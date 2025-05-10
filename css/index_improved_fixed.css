@@ -163,14 +163,17 @@ html {
     color: #19a7ce;
 }
 
-.nav-each-link.active {
-    color: #19a7ce;
-    font-weight: 600;
+.nav-each-link.active,
+.nav-link.nav-each-link.active,
+.navbar-nav .nav-link.nav-each-link.active {
+    color: #19a7ce !important;
+    font-weight: 600 !important;
 }
 
 .nav-each-link:hover::after,
-.nav-each-link.active::after {
-    width: 100%;
+.nav-each-link.active::after,
+.nav-link.nav-each-link.active::after {
+    width: 100% !important;
 }
 
 /* Section Titles */
