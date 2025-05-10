@@ -1,0 +1,232 @@
+
+
+body{
+    background-color: #0a0a0a;
+    color: #F6F1F1;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.mynav{
+    display: flex;
+    justify-content:space-between;
+    padding: 0px;
+    background-color: #000000;
+
+}
+
+.navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")}
+
+#mynav-brand{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    /* border-radius: 77% 23% 63% 37% / 30% 62% 38% 70% ; */
+}
+
+.nav-each-link{
+    padding: 0px;
+    font-size: 1.5rem;
+    color: #F6F1F1;
+;
+}
+
+.nav-each-link:hover{
+    color: #19A7CE;
+}
+
+#mypic{
+    border: 3px solid #19a7ce;
+    border-radius: 18% 82% 24% 76% / 54% 50% 50% 46% 
+}
+
+#area-1{
+    margin-top: 100px;
+}
+
+#mypic:hover{
+    scale: 1.1;
+    box-shadow: 10px 10px 50px 5px #19A7CE;
+    transition: scale 0.7s, box-shadow 0.7s ;
+}
+
+
+#span-1{
+    font-size: 3rem;
+    display: block;
+}
+
+#span-2{
+    font-size: 5rem;
+   
+}
+
+#span-3{
+    font-size: 5rem;
+   color: #19A7CE; 
+}
+
+#span-4{
+    font-size: 5rem;
+   
+}
+#span-5{
+    font-size: 1.7rem;
+    display: block;
+}
+
+#socials{
+    margin-top: 20px;
+}
+#socials a{
+    margin: 0 15px;
+}
+
+#socials a :hover{
+    scale: 1.2;
+}
+
+/* ----------------------------------------------------END of Home Section ------------------------------------------------------- */
+
+
+/* About Section CSS */
+
+.about{
+    margin-top: 150px;
+}
+
+
+.about-col-1 p{
+    font-size: 1.3rem;
+}
+
+
+.about-col-2 img{
+    width: 80%;
+    border-radius: 82% 18% 91% 9% / 36% 56% 44% 64% ;
+    border: 3px solid #19a7ce;
+    margin-left: 10%;
+}
+
+.about-col-2 img:hover{
+    scale: 1.1;
+    box-shadow: 10px 10px 50px 5px #19A7CE;
+    transition: scale 0.7s, box-shadow 0.7s;
+}
+
+/* ----------------------------------------------------END of About Section ------------------------------------------------------- */
+
+
+/* Resume Section CSS */
+
+.resume{
+    margin-top: 150px;
+ 
+}
+
+.resume-download{
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 100px;
+}
+
+#resume-download{
+    background: #000000;
+    font-size: 1.5rem;
+    color: lightgrey;
+    border: 2px solid #19a7ce;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+#resume-download:hover{
+    box-shadow: 1px 1px 10px 5px #19A7CE;
+}
+
+.theme-color{
+    color: #19A7CE;
+}
+
+th,td{
+    font-size: 1.5rem;
+    padding: 0 0.7rem;
+}
+
+ul li{
+    font-size: 1.5rem;
+    /* list-style: none; */
+}
+
+.slides{
+   padding: 0 100px;
+}
+
+/* ----------------------------------------------------END of Resume Section ------------------------------------------------------- */
+
+
+/* Contact Section CSS */
+
+.contact-box{
+    margin-top: 50px;
+    border: 2px solid #19a7ce;
+    border-radius: 20px;
+    padding: 50px;
+}
+
+#feedback-text{
+    display: block;
+    font-size: 3rem;
+    color:#19a7ce;
+}
+
+#contact-text{
+    display: block;
+    font-size: 3rem;
+    color:#19a7ce;
+}
+
+#submit{
+    background: #19A7CE;
+    color: #F6F1F1;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#submit:hover{
+    box-shadow: 1px 1px 10px 5px #19A7CE;
+}
+
+.myform{
+    border-radius: 10px;
+    width: 100%;
+    background-color: #000000;
+    border: 2px solid #19A7CE;
+    color: #F6F1F1;
+    padding: 15px;
+    margin: 0px, auto;
+}
+
+#myfooter{
+    text-align: center;
+    display: block;
+    margin-top: 100px;
+    min-height: 40px;
+    background: #146C94;
+    color: #F6F1F1;
+}
+
+#msg{
+    color: #19A7CE;
+    margin-top: 20px;
+    display: block;
+
+}
+
+/* #copyright{
+
+    text-align: center;
+
+} */
+
