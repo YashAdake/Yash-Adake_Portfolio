@@ -1,0 +1,32 @@
+HOW TO COMBINE THE HTML PARTS INTO ONE FILE
+
+You have 3 parts to combine:
+1. index_improved_part1.html
+2. index_improved_part2.html  
+3. index_improved_part3_final.html
+
+Steps to create the complete index_improved.html:
+
+1. Open a new text file and name it: index_improved.html
+
+2. Copy the ENTIRE content of "index_improved_part1.html" and paste it
+
+3. At the end of part1, copy the ENTIRE content of "index_improved_part2.html" and paste it
+
+4. At the end of part2, copy the ENTIRE content of "index_improved_part3_final.html" and paste it
+
+5. Save the file as index_improved.html
+
+That's it! Your complete improved portfolio is ready.
+
+Quick Test:
+- Open index_improved.html in your browser
+- Make sure the CSS link works: <link rel="stylesheet" href="css/index_improved.css">
+
+Files you now have:
+✓ index_improved.html (the combined file)
+✓ css/index_improved.css 
+✓ backup/index_original.html
+✓ backup/index_original.css
+
+Ready to deploy! 🚀
