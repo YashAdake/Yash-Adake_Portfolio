@@ -34,6 +34,57 @@ function doPost(e) {
   }
 }
 
+// ============================================
+// VISITOR COUNTER - GET Request Handler
+// ============================================
+function doGet(e) {
+  try {
+    var action = e.parameter.action || 'count';
+    
+    if (action === 'count') {
+      // Get or initialize the visitor count from Script Properties
+      var scriptProperties = PropertiesService.getScriptProperties();
+      var count = parseInt(scriptProperties.getProperty('visitorCount')) || 0;
+      
+      // Increment the count
+      count++;
+      scriptProperties.setProperty('visitorCount', count.toString());
+      
+      // Return JSON response with CORS headers
+      var output = ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        count: count
+      }));
+      output.setMimeType(ContentService.MimeType.JSON);
+      return output;
+      
+    } else if (action === 'getCount') {
+      // Just get count without incrementing
+      var scriptProperties = PropertiesService.getScriptProperties();
+      var count = parseInt(scriptProperties.getProperty('visitorCount')) || 0;
+      
+      var output = ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        count: count
+      }));
+      output.setMimeType(ContentService.MimeType.JSON);
+      return output;
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      error: 'Invalid action'
+    })).setMimeType(ContentService.MimeType.JSON);
+    
+  } catch (error) {
+    Logger.log('Visitor count error: ' + error.toString());
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      error: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
 // Function to send email notification to you
 function sendEmailNotification(params) {
   var recipient = "yashadakeofficial@gmail.com"; // Change to your email

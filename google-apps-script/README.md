@@ -2,13 +2,14 @@
 
 This enhanced script adds powerful features to your contact form!
 
-## 🚀 New Features
+## 🚀 Features
 
 1. **Email Notifications** - Get instant email alerts for new messages
 2. **Auto-Reply** - Automatically respond to message senders
-3. **Dashboard** - Visual summary of all responses
-4. **Conditional Formatting** - Highlight new entries
-5. **Professional Setup** - Organized headers and styling
+3. **Visitor Counter** - Real-time visitor tracking for your portfolio
+4. **Dashboard** - Visual summary of all responses
+5. **Conditional Formatting** - Highlight new entries
+6. **Professional Setup** - Organized headers and styling
 
 ## 📋 Setup Instructions
 

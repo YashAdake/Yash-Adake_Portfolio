@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Yash Adake - Software Engineer specializing in DevOps, Golang, Docker, PostgreSQL, and Cloud Technologies. Currently at ArthaVedh Consulting.">
+        content="Yash Adake - Software Engineer specializing in DevOps, Python, Docker, PostgreSQL, and Cloud Technologies. Currently at ArthaVedh Consulting.">
     <meta name="keywords"
-        content="Yash Adake, Software Engineer, DevOps, Golang, Docker, Cloud, PostgreSQL, API Development, India">
+        content="Yash Adake, Software Engineer, DevOps, Python, Docker, Cloud, PostgreSQL, API Development, India">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow">
 
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Yash Adake | Software Engineer">
     <meta property="og:description"
-        content="Software Engineer specializing in DevOps, Golang, and Cloud Technologies. Transforming challenges into opportunities.">
+        content="Software Engineer specializing in DevOps, Python, and Cloud Technologies. Transforming challenges into opportunities.">
     <meta property="og:url" content="https://yashadake.github.io/Yash-Adake_Portfolio/">
     <meta property="og:image" content="photos/me1.jpg">
 
@@ -28,7 +28,7 @@
     <meta name="twitter:creator" content="@yash_adake">
     <meta name="twitter:title" content="Yash Adake | Software Engineer">
     <meta name="twitter:description"
-        content="Software Engineer specializing in DevOps, Golang, and Cloud Technologies.">
+        content="Software Engineer specializing in DevOps, Python, and Cloud Technologies.">
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#19a7ce">
@@ -70,8 +70,23 @@
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTop" class="scroll-to-top">
-        <i class='bx bx-up-arrow-alt'></i>
+        <i class='bx bx-chevrons-up'></i>
     </button>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/917715982570?text=Hi%20Yash!%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
+        target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class='bx bxl-whatsapp'></i>
+    </a>
+
+    <!-- Visitor Counter Badge -->
+    <div class="visitor-counter" id="visitorCounter">
+        <i class='bx bx-show'></i>
+        <span id="visitorCount">--</span> visitors
+    </div>
+
+    <!-- Particle Background -->
+    <div id="particles-container" class="particles-container"></div>
 
     <header>
         <nav class="navbar navbar-expand-lg fixed-top">
@@ -91,8 +106,12 @@
                         <a class="nav-link nav-each-link active" href="#home">Home</a>
                         <a class="nav-link nav-each-link" href="#about">About</a>
                         <a class="nav-link nav-each-link" href="#resume">Resume</a>
-                        <a class="nav-link nav-each-link" href="#projects">Projects</a>
+                        <!-- <a class="nav-link nav-each-link" href="#projects">Projects</a> -->
+                        <a class="nav-link nav-each-link" href="#blog">Blog</a>
                         <a class="nav-link nav-each-link" href="#contact">Contact</a>
+                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                            <i class='bx bx-sun' id="themeIcon"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -115,8 +134,10 @@
                                 <span id="span-3" class="first-name">Yash</span>
                                 <span id="span-4" class="last-name">Adake</span>
                             </h1>
-                            <h2 id="span-5" class="profession">Software Engineer</h2>
-                            <p class="intro-text">Specializing in DevOps, Golang, and Cloud Technologies. Currently
+                            <h2 id="span-5" class="profession">
+                                <span id="typed-text"></span><span class="typing-cursor">|</span>
+                            </h2>
+                            <p class="intro-text">Specializing in DevOps, Python, and Cloud Technologies. Currently
                                 transforming challenges into opportunities, one line of code at a time.</p>
                             <div class="current-role">
                                 <p class="company-name">ArthaVedh Consulting Pvt Ltd</p>
@@ -168,7 +189,7 @@
                                     Currently working full-time as a <strong>Software Engineer at ArthaVedh Consulting
                                         Pvt Ltd</strong>,
                                     where I've gained hands-on experience with cutting-edge technologies like
-                                    <strong>Golang, Docker, and
+                                    <strong>Python, Docker, and
                                         PostgreSQL</strong>.
                                 </p>
                                 <p>
@@ -255,7 +276,7 @@
                                     <h4>Software Engineer <span class="badge bg-primary">Current</span></h4>
                                     <p class="company">ArthaVedh Consulting Pvt Ltd</p>
                                     <p class="duration">March 2024 - Present</p>
-                                    <p class="description">Full-time role developing enterprise solutions using Golang,
+                                    <p class="description">Full-time role developing enterprise solutions using Python,
                                         Docker, and PostgreSQL. Working with cloud technologies including CloudJiffy,
                                         implementing microservices architecture, and managing API gateways.</p>
                                 </div>
@@ -308,7 +329,7 @@
                                 <div class="skill-category">
                                     <h4>Backend & DevOps</h4>
                                     <div class="skills-grid">
-                                        <span class="skill-tag featured">Go (Golang)</span>
+                                        <span class="skill-tag featured">Python</span>
                                         <span class="skill-tag featured">Docker</span>
                                         <span class="skill-tag featured">PostgreSQL</span>
                                         <span class="skill-tag featured">Apache NiFi</span>
@@ -474,7 +495,11 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- ============================================
+             PROJECTS SECTION - COMMENTED OUT FOR NOW
+             Will add genuine content later
+             ============================================ -->
+        <!--
         <section id="projects">
             <div class="projects">
                 <div class="container">
@@ -522,7 +547,7 @@
                                     <p>Full-stack application deployed on CloudJiffy with PostgreSQL backend and
                                         containerized microservices.</p>
                                     <div class="tech-tags">
-                                        <span class="tech-tag">Golang</span>
+                                        <span class="tech-tag">Python</span>
                                         <span class="tech-tag">PostgreSQL</span>
                                         <span class="tech-tag">CloudJiffy</span>
                                         <span class="tech-tag">Docker</span>
@@ -635,6 +660,105 @@
                 </div>
             </div>
         </section>
+        -->
+        <!-- END OF PROJECTS SECTION (COMMENTED OUT) -->
+
+        <!-- Blog Section -->
+        <section id="blog">
+            <div class="blog">
+                <div class="container">
+                    <h2 class="section-title" data-aos="fade-up">Tech <span class="highlight">Talks</span> with Yash
+                    </h2>
+                    <p class="section-subtitle text-center mb-5" data-aos="fade-up">Insights on AI, DevOps, and Cloud
+                        Technologies</p>
+
+                    <div class="row">
+                        <!-- Article 1: AI Agents with N8N -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <a href="https://www.linkedin.com/pulse/tech-talks-yash-building-ai-agents-n8n-turn-ideas-automation-adake-fkg6f"
+                                target="_blank" class="blog-card-link">
+                                <div class="blog-card">
+                                    <div class="blog-image">
+                                        <img src="photos/blog-ai-agents.png" alt="Building AI Agents with N8N"
+                                            class="img-fluid">
+                                        <span class="blog-category">AI Automation</span>
+                                    </div>
+                                    <div class="blog-content">
+                                        <span class="blog-date"><i class='bx bx-calendar'></i> Tech Talks Series</span>
+                                        <h3>Building AI Agents with N8N - Turn Ideas into Intelligent Automation</h3>
+                                        <p>Learn how to create powerful AI agents using N8N workflow automation
+                                            platform...</p>
+                                        <span class="blog-read-more">Read on LinkedIn <i
+                                                class='bx bx-link-external'></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 2: Docker Guide -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <a href="https://www.linkedin.com/pulse/what-docker-simple-guide-everyone-yash-adake-65dtf"
+                                target="_blank" class="blog-card-link">
+                                <div class="blog-card">
+                                    <div class="blog-image">
+                                        <img src="photos/blog-docker.png" alt="What is Docker" class="img-fluid">
+                                        <span class="blog-category">DevOps</span>
+                                    </div>
+                                    <div class="blog-content">
+                                        <span class="blog-date"><i class='bx bx-calendar'></i> Beginner Guide</span>
+                                        <h3>What is Docker? A Simple Guide for Everyone</h3>
+                                        <p>Understanding containerization made easy - a beginner-friendly Docker
+                                            introduction...</p>
+                                        <span class="blog-read-more">Read on LinkedIn <i
+                                                class='bx bx-link-external'></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Article 3: GenAI and Agentic AI -->
+                        <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <a href="https://www.linkedin.com/pulse/understanding-genai-agentic-ai-beginners-guide-yash-adake-zzjsf"
+                                target="_blank" class="blog-card-link">
+                                <div class="blog-card">
+                                    <div class="blog-image">
+                                        <img src="photos/blog-genai.png" alt="Understanding GenAI and Agentic AI"
+                                            class="img-fluid">
+                                        <span class="blog-category">AI/ML</span>
+                                    </div>
+                                    <div class="blog-content">
+                                        <span class="blog-date"><i class='bx bx-calendar'></i> Beginner Guide</span>
+                                        <h3>Understanding GenAI and Agentic AI: A Beginner's Guide</h3>
+                                        <p>Explore the world of Generative AI and Agentic AI systems explained simply...
+                                        </p>
+                                        <span class="blog-read-more">Read on LinkedIn <i
+                                                class='bx bx-link-external'></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Subscribe Section -->
+                    <div class="newsletter-box" data-aos="fade-up">
+                        <div class="newsletter-content">
+                            <div class="newsletter-icon">
+                                <i class='bx bx-news'></i>
+                            </div>
+                            <div class="newsletter-text">
+                                <h3>🤖 Subscribe to Tech Talks with Yash</h3>
+                                <p>Get weekly insights on AI, DevOps, and emerging technologies directly to your
+                                    LinkedIn feed!</p>
+                            </div>
+                            <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7329856064940675072"
+                                target="_blank" class="btn btn-primary newsletter-btn">
+                                <i class='bx bxl-linkedin'></i> Subscribe on LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Contact Section -->
         <section id="contact">
@@ -656,17 +780,28 @@
                                     <div class="contact-details">
                                         <div class="contact-item">
                                             <i class='bx bx-envelope'></i>
-                                            <div>
+                                            <div class="contact-info-text">
                                                 <h4>Email</h4>
-                                                <p>yashadakeofficial@gmail.com</p>
+                                                <a href="mailto:yashadakeofficial@gmail.com" class="contact-link">
+                                                    yashadakeofficial@gmail.com
+                                                </a>
                                             </div>
+                                            <button class="copy-btn"
+                                                onclick="copyText('yashadakeofficial@gmail.com', this)">
+                                                <span class="copy-text">Copy</span>
+                                            </button>
                                         </div>
                                         <div class="contact-item">
                                             <i class='bx bx-phone'></i>
-                                            <div>
+                                            <div class="contact-info-text">
                                                 <h4>Phone</h4>
-                                                <p>+91-7715982570</p>
+                                                <a href="tel:+917715982570" class="contact-link">
+                                                    +91-7715982570
+                                                </a>
                                             </div>
+                                            <button class="copy-btn" onclick="copyText('+917715982570', this)">
+                                                <span class="copy-text">Copy</span>
+                                            </button>
                                         </div>
                                         <div class="contact-item">
                                             <i class='bx bx-map'></i>
@@ -705,23 +840,29 @@
                             <div class="col-md-6" data-aos="fade-left">
                                 <div class="contact-form">
                                     <h3>Send me a message</h3>
-                                    <form name="submit-to-google-sheet" id="contactForm">
+                                    <form name="submit-to-google-sheet" id="contactForm" novalidate>
                                         <div class="form-group">
-                                            <input type="text" name="Name" id="name" placeholder="Your Name" required>
+                                            <input type="text" name="Name" id="name" placeholder="Your Name" required
+                                                minlength="2">
+                                            <span class="error-message" id="nameError"></span>
                                         </div>
                                         <div class="form-group">
                                             <input type="email" name="Email" id="email" placeholder="Your Email"
-                                                required>
+                                                required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                                            <span class="error-message" id="emailError"></span>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="Subject" id="subject" placeholder="Subject"
-                                                required>
+                                                required minlength="3">
+                                            <span class="error-message" id="subjectError"></span>
                                         </div>
                                         <div class="form-group">
-                                            <textarea name="Message" id="message" rows="5" placeholder="Your Message"
-                                                required></textarea>
+                                            <textarea name="Message" id="message" rows="5"
+                                                placeholder="Your Message (minimum 10 characters)" required
+                                                minlength="10"></textarea>
+                                            <span class="error-message" id="messageError"></span>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary" id="submitBtn">
                                             <span class="btn-text">Send Message</span>
                                             <i class='bx bx-send'></i>
                                         </button>
@@ -742,7 +883,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 text-center">
                         <p id="copyright">© <span id="currentYear">2025</span> Yash Adake. All rights reserved.</p>
-                        <p class="footer-tagline">Software Engineer | DevOps Enthusiast | Cloud Architect</p>
+                        <p class="footer-tagline">Software Engineer | DevOps Enthusiast | Python Developer</p>
                         <p class="footer-company">Currently transforming challenges at ArthaVedh Consulting Pvt Ltd</p>
                     </div>
                 </div>
@@ -761,8 +902,111 @@
         const form = document.forms['submit-to-google-sheet']
         const msg = document.getElementById("msg")
 
+        // ============================================
+        // FORM VALIDATION
+        // ============================================
+        const validators = {
+            name: {
+                validate: (value) => value.trim().length >= 2,
+                message: '⚠️ Name must be at least 2 characters'
+            },
+            email: {
+                validate: (value) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
+                message: '⚠️ Please enter a valid email (e.g., name@example.com)'
+            },
+            subject: {
+                validate: (value) => value.trim().length >= 3,
+                message: '⚠️ Subject must be at least 3 characters'
+            },
+            message: {
+                validate: (value) => value.trim().length >= 10,
+                message: '⚠️ Message must be at least 10 characters'
+            }
+        };
+
+        // Real-time validation on input
+        Object.keys(validators).forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            const errorSpan = document.getElementById(fieldName + 'Error');
+
+            if (field && errorSpan) {
+                // Validate on blur (when leaving field)
+                field.addEventListener('blur', () => validateField(field, errorSpan, validators[fieldName]));
+
+                // Also validate on input for real-time feedback
+                field.addEventListener('input', () => {
+                    if (field.classList.contains('error') || field.classList.contains('valid')) {
+                        validateField(field, errorSpan, validators[fieldName]);
+                    }
+                });
+            }
+        });
+
+        function validateField(field, errorSpan, validator) {
+            const value = field.value;
+            const isValid = validator.validate(value);
+
+            if (isValid) {
+                field.classList.remove('error');
+                field.classList.add('valid');
+                errorSpan.textContent = '';
+            } else {
+                field.classList.remove('valid');
+                field.classList.add('error');
+                errorSpan.textContent = validator.message;
+            }
+
+            return isValid;
+        }
+
+        function validateAllFields() {
+            let isFormValid = true;
+
+            Object.keys(validators).forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                const errorSpan = document.getElementById(fieldName + 'Error');
+
+                if (field && errorSpan) {
+                    const isFieldValid = validateField(field, errorSpan, validators[fieldName]);
+                    if (!isFieldValid) isFormValid = false;
+                }
+            });
+
+            return isFormValid;
+        }
+
+        // Clear validation styles on successful submit
+        function clearValidationStyles() {
+            Object.keys(validators).forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                const errorSpan = document.getElementById(fieldName + 'Error');
+                if (field) {
+                    field.classList.remove('error', 'valid');
+                }
+                if (errorSpan) {
+                    errorSpan.textContent = '';
+                }
+            });
+        }
+
         form.addEventListener('submit', e => {
             e.preventDefault()
+
+            // Validate all fields first
+            if (!validateAllFields()) {
+                msg.innerHTML = "⚠️ Please fix the errors above before submitting."
+                msg.style.color = '#ff4444';
+                msg.style.background = 'rgba(255, 68, 68, 0.1)';
+                msg.style.padding = '15px';
+                msg.style.borderRadius = '10px';
+                setTimeout(() => {
+                    msg.innerHTML = '';
+                    msg.style.background = 'transparent';
+                    msg.style.padding = '0';
+                }, 3000);
+                return;
+            }
+
             const submitBtn = form.querySelector('button[type="submit"]');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnIcon = submitBtn.querySelector('i');
@@ -799,6 +1043,7 @@
                         submitBtn.disabled = false;
                     }, 5000)
                     form.reset()
+                    clearValidationStyles(); // Clear validation after successful submit
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
@@ -864,24 +1109,31 @@
         };
 
         // ============================================
-        // ACTIVE NAV LINK HIGHLIGHTING
+        // ACTIVE NAV LINK HIGHLIGHTING (Improved)
         // ============================================
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-each-link');
+        let isScrolling = false;
 
         const observerOptions = {
             root: null,
-            rootMargin: '-20% 0px -60% 0px',
+            rootMargin: '-30% 0px -50% 0px',
             threshold: 0
         };
 
         const navObserver = new IntersectionObserver((entries) => {
+            // Don't update during programmatic scrolling
+            if (isScrolling) return;
+
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    const targetId = entry.target.id;
                     navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        const href = link.getAttribute('href');
+                        if (href && href.substring(1) === targetId) {
                             link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
                         }
                     });
                 }
@@ -914,8 +1166,17 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+
                 if (target) {
+                    // Set scrolling flag to prevent observer updates
+                    isScrolling = true;
+
+                    // Immediately update active state for clicked link
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+
                     const headerOffset = 80;
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -924,6 +1185,11 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
+
+                    // Re-enable observer after scroll completes
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 800);
 
                     // Close mobile menu if open
                     const navCollapse = document.querySelector('.navbar-collapse');
@@ -1065,6 +1331,216 @@ Feel free to reach out!
             'color: #19a7ce; font-size: 20px; font-weight: bold;',
             'color: #f6f1f1; font-size: 14px;'
         );
+
+        // ============================================
+        // TYPING EFFECT
+        // ============================================
+        const typedTextElement = document.getElementById('typed-text');
+        const professions = [
+            'Software Engineer',
+            'DevOps Enthusiast',
+            'Python Developer',
+            'Tech Blogger',
+            'Problem Solver'
+        ];
+        let professionIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typeEffect() {
+            const currentProfession = professions[professionIndex];
+
+            if (isDeleting) {
+                typedTextElement.textContent = currentProfession.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                typedTextElement.textContent = currentProfession.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentProfession.length) {
+                // Pause at end of word
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                professionIndex = (professionIndex + 1) % professions.length;
+                typingSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        // Start typing effect after page loads
+        setTimeout(typeEffect, 1500);
+
+        // ============================================
+        // DARK/LIGHT THEME TOGGLE
+        // ============================================
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('bx-sun');
+            themeIcon.classList.add('bx-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('bx-sun');
+                themeIcon.classList.add('bx-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('bx-moon');
+                themeIcon.classList.add('bx-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // ============================================
+        // SIMPLE COPY TO CLIPBOARD FUNCTION
+        // ============================================
+        function copyText(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const textSpan = button.querySelector('.copy-text');
+
+                // Change text to Copied!
+                textSpan.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    textSpan.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                alert('Copied: ' + text);
+            });
+        }
+
+        // ============================================
+        // FUTURISTIC FLOATING ORBS
+        // ============================================
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const orbCount = 15; // Fewer but larger orbs
+
+            for (let i = 0; i < orbCount; i++) {
+                const orb = document.createElement('div');
+                orb.className = 'particle';
+
+                // Random position
+                orb.style.left = Math.random() * 100 + '%';
+
+                // Larger random size for orb effect
+                const size = Math.random() * 80 + 30;
+                orb.style.width = size + 'px';
+                orb.style.height = size + 'px';
+
+                // Random animation duration (slower for smoothness)
+                const duration = Math.random() * 30 + 20;
+                orb.style.animationDuration = duration + 's';
+
+                // Random delay for staggered start
+                orb.style.animationDelay = (Math.random() * -30) + 's';
+
+                container.appendChild(orb);
+            }
+        }
+
+        // Create floating orbs on load
+        createParticles();
+
+        // ============================================
+        // VISITOR COUNTER (Real tracking via Google Apps Script)
+        // ============================================
+        async function updateVisitorCount() {
+            const visitorCountElement = document.getElementById('visitorCount');
+            const VISITOR_API = scriptURL; // Uses same URL as contact form
+
+            // Check if already counted this session
+            const hasVisited = sessionStorage.getItem('hasVisited');
+
+            try {
+                let count;
+
+                if (!hasVisited) {
+                    // First visit this session - increment count
+                    const response = await fetch(VISITOR_API + '?action=count', {
+                        method: 'GET',
+                        mode: 'cors'
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        count = data.count;
+                        sessionStorage.setItem('hasVisited', 'true');
+                    } else {
+                        throw new Error('API failed');
+                    }
+                } else {
+                    // Already counted this session - just get current count
+                    const response = await fetch(VISITOR_API + '?action=getCount', {
+                        method: 'GET',
+                        mode: 'cors'
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        count = data.count;
+                    } else {
+                        throw new Error('API failed');
+                    }
+                }
+
+                // Animate the counter
+                animateCounter(count);
+
+            } catch (error) {
+                console.log('Visitor API not available, using localStorage fallback');
+
+                // Fallback to localStorage
+                const lastVisit = localStorage.getItem('lastVisit');
+                const today = new Date().toDateString();
+                let count = parseInt(localStorage.getItem('visitorCount')) || 100;
+
+                if (lastVisit !== today) {
+                    count++;
+                    localStorage.setItem('visitorCount', count);
+                    localStorage.setItem('lastVisit', today);
+                }
+
+                animateCounter(count);
+            }
+        }
+
+        function animateCounter(count) {
+            const visitorCountElement = document.getElementById('visitorCount');
+            let displayCount = 0;
+            const increment = Math.ceil(count / 40);
+
+            const counterAnimation = setInterval(() => {
+                displayCount += increment;
+                if (displayCount >= count) {
+                    displayCount = count;
+                    clearInterval(counterAnimation);
+                }
+                visitorCountElement.textContent = displayCount.toLocaleString();
+            }, 25);
+        }
+
+        // Update visitor count on load
+        updateVisitorCount();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -1086,9 +1562,9 @@ Feel free to reach out!
         // Add fadeOut keyframe dynamically
         const styleSheet = document.createElement('style');
         styleSheet.textContent = `
-            @keyframes fadeOut {
-                from { opacity: 1; transform: translateY(0); }
-                to { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeOut {
+            from {opacity: 1; transform: translateY(0); }
+        to {opacity: 0; transform: translateY(10px); }
             }
         `;
         document.head.appendChild(styleSheet);
