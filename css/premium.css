@@ -2818,19 +2818,25 @@ body.light-mode #loading {
     }
 
     #mypic {
-        width: 200px;
-        height: 200px;
-        margin-bottom: 30px;
+        width: 280px;
+        height: auto;
+        max-width: 80%;
+        margin-bottom: 40px;
+    }
+
+    #mypic-div {
+        margin-bottom: 20px;
+        padding: 20px;
     }
 
     #mypic-div::before {
-        width: 220px;
-        height: 220px;
+        width: 300px;
+        height: 300px;
     }
 
     #mypic-div::after {
-        width: 240px;
-        height: 240px;
+        width: 320px;
+        height: 320px;
     }
 
     /* Navigation */
@@ -3105,8 +3111,25 @@ body.light-mode #loading {
     }
 
     #mypic {
-        width: 160px;
-        height: 160px;
+        width: 220px;
+        height: auto;
+        max-width: 75%;
+        margin-bottom: 30px;
+    }
+
+    #mypic-div {
+        margin-bottom: 10px;
+        padding: 15px;
+    }
+
+    #mypic-div::before {
+        width: 240px;
+        height: 240px;
+    }
+
+    #mypic-div::after {
+        width: 260px;
+        height: 260px;
     }
 
     .current-role {
@@ -3292,8 +3315,24 @@ body.light-mode #loading {
     }
 
     #mypic {
-        width: 140px;
-        height: 140px;
+        width: 180px;
+        height: auto;
+        max-width: 70%;
+        margin-bottom: 25px;
+    }
+
+    #mypic-div {
+        padding: 10px;
+    }
+
+    #mypic-div::before {
+        width: 200px;
+        height: 200px;
+    }
+
+    #mypic-div::after {
+        width: 220px;
+        height: 220px;
     }
 
     /* Section Titles */
