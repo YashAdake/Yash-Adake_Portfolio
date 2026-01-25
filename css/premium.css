@@ -526,7 +526,7 @@ section::after {
     position: relative;
 }
 
-/* Glow ring behind profile picture */
+/* Glow ring behind profile picture - OPTIMIZED */
 #mypic-div::before {
     content: '';
     position: absolute;
@@ -535,16 +535,11 @@ section::after {
     transform: translate(-50%, -50%);
     width: 320px;
     height: 320px;
-    background: conic-gradient(from 0deg,
-            var(--primary),
-            var(--accent-1),
-            var(--accent-2),
-            var(--primary));
+    background: linear-gradient(135deg, var(--primary), var(--accent-1), var(--accent-2));
     border-radius: var(--radius-lg);
     z-index: 0;
-    opacity: 0.5;
-    filter: blur(25px);
-    animation: glowRotate 10s linear infinite;
+    opacity: 0.4;
+    filter: blur(30px);
 }
 
 #mypic-div::after {
@@ -558,7 +553,7 @@ section::after {
     background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
     border-radius: var(--radius-lg);
     z-index: 0;
-    animation: glowPulse 4s ease-in-out infinite;
+    opacity: 0.5;
 }
 
 @keyframes glowRotate {
