@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>404 - Page Not Found | Yash Adake</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Let's get you back on track.">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#19a7ce">
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="photos/nav-brand.png">
+
+    <style>
+        :root {
+            --primary: #19a7ce;
+            --primary-glow: rgba(25, 167, 206, 0.5);
+            --accent-1: #667eea;
+            --accent-2: #764ba2;
+            --bg-primary: #0a0a0a;
+            --text-primary: #F6F1F1;
+            --text-secondary: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent-1) 100%);
+            --gradient-text: linear-gradient(90deg, var(--primary) 0%, var(--accent-1) 50%, #f093fb 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(25, 167, 206, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container-404 {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: 10rem;
+            font-weight: 800;
+            line-height: 1;
+            background: var(--gradient-text);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 3s linear infinite;
+            position: relative;
+        }
+
+        .error-code::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        @keyframes shimmerText {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .error-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 30px 0 15px;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .error-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-primary);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--primary-glow);
+        }
+
+        .btn-home i {
+            font-size: 1.3rem;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .particle:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent-1) 0%, transparent 70%);
+            top: 60%;
+            right: 10%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .particle:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--accent-2) 0%, transparent 70%);
+            bottom: 20%;
+            left: 20%;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(20px, -30px);
+            }
+
+            50% {
+                transform: translate(-10px, 20px);
+            }
+
+            75% {
+                transform: translate(-30px, -10px);
+            }
+        }
+
+        /* Quick links */
+        .quick-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .quick-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(25, 167, 206, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+
+            .quick-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <div class="container-404">
+        <div class="error-emoji">🚀</div>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Houston, we have a problem!</h1>
+        <p class="error-message">
+            The page you're looking for seems to have drifted into the void.
+            Don't worry, even the best explorers get lost sometimes!
+        </p>
+
+        <a href="index.html" class="btn-home">
+            <i class='bx bx-home'></i>
+            Back to Home
+        </a>
+
+        <div class="quick-links">
+            <a href="index.html#about" class="quick-link">About Me</a>
+            <a href="index.html#resume" class="quick-link">Resume</a>
+            <a href="index.html#blog" class="quick-link">Blog</a>
+            <a href="index.html#contact" class="quick-link">Contact</a>
+        </div>
+    </div>
+
+    <script>
+        // Console message
+        console.log(`
+%c🔍 Looking for something?
+
+%cThis page doesn't exist, but here are some helpful links:
+• Home: index.html
+• About: index.html#about
+• Resume: index.html#resume
+• Contact: index.html#contact
+
+Or just click the button to go back home! 🏠
+        `,
+            'color: #19a7ce; font-size: 18px; font-weight: bold;',
+            'color: #b0b0b0; font-size: 12px;'
+        );
+    </script>
+</body>
+
+</html>

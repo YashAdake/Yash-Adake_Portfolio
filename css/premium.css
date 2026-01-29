@@ -1715,6 +1715,42 @@ section::after {
     letter-spacing: 1px;
 }
 
+/* Footer contact info - right aligned */
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-contact p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-contact i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* Ensure right column aligns properly on desktop */
+@media (min-width: 768px) {
+    .col-md-4.text-md-end .footer-title {
+        text-align: right;
+    }
+
+    .col-md-4.text-md-end .footer-contact {
+        align-items: flex-end;
+    }
+
+    .col-md-4.text-md-end .footer-contact p {
+        justify-content: flex-end;
+    }
+}
+
 .footer-links {
     display: flex;
     flex-direction: column;
@@ -3440,5 +3476,725 @@ body.light-mode #loading {
     /* Disable complex animations on mobile */
     .whatsapp-float::before {
         display: none;
+    }
+}
+
+/* ============================================
+   PREMIUM UX/MICRO-INTERACTIONS & VISUAL POLISH
+   ============================================ */
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--gradient-primary);
+    z-index: 10000;
+    transition: width 0.05s ease-out;
+    box-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
+}
+
+.scroll-progress::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    width: 10px;
+    height: 7px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-progress.active::after {
+    opacity: 1;
+}
+
+/* ============================================
+   TRAIL/COMET CURSOR - FINAL (Desktop Only)
+   Dynamic comet effect with trailing particles
+   ============================================ */
+
+/* Main cursor - head of the comet */
+.custom-cursor {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle,
+            #fff 0%,
+            var(--primary) 40%,
+            transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 0 15px var(--primary),
+        0 0 30px rgba(25, 167, 206, 0.6),
+        0 0 45px rgba(25, 167, 206, 0.3);
+    transition:
+        width 0.2s ease,
+        height 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Outer glow ring */
+.custom-cursor-dot {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    box-shadow: 0 0 15px var(--primary);
+    transition:
+        width 0.4s ease,
+        height 0.4s ease,
+        opacity 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Trail dots (created via JS) */
+.cursor-trail {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.15s ease;
+}
+
+/* Hover state - comet expands and glows brighter */
+.custom-cursor.cursor-hover {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle,
+            #fff 0%,
+            var(--accent-1) 40%,
+            transparent 70%);
+    box-shadow:
+        0 0 20px var(--accent-1),
+        0 0 40px rgba(102, 126, 234, 0.7),
+        0 0 60px rgba(102, 126, 234, 0.4);
+}
+
+.custom-cursor-dot.cursor-hover {
+    width: 55px;
+    height: 55px;
+    opacity: 0.5;
+    border-color: var(--accent-1);
+    box-shadow: 0 0 20px var(--accent-1);
+}
+
+/* Click state - bright flash pulse */
+.custom-cursor.cursor-click {
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle,
+            #fff 0%,
+            #fff 30%,
+            var(--primary) 60%,
+            transparent 80%);
+    box-shadow:
+        0 0 30px #fff,
+        0 0 60px var(--primary),
+        0 0 90px rgba(25, 167, 206, 0.5);
+    animation: cometPulse 0.3s ease;
+}
+
+.custom-cursor-dot.cursor-click {
+    width: 35px;
+    height: 35px;
+    opacity: 0.8;
+    border-color: #fff;
+    box-shadow: 0 0 25px #fff;
+}
+
+@keyframes cometPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Hide unused elements */
+.spotlight-overlay,
+.spotlight-glow,
+.cursor-text,
+.cursor-ripple,
+.finger-ripple {
+    display: none !important;
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+body.custom-cursor-enabled {
+    cursor: none;
+}
+
+body.custom-cursor-enabled a,
+body.custom-cursor-enabled button,
+body.custom-cursor-enabled input,
+body.custom-cursor-enabled textarea,
+body.custom-cursor-enabled [role="button"] {
+    cursor: none;
+}
+
+/* Responsive - hide on mobile/touch */
+@media (max-width: 768px) {
+
+    .custom-cursor,
+    .custom-cursor-dot,
+    .cursor-trail {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   ENHANCED PRELOADER WITH "YA" INITIALS
+   ============================================ */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loading.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-logo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+.loading-logo-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--gradient-text);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerText 2s linear infinite;
+    z-index: 2;
+}
+
+.loading-logo-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top-color: var(--primary);
+    border-right-color: var(--accent-1);
+    border-radius: 50%;
+    animation: logoSpin 1.5s linear infinite;
+}
+
+.loading-logo-ring-inner {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border: 2px solid transparent;
+    border-bottom-color: var(--accent-2);
+    border-left-color: var(--accent-3);
+    border-radius: 50%;
+    animation: logoSpin 1s linear infinite reverse;
+}
+
+@keyframes logoSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
+
+/* ============================================
+   NOISE TEXTURE OVERLAY
+   ============================================ */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+}
+
+/* Light mode noise adjustment */
+body.light-mode .noise-overlay {
+    opacity: 0.03;
+}
+
+/* ============================================
+   FLOATING TECH BADGES AROUND PROFILE
+   ============================================ */
+.floating-badges {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.floating-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-md);
+    animation: floatBadge 6s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.floating-badge:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-glow);
+    pointer-events: auto;
+}
+
+.floating-badge:nth-child(1) {
+    top: 5%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.floating-badge:nth-child(2) {
+    top: 15%;
+    right: -5%;
+    animation-delay: -1s;
+    animation-duration: 7s;
+}
+
+.floating-badge:nth-child(3) {
+    bottom: 20%;
+    left: -15%;
+    animation-delay: -2s;
+    animation-duration: 5s;
+}
+
+.floating-badge:nth-child(4) {
+    bottom: 10%;
+    right: -10%;
+    animation-delay: -3s;
+    animation-duration: 8s;
+}
+
+.floating-badge:nth-child(5) {
+    top: 50%;
+    left: -20%;
+    animation-delay: -1.5s;
+    animation-duration: 6s;
+}
+
+@keyframes floatBadge {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translateY(-20px) rotate(3deg);
+    }
+}
+
+/* Badge Icon Colors */
+.floating-badge.python {
+    color: #3776ab;
+}
+
+.floating-badge.docker {
+    color: #2496ed;
+}
+
+.floating-badge.cloud {
+    color: #ff9900;
+}
+
+.floating-badge.database {
+    color: #336791;
+}
+
+.floating-badge.git {
+    color: #f05032;
+}
+
+.floating-badge:hover.python,
+.floating-badge:hover.docker,
+.floating-badge:hover.cloud,
+.floating-badge:hover.database,
+.floating-badge:hover.git {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   ANIMATED ROTATING GRADIENT BORDER ON PROFILE
+   ============================================ */
+#mypic-div::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: conic-gradient(from 0deg,
+            var(--primary),
+            var(--accent-1),
+            var(--accent-2),
+            var(--accent-3),
+            var(--primary));
+    border-radius: var(--radius-lg);
+    z-index: 0;
+    opacity: 0.6;
+    filter: blur(40px);
+    animation: rotateGradient 8s linear infinite;
+}
+
+@keyframes rotateGradient {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Inner pulsing glow */
+#mypic-div::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+    border-radius: var(--radius-lg);
+    z-index: 0;
+    opacity: 0.5;
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+/* ============================================
+   ENHANCED MOUSE FOLLOWER GRADIENT
+   ============================================ */
+.mouse-follower {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle,
+            rgba(25, 167, 206, 0.08) 0%,
+            rgba(102, 126, 234, 0.05) 30%,
+            transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8;
+}
+
+.mouse-follower.expanded {
+    width: 600px;
+    height: 600px;
+    opacity: 1;
+}
+
+/* ============================================
+   SCROLL HINT ANIMATION
+   ============================================ */
+.scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.6;
+    animation: fadeInUp 1s ease 2s forwards, bounceHint 2s ease-in-out infinite 3s;
+    opacity: 0;
+}
+
+.scroll-hint-text {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+}
+
+.scroll-hint-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 0.6;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes bounceHint {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* ============================================
+   EASTER EGG STYLES
+   ============================================ */
+.easter-egg-active {
+    animation: rainbowBorder 2s linear infinite;
+}
+
+@keyframes rainbowBorder {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.easter-egg-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 40px 60px;
+    text-align: center;
+    z-index: 99999;
+    box-shadow: var(--shadow-lg), var(--shadow-glow-intense);
+    animation: easterEggPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.easter-egg-notification h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.easter-egg-notification p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.easter-egg-notification .confetti {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+@keyframes easterEggPop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   LINK HOVER UNDERLINE ANIMATION
+   ============================================ */
+.animated-link {
+    position: relative;
+    text-decoration: none;
+}
+
+.animated-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+}
+
+.animated-link:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   GLOW ON HOVER FOR INTERACTIVE ELEMENTS
+   ============================================ */
+.glow-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glow-hover:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS FOR ENHANCEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Hide floating badges on mobile */
+    .floating-badges {
+        display: none;
+    }
+
+    /* Smaller scroll hint */
+    .scroll-hint {
+        bottom: 20px;
+    }
+
+    /* Reduce noise opacity on mobile */
+    .noise-overlay {
+        opacity: 0.01;
+    }
+
+    /* Adjust preloader logo */
+    .loading-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .loading-logo-text {
+        font-size: 2rem;
+    }
+
+    /* Hide custom cursor on touch devices */
+    .custom-cursor,
+    .custom-cursor-dot {
+        display: none !important;
+    }
+
+    /* Reduce gradient animation intensity */
+    #mypic-div::before {
+        width: 280px;
+        height: 280px;
+        animation: none;
+        opacity: 0.4;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .floating-badge,
+    .scroll-hint,
+    #mypic-div::before,
+    #mypic-div::after,
+    .loading-logo-ring,
+    .loading-logo-ring-inner {
+        animation: none;
+    }
+
+    .scroll-progress {
+        transition: none;
     }
 }

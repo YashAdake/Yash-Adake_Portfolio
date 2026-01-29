@@ -73,11 +73,35 @@
 
 <body>
 
-    <!-- Loading Screen -->
+    <!-- Loading Screen with YA Initials -->
     <div id="loading">
+        <div class="loading-logo">
+            <div class="loading-logo-ring"></div>
+            <div class="loading-logo-ring-inner"></div>
+            <span class="loading-logo-text">YA</span>
+        </div>
         <div class="loading-text">Welcome to My Portfolio</div>
         <div class="loading-bar"></div>
     </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Cursor with Text Label (Desktop Only) -->
+    <div class="custom-cursor" id="customCursor">
+        <span class="cursor-text" id="cursorText"></span>
+    </div>
+    <div class="custom-cursor-dot" id="customCursorDot"></div>
+
+    <!-- Spotlight/Flashlight Effect (hidden for text cursor) -->
+    <div class="spotlight-overlay" id="spotlightOverlay"></div>
+    <div class="spotlight-glow" id="spotlightGlow"></div>
+
+    <!-- Enhanced Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTop" class="scroll-to-top">
@@ -136,6 +160,24 @@
                 <div class="container">
                     <div class="row" id="area-1">
                         <div class="col-md-6" id="mypic-div" data-aos="fade-right">
+                            <!-- Floating Tech Badges -->
+                            <div class="floating-badges">
+                                <div class="floating-badge python" title="Python">
+                                    <i class='bx bxl-python'></i>
+                                </div>
+                                <div class="floating-badge docker" title="Docker">
+                                    <i class='bx bxl-docker'></i>
+                                </div>
+                                <div class="floating-badge cloud" title="Cloud">
+                                    <i class='bx bx-cloud'></i>
+                                </div>
+                                <div class="floating-badge database" title="PostgreSQL">
+                                    <i class='bx bx-data'></i>
+                                </div>
+                                <div class="floating-badge git" title="Git">
+                                    <i class='bx bxl-git'></i>
+                                </div>
+                            </div>
                             <img src="photos/me1.jpeg" alt="Yash Adake Profile Picture" id="mypic">
                         </div>
 
@@ -194,6 +236,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Scroll Hint -->
+                <div class="scroll-hint">
+                    <span class="scroll-hint-text">Scroll Down</span>
+                    <i class='bx bx-chevron-down scroll-hint-icon'></i>
                 </div>
             </div>
         </section>
@@ -1339,30 +1387,7 @@
             });
         });
 
-        // ============================================
-        // CURSOR GLOW EFFECT (Optional - Desktop Only)
-        // ============================================
-        if (window.innerWidth > 768) {
-            const cursorGlow = document.createElement('div');
-            cursorGlow.className = 'cursor-glow';
-            cursorGlow.style.cssText = `
-                position: fixed;
-                width: 300px;
-                height: 300px;
-                background: radial-gradient(circle, rgba(25, 167, 206, 0.08) 0%, transparent 70%);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: -1;
-                transform: translate(-50%, -50%);
-                transition: opacity 0.3s ease;
-            `;
-            document.body.appendChild(cursorGlow);
-
-            document.addEventListener('mousemove', (e) => {
-                cursorGlow.style.left = e.clientX + 'px';
-                cursorGlow.style.top = e.clientY + 'px';
-            });
-        }
+        // NOTE: Cursor glow effect replaced by enhanced mouse-follower in premium UX section
 
         // ============================================
         // FORM INPUT ANIMATION
@@ -1636,6 +1661,350 @@ Feel free to reach out!
             }
         `;
         document.head.appendChild(styleSheet);
+
+        // ============================================
+        // PREMIUM UX ENHANCEMENTS
+        // ============================================
+
+        // ============================================
+        // SCROLL PROGRESS BAR
+        // ============================================
+        const scrollProgressBar = document.getElementById('scrollProgress');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+
+            scrollProgressBar.style.width = scrollPercent + '%';
+
+            // Add active class when scrolling
+            if (scrollPercent > 0) {
+                scrollProgressBar.classList.add('active');
+            } else {
+                scrollProgressBar.classList.remove('active');
+            }
+        });
+
+        // ============================================
+        // TRAIL/COMET CURSOR - FINAL (Desktop Only)
+        // Dynamic comet effect with trailing particles
+        // ============================================
+        if (window.innerWidth > 768 && !('ontouchstart' in window)) {
+            const cursor = document.getElementById('customCursor');
+            const cursorDot = document.getElementById('customCursorDot');
+
+            document.body.classList.add('custom-cursor-enabled');
+
+            // Trail configuration
+            const trailLength = 12;
+            const trailDots = [];
+            const trailPositions = [];
+
+            // Color gradient for trail (cyan to purple to fade)
+            const trailColors = [
+                'rgba(25, 167, 206, 0.9)',   // Bright cyan
+                'rgba(25, 167, 206, 0.8)',
+                'rgba(70, 140, 200, 0.7)',
+                'rgba(102, 126, 234, 0.6)',  // Purple blend
+                'rgba(102, 126, 234, 0.5)',
+                'rgba(118, 75, 162, 0.4)',   // Violet
+                'rgba(118, 75, 162, 0.35)',
+                'rgba(118, 75, 162, 0.3)',
+                'rgba(118, 75, 162, 0.25)',
+                'rgba(118, 75, 162, 0.2)',
+                'rgba(118, 75, 162, 0.15)',
+                'rgba(118, 75, 162, 0.1)'    // Fade out
+            ];
+
+            // Create trail dots
+            for (let i = 0; i < trailLength; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'cursor-trail';
+                const size = 14 - (i * 0.9); // Decreasing size
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.background = trailColors[i];
+                dot.style.boxShadow = `0 0 ${6 - i * 0.4}px ${trailColors[i]}`;
+                document.body.appendChild(dot);
+                trailDots.push(dot);
+                trailPositions.push({ x: 0, y: 0 });
+            }
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            let ringX = 0, ringY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Smooth cursor animation with trail
+            function animateCursor() {
+                // Main cursor (head of comet) follows quickly
+                const dx = mouseX - cursorX;
+                const dy = mouseY - cursorY;
+                cursorX += dx * 0.25;
+                cursorY += dy * 0.25;
+
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+
+                // Ring follows with more lag
+                const ringDx = mouseX - ringX;
+                const ringDy = mouseY - ringY;
+                ringX += ringDx * 0.08;
+                ringY += ringDy * 0.08;
+
+                cursorDot.style.left = ringX + 'px';
+                cursorDot.style.top = ringY + 'px';
+
+                // Update trail positions (each follows the one ahead)
+                trailPositions[0].x += (cursorX - trailPositions[0].x) * 0.35;
+                trailPositions[0].y += (cursorY - trailPositions[0].y) * 0.35;
+
+                for (let i = 1; i < trailLength; i++) {
+                    const followSpeed = 0.35 - (i * 0.02);
+                    trailPositions[i].x += (trailPositions[i - 1].x - trailPositions[i].x) * followSpeed;
+                    trailPositions[i].y += (trailPositions[i - 1].y - trailPositions[i].y) * followSpeed;
+                }
+
+                // Apply positions to trail dots
+                trailDots.forEach((dot, i) => {
+                    dot.style.left = trailPositions[i].x + 'px';
+                    dot.style.top = trailPositions[i].y + 'px';
+                });
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Hover effect on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, input, textarea, .social-link, .btn, .project-card, .blog-card, .skill-tag, .floating-badge, .nav-each-link');
+
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('cursor-hover');
+                    cursorDot.classList.add('cursor-hover');
+                    // Make trail brighter on hover
+                    trailDots.forEach((dot, i) => {
+                        dot.style.background = `rgba(102, 126, 234, ${0.9 - i * 0.07})`;
+                        dot.style.boxShadow = `0 0 ${8 - i * 0.5}px rgba(102, 126, 234, ${0.8 - i * 0.06})`;
+                    });
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-hover');
+                    cursorDot.classList.remove('cursor-hover');
+                    // Restore trail colors
+                    trailDots.forEach((dot, i) => {
+                        dot.style.background = trailColors[i];
+                        dot.style.boxShadow = `0 0 ${6 - i * 0.4}px ${trailColors[i]}`;
+                    });
+                });
+            });
+
+            // Click effect - pulse
+            document.addEventListener('mousedown', () => {
+                cursor.classList.add('cursor-click');
+                cursorDot.classList.add('cursor-click');
+                // Flash trail on click
+                trailDots.forEach((dot, i) => {
+                    dot.style.background = `rgba(255, 255, 255, ${0.9 - i * 0.07})`;
+                    dot.style.boxShadow = `0 0 ${10 - i * 0.6}px rgba(255, 255, 255, ${0.8 - i * 0.06})`;
+                });
+            });
+
+            document.addEventListener('mouseup', () => {
+                cursor.classList.remove('cursor-click');
+                cursorDot.classList.remove('cursor-click');
+                // Restore trail colors
+                trailDots.forEach((dot, i) => {
+                    dot.style.background = trailColors[i];
+                    dot.style.boxShadow = `0 0 ${6 - i * 0.4}px ${trailColors[i]}`;
+                });
+            });
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorDot.style.opacity = '0';
+                trailDots.forEach(dot => dot.style.opacity = '0');
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorDot.style.opacity = '0.3';
+                trailDots.forEach(dot => dot.style.opacity = '1');
+            });
+        }
+
+        // ============================================
+        // ENHANCED MOUSE FOLLOWER
+        // ============================================
+        if (window.innerWidth > 768) {
+            const mouseFollower = document.getElementById('mouseFollower');
+            let followerX = 0, followerY = 0;
+            let targetX = 0, targetY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            });
+
+            function animateFollower() {
+                const dx = targetX - followerX;
+                const dy = targetY - followerY;
+
+                followerX += dx * 0.05;
+                followerY += dy * 0.05;
+
+                mouseFollower.style.left = followerX + 'px';
+                mouseFollower.style.top = followerY + 'px';
+
+                requestAnimationFrame(animateFollower);
+            }
+            animateFollower();
+
+            // Expand on interactive areas
+            const expandTriggers = document.querySelectorAll('.home, .about, section');
+            expandTriggers.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    mouseFollower.classList.add('expanded');
+                });
+                el.addEventListener('mouseleave', () => {
+                    mouseFollower.classList.remove('expanded');
+                });
+            });
+        }
+
+        // ============================================
+        // KONAMI CODE EASTER EGG
+        // ============================================
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+
+                if (konamiIndex === konamiCode.length) {
+                    activateEasterEgg();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateEasterEgg() {
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'easter-egg-notification';
+            notification.innerHTML = `
+                <div class="confetti">🎮</div>
+                <h3>🎉 You found it!</h3>
+                <p>You're a true developer! Thanks for exploring!</p>
+            `;
+            document.body.appendChild(notification);
+
+            // Add rainbow effect to profile picture
+            const profilePic = document.getElementById('mypic');
+            profilePic.classList.add('easter-egg-active');
+
+            // Create confetti effect
+            createConfetti();
+
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'easterEggPop 0.5s ease reverse forwards';
+                setTimeout(() => {
+                    notification.remove();
+                    profilePic.classList.remove('easter-egg-active');
+                }, 500);
+            }, 4500);
+        }
+
+        function createConfetti() {
+            const colors = ['#19a7ce', '#667eea', '#764ba2', '#f093fb', '#f5576c', '#00ff88'];
+            const confettiCount = 100;
+
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${Math.random() * 100}vw;
+                    top: -20px;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    pointer-events: none;
+                    z-index: 100000;
+                    animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 5000);
+            }
+
+            // Add confetti animation
+            if (!document.getElementById('confetti-style')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-style';
+                style.textContent = `
+                    @keyframes confettiFall {
+                        0% {
+                            transform: translateY(0) rotate(0deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(100vh) rotate(${Math.random() * 720}deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // ============================================
+        // SCROLL HINT AUTO-HIDE
+        // ============================================
+        const scrollHint = document.querySelector('.scroll-hint');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                scrollHint.style.opacity = '0';
+                scrollHint.style.visibility = 'hidden';
+            } else {
+                scrollHint.style.opacity = '0.6';
+                scrollHint.style.visibility = 'visible';
+            }
+        });
+
+        // ============================================
+        // SMOOTH PAGE TRANSITIONS (Link Hover Sounds Effect - Visual)
+        // ============================================
+        const allLinks = document.querySelectorAll('a:not([href^="#"]):not([target="_blank"])');
+        allLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('#') && !href.startsWith('tel:') && !href.startsWith('mailto:')) {
+                    e.preventDefault();
+                    document.body.style.opacity = '0';
+                    document.body.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 300);
+                }
+            });
+        });
+
+        // Log premium features loaded
+        console.log('%c✨ Premium UX Features Loaded!', 'color: #19a7ce; font-size: 14px; font-weight: bold;');
+        console.log('%c🎮 Try the Konami Code: ↑↑↓↓←→←→BA', 'color: #667eea; font-size: 12px;');
     </script>
 </body>
 
