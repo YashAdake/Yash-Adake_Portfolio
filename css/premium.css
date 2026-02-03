@@ -78,8 +78,6 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
-    /* Prevent layout shift during scrollbar appearance */
-    scrollbar-gutter: stable;
 }
 
 body {
@@ -90,40 +88,6 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* GPU acceleration for smooth scrolling */
-    transform: translateZ(0);
-    /* Optimize text rendering */
-    text-rendering: optimizeSpeed;
-}
-
-/* Performance: Offscreen content optimization */
-section {
-    content-visibility: auto;
-    contain-intrinsic-size: 0 500px;
-}
-
-/* GPU-accelerated animations hint */
-.custom-cursor,
-.custom-cursor-dot,
-.cursor-trail,
-.nav-link,
-.btn,
-.project-card,
-.blog-card {
-    will-change: transform;
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
 }
 
 /* Animated Background Gradient */

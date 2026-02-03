@@ -37,12 +37,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- DNS Prefetch for faster external connections -->
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="https://unpkg.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
     <!-- Google Fonts - Inter (Modern, Clean) - Preload for speed -->
     <link rel="preload" as="style"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
@@ -53,19 +47,16 @@
             rel="stylesheet">
     </noscript>
 
-    <!-- Critical CSS - Load First (Bootstrap) -->
+    <!-- Critical CSS - Load First -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Premium Custom CSS -->
     <link rel="stylesheet" href="css/premium.css">
 
-    <!-- Boxicons - Defer loading for performance -->
-    <link rel="preload" as="style" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </noscript>
+    <!-- Boxicons - Load async -->
+    <link rel="preload" as="style" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- AOS Animation Library - Defer loading -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" media="print"
@@ -74,8 +65,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     </noscript>
 
-    <!-- Favicon - Use ICO for better caching -->
-    <link rel="icon" type="image/x-icon" href="photos/YA-Favicon.ico">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="photos/nav-brand.png">
     <link rel="apple-touch-icon" href="photos/nav-brand.png">
 
 </head>
@@ -1023,7 +1014,7 @@
         // ============================================
 
         // Contact Form Handler
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxsmf3WbfwIp9PwrjvSdBMxPnJ7YqKw8xvJnz8gq7v8VWobzaU9zYqImiy2MSUFhpoJ/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby_BRziPluzyJVncAlKAYgBUUr4O_PmWtpcxhSSA95FwXLK7hJxBgIrLIBaK_pfUi-mtg/exec'
         const form = document.forms['submit-to-google-sheet']
         const msg = document.getElementById("msg")
 
