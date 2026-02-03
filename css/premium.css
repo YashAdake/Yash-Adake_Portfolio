@@ -2371,6 +2371,8 @@ body.light-mode #loading {
             transparent 70%);
     filter: blur(1px);
     animation: orbFloat linear infinite;
+    pointer-events: none;
+    /* Prevent blocking cursor interactions */
 }
 
 @keyframes orbFloat {
