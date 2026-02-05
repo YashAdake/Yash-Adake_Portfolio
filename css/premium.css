@@ -4200,3 +4200,102 @@ body.light-mode .noise-overlay {
         transition: none;
     }
 }
+
+/* ============================================
+   PRODUCTION SAFEGUARDS - Critical Fixes
+   Ensures content visibility and proper 
+   fixed positioning on all hosting platforms
+   ============================================ */
+
+/* Ensure all sections are visible */
+section,
+.home,
+.about,
+.resume,
+.blog,
+.contact,
+footer {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure body doesn't create broken stacking context */
+body {
+    transform: none;
+    filter: none;
+    perspective: none;
+}
+
+/* Force fixed positioning to work correctly */
+.scroll-to-top,
+.whatsapp-float,
+.visitor-counter,
+.navbar,
+#loading,
+.custom-cursor,
+.custom-cursor-dot,
+.cursor-trail {
+    position: fixed !important;
+    /* Ensure no parent transform breaks fixed positioning */
+}
+
+/* Ensure floating elements are visible and properly positioned */
+.whatsapp-float,
+.visitor-counter {
+    visibility: visible !important;
+    opacity: 1;
+    z-index: 9998 !important;
+}
+
+/* Scroll-to-top - let JS control display, just ensure proper z-index */
+.scroll-to-top {
+    z-index: 9998 !important;
+}
+
+/* Navbar always on top */
+.navbar {
+    z-index: 1000 !important;
+}
+
+/* Loading screen above everything */
+#loading {
+    z-index: 99999 !important;
+}
+
+/* Cursor elements highest z-index */
+.custom-cursor {
+    z-index: 100001 !important;
+}
+
+.cursor-trail {
+    z-index: 100000 !important;
+}
+
+.custom-cursor-dot {
+    z-index: 99999 !important;
+}
+
+/* Ensure main content has proper layout */
+main,
+.container,
+.row {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fix for content not appearing after hero */
+.about,
+.resume,
+.blog,
+.contact {
+    min-height: auto;
+    padding: 100px 0;
+}
+
+footer {
+    position: relative;
+    z-index: 10;
+}
