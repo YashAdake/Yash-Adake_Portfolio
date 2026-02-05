@@ -4299,3 +4299,526 @@ footer {
     position: relative;
     z-index: 10;
 }
+
+/* ============================================
+   MOBILE-FIRST OPTIMIZATIONS
+   Enhanced mobile experience for touch devices
+   ============================================ */
+
+/* Detect touch devices and apply touch-friendly styles */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Disable hover effects on touch devices */
+    .btn:hover,
+    .nav-link:hover,
+    .social-link:hover,
+    .project-card:hover,
+    .blog-card:hover,
+    .timeline-item:hover {
+        transform: none !important;
+    }
+
+    /* Make buttons more touch-friendly */
+    .btn {
+        min-height: 48px;
+        padding: 14px 28px;
+    }
+
+    /* Add active state for touch feedback */
+    .btn:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9;
+    }
+
+    .social-link:active,
+    .nav-link:active {
+        transform: scale(0.95) !important;
+        background: var(--glass-bg) !important;
+    }
+
+    /* Improve form inputs for mobile */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+        /* Prevents zoom on iOS */
+        min-height: 48px;
+    }
+}
+
+/* ============================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Reduce animations for faster loading
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Disable heavy animations */
+    body::before {
+        animation: none !important;
+        opacity: 0.5;
+    }
+
+    .home::before,
+    .home::after {
+        display: none !important;
+    }
+
+    #mypic-div::before,
+    #mypic-div::after {
+        animation: none !important;
+    }
+
+    /* Faster loading screen on mobile */
+    #loading {
+        transition: opacity 0.4s ease, visibility 0.4s ease !important;
+    }
+
+    .loading-logo-ring,
+    .loading-logo-ring-inner {
+        animation-duration: 1s !important;
+    }
+
+    /* Simplify transitions */
+    * {
+        transition-duration: 0.2s !important;
+    }
+
+    /* Disable parallax/complex effects */
+    .particles-container {
+        display: none !important;
+    }
+
+    .noise-overlay {
+        display: none !important;
+    }
+
+    /* Optimize scroll progress */
+    .scroll-progress::after {
+        display: none;
+    }
+}
+
+/* ============================================
+   MOBILE NAVIGATION IMPROVEMENTS
+   ============================================ */
+@media (max-width: 991px) {
+
+    /* Better mobile menu styling */
+    .navbar-collapse {
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--glass-border);
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .navbar-nav {
+        gap: 5px;
+    }
+
+    .nav-each-link {
+        padding: 15px 20px !important;
+        font-size: 1.1rem !important;
+        border-radius: var(--radius-md);
+        text-align: center;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-each-link:active {
+        background: var(--glass-bg);
+    }
+
+    /* Bigger hamburger menu */
+    .navbar-toggler {
+        width: 48px;
+        height: 48px;
+        padding: 10px;
+    }
+
+    .navbar-toggler-icon {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* ============================================
+   MOBILE HERO SECTION
+   ============================================ */
+@media (max-width: 768px) {
+
+    .home {
+        padding: 100px 0 60px;
+        min-height: auto;
+    }
+
+    .name-heading {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .hello-text {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .profession {
+        font-size: 1.1rem !important;
+        line-height: 1.4;
+    }
+
+    .intro-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        padding: 0 5px;
+        margin-bottom: 20px;
+    }
+
+    /* Profile picture optimization */
+    #mypic {
+        width: 200px !important;
+        height: auto !important;
+        border-width: 3px;
+    }
+
+    #mypic-div::before {
+        width: 220px !important;
+        height: 220px !important;
+        border-width: 2px;
+    }
+
+    /* Action buttons - full width on mobile */
+    .action-buttons {
+        gap: 12px;
+    }
+
+    .action-buttons .btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Social links */
+    #socials {
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .social-link {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.3rem;
+    }
+
+    /* Current role badge */
+    .current-role {
+        padding: 10px 16px;
+        margin-bottom: 15px;
+    }
+
+    .company-name {
+        font-size: 0.85rem;
+    }
+
+    .role-status {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================
+   MOBILE FLOATING ELEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* WhatsApp button - larger for touch */
+    .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        bottom: 80px;
+        right: 15px;
+        font-size: 1.8rem;
+    }
+
+    .whatsapp-float::before {
+        animation: none !important;
+    }
+
+    /* Scroll to top - touch friendly */
+    .scroll-to-top {
+        width: 48px;
+        height: 48px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+
+    /* Visitor counter - smaller on mobile */
+    .visitor-counter {
+        bottom: 15px;
+        left: 15px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    .visitor-counter i {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   MOBILE SECTIONS (About, Resume, Blog, Contact)
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Reduce section padding */
+    section,
+    .about,
+    .resume,
+    .blog,
+    .contact {
+        padding: 60px 0 !important;
+    }
+
+    .section-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 25px;
+    }
+
+    .subsection-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    /* About section */
+    .about-text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    /* Skills */
+    .skill-badges {
+        gap: 8px;
+    }
+
+    .badge {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    /* Timeline */
+    .timeline {
+        padding-left: 20px;
+    }
+
+    .timeline-item {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .timeline-marker {
+        left: -28px;
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Blog cards */
+    .blog-card {
+        margin-bottom: 20px;
+    }
+
+    .blog-img {
+        height: 160px;
+    }
+
+    .blog-content {
+        padding: 15px;
+    }
+
+    .blog-content h3 {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    /* Contact form */
+    .contact-box {
+        padding: 20px 15px;
+    }
+
+    .form-control {
+        padding: 14px;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+
+    textarea.form-control {
+        min-height: 120px;
+    }
+
+    .contact-item {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .contact-item i {
+        font-size: 1.3rem;
+        width: 28px;
+    }
+}
+
+/* ============================================
+   MOBILE FOOTER
+   ============================================ */
+@media (max-width: 768px) {
+
+    footer {
+        padding: 40px 0 20px;
+    }
+
+    .footer-title {
+        font-size: 1rem;
+        text-align: center !important;
+        margin-bottom: 15px;
+    }
+
+    .footer-links,
+    .footer-contact {
+        align-items: center !important;
+        text-align: center;
+    }
+
+    .footer-contact p {
+        justify-content: center !important;
+    }
+
+    .footer-social {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .footer-social .social-link {
+        width: 44px;
+        height: 44px;
+    }
+
+    .footer-bottom {
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+
+    .footer-bottom p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================
+   EXTRA SMALL MOBILE (< 375px)
+   For iPhone SE and similar small devices
+   ============================================ */
+@media (max-width: 375px) {
+
+    .name-heading {
+        font-size: 1.8rem !important;
+    }
+
+    .profession {
+        font-size: 1rem !important;
+    }
+
+    #mypic {
+        width: 160px !important;
+    }
+
+    #mypic-div::before {
+        width: 180px !important;
+        height: 180px !important;
+    }
+
+    .section-title {
+        font-size: 1.5rem !important;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .social-link {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 70px;
+    }
+
+    .scroll-to-top {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* ============================================
+   SMOOTH SCROLL BEHAVIOR FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Prevent horizontal scroll */
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* Ensure images don't overflow */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Fix for iOS Safari bottom bar */
+    .home {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* ============================================
+   LANDSCAPE MODE ADJUSTMENTS
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .home {
+        padding: 80px 0 40px;
+        min-height: auto;
+    }
+
+    #mypic {
+        width: 120px !important;
+    }
+
+    .name-heading {
+        font-size: 1.5rem !important;
+    }
+
+    .loading-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .loading-logo-text {
+        font-size: 1.5rem;
+    }
+}
