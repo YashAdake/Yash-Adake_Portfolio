@@ -122,82 +122,9 @@ body::before {
 }
 
 /* ============================================
-   LOADING SCREEN - PREMIUM ANIMATED
+   LOADING SCREEN - Defined in ENHANCED PRELOADER section below
    ============================================ */
-#loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-primary);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-}
 
-#loading.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loading-text {
-    color: var(--text-primary);
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    background: var(--gradient-text);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmerText 3s linear infinite;
-}
-
-@keyframes shimmerText {
-    0% {
-        background-position: 0% center;
-    }
-
-    100% {
-        background-position: 200% center;
-    }
-}
-
-.loading-bar {
-    width: 300px;
-    height: 4px;
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-full);
-    overflow: hidden;
-    position: relative;
-}
-
-.loading-bar::after {
-    content: '';
-    position: absolute;
-    width: 40%;
-    height: 100%;
-    background: var(--gradient-primary);
-    border-radius: var(--radius-full);
-    top: 0;
-    left: -40%;
-    animation: loadingSlide 1.2s ease-in-out infinite;
-    box-shadow: 0 0 20px var(--primary-glow);
-}
-
-@keyframes loadingSlide {
-    0% {
-        left: -40%;
-    }
-
-    100% {
-        left: 100%;
-    }
-}
 
 /* ============================================
    SCROLL TO TOP BUTTON - PREMIUM FLOATING
@@ -2163,16 +2090,234 @@ body.light-mode::before {
         radial-gradient(ellipse at 50% 50%, rgba(118, 75, 162, 0.08) 0%, transparent 60%);
 }
 
+body.light-mode #loading {
+    background: var(--bg-primary);
+}
+
+/* Light Mode - Navigation */
 body.light-mode .navbar {
-    background: rgba(245, 245, 247, 0.9);
+    background: rgba(245, 245, 247, 0.92);
+    border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 body.light-mode .navbar.scrolled {
     background: rgba(245, 245, 247, 0.98);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-body.light-mode #loading {
+body.light-mode .navbar-collapse {
+    background: rgba(245, 245, 247, 0.98);
+}
+
+body.light-mode .navbar-toggler i {
+    color: #1d1d1f !important;
+}
+
+/* Light Mode - Cards & Glass Elements */
+body.light-mode .timeline-item,
+body.light-mode .experience-item,
+body.light-mode .achievement-card,
+body.light-mode .blog-card,
+body.light-mode .skills-container,
+body.light-mode .certifications-container,
+body.light-mode .contact-box,
+body.light-mode .newsletter-box {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .timeline-item:hover,
+body.light-mode .experience-item:hover,
+body.light-mode .achievement-card:hover,
+body.light-mode .blog-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode - Skill Tags */
+body.light-mode .skill-tag {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-secondary);
+}
+
+body.light-mode .skill-tag:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+body.light-mode .skill-tag.featured {
+    background: rgba(25, 167, 206, 0.1);
+}
+
+body.light-mode .skill-tag.new {
+    background: rgba(240, 147, 251, 0.1);
+}
+
+/* Light Mode - Buttons */
+body.light-mode .btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+body.light-mode .scroll-to-top {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode - Contact */
+body.light-mode .contact-item {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .contact-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .form-group input,
+body.light-mode .form-group textarea {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--text-primary);
+}
+
+body.light-mode .form-group input:focus,
+body.light-mode .form-group textarea:focus {
+    background: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(25, 167, 206, 0.12);
+}
+
+body.light-mode .form-group input::placeholder,
+body.light-mode .form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Light Mode - Copy Button */
+body.light-mode .copy-btn {
+    background: rgba(25, 167, 206, 0.08);
+    border-color: rgba(25, 167, 206, 0.25);
+}
+
+/* Light Mode - Experience Badges */
+body.light-mode .exp-badge,
+body.light-mode .current-role {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Light Mode - Social Links */
+body.light-mode .social-link {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: var(--text-secondary);
+}
+
+body.light-mode .social-link:hover {
+    color: #fff;
+}
+
+/* Light Mode - Profile Picture */
+body.light-mode #mypic {
+    background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+        var(--gradient-primary) border-box;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Light Mode - Personal Quote */
+body.light-mode .personal-quote {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Light Mode - Blog */
+body.light-mode .blog-placeholder {
+    background: linear-gradient(135deg, #e8e8ed 0%, #d1d1d6 100%);
+}
+
+/* Light Mode - Workshop List */
+body.light-mode .workshop-list li {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode .workshop-list li:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Light Mode - Footer */
+body.light-mode .footer-content {
+    background: #e8e8ed;
+    border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .footer-bottom {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Light Mode - Visitor Counter */
+body.light-mode .visitor-counter {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Light Mode - WhatsApp Button */
+body.light-mode .whatsapp-float {
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
+}
+
+/* Light Mode - Scrollbar */
+body.light-mode ::-webkit-scrollbar-track {
     background: var(--bg-primary);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary) 0%, var(--accent-1) 100%);
+    border-color: var(--bg-primary);
+}
+
+/* Light Mode - Section Dividers */
+body.light-mode .section-divider {
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(25, 167, 206, 0.2) 20%,
+            rgba(102, 126, 234, 0.35) 50%,
+            rgba(25, 167, 206, 0.2) 80%,
+            transparent 100%);
+}
+
+/* Light Mode - Selection */
+body.light-mode ::selection {
+    background: rgba(25, 167, 206, 0.2);
+    color: var(--text-primary);
+}
+
+/* Light Mode - Timeline */
+body.light-mode .timeline::before {
+    opacity: 0.7;
+}
+
+body.light-mode .experience-item.current {
+    background: linear-gradient(135deg, rgba(25, 167, 206, 0.08) 0%, rgba(102, 126, 234, 0.08) 100%);
+}
+
+/* Light Mode - Easter Egg */
+body.light-mode .easter-egg-notification {
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), var(--shadow-glow);
+}
+
+/* Light Mode - Theme Toggle visual feedback */
+body.light-mode .theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+    color: #515154;
+}
+
+body.light-mode .theme-toggle:hover {
+    background: var(--primary);
+    color: #fff;
 }
 
 /* ============================================
@@ -2261,7 +2406,6 @@ body.light-mode #loading {
     font-size: 1.1rem;
 }
 
-/* ============================================
 /* ============================================
    FUTURISTIC AURORA BACKGROUND
    ============================================ */
@@ -4820,5 +4964,228 @@ footer {
 
     .loading-logo-text {
         font-size: 1.5rem;
+    }
+}
+
+/* ============================================
+   VISUAL POLISH & MICRO-INTERACTIONS v3.0
+   Enhanced transitions, card effects, and details
+   ============================================ */
+
+/* Smooth Theme Transition */
+body,
+body * {
+    transition-property: background-color, color, border-color, box-shadow, opacity;
+    transition-duration: 0.35s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Don't transition layout properties or animations */
+body *:not(.cursor-trail):not(.custom-cursor):not(.custom-cursor-dot):not(.particle):not(.mouse-follower) {
+    transition-property: background-color, color, border-color, box-shadow;
+}
+
+/* Override for elements that need their own transitions */
+.btn-primary,
+.btn-outline-primary,
+.social-link,
+.skill-tag,
+.nav-each-link,
+.scroll-to-top,
+.theme-toggle,
+.project-card,
+.blog-card,
+.timeline-item,
+.experience-item,
+.achievement-card,
+.contact-item,
+.whatsapp-float,
+.exp-badge,
+.floating-badge,
+.copy-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stagger Animation for Skill Tags */
+.skill-tag {
+    opacity: 0;
+    animation: skillFadeIn 0.4s ease forwards;
+}
+
+@keyframes skillFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Card Shine Effect on Hover */
+.blog-card::after,
+.achievement-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.03) 45%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.03) 55%,
+            transparent 60%);
+    transform: translateX(-100%) translateY(-100%);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.blog-card:hover::after,
+.achievement-card:hover::after {
+    transform: translateX(30%) translateY(30%);
+}
+
+/* Enhanced Status Pulse for Current Experience */
+.experience-item.current::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: statusPulse 2s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+}
+
+/* Refined About Image Hover */
+.about-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease;
+}
+
+.about-image:hover {
+    transform: scale(1.02) rotate(0.5deg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(102, 126, 234, 0.15);
+}
+
+/* Subtle gradient shimmer for section subtitles */
+.section-subtitle {
+    background: linear-gradient(90deg, var(--text-secondary) 0%, var(--primary) 50%, var(--text-secondary) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: subtitleShimmer 6s linear infinite;
+}
+
+@keyframes subtitleShimmer {
+    0% {
+        background-position: 200% center;
+    }
+
+    100% {
+        background-position: -200% center;
+    }
+}
+
+/* Enhanced contact form submit button */
+.contact-form .btn-primary {
+    background: var(--gradient-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: btnShine 3s ease-in-out infinite;
+}
+
+@keyframes btnShine {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* Better focus ring for accessibility */
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(25, 167, 206, 0.15), 0 0 20px rgba(25, 167, 206, 0.1);
+}
+
+/* Newsletter box hover enhancement */
+.newsletter-box:hover {
+    border-color: rgba(25, 167, 206, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(25, 167, 206, 0.1);
+}
+
+/* Certification carousel smooth transition */
+.carousel-item {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Footer link arrow animation */
+.footer-links a {
+    transition: color 0.3s ease, transform 0.3s ease, gap 0.3s ease;
+}
+
+/* Achievement card counter animation trigger */
+.achievement-card {
+    position: relative;
+}
+
+/* Smooth mobile menu appearance */
+@media (max-width: 991px) {
+    .navbar-collapse.collapsing {
+        transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar-collapse.show {
+        animation: menuSlideDown 0.3s ease forwards;
+    }
+
+    @keyframes menuSlideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
