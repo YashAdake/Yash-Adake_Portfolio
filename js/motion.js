@@ -4,59 +4,8 @@
 // Letter-by-letter hero entrance, text-reveal section titles
 // ============================================
 
-// ============================================
-// 1. Split hero name into letters for staggered entrance
-// ============================================
-(function splitHeroName() {
-    const heroName = document.querySelector('.hero-name');
-    if (!heroName) return;
+// Hero name animation moved to delights.js (scramble handles it)
 
-    const html = heroName.innerHTML.trim();
-    const wrapper = document.createElement('span');
-    wrapper.className = 'hero-name-inner';
-
-    // Parse existing structure: "Yash <em>Adake</em>"
-    const parser = new DOMParser();
-    const parsed = parser.parseFromString(`<div>${html}</div>`, 'text/html');
-    const container = parsed.body.firstChild;
-
-    function wrapText(text, isItalic) {
-        const frag = document.createDocumentFragment();
-        [...text].forEach((ch, i) => {
-            const span = document.createElement('span');
-            span.className = 'hero-letter' + (isItalic ? ' hero-letter-italic' : '');
-            span.textContent = ch === ' ' ? '\u00A0' : ch;
-            span.style.setProperty('--i', frag.childNodes.length);
-            frag.appendChild(span);
-        });
-        return frag;
-    }
-
-    heroName.innerHTML = '';
-    let index = 0;
-    container.childNodes.forEach(node => {
-        if (node.nodeType === 3) {
-            [...node.textContent].forEach(ch => {
-                const s = document.createElement('span');
-                s.className = 'hero-letter';
-                s.textContent = ch === ' ' ? '\u00A0' : ch;
-                s.style.setProperty('--i', index++);
-                heroName.appendChild(s);
-            });
-        } else if (node.tagName === 'EM') {
-            [...node.textContent].forEach(ch => {
-                const s = document.createElement('span');
-                s.className = 'hero-letter hero-letter-italic';
-                s.textContent = ch === ' ' ? '\u00A0' : ch;
-                s.style.setProperty('--i', index++);
-                heroName.appendChild(s);
-            });
-        }
-    });
-
-    // Trigger after load
-    setTimeout(() => heroName.classList.add('hero-name-revealed'), 300);
-})();
 
 // ============================================
 // 2. Section number count-up on scroll-into-view
@@ -96,30 +45,8 @@ const titleObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 document.querySelectorAll('.section-title').forEach(t => titleObserver.observe(t));
 
-// ============================================
-// 4. Cursor-following gradient blob (low-opacity depth layer)
-// ============================================
-(function cursorGradient() {
-    if (window.innerWidth <= 768) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const blob = document.createElement('div');
-    blob.className = 'cursor-gradient-blob';
-    document.body.appendChild(blob);
-
-    let x = window.innerWidth / 2, y = window.innerHeight / 2;
-    let tx = x, ty = y;
-
-    window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-
-    function loop() {
-        x += (tx - x) * 0.04;
-        y += (ty - y) * 0.04;
-        blob.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-        requestAnimationFrame(loop);
-    }
-    loop();
-})();
+// Cursor gradient blob removed in v10.5 — redundant with spotlight-follow in delights.js;
+// three cursor-follow RAF loops were fighting the hero WebGL for GPU time.
 
 // ============================================
 // 5. Project card 3D tilt with shine sweep
@@ -281,49 +208,6 @@ document.querySelectorAll('.section-header').forEach(h => sectionHeaderObserver.
 
         divider.appendChild(track);
         section.parentNode.insertBefore(divider, section.nextSibling);
-    });
-})();
-
-// ============================================
-// 12. Page-wipe transition on nav click (anchor links)
-// Adds a dramatic cinematic pause before scroll lands
-// ============================================
-(function pageWipe() {
-    const wipe = document.createElement('div');
-    wipe.className = 'page-wipe';
-    document.body.appendChild(wipe);
-
-    const navLinks = document.querySelectorAll('.nav-each-link[href^="#"]');
-    navLinks.forEach(link => {
-        link.addEventListener('click', e => {
-            const href = link.getAttribute('href');
-            if (!href || href === '#') return;
-            const target = document.querySelector(href);
-            if (!target) return;
-
-            e.preventDefault();
-            e.stopImmediatePropagation();
-
-            wipe.classList.remove('clearing');
-            wipe.classList.add('wiping');
-
-            setTimeout(() => {
-                const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({ top, behavior: 'auto' });
-
-                // Close mobile nav if open
-                const navCollapse = document.querySelector('.navbar-collapse');
-                if (navCollapse?.classList.contains('show') && window.bootstrap) {
-                    new bootstrap.Collapse(navCollapse, { toggle: false }).hide();
-                }
-
-                // Clear the wipe
-                setTimeout(() => {
-                    wipe.classList.remove('wiping');
-                    wipe.classList.add('clearing');
-                }, 120);
-            }, 500);
-        });
     });
 })();
 

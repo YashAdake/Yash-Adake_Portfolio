@@ -12,8 +12,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta name="description" content="Yash Adake — Software Engineer based in Maharashtra, India. Backend systems, cloud infrastructure, and applied AI at ArthaVedh Consulting.">
-    <meta name="keywords" content="Yash Adake, Software Engineer India, DevOps Engineer, Python Developer, Docker, Cloud, PostgreSQL, API Development, Maharashtra, ArthaVedh, backend developer">
+    <meta name="description" content="Yash Adake — Software Engineer · Remote-friendly, based in India (GMT+5:30). Backend systems, cloud infrastructure, and applied AI. Open to remote roles and consulting worldwide.">
+    <meta name="keywords" content="Yash Adake, remote software engineer, remote backend developer, remote DevOps engineer, Python developer, Docker, PostgreSQL, API development, cloud engineer, agentic AI, India, ArthaVedh">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -26,19 +26,21 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Yash Adake — Software Engineer">
     <meta property="og:title" content="Yash Adake — Software Engineer">
-    <meta property="og:description" content="Backend systems, cloud infrastructure, and applied AI. Based in Maharashtra, India.">
+    <meta property="og:description" content="Backend systems, cloud infrastructure, and applied AI. Remote-friendly · Based in India (GMT+5:30) · Open to roles worldwide.">
     <meta property="og:url" content="https://yashadake.com/">
     <meta property="og:image" content="https://yashadake.com/photos/me1.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Yash Adake — Software Engineer">
-    <meta property="og:locale" content="en_IN">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta property="og:locale:alternate" content="en_IN">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yash_adake">
     <meta name="twitter:creator" content="@yash_adake">
     <meta name="twitter:title" content="Yash Adake — Software Engineer">
-    <meta name="twitter:description" content="Backend systems, cloud infrastructure, and applied AI.">
+    <meta name="twitter:description" content="Backend systems, cloud infrastructure, and applied AI. Remote-friendly · Open to roles worldwide.">
     <meta name="twitter:image" content="https://yashadake.com/photos/me1.jpeg">
 
     <meta name="theme-color" content="#0A0A0A">
@@ -52,10 +54,15 @@
         "image": "https://yashadake.com/photos/me1.jpeg",
         "jobTitle": "Software Engineer",
         "worksFor": { "@type": "Organization", "name": "ArthaVedh Consulting Pvt Ltd", "url": "https://arthavedh.com/" },
-        "description": "Software Engineer specializing in backend systems, cloud infrastructure, and applied AI.",
+        "description": "Software Engineer specializing in backend systems, cloud infrastructure, and applied AI. Remote-friendly and open to roles worldwide.",
         "email": "yashadakeofficial@gmail.com",
         "telephone": "+91-7715982570",
         "address": { "@type": "PostalAddress", "addressRegion": "Maharashtra", "addressCountry": "IN" },
+        "workLocation": [
+            { "@type": "Place", "name": "Remote — Worldwide" },
+            { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "IN" } }
+        ],
+        "availableLanguage": ["English", "Hindi", "Marathi"],
         "alumniOf": { "@type": "EducationalOrganization", "name": "DKTE Society's Textile and Engineering Institute" },
         "knowsAbout": ["Python", "Docker", "Kubernetes", "DevOps", "Cloud Computing", "PostgreSQL", "API Development", "Go", "Java", "Spring Boot", "Apache NiFi", "Azure", "Git", "CI/CD", "Generative AI"],
         "sameAs": [
@@ -88,7 +95,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/premium.css?v=9.2.0">
+    <link rel="stylesheet" href="css/premium.css?v=11.2.0">
+    <link rel="stylesheet" href="css/elite.css">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -111,12 +119,6 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Custom Cursor (with contextual text label) -->
-    <div class="custom-cursor" id="customCursor">
-        <span class="cursor-label" id="cursorLabel"></span>
-    </div>
-    <div class="custom-cursor-dot" id="customCursorDot"></div>
-
     <!-- Scroll to Top -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
         <i class='bx bx-chevrons-up'></i>
@@ -133,7 +135,7 @@
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container mynav">
                 <a class="navbar-brand" href="#home">
-                    <img src="photos/nav-brand2.png" alt="Yash Adake" id="mynav-brand" width="40" height="40">
+                    <img src="photos/nav-brand2.webp" alt="Yash Adake" id="mynav-brand" width="40" height="40">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -164,18 +166,19 @@
                 <div class="container">
                     <div class="row hero-row align-items-center">
                         <div class="col-md-5" id="mypic-div">
-                            <img src="photos/me1.jpeg" alt="Yash Adake" id="mypic" width="420" height="420" fetchpriority="high">
+                            <img src="photos/me1.webp" alt="Yash Adake" id="mypic" width="420" height="420" fetchpriority="high">
                         </div>
                         <div class="col-md-7" id="myinfo-div">
-                            <p class="hero-eyebrow">Software Engineer · Maharashtra, IN</p>
+                            <p class="hero-eyebrow">Software Engineer · Based in India · Available worldwide · GMT+5:30</p>
                             <h1 class="hero-name">Yash <em>Adake</em></h1>
                             <p class="hero-tagline">
                                 I build backend systems that handle messy, real-world scale —
                                 <span class="hero-accent">API gateways, data pipelines, and AI-driven automation.</span>
                             </p>
                             <p class="hero-meta">
-                                Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer" class="inline-link-subtle">ArthaVedh Consulting</a>,
-                                exploring <a href="#writing" class="inline-link-subtle">agentic AI</a> in my spare time.
+                                Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer" class="inline-link-subtle">ArthaVedh Consulting</a>
+                                · Exploring <a href="#writing" class="inline-link-subtle">agentic AI</a>
+                                · <strong>Open to remote roles &amp; consulting worldwide.</strong>
                             </p>
 
                             <div class="hero-actions">
@@ -216,6 +219,10 @@
                             <span class="work-tag">01 — E-commerce · Agritech</span>
                             <h3 class="work-title">Navaved Agro</h3>
                             <p class="work-desc">Brand and storefront for an Ayurvedic food-products company in Kolhapur — clean consumer-facing design, responsive catalog, natural palette.</p>
+                            <ul class="work-outcomes">
+                                <li>Shipped a live D2C storefront with WhatsApp-based ordering</li>
+                                <li>Mobile-first catalog for a non-technical merchant team</li>
+                            </ul>
                             <div class="work-stack">
                                 <span>HTML</span>·<span>CSS</span>·<span>JavaScript</span>
                             </div>
@@ -232,6 +239,10 @@
                             <span class="work-tag">02 — Marketing · Clean energy</span>
                             <h3 class="work-title">Urja Solar</h3>
                             <p class="work-desc">Marketing site for a Tasgaon-based solar installer — showcases residential and commercial services, government subsidy programs, and distributor partnerships.</p>
+                            <ul class="work-outcomes">
+                                <li>Lead-capture pipeline via WhatsApp API — zero-click enquiries</li>
+                                <li>Consolidated 4 distinct service tracks into one clear narrative</li>
+                            </ul>
                             <div class="work-stack">
                                 <span>HTML</span>·<span>CSS</span>·<span>JavaScript</span>·<span>WhatsApp API</span>
                             </div>
@@ -403,7 +414,15 @@
                             </div>
                             <div class="contact-row">
                                 <span class="contact-label">Based in</span>
-                                <span class="contact-value">Maharashtra, India</span>
+                                <span class="contact-value">India · GMT+5:30 · Remote-friendly worldwide</span>
+                            </div>
+                            <div class="contact-row">
+                                <span class="contact-label">Overlap</span>
+                                <span class="contact-value">Full day with Dubai &amp; Singapore · 4h+ with London · 3h+ with US East evenings</span>
+                            </div>
+                            <div class="contact-row">
+                                <span class="contact-label">Working in</span>
+                                <span class="contact-value">English (fluent) · Hindi · Marathi</span>
                             </div>
                         </div>
 
@@ -454,7 +473,7 @@
                 <div class="footer-row">
                     <div class="footer-brand">
                         <p class="footer-name">Yash Adake</p>
-                        <p class="footer-tagline">Software Engineer · Built in Maharashtra.</p>
+                        <p class="footer-tagline">Software Engineer · Remote-friendly worldwide · GMT+5:30</p>
                     </div>
                     <div class="footer-links">
                         <a href="#home">Home</a>
@@ -482,10 +501,13 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
-    <script src="js/core.js?v=9.2.0" defer></script>
-    <script src="js/effects.js?v=9.2.0" defer></script>
-    <script src="js/motion.js?v=9.2.0" defer></script>
-    <script src="js/hero3d.js?v=9.2.0" defer></script>
+    <script src="js/core.js?v=11.2.0" defer></script>
+    <script src="js/effects.js?v=11.2.0" defer></script>
+    <script src="js/motion.js?v=11.2.0" defer></script>
+    <script src="js/delights.js?v=11.2.0" defer></script>
+    <script src="js/palette.js?v=11.2.0" defer></script>
+    <script src="js/hero3d.js?v=11.2.0" defer></script>
+    <script src="js/elite-improvements.js" defer></script>
 
     <script>
         window.addEventListener('load', () => {

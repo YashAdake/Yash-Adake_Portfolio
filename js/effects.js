@@ -4,95 +4,13 @@
 // ============================================
 
 // ============================================
-// Cinematic Cursor with Contextual Text Label
+// v11.2 — REFINED CURSOR
+// Two elements: precise dot (instant) + smooth ring (lerped).
+// Ring morphs into a contextual label pill on interactive elements.
+// Auto-contrast via mix-blend-mode: difference (no theme-specific code).
+// One RAF loop, no filter stack. ~0.4ms/frame.
 // ============================================
-if (window.innerWidth > 768 && !('ontouchstart' in window)) {
-    const cursor = document.getElementById('customCursor');
-    const cursorDot = document.getElementById('customCursorDot');
-    const cursorLabel = document.getElementById('cursorLabel');
-
-    if (cursor && cursorDot) {
-        document.body.classList.add('custom-cursor-enabled');
-
-        let mx = 0, my = 0, cx = 0, cy = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-        function animate() {
-            cx += (mx - cx) * 0.4;
-            cy += (my - cy) * 0.4;
-            cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
-
-            rx += (mx - rx) * 0.14;
-            ry += (my - ry) * 0.14;
-            cursorDot.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
-
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Contextual label logic
-        function setLabel(text, variant) {
-            if (!cursorLabel) return;
-            cursorLabel.textContent = text;
-            cursor.className = 'custom-cursor' + (text ? ' cursor-label-active' : '') + (variant ? ' cursor-' + variant : '');
-            cursorDot.className = 'custom-cursor-dot' + (text ? ' cursor-label-active' : '');
-        }
-
-        // Work cards → VISIT
-        document.querySelectorAll('.work-card:not(.work-card-draft)').forEach(el => {
-            el.addEventListener('mouseenter', () => setLabel('VISIT', 'work'));
-            el.addEventListener('mouseleave', () => setLabel(''));
-        });
-
-        // Writing items → READ
-        document.querySelectorAll('.writing-item').forEach(el => {
-            el.addEventListener('mouseenter', () => setLabel('READ', 'read'));
-            el.addEventListener('mouseleave', () => setLabel(''));
-        });
-
-        // Buttons → arrow
-        document.querySelectorAll('.btn-refined, .btn-primary').forEach(el => {
-            el.addEventListener('mouseenter', () => setLabel('→', 'btn'));
-            el.addEventListener('mouseleave', () => setLabel(''));
-        });
-
-        // Inputs → text cursor feel
-        document.querySelectorAll('input, textarea').forEach(el => {
-            el.addEventListener('mouseenter', () => setLabel('', 'text'));
-            el.addEventListener('mouseleave', () => setLabel(''));
-        });
-
-        // Hero photo → a nice little label
-        const heroPhoto = document.getElementById('mypic');
-        if (heroPhoto) {
-            heroPhoto.addEventListener('mouseenter', () => setLabel("THAT'S ME", 'photo'));
-            heroPhoto.addEventListener('mouseleave', () => setLabel(''));
-        }
-
-        // Generic links (not covered above)
-        document.querySelectorAll('a:not(.work-card):not(.writing-item):not(.btn-refined)').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if (!cursor.classList.contains('cursor-label-active')) {
-                    cursor.classList.add('cursor-hover');
-                    cursorDot.classList.add('cursor-hover');
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('cursor-hover');
-                cursorDot.classList.remove('cursor-hover');
-            });
-        });
-
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            cursorDot.style.opacity = '0';
-        });
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '1';
-            cursorDot.style.opacity = '0.35';
-        });
-    }
-}
+// Left intentionally blank as custom cursor is now managed by js/elite-improvements.js
 
 // ============================================
 // Subtle Magnetic Effect on Buttons (not nav — now that nav uses underline)

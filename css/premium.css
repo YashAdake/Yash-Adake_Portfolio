@@ -8835,28 +8835,6 @@ body.light-mode .work-card:hover {
 }
 
 /* ===========================================================
-   PAGE TRANSITION WIPE (for nav link clicks)
-   =========================================================== */
-.page-wipe {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    pointer-events: none;
-    transform: scaleY(0);
-    transform-origin: bottom;
-    background: linear-gradient(180deg, var(--accent) 0%, #7C3AED 100%);
-    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.page-wipe.wiping {
-    transform: scaleY(1);
-    transform-origin: top;
-}
-.page-wipe.clearing {
-    transform: scaleY(0);
-    transform-origin: bottom;
-}
-
-/* ===========================================================
    HERO — typography polish under new canvas
    =========================================================== */
 .hero-name {
@@ -9128,3 +9106,1154 @@ body.light-mode .hero-vignette {
 @media (max-width: 900px) {
     #myinfo-div::before { display: none !important; }
 }
+/* ===========================================================
+   V10.0 — DELIGHTS
+   Command palette · Scramble text · GitHub heatmap ·
+   Currently strip · Spotlight cursor
+   =========================================================== */
+
+/* ============================================
+   COMMAND PALETTE (⌘K)
+   ============================================ */
+.cmdk-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: rgba(8, 8, 8, 0.55);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 12vh;
+    padding-inline: 20px;
+}
+.cmdk-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+body.light-mode .cmdk-overlay { background: rgba(245, 242, 235, 0.7); }
+
+.cmdk-panel {
+    width: 100%;
+    max-width: 620px;
+    background: rgba(18, 18, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    transform: scale(0.96) translateY(-8px);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cmdk-overlay.visible .cmdk-panel {
+    transform: scale(1) translateY(0);
+}
+body.light-mode .cmdk-panel {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.cmdk-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.light-mode .cmdk-search { border-bottom-color: rgba(0, 0, 0, 0.06); }
+
+.cmdk-search-icon {
+    font-size: 18px;
+    color: var(--text-2);
+    flex-shrink: 0;
+}
+
+.cmdk-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-0);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+.cmdk-input::placeholder { color: var(--text-2); }
+
+.cmdk-kbd {
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    padding: 3px 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: var(--text-1);
+    letter-spacing: 0.05em;
+}
+body.light-mode .cmdk-kbd {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.cmdk-list {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding: 6px;
+    scrollbar-width: thin;
+}
+.cmdk-list::-webkit-scrollbar { width: 4px; }
+.cmdk-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+.cmdk-group-label {
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    padding: 12px 14px 6px;
+}
+
+.cmdk-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.1s;
+    user-select: none;
+}
+.cmdk-item.selected {
+    background: rgba(91, 141, 239, 0.15);
+}
+body.light-mode .cmdk-item.selected {
+    background: rgba(41, 85, 200, 0.1);
+}
+
+.cmdk-item-icon {
+    font-size: 18px;
+    color: var(--text-1);
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+.cmdk-item.selected .cmdk-item-icon { color: var(--accent); }
+
+.cmdk-item-text {
+    flex: 1;
+    min-width: 0;
+}
+.cmdk-item-title {
+    font-size: 0.92rem;
+    color: var(--text-0);
+    font-weight: 500;
+    line-height: 1.3;
+}
+.cmdk-item-sub {
+    font-size: 0.78rem;
+    color: var(--text-2);
+    font-family: ui-monospace, monospace;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cmdk-item-arrow {
+    font-size: 16px;
+    color: var(--text-2);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.15s, transform 0.15s;
+}
+.cmdk-item.selected .cmdk-item-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent);
+}
+
+.cmdk-empty {
+    padding: 32px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-2);
+}
+
+.cmdk-footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.2);
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--text-2);
+}
+body.light-mode .cmdk-footer {
+    border-top-color: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.02);
+}
+.cmdk-hint { display: inline-flex; align-items: center; gap: 4px; }
+.cmdk-hint kbd {
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    padding: 2px 5px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+    color: var(--text-1);
+}
+body.light-mode .cmdk-hint kbd { background: rgba(0, 0, 0, 0.05); }
+.cmdk-brand {
+    margin-left: auto;
+    color: var(--text-2);
+    font-style: italic;
+    font-family: var(--font-serif);
+    font-size: 11px;
+    letter-spacing: 0;
+}
+
+/* Toast */
+.cmdk-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(18, 18, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-0);
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    z-index: 100001;
+    transition: opacity 0.25s, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+}
+.cmdk-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+body.light-mode .cmdk-toast {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #0D0D0D;
+}
+
+/* ⌘K floating trigger bottom-right */
+.cmdk-trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 80px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: rgba(18, 18, 20, 0.72);
+    border: 1px solid var(--rule-strong);
+    border-radius: 100px;
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--text-1);
+    cursor: pointer;
+    z-index: 99;
+    backdrop-filter: blur(20px);
+    transition: transform 0.25s, border-color 0.25s, color 0.25s;
+}
+.cmdk-trigger:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    color: var(--text-0);
+}
+.cmdk-trigger kbd {
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+}
+body.light-mode .cmdk-trigger {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+body.light-mode .cmdk-trigger kbd { background: rgba(0, 0, 0, 0.05); }
+
+/* Mobile: floating action button */
+.cmdk-fab {
+    position: fixed;
+    bottom: 76px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 6px 20px rgba(41, 85, 200, 0.4);
+    cursor: pointer;
+    z-index: 99;
+    transition: transform 0.25s;
+}
+.cmdk-fab:hover { transform: scale(1.08); }
+.cmdk-fab i { color: #fff; }
+
+@media (min-width: 992px) { .cmdk-fab { display: none; } }
+@media (max-width: 991px) { .cmdk-trigger { display: none; } }
+
+body.cmdk-open { overflow: hidden; }
+
+/* ============================================
+   SCRAMBLE TEXT
+   ============================================ */
+.hero-name.scramble-mode {
+    font-family: ui-monospace, "JetBrains Mono", monospace !important;
+    letter-spacing: -0.01em !important;
+    font-size: clamp(2.5rem, 7vw, 5rem) !important;
+    transition: font-family 0.4s 0.2s, font-size 0.4s 0.2s, letter-spacing 0.4s 0.2s;
+}
+.hero-name.scramble-mode.scramble-done {
+    font-family: var(--font-serif) !important;
+    font-size: clamp(3rem, 7vw, 5.5rem) !important;
+    letter-spacing: -0.03em !important;
+}
+
+.scramble-part {
+    display: inline;
+    color: var(--text-0);
+}
+.scramble-italic {
+    color: var(--accent);
+    font-style: italic;
+}
+.hero-name.scramble-mode .scramble-italic {
+    font-style: normal; /* monospace during scramble */
+}
+.hero-name.scramble-done .scramble-italic {
+    font-style: italic;
+}
+
+.scramble-title-text {
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    letter-spacing: -0.01em;
+    color: var(--text-0);
+}
+
+/* ============================================
+   SPOTLIGHT CURSOR
+   ============================================ */
+.spotlight-follow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+        circle,
+        rgba(91, 141, 239, 0.06) 0%,
+        rgba(91, 141, 239, 0.02) 35%,
+        transparent 65%
+    );
+    /* Removed filter:blur — it was GPU-expensive and the radial gradient already fades softly */
+    will-change: transform;
+    mix-blend-mode: screen;
+}
+body.light-mode .spotlight-follow {
+    background: radial-gradient(
+        circle,
+        rgba(41, 85, 200, 0.08) 0%,
+        rgba(41, 85, 200, 0.04) 30%,
+        transparent 60%
+    );
+    mix-blend-mode: multiply;
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .spotlight-follow { animation: none !important; transition: none !important; }
+}
+
+/* ============================================
+   v10.2 — HERO CONTRAST FIX
+   Dark-mode hero text was getting washed out by the
+   aurora. Lift colors to near-white and deepen shadow
+   so copy is always legible on the gradient background.
+   ============================================ */
+.hero-eyebrow {
+    color: rgba(255, 255, 255, 0.88) !important;
+    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55) !important;
+}
+.hero-tagline {
+    color: #ffffff !important;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55) !important;
+}
+.hero-accent {
+    color: rgba(255, 255, 255, 0.82) !important;
+}
+.hero-meta {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55) !important;
+}
+.hero-meta .inline-link-subtle {
+    color: #ffffff !important;
+    border-bottom-color: rgba(255, 255, 255, 0.45) !important;
+}
+.hero-meta .inline-link-subtle:hover {
+    color: var(--accent) !important;
+    border-bottom-color: var(--accent) !important;
+}
+.hero-socials a {
+    color: rgba(255, 255, 255, 0.75) !important;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+.hero-socials a:hover { color: var(--accent) !important; }
+
+/* Light mode keeps its own high-contrast overrides — don't let these win there */
+body.light-mode .hero-eyebrow { color: #333333 !important; text-shadow: none !important; }
+body.light-mode .hero-tagline { color: #0D0D0D !important; text-shadow: none !important; }
+body.light-mode .hero-accent  { color: #3A3A3A !important; }
+body.light-mode .hero-meta    { color: #333333 !important; text-shadow: none !important; }
+body.light-mode .hero-meta .inline-link-subtle { color: #0D0D0D !important; border-bottom-color: rgba(0,0,0,0.35) !important; }
+body.light-mode .hero-socials a { color: #3A3A3A !important; text-shadow: none; }
+
+/* ============================================
+   v10.2 — WORK OUTCOMES (concrete deliverables
+   under each project description)
+   ============================================ */
+.work-outcomes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--s-4);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.work-outcomes li {
+    font-size: 0.85rem;
+    color: var(--text-1);
+    line-height: 1.5;
+    padding-left: 18px;
+    position: relative;
+}
+.work-outcomes li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-family: ui-monospace, monospace;
+    font-weight: 600;
+}
+body.light-mode .work-outcomes li { color: #333333; }
+@media (max-width: 640px) {
+    .work-outcomes li { font-size: 0.8rem; }
+}
+
+/* ============================================
+   v10.3 — POLISH PASS
+   1) Light-mode navbar: remove the white "strip"
+      (aurora should bleed behind a transparent header)
+   2) Cmd-K trigger visibility in light mode
+   3) Widen container on desktop (less side padding)
+   4) Contact section uses full width, tighter spacing
+   5) Reduce vertical breathing room between sections
+   ============================================ */
+
+/* ---------- 1. Navbar strip in light mode ---------- */
+/* Kill every navbar-related background and border so the aurora reads through */
+body.light-mode .navbar,
+body.light-mode .navbar .navbar-collapse,
+body.light-mode .navbar .mynav {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+/* Once user scrolls, solid-ish bar reappears with a soft shadow (no hard line) */
+body.light-mode .navbar.scrolled {
+    background: rgba(245, 242, 235, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: none !important;
+    box-shadow: 0 1px 18px rgba(0, 0, 0, 0.06) !important;
+}
+body.light-mode .navbar.scrolled .navbar-collapse {
+    background: transparent !important;
+}
+/* Dark mode: also drop the hard rule-line under the nav so there's no strip edge */
+.navbar { border-bottom: none !important; }
+.navbar .navbar-collapse { background: transparent !important; }
+.navbar.scrolled { box-shadow: 0 1px 18px rgba(0, 0, 0, 0.35); }
+/* Mobile: restore the navbar-collapse dropdown background (only when actually shown) */
+@media (max-width: 991px) {
+    .navbar .navbar-collapse.show,
+    .navbar .navbar-collapse.collapsing {
+        background: var(--bg-1) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+        border: 1px solid var(--rule) !important;
+        border-radius: 16px !important;
+    }
+    body.light-mode .navbar .navbar-collapse.show,
+    body.light-mode .navbar .navbar-collapse.collapsing {
+        background: #FFFFFF !important;
+        border-color: rgba(0, 0, 0, 0.08) !important;
+    }
+}
+
+/* ---------- 2. Cmd-K trigger legibility ---------- */
+.cmdk-trigger {
+    background: rgba(18, 18, 20, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.cmdk-trigger kbd {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+body.light-mode .cmdk-trigger {
+    background: #0D0D0D !important;
+    border-color: rgba(0, 0, 0, 0.9) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18) !important;
+}
+body.light-mode .cmdk-trigger kbd {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- 3. Widen container on desktop ---------- */
+@media (min-width: 992px) {
+    .section-container { max-width: 1280px; padding: var(--s-8) var(--s-6); }
+    #home .container { max-width: 1280px !important; }
+}
+@media (min-width: 1400px) {
+    .section-container { max-width: 1360px; }
+    #home .container { max-width: 1360px !important; }
+}
+/* Bootstrap .container override at xl/xxl so nav + hero align to widened grid */
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1280px !important;
+    }
+}
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1360px !important;
+    }
+}
+
+/* ---------- 4. Contact: full-width + tighter rhythm ---------- */
+#contact .section-container-narrow {
+    max-width: 1100px !important;
+}
+@media (min-width: 992px) {
+    #contact .section-container-narrow { max-width: 1200px !important; }
+}
+#contact .contact-grid {
+    grid-template-columns: minmax(320px, 1fr) minmax(360px, 1.2fr) !important;
+    gap: var(--s-7) !important;
+    align-items: stretch !important;
+}
+@media (max-width: 768px) {
+    #contact .contact-grid { grid-template-columns: 1fr !important; gap: var(--s-5) !important; }
+}
+/* Contact info column: trim top-space so it aligns with form */
+#contact .contact-reply { margin-bottom: var(--s-4); }
+#contact .contact-row { padding: 14px 0 !important; }
+
+/* ---------- 5. Less dead air between sections ---------- */
+.section-container { padding: var(--s-8) var(--s-5) !important; }
+@media (min-width: 992px) {
+    .section-container { padding: 72px var(--s-6) !important; }
+}
+@media (max-width: 768px) {
+    .section-container { padding: var(--s-7) var(--s-4) !important; }
+}
+.section-header { margin-bottom: var(--s-7) !important; }
+
+/* Footer: pull closer to the last section */
+.footer-refined { padding-top: var(--s-6) !important; }
+@media (max-width: 768px) {
+    .footer-refined { padding-top: var(--s-5) !important; }
+}
+
+/* ===========================================================
+   v11 — DESIGN SYSTEM REFINEMENT
+   Proportions, typography rhythm, interactive states, cursor.
+   This is the "senior design pass" — native cursor, tighter
+   scale, unified hover language, and restraint everywhere it
+   was previously trying too hard.
+   =========================================================== */
+
+/* ---------- 1. NATIVE CURSOR — custom cursor is dead ---------- */
+.custom-cursor,
+.custom-cursor-dot,
+.cursor-label,
+.cursor-gradient-blob,
+.spotlight-follow,
+.mouse-follower {
+    display: none !important;
+}
+html, body {
+    cursor: auto !important;
+}
+/* Clear interaction affordances via native pointer + underlines/color shifts */
+a, button, [role="button"], .work-card, .writing-item, .cmdk-trigger, .cmdk-fab,
+.copy-btn, .theme-toggle, label, summary, [type="submit"] {
+    cursor: pointer !important;
+}
+input:not([type="submit"]), textarea, select, [contenteditable="true"] {
+    cursor: text !important;
+}
+/* Accessible focus rings — the right kind of polish */
+*:focus { outline: none; }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+.work-card:focus-visible,
+.writing-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* ---------- 2. HERO — restraint and proportion ---------- */
+.hero-eyebrow {
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
+    opacity: 0.85;
+    margin-bottom: 20px !important;
+}
+.hero-eyebrow::before { display: none !important; } /* kill the pulsing dot — too noisy */
+
+.hero-name {
+    font-size: clamp(2.75rem, 6vw, 4.75rem) !important;
+    letter-spacing: -0.035em !important;
+    line-height: 0.98 !important;
+    margin-bottom: 24px !important;
+}
+
+.hero-tagline {
+    font-size: clamp(1rem, 1.4vw, 1.15rem) !important;
+    line-height: 1.55 !important;
+    max-width: 520px;
+    margin-bottom: 18px !important;
+    font-weight: 400 !important;
+}
+.hero-meta {
+    font-size: 0.92rem !important;
+    max-width: 560px;
+    margin-bottom: 36px !important;
+    line-height: 1.55 !important;
+}
+
+.hero-actions { gap: 10px !important; margin-bottom: 36px !important; }
+
+#mypic {
+    max-width: 360px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.5);
+}
+body.light-mode #mypic { box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.18); }
+
+.hero-socials { gap: 18px !important; }
+.hero-socials a {
+    font-size: 1.1rem !important;
+    transition: color 0.2s ease, opacity 0.2s ease !important;
+}
+.hero-socials a:hover { transform: none !important; opacity: 1; }
+
+/* ---------- 3. SECTIONS — consistent rhythm ---------- */
+.section-number {
+    font-size: 11px !important;
+    letter-spacing: 0.18em !important;
+    opacity: 0.7;
+    margin-bottom: 14px !important;
+}
+
+.section-title {
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem) !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1.1 !important;
+    margin-bottom: 12px !important;
+}
+
+.section-kicker {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    opacity: 0.85;
+    max-width: 600px;
+}
+
+.section-header { margin-bottom: 56px !important; }
+@media (max-width: 768px) {
+    .section-header { margin-bottom: 40px !important; }
+}
+
+/* ---------- 4. WORK CARDS — dial back the 3D tilt ---------- */
+.work-card {
+    transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.work-card .work-visual {
+    border-radius: 10px 10px 0 0;
+}
+.work-title {
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem) !important;
+    letter-spacing: -0.015em !important;
+}
+.work-desc {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+}
+
+/* ---------- 5. WRITING LIST — tighter rows ---------- */
+.writing-item {
+    padding: 24px 0 !important;
+    transition: opacity 0.2s ease !important;
+}
+.writing-item:hover { opacity: 1; }
+.writing-title {
+    font-size: clamp(1.15rem, 1.8vw, 1.45rem) !important;
+    letter-spacing: -0.015em !important;
+    line-height: 1.25 !important;
+}
+.writing-excerpt {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+}
+
+/* ---------- 6. CONTACT — aligned, less formal ---------- */
+.contact-reply {
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
+    margin-bottom: 20px !important;
+}
+.contact-label {
+    font-size: 10.5px !important;
+    letter-spacing: 0.14em !important;
+    color: var(--text-2) !important;
+    text-transform: uppercase;
+}
+.contact-value {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+.contact-row { padding: 16px 0 !important; }
+
+/* Form polish */
+.form-group label {
+    font-size: 10.5px !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase;
+    color: var(--text-2) !important;
+    margin-bottom: 8px !important;
+}
+.form-group input,
+.form-group textarea {
+    font-size: 15px !important;
+    padding: 12px 14px !important;
+    border-radius: 8px !important;
+}
+
+/* ---------- 7. BUTTONS — restrained, no bounce ---------- */
+.btn-refined {
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+    padding: 11px 20px !important;
+    font-size: 0.9rem !important;
+    letter-spacing: -0.005em !important;
+}
+.btn-refined:hover { transform: translateY(-1px) !important; }
+
+/* ---------- 8. ABOUT ---------- */
+.about-prose { font-size: 1rem !important; line-height: 1.7 !important; }
+.about-lead {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem) !important;
+    line-height: 1.6 !important;
+    margin-bottom: 28px !important;
+}
+.about-quote {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem) !important;
+    line-height: 1.35 !important;
+    margin: 32px 0 !important;
+}
+.about-subtitle {
+    font-size: 11px !important;
+    letter-spacing: 0.18em !important;
+    margin-top: 40px !important;
+    margin-bottom: 16px !important;
+    opacity: 0.75;
+}
+.list-label {
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
+}
+
+/* ---------- 9. NAV — breath + weight ---------- */
+.nav-each-link {
+    font-size: 0.9rem !important;
+    letter-spacing: -0.005em !important;
+    padding: 6px 4px !important;
+}
+.links-grp { gap: 28px !important; }
+
+/* ---------- 10. FOOTER ---------- */
+.footer-refined { padding: 40px 0 24px !important; }
+.footer-name { font-size: 1.25rem !important; }
+.footer-tagline {
+    font-size: 11px !important;
+    letter-spacing: 0.14em !important;
+    opacity: 0.75;
+}
+.footer-bottom {
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    opacity: 0.6;
+}
+
+/* ---------- 11. CONSISTENT RADIUS SCALE ---------- */
+.work-card { border-radius: 12px !important; }
+.writing-item { border-radius: 0 !important; }
+.btn-refined { border-radius: 999px !important; }
+.cmdk-panel { border-radius: 14px !important; }
+.cmdk-item { border-radius: 8px !important; }
+.cmdk-trigger { border-radius: 999px !important; }
+
+/* ---------- 12. REMOVE NOISE ---------- */
+/* Tech marquee: too much movement for a senior portfolio. Mute opacity */
+.tech-marquee { opacity: 0.55; }
+/* Scroll marquee dividers: same */
+.scroll-marquee-divider { opacity: 0.45; }
+
+/* ---------- 13. VISITOR COUNTER — less loud ---------- */
+.visitor-counter {
+    opacity: 0.6 !important;
+    font-size: 10.5px !important;
+    transition: opacity 0.2s ease;
+}
+.visitor-counter:hover { opacity: 1 !important; }
+
+/* ---------- 14. PREFERS-REDUCED-MOTION — respect it deeply ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===========================================================
+   v11.2 — REFINED CURSOR (precise dot + morphing ring with labels)
+   Auto-contrast via mix-blend-mode: difference
+   Labels: "That's me!" on photo, "View" on work, "Read" on writing
+   =========================================================== */
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ffffff;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: opacity 0.2s ease;
+    will-change: transform;
+}
+.cursor-dot.click {
+    animation: cursor-dot-pulse 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes cursor-dot-pulse {
+    0%   { width: 5px;  height: 5px;  }
+    45%  { width: 14px; height: 14px; }
+    100% { width: 5px;  height: 5px;  }
+}
+.cursor-dot.gone { opacity: 0; }
+
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 32px;
+    height: 32px;
+    border: 1.5px solid #ffffff;
+    border-radius: 999px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: difference;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    padding: 0;
+    will-change: transform;
+    transition:
+        min-width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        border-radius 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.22s ease,
+        border-color 0.22s ease,
+        border-width 0.2s ease,
+        opacity 0.2s ease;
+}
+.cursor-ring.hover {
+    min-width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.08);
+}
+.cursor-ring.label-active {
+    min-width: 0;
+    height: 36px;
+    padding: 0 14px;
+    background: #ffffff;
+    border-color: #ffffff;
+}
+.cursor-ring.click {
+    opacity: 0.6;
+    border-width: 2px;
+}
+.cursor-ring.text {
+    min-width: 2px;
+    height: 22px;
+    border-radius: 2px;
+    background: #ffffff;
+    border: 0;
+}
+.cursor-ring.gone { opacity: 0; }
+
+.cursor-label {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    opacity: 0;
+    transition: opacity 0.18s ease 0.08s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+.cursor-ring.label-active .cursor-label { opacity: 1; }
+
+/* Hide native cursor only where the custom cursor is active */
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+    body.cursor-custom-active,
+    body.cursor-custom-active a,
+    body.cursor-custom-active button,
+    body.cursor-custom-active [role="button"],
+    body.cursor-custom-active .work-card,
+    body.cursor-custom-active .writing-item,
+    body.cursor-custom-active label,
+    body.cursor-custom-active summary,
+    body.cursor-custom-active #mypic {
+        cursor: none !important;
+    }
+    body.cursor-custom-active input:not([type="submit"]):not([type="button"]),
+    body.cursor-custom-active textarea,
+    body.cursor-custom-active select,
+    body.cursor-custom-active [contenteditable="true"] {
+        cursor: text !important;
+    }
+}
+/* Touch / reduced-motion / small screens: no custom cursor */
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce), (max-width: 768px) {
+    .cursor-dot, .cursor-ring { display: none !important; }
+    html, body { cursor: auto !important; }
+}
+
+/* ===========================================================
+   v11.1 — HERO SOCIALS — branded icon chips with tooltips
+   Uses aria-label for tooltip text (no markup change)
+   =========================================================== */
+.hero-socials {
+    gap: 10px !important;
+    align-items: center !important;
+}
+.hero-socials a {
+    position: relative;
+    width: 42px !important;
+    height: 42px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px !important;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    color: var(--text-1) !important;
+    font-size: 18px !important;
+    text-decoration: none;
+    overflow: visible;
+    transition:
+        transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease !important;
+}
+.hero-socials a:hover {
+    transform: translateY(-3px) !important;
+    border-color: var(--rule-strong);
+    background: rgba(255, 255, 255, 0.04);
+}
+body.light-mode .hero-socials a {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #333 !important;
+}
+body.light-mode .hero-socials a:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.18);
+}
+
+/* Tooltip label — uses aria-label, positioned above */
+.hero-socials a::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #111;
+    color: #fff;
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 5px 9px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.hero-socials a::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background: #111;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.hero-socials a:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.hero-socials a:hover::before { opacity: 1; }
+
+body.light-mode .hero-socials a::after {
+    background: #0D0D0D;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+body.light-mode .hero-socials a::before {
+    background: #0D0D0D;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Brand-specific hover — each platform lights up its own color */
+.hero-socials a[aria-label="LinkedIn"]:hover {
+    color: #0A66C2 !important;
+    border-color: #0A66C2 !important;
+    background: rgba(10, 102, 194, 0.08) !important;
+    box-shadow: 0 8px 20px -8px rgba(10, 102, 194, 0.5);
+}
+.hero-socials a[aria-label="Twitter"]:hover {
+    color: #ffffff !important;
+    border-color: #000000 !important;
+    background: #000000 !important;
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+}
+body.light-mode .hero-socials a[aria-label="Twitter"]:hover {
+    color: #ffffff !important;
+    background: #0D0D0D !important;
+    border-color: #0D0D0D !important;
+}
+.hero-socials a[aria-label="Instagram"]:hover {
+    color: #ffffff !important;
+    border-color: transparent !important;
+    background: linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%) !important;
+    box-shadow: 0 8px 20px -8px rgba(221, 42, 123, 0.5);
+}
+.hero-socials a[aria-label="Email"]:hover {
+    color: #EA4335 !important;
+    border-color: #EA4335 !important;
+    background: rgba(234, 67, 53, 0.08) !important;
+    box-shadow: 0 8px 20px -8px rgba(234, 67, 53, 0.5);
+}
+.hero-socials a[aria-label="Resume"]:hover {
+    color: #10B981 !important;
+    border-color: #10B981 !important;
+    background: rgba(16, 185, 129, 0.08) !important;
+    box-shadow: 0 8px 20px -8px rgba(16, 185, 129, 0.5);
+}
+
+/* Mobile: smaller, less gap */
+@media (max-width: 640px) {
+    .hero-socials a {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 16px !important;
+    }
+    .hero-socials { gap: 8px !important; }
+    /* Don't show tooltips on touch */
+    .hero-socials a::after,
+    .hero-socials a::before { display: none; }
+}
+
+/* Apply same chip treatment to contact socials (consistency) */
+.contact-socials a {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid var(--rule);
+    background: var(--bg-card);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--text-1);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s, background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+.contact-socials { gap: 10px !important; }
+.contact-socials a:hover { transform: translateY(-3px); border-color: var(--rule-strong); }
+.contact-socials a[aria-label="LinkedIn"]:hover { color: #0A66C2; border-color: #0A66C2; background: rgba(10,102,194,0.08); }
+.contact-socials a[aria-label="Twitter"]:hover { color: #fff; background: #000; border-color: #000; }
+.contact-socials a[aria-label="Instagram"]:hover { color: #fff; border-color: transparent; background: linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%); }
+body.light-mode .contact-socials a { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.1); color: #333; }

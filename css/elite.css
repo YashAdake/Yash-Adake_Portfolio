@@ -1,0 +1,144 @@
+/* ELITE IMPROVEMENTS - Custom Cursor, Light Mode Fixes, Parallax */
+
+/* 1. Custom Magnetic Cursor */
+body.has-custom-cursor, 
+body.has-custom-cursor * {
+    cursor: none !important;
+}
+
+.cursor-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    /* Arrow tip is exactly at mouse coordinate */
+    transform-origin: top left;
+}
+
+.cursor-arrow {
+    display: block;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5));
+}
+
+.cursor-text-bubble {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: linear-gradient(135deg, var(--primary), var(--accent-1));
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 40px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px var(--primary-glow);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* The shiny glimmer animation */
+.cursor-text-bubble::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shiny 2.5s infinite ease-in-out;
+}
+
+@keyframes shiny {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+.cursor-container.active-text .cursor-arrow {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.cursor-container.active-text .cursor-text-bubble {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 2. Light Mode Contrast Fixes */
+/* Overrides for better contrast in light mode */
+body.light-mode {
+    --primary-glow: rgba(25, 167, 206, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+}
+body.light-mode #mypic-div::before {
+    opacity: 0.7;
+    filter: blur(25px);
+}
+body.light-mode #mypic-div::after {
+    opacity: 0.8;
+}
+
+/* 3. Tech Stack Marquee / Hover Animation */
+.work-stack span {
+    transition: var(--transition-normal);
+}
+.work-card:hover .work-stack span {
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(25, 167, 206, 0.2);
+    border-color: var(--primary);
+}
+
+/* 4. Typing Animation Styles */
+.typing-text {
+    display: inline-block;
+    min-width: 10px;
+}
+.typing-text-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    background-color: var(--primary);
+    vertical-align: text-bottom;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 5. Hero Parallax Prep */
+.hero-parallax {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* 6. Social Links Visibility (Dark Mode Pop) */
+.hero-socials a, 
+.contact-socials a, 
+.footer-socials a {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-socials a:hover, 
+.contact-socials a:hover, 
+.footer-socials a:hover {
+    background: rgba(25, 167, 206, 0.2) !important;
+    border-color: rgba(25, 167, 206, 0.8) !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(25, 167, 206, 0.4);
+}
