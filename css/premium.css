@@ -7807,3 +7807,648 @@ body.light-mode .easter-egg-notification {
 
 /* Theme icon swap visibility */
 body.light-mode #themeIcon { color: #5E5E5E !important; }
+/* ===========================================================
+   V8.0 — MOBILE RESPONSIVE, COMPREHENSIVE
+   Every component retuned for mobile + tablet.
+   Touch-target safe (min 44px), typography scales smoothly,
+   Bootstrap hamburger collapse styled to match our system.
+   Appended LAST. Wins cascade where needed.
+   =========================================================== */
+
+/* ===========================================================
+   NAVBAR MOBILE (< 992px — Bootstrap's lg breakpoint)
+   =========================================================== */
+@media (max-width: 991px) {
+    .navbar {
+        padding: 10px 0 !important;
+    }
+
+    .mynav {
+        padding: 0 16px;
+    }
+
+    #mynav-brand {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    /* Hamburger button — refined, touch-safe */
+    .navbar-toggler {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent !important;
+        border: 1px solid var(--rule-strong) !important;
+        border-radius: 10px !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        transition: background 0.25s, border-color 0.25s;
+    }
+    .navbar-toggler:hover,
+    .navbar-toggler:focus {
+        background: var(--bg-2) !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    .navbar-toggler[aria-expanded="true"] {
+        background: var(--accent-soft) !important;
+        border-color: var(--accent) !important;
+    }
+    .navbar-toggler[aria-expanded="true"] i::before {
+        content: "\ec8b"; /* bx-x */
+    }
+    .navbar-toggler i {
+        font-size: 1.5rem !important;
+        color: var(--text-0) !important;
+        margin: 0 !important;
+        transition: color 0.25s;
+    }
+    .navbar-toggler[aria-expanded="true"] i { color: var(--accent) !important; }
+
+    /* Collapsed menu panel */
+    .navbar-collapse {
+        background: var(--bg-1);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid var(--rule);
+        border-radius: 16px;
+        margin-top: 12px;
+        padding: 16px;
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+    }
+    body.light-mode .navbar-collapse {
+        background: #FFFFFF !important;
+        border-color: rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .links-grp {
+        flex-direction: column;
+        gap: 2px !important;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .nav-each-link {
+        padding: 14px 16px !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+        text-align: left;
+        border-radius: 10px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        transition: background 0.25s, color 0.25s;
+    }
+    .nav-each-link::after { display: none !important; } /* underline doesn't fit list items */
+    .nav-each-link:hover,
+    .nav-each-link:focus {
+        background: var(--bg-2) !important;
+        color: var(--text-0) !important;
+    }
+    body.light-mode .nav-each-link:hover,
+    body.light-mode .nav-each-link:focus {
+        background: rgba(0, 0, 0, 0.04) !important;
+    }
+    .nav-each-link.active {
+        background: var(--accent-soft) !important;
+        color: var(--accent) !important;
+    }
+
+    /* Theme toggle as its own row */
+    .theme-toggle {
+        margin: 8px 0 0 !important;
+        width: 100% !important;
+        height: 44px !important;
+        border-radius: 10px !important;
+        justify-content: center;
+        gap: 10px;
+    }
+    .theme-toggle:hover { transform: none !important; }
+}
+
+/* ===========================================================
+   HERO MOBILE
+   =========================================================== */
+@media (max-width: 900px) {
+    #home {
+        min-height: auto !important;
+        padding: 100px 0 48px !important;
+    }
+
+    .hero-row {
+        flex-direction: column !important;
+        gap: 32px !important;
+        text-align: left;
+    }
+
+    .hero-row > #mypic-div,
+    .hero-row > #myinfo-div {
+        flex: 1 1 auto !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    #mypic-div { justify-content: flex-start !important; }
+
+    #mypic {
+        max-width: 220px !important;
+        margin: 0 !important;
+    }
+
+    .hero-eyebrow {
+        font-size: 11px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .hero-name {
+        font-size: clamp(2.5rem, 12vw, 3.75rem) !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero-tagline {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 14px !important;
+    }
+
+    .hero-meta {
+        font-size: 0.9rem !important;
+        margin-bottom: 32px !important;
+    }
+
+    .hero-actions {
+        gap: 10px !important;
+        margin-bottom: 28px !important;
+        flex-wrap: wrap;
+    }
+    .hero-actions .btn-refined {
+        flex: 1 1 auto;
+        min-width: 140px;
+        justify-content: center;
+        font-size: 0.9rem !important;
+        padding: 12px 18px !important;
+    }
+
+    .hero-socials {
+        gap: 20px !important;
+    }
+    .hero-socials a {
+        font-size: 1.35rem !important;
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Kill the side-gradient overlay on mobile */
+    #myinfo-div::before { display: none !important; }
+
+    /* Hero ambient tuned for small screens */
+    .hero-mesh { filter: blur(40px) saturate(1.2) !important; opacity: 0.6 !important; }
+    .hero-grid { opacity: 0.25 !important; background-size: 22px 22px !important; }
+    .hero-scanline { display: none !important; }
+}
+
+@media (max-width: 480px) {
+    #mypic { max-width: 180px !important; }
+    .hero-name { font-size: clamp(2.1rem, 11vw, 2.75rem) !important; }
+    .hero-actions .btn-refined {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+}
+
+/* ===========================================================
+   SECTIONS (padding + titles)
+   =========================================================== */
+@media (max-width: 768px) {
+    .section-container {
+        padding: 64px 20px !important;
+    }
+    .section-container-narrow { padding: 64px 20px !important; }
+
+    .section-header {
+        margin-bottom: 40px !important;
+    }
+
+    .section-number {
+        font-size: 11px !important;
+        margin-bottom: 10px !important;
+    }
+    .section-number::before {
+        width: 18px !important;
+        margin-right: 8px !important;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 8vw, 2.75rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: 14px !important;
+    }
+
+    .section-kicker {
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-container,
+    .section-container-narrow { padding: 56px 16px !important; }
+    .section-title { font-size: clamp(1.85rem, 9vw, 2.25rem) !important; }
+}
+
+/* ===========================================================
+   WORK CARDS MOBILE
+   =========================================================== */
+@media (max-width: 640px) {
+    .work-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .work-card {
+        /* Kill 3D tilt on touch — feels wrong */
+        transform: none !important;
+        perspective: none !important;
+    }
+    .work-card:hover {
+        transform: translateY(-2px) !important;
+    }
+    .work-card:active {
+        transform: scale(0.99) !important;
+    }
+
+    .work-visual {
+        aspect-ratio: 16 / 10 !important;
+        padding: 20px !important;
+    }
+
+    .work-logotype {
+        font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
+    }
+
+    .work-visit {
+        /* Always show on mobile (no hover) */
+        opacity: 0.85 !important;
+        transform: none !important;
+        bottom: 12px !important;
+        right: 12px !important;
+        font-size: 10px !important;
+    }
+
+    .work-meta { padding: 20px !important; }
+    .work-tag { font-size: 10px !important; margin-bottom: 10px !important; }
+    .work-title { font-size: 1.4rem !important; margin-bottom: 10px !important; }
+    .work-desc { font-size: 0.9rem !important; margin-bottom: 12px !important; }
+    .work-stack { font-size: 10px !important; }
+}
+
+/* ===========================================================
+   ABOUT PROSE + LISTS + MARQUEE MOBILE
+   =========================================================== */
+@media (max-width: 768px) {
+    .about-prose { font-size: 1rem !important; line-height: 1.7 !important; }
+    .about-prose .about-lead {
+        font-size: 1.1rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 28px !important;
+    }
+    .about-prose p { margin-bottom: 20px !important; }
+
+    .about-quote {
+        margin: 36px 0 !important;
+        padding: 16px 0 16px 18px !important;
+        font-size: 1.2rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .about-subtitle {
+        margin: 40px 0 16px !important;
+        font-size: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    /* Stack info rows to single column on mobile */
+    .about-list li,
+    .stack-row {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+        padding: 12px 0 !important;
+    }
+    .list-label,
+    .stack-label {
+        font-size: 10px !important;
+        letter-spacing: 0.1em !important;
+    }
+    .about-list li { font-size: 0.92rem !important; }
+    .stack-row { font-size: 0.92rem !important; }
+
+    .tech-marquee {
+        margin: 20px 0 28px !important;
+        padding: 12px 0 !important;
+    }
+    .tech-chip {
+        font-size: 1.1rem !important;
+        padding: 0 10px !important;
+    }
+    .tech-marquee-track { gap: 16px !important; animation-duration: 30s !important; }
+
+    .about-cta { margin-top: 40px !important; }
+    .about-cta .btn-refined {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ===========================================================
+   WRITING LIST MOBILE
+   =========================================================== */
+@media (max-width: 768px) {
+    .writing-item {
+        padding: 24px 0 !important;
+    }
+    .writing-item:hover { padding-left: 8px !important; }
+
+    .writing-meta {
+        gap: 12px !important;
+        margin-bottom: 10px !important;
+        font-size: 10px !important;
+        flex-wrap: wrap;
+    }
+
+    .writing-title {
+        font-size: 1.2rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .writing-excerpt {
+        font-size: 0.9rem !important;
+        line-height: 1.55 !important;
+    }
+
+    .writing-arrow { font-size: 10px !important; }
+
+    .writing-footer { margin-top: 32px !important; }
+    .inline-link { font-size: 0.95rem !important; }
+}
+
+/* ===========================================================
+   CONTACT MOBILE
+   =========================================================== */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+
+    .contact-reply {
+        font-size: 11px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .contact-row {
+        grid-template-columns: 90px 1fr auto !important;
+        gap: 12px !important;
+        padding: 14px 0 !important;
+        align-items: center;
+    }
+    .contact-label { font-size: 10px !important; }
+    .contact-value { font-size: 0.9rem !important; }
+
+    .copy-btn {
+        padding: 6px 12px !important;
+        font-size: 10px !important;
+        min-height: 32px;
+    }
+
+    .contact-socials { gap: 20px !important; }
+    .contact-socials a {
+        font-size: 1.35rem !important;
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact-form-refined { gap: 16px !important; }
+    .contact-form-refined input,
+    .contact-form-refined textarea {
+        font-size: 16px !important; /* iOS zoom prevention */
+        padding: 14px 14px !important;
+        min-height: 48px;
+    }
+    .contact-form-refined textarea { min-height: 120px; }
+    .contact-form-refined label { font-size: 10px !important; }
+    .btn-refined-full { padding: 16px 22px !important; font-size: 0.95rem !important; }
+}
+
+@media (max-width: 480px) {
+    .contact-row {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+        align-items: flex-start;
+    }
+    .contact-row .copy-btn {
+        justify-self: flex-start;
+        margin-top: 4px;
+    }
+    .contact-label { margin-bottom: 2px; }
+}
+
+/* ===========================================================
+   FOOTER MOBILE
+   =========================================================== */
+@media (max-width: 768px) {
+    .footer-refined {
+        padding: 40px 16px 24px !important;
+    }
+    .footer-row {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+        text-align: center !important;
+        padding-bottom: 28px !important;
+    }
+
+    .footer-brand .footer-name { font-size: 1.3rem !important; }
+    .footer-brand .footer-tagline { font-size: 0.8rem !important; }
+
+    .footer-links {
+        justify-content: center !important;
+        flex-wrap: wrap;
+        gap: 16px !important;
+    }
+    .footer-links a {
+        font-size: 0.85rem !important;
+        padding: 6px 0;
+    }
+
+    .footer-socials {
+        justify-content: center !important;
+        gap: 20px !important;
+    }
+    .footer-socials a {
+        font-size: 1.3rem !important;
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px !important;
+        padding-top: 20px !important;
+        font-size: 10px !important;
+        text-align: center;
+    }
+}
+
+/* ===========================================================
+   FLOATING CHROME (visitor counter + scroll-to-top) MOBILE
+   =========================================================== */
+@media (max-width: 768px) {
+    .visitor-counter {
+        bottom: 16px !important;
+        left: 16px !important;
+        padding: 6px 12px !important;
+        font-size: 10px !important;
+        gap: 8px !important;
+    }
+    .visitor-dot { width: 6px !important; height: 6px !important; }
+
+    .scroll-to-top {
+        width: 44px !important;
+        height: 44px !important;
+        bottom: 16px !important;
+        right: 16px !important;
+        font-size: 18px !important;
+    }
+}
+
+/* ===========================================================
+   CURSOR / BLOB / NOISE — disable on mobile
+   =========================================================== */
+@media (max-width: 768px), (pointer: coarse) {
+    .custom-cursor,
+    .custom-cursor-dot,
+    .cursor-trail,
+    .cursor-gradient-blob {
+        display: none !important;
+    }
+    body.custom-cursor-enabled { cursor: auto !important; }
+    body.custom-cursor-enabled a,
+    body.custom-cursor-enabled button,
+    body.custom-cursor-enabled input,
+    body.custom-cursor-enabled textarea { cursor: auto !important; }
+
+    body::after { opacity: 0.01 !important; }
+}
+
+/* ===========================================================
+   TOUCH-DEVICE INTERACTION NORMALIZATION
+   =========================================================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Make all hover states work on tap */
+    .work-card:active,
+    .writing-item:active,
+    .btn-refined:active,
+    .contact-value:active {
+        opacity: 0.85;
+    }
+
+    /* Disable tilt + magnetic on touch */
+    .work-card { transform: none !important; }
+    .btn-refined { transform: none !important; }
+
+    /* Bigger tap targets for nav */
+    .nav-each-link { min-height: 48px; }
+
+    /* Prevent iOS text scaling */
+    html { -webkit-text-size-adjust: 100%; }
+}
+
+/* ===========================================================
+   LANDSCAPE PHONE (low height)
+   =========================================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    #home {
+        padding: 80px 0 40px !important;
+        min-height: auto !important;
+    }
+    #mypic { max-width: 140px !important; }
+    .hero-name { font-size: 2rem !important; }
+    .hero-tagline { font-size: 0.9rem !important; }
+}
+
+/* ===========================================================
+   ULTRA-SMALL (< 375px, old iPhone SE)
+   =========================================================== */
+@media (max-width: 375px) {
+    .section-container,
+    .section-container-narrow { padding: 48px 14px !important; }
+    .hero-name { font-size: 2rem !important; letter-spacing: -0.02em !important; }
+    .section-title { font-size: 1.75rem !important; }
+    .work-logotype { font-size: 1.5rem !important; }
+    #mypic { max-width: 160px !important; }
+}
+
+/* ===========================================================
+   UTILITY: Prevent horizontal scroll, ensure images fit
+   =========================================================== */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    img { max-width: 100%; height: auto; }
+
+    /* Make sure section numbers don't wrap oddly */
+    .section-number { white-space: nowrap; }
+}
+
+/* ===========================================================
+   V8.0 — HAMBURGER ICON FIX
+   Kill Bootstrap's default toggler icon SVG so our bx icon shows clean
+   =========================================================== */
+.navbar-toggler-icon {
+    background-image: none !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+.navbar-toggler-icon i {
+    font-size: 1.5rem;
+    color: var(--text-0);
+    line-height: 1;
+}
+body.light-mode .navbar-toggler-icon i { color: #0D0D0D !important; }
+
+/* Cleaner X-state: JS will toggle this via aria-expanded */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon i {
+    color: var(--accent);
+}
+
+/* Smoother collapse animation */
+.navbar-collapse.collapsing {
+    transition: height 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Body-scroll-lock hint when menu is open on mobile (visual cue only) */
+@media (max-width: 991px) {
+    body:has(.navbar-collapse.show) {
+        /* No lock — just dim anything behind naturally via menu's opacity */
+    }
+}
