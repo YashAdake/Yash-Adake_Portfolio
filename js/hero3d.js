@@ -5,7 +5,6 @@
 // ============================================
 
 (function() {
-    if (window.innerWidth <= 768) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const heroSection = document.getElementById('home');
@@ -13,6 +12,14 @@
 
     const canvas = document.getElementById('hero3d-canvas');
     if (!canvas) return;
+
+    // Performance tier: phone / tablet / desktop
+    const isPhone = window.innerWidth <= 640;
+    const isTablet = window.innerWidth > 640 && window.innerWidth <= 1024;
+    const isDesktop = window.innerWidth > 1024;
+
+    // On very small phones skip WebGL entirely (CSS mesh takes over)
+    if (window.innerWidth < 420) return;
 
     let loaded = false;
 
@@ -33,9 +40,16 @@
         const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 50);
         camera.position.z = 5;
 
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            antialias: !isPhone, // skip AA on phones for perf
+            alpha: true,
+            powerPreference: isPhone ? 'low-power' : 'high-performance'
+        });
         renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // Tighter pixel ratio cap on phones to save GPU
+        const pixelCap = isPhone ? 1.25 : isTablet ? 1.75 : 2;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, pixelCap));
         renderer.setClearColor(0x000000, 0);
 
         // ============================================
@@ -196,8 +210,9 @@
             }
         `;
 
-        // Plane sized to fill the frustum at z=0
-        const planeGeo = new THREE.PlaneGeometry(14, 8, 64, 64);
+        // Plane sized to fill the frustum at z=0 (lower segments on mobile)
+        const segs = isPhone ? 32 : isTablet ? 48 : 64;
+        const planeGeo = new THREE.PlaneGeometry(14, 8, segs, segs);
         const planeMat = new THREE.ShaderMaterial({
             vertexShader,
             fragmentShader,
@@ -222,7 +237,7 @@
         // Floating geometric shards for depth + detail
         // ============================================
         const shards = new THREE.Group();
-        const SHARD_COUNT = 6;
+        const SHARD_COUNT = isPhone ? 3 : isTablet ? 5 : 6;
         for (let i = 0; i < SHARD_COUNT; i++) {
             const geo = new THREE.OctahedronGeometry(0.25 + Math.random() * 0.15, 0);
             const mat = new THREE.MeshBasicMaterial({
@@ -255,16 +270,32 @@
         const mouse = new THREE.Vector2(0, 0);
         let targetStrength = 0, mouseStrength = 0;
 
-        window.addEventListener('mousemove', e => {
+        function setPointer(clientX, clientY) {
             const rect = canvas.getBoundingClientRect();
-            if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                targetMouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-                targetMouse.y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+            if (clientY >= rect.top && clientY <= rect.bottom) {
+                targetMouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+                targetMouse.y = -(((clientY - rect.top) / rect.height) * 2 - 1);
                 targetStrength = 1.0;
             } else {
                 targetStrength = 0;
             }
-        });
+        }
+        window.addEventListener('mousemove', e => setPointer(e.clientX, e.clientY));
+        window.addEventListener('touchmove', e => {
+            if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        window.addEventListener('touchstart', e => {
+            if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+
+        // Auto-drift on mobile (no cursor to drive it naturally)
+        if (isPhone) {
+            setInterval(() => {
+                targetMouse.x = (Math.random() - 0.5) * 1.2;
+                targetMouse.y = (Math.random() - 0.5) * 1.0;
+                targetStrength = 0.7;
+            }, 2200);
+        }
 
         let scrollOffset = 0;
         window.addEventListener('scroll', () => {

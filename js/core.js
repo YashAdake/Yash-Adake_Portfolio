@@ -291,40 +291,37 @@ if (typedEl) {
 }
 
 // ============================================
-// Visitor Counter (base 750, localStorage increment, session-gated)
+// Visitor Counter — every page load counts
+// Base 750 · localStorage persists count · pings Apps Script
 // ============================================
 (function visitorCounter() {
     const el = document.getElementById('visitorCount');
     if (!el) return;
 
     const BASE = 750;
-    const today = new Date().toDateString();
 
     let count = parseInt(localStorage.getItem('visitorCount'), 10);
     if (!count || count < BASE) count = BASE;
 
-    if (!sessionStorage.getItem('hasVisited')) {
-        count++;
-        localStorage.setItem('visitorCount', count);
-        localStorage.setItem('lastVisit', today);
-        sessionStorage.setItem('hasVisited', 'true');
+    // Increment on EVERY page load (no session gate)
+    count++;
+    localStorage.setItem('visitorCount', count);
 
-        // Also silent-ping the Apps Script to keep the real sheet count aligned
-        fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
-    }
+    // Silent ping to backend so the real sheet count also grows
+    fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
 
-    // Animate from count - 20 up to current count, feels alive
-    const start = Math.max(BASE, count - 20);
+    // Animate from start number up to count — feels alive on every load
+    const start = Math.max(BASE, count - 15);
     let cur = start;
     el.textContent = cur.toLocaleString();
     const tick = () => {
         if (cur < count) {
             cur++;
             el.textContent = cur.toLocaleString();
-            setTimeout(tick, 40);
+            setTimeout(tick, 50);
         }
     };
-    setTimeout(tick, 800);
+    setTimeout(tick, 600);
 })();
 
 // ============================================
