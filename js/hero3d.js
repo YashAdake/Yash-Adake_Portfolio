@@ -1,8 +1,7 @@
 // ============================================
-// HERO 3D — v6.1 "SYSTEMS GRAPH"
-// A slowly rotating 3D network of nodes connected by lines —
-// the visual metaphor for someone who builds backend systems,
-// APIs, and distributed infrastructure. Subtle, relevant, alive.
+// HERO 3D — v9.0 "CINEMATIC AURORA"
+// Full-screen chromatic shader plane
+// + cursor ripples + chromatic aberration + scroll parallax
 // ============================================
 
 (function() {
@@ -17,7 +16,7 @@
 
     let loaded = false;
 
-    function loadThreeAndInit() {
+    function loadAndInit() {
         if (loaded) return;
         loaded = true;
         const script = document.createElement('script');
@@ -31,214 +30,314 @@
         const THREE = window.THREE;
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 200);
-        camera.position.set(0, 0, 22);
+        const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 50);
+        camera.position.z = 5;
 
         const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
         renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
 
         // ============================================
-        // Build a network topology: 50 nodes distributed on a sphere
-        // with connections drawn between nearest neighbors
+        // Full-screen plane with chromatic aurora shader
         // ============================================
-        const NODE_COUNT = 50;
-        const CONNECTION_DIST = 4.5;
-        const SPHERE_RADIUS = 7;
-
-        // Create nodes as positions
-        const nodePositions = [];
-        for (let i = 0; i < NODE_COUNT; i++) {
-            // Fibonacci sphere distribution for even spacing
-            const phi = Math.acos(1 - 2 * (i + 0.5) / NODE_COUNT);
-            const theta = Math.PI * (1 + Math.sqrt(5)) * i;
-            const jitter = 0.4;
-            const r = SPHERE_RADIUS + (Math.random() - 0.5) * jitter * 2;
-            const x = r * Math.sin(phi) * Math.cos(theta);
-            const y = r * Math.sin(phi) * Math.sin(theta);
-            const z = r * Math.cos(phi);
-            nodePositions.push(new THREE.Vector3(x, y, z));
-        }
-
-        // ---- Node points (glowing dots) ----
-        const nodeGeometry = new THREE.BufferGeometry();
-        const nodeArray = new Float32Array(NODE_COUNT * 3);
-        const nodeSizes = new Float32Array(NODE_COUNT);
-        nodePositions.forEach((p, i) => {
-            nodeArray[i * 3] = p.x;
-            nodeArray[i * 3 + 1] = p.y;
-            nodeArray[i * 3 + 2] = p.z;
-            nodeSizes[i] = Math.random() * 0.6 + 0.4;
-        });
-        nodeGeometry.setAttribute('position', new THREE.BufferAttribute(nodeArray, 3));
-        nodeGeometry.setAttribute('aSize', new THREE.BufferAttribute(nodeSizes, 1));
-
-        const nodeVS = `
-            attribute float aSize;
+        const vertexShader = `
+            varying vec2 vUv;
+            varying vec3 vPosition;
             uniform float uTime;
-            varying float vSize;
+            uniform vec2 uMouse;
+            uniform float uMouseStrength;
+
+            // Simplex 2D noise
+            vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+            float snoise(vec2 v) {
+                const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                vec2 i = floor(v + dot(v, C.yy));
+                vec2 x0 = v - i + dot(i, C.xx);
+                vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                vec4 x12 = x0.xyxy + C.xxzz; x12.xy -= i1;
+                i = mod(i, 289.0);
+                vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+                vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                m = m*m; m = m*m;
+                vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                vec3 h = abs(x) - 0.5;
+                vec3 ox = floor(x + 0.5);
+                vec3 a0 = x - ox;
+                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                vec3 g;
+                g.x = a0.x * x0.x + h.x * x0.y;
+                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                return 130.0 * dot(m, g);
+            }
+
             void main() {
-                vSize = aSize;
-                vec4 mv = modelViewMatrix * vec4(position, 1.0);
-                gl_Position = projectionMatrix * mv;
-                float pulse = 0.85 + 0.15 * sin(uTime * 1.2 + position.x * 2.0 + position.y * 3.0);
-                gl_PointSize = aSize * pulse * (280.0 / -mv.z);
+                vUv = uv;
+                vPosition = position;
+
+                vec3 pos = position;
+
+                // Subtle wave distortion
+                float n = snoise(uv * 2.5 + uTime * 0.15) * 0.15;
+                pos.z += n;
+
+                // Cursor-driven ripple
+                float distToMouse = distance(uv, uMouse * 0.5 + 0.5);
+                float ripple = sin(distToMouse * 15.0 - uTime * 3.0) * exp(-distToMouse * 4.0) * uMouseStrength * 0.15;
+                pos.z += ripple;
+
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
             }
         `;
-        const nodeFS = `
-            uniform vec3 uColor;
-            varying float vSize;
+
+        const fragmentShader = `
+            varying vec2 vUv;
+            varying vec3 vPosition;
+            uniform float uTime;
+            uniform vec2 uMouse;
+            uniform float uMouseStrength;
+            uniform vec3 uColor1;
+            uniform vec3 uColor2;
+            uniform vec3 uColor3;
+            uniform vec3 uColor4;
+            uniform float uLightMode;
+
+            vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+            float snoise(vec2 v) {
+                const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                vec2 i = floor(v + dot(v, C.yy));
+                vec2 x0 = v - i + dot(i, C.xx);
+                vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                vec4 x12 = x0.xyxy + C.xxzz; x12.xy -= i1;
+                i = mod(i, 289.0);
+                vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+                vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                m = m*m; m = m*m;
+                vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                vec3 h = abs(x) - 0.5;
+                vec3 ox = floor(x + 0.5);
+                vec3 a0 = x - ox;
+                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                vec3 g;
+                g.x = a0.x * x0.x + h.x * x0.y;
+                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                return 130.0 * dot(m, g);
+            }
+
+            // FBM — fractal brownian motion, creates cloud-like patterns
+            float fbm(vec2 p) {
+                float value = 0.0;
+                float amp = 0.5;
+                for (int i = 0; i < 4; i++) {
+                    value += amp * snoise(p);
+                    p *= 2.0;
+                    amp *= 0.5;
+                }
+                return value;
+            }
+
             void main() {
-                float d = length(gl_PointCoord - vec2(0.5));
-                if (d > 0.5) discard;
-                // Core bright, edge soft
-                float core = smoothstep(0.5, 0.0, d);
-                float halo = smoothstep(0.5, 0.35, d) * 0.5;
-                gl_FragColor = vec4(uColor, core * 0.95 + halo);
+                vec2 uv = vUv;
+                float t = uTime * 0.12;
+
+                // Layered aurora bands
+                vec2 q = uv * 2.0;
+                q.x += t * 0.3;
+
+                float band1 = fbm(q + vec2(0.0, t));
+                float band2 = fbm(q * 1.5 + vec2(t * 0.7, -t * 0.4));
+                float band3 = fbm(q * 0.8 - vec2(t * 0.5, t * 0.3));
+
+                // Cursor influence
+                float mouseDist = distance(uv, uMouse * 0.5 + 0.5);
+                float mouseGlow = exp(-mouseDist * 3.0) * uMouseStrength;
+
+                // Compose colors (iridescent / chromatic)
+                float f1 = smoothstep(-0.3, 0.5, band1);
+                float f2 = smoothstep(-0.3, 0.5, band2);
+                float f3 = smoothstep(-0.3, 0.5, band3);
+
+                vec3 col = mix(uColor1, uColor2, f1);
+                col = mix(col, uColor3, f2 * 0.7);
+                col = mix(col, uColor4, f3 * 0.5);
+
+                // Cursor adds warmer highlight
+                col += vec3(0.3, 0.4, 0.8) * mouseGlow * 0.6;
+
+                // Chromatic aberration on edges
+                vec2 centered = uv - 0.5;
+                float edge = length(centered);
+                float chroma = smoothstep(0.3, 0.75, edge);
+                col.r += chroma * 0.08;
+                col.b -= chroma * 0.05;
+
+                // Radial vignette (darkens edges)
+                float vig = 1.0 - smoothstep(0.3, 0.9, edge);
+                col *= mix(0.5, 1.0, vig);
+
+                // Subtle film grain
+                float grain = fract(sin(dot(uv * 1000.0 + t, vec2(12.9898, 78.233))) * 43758.5453);
+                col += (grain - 0.5) * 0.02;
+
+                // Horizontal scanline shimmer (very subtle)
+                float scan = sin(uv.y * 800.0 + t * 20.0) * 0.01;
+                col += scan;
+
+                // Light mode: invert tone logic, soften
+                if (uLightMode > 0.5) {
+                    col = mix(col, vec3(1.0) - col * 0.3, 0.4);
+                    col *= 0.85;
+                }
+
+                // Overall intensity
+                float alpha = 0.85 + 0.1 * sin(t * 2.0);
+
+                gl_FragColor = vec4(col, alpha);
             }
         `;
-        const nodeMat = new THREE.ShaderMaterial({
-            vertexShader: nodeVS,
-            fragmentShader: nodeFS,
+
+        // Plane sized to fill the frustum at z=0
+        const planeGeo = new THREE.PlaneGeometry(14, 8, 64, 64);
+        const planeMat = new THREE.ShaderMaterial({
+            vertexShader,
+            fragmentShader,
             uniforms: {
                 uTime: { value: 0 },
-                uColor: { value: new THREE.Color(0x5B8DEF) }
+                uMouse: { value: new THREE.Vector2(0, 0) },
+                uMouseStrength: { value: 0 },
+                uColor1: { value: new THREE.Color(0x0a0a3a) }, // deep midnight
+                uColor2: { value: new THREE.Color(0x2955C8) }, // saturated blue
+                uColor3: { value: new THREE.Color(0x7C3AED) }, // violet
+                uColor4: { value: new THREE.Color(0xEC4899) }, // magenta
+                uLightMode: { value: 0 }
             },
             transparent: true,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending
-        });
-        const nodes = new THREE.Points(nodeGeometry, nodeMat);
-        scene.add(nodes);
-
-        // ---- Edge lines (connections) ----
-        const edgeVertices = [];
-        const edgeOpacities = [];
-        for (let i = 0; i < NODE_COUNT; i++) {
-            for (let j = i + 1; j < NODE_COUNT; j++) {
-                const d = nodePositions[i].distanceTo(nodePositions[j]);
-                if (d < CONNECTION_DIST) {
-                    edgeVertices.push(
-                        nodePositions[i].x, nodePositions[i].y, nodePositions[i].z,
-                        nodePositions[j].x, nodePositions[j].y, nodePositions[j].z
-                    );
-                    // Stronger lines for closer pairs
-                    const strength = 1 - (d / CONNECTION_DIST);
-                    edgeOpacities.push(strength, strength);
-                }
-            }
-        }
-        const edgeGeo = new THREE.BufferGeometry();
-        edgeGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(edgeVertices), 3));
-        edgeGeo.setAttribute('aOpacity', new THREE.BufferAttribute(new Float32Array(edgeOpacities), 1));
-
-        const edgeVS = `
-            attribute float aOpacity;
-            varying float vOpacity;
-            void main() {
-                vOpacity = aOpacity;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }
-        `;
-        const edgeFS = `
-            uniform vec3 uColor;
-            uniform float uGlobalOpacity;
-            varying float vOpacity;
-            void main() {
-                gl_FragColor = vec4(uColor, vOpacity * uGlobalOpacity * 0.45);
-            }
-        `;
-        const edgeMat = new THREE.ShaderMaterial({
-            vertexShader: edgeVS,
-            fragmentShader: edgeFS,
-            uniforms: {
-                uColor: { value: new THREE.Color(0x5B8DEF) },
-                uGlobalOpacity: { value: 1.0 }
-            },
-            transparent: true,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending
-        });
-        const edges = new THREE.LineSegments(edgeGeo, edgeMat);
-        scene.add(edges);
-
-        // ---- Container group for rotation ----
-        const graph = new THREE.Group();
-        graph.add(nodes);
-        graph.add(edges);
-        scene.remove(nodes);
-        scene.remove(edges);
-        scene.add(graph);
-
-        // ---- Background dust particles (sparse, far) ----
-        const dustCount = 120;
-        const dustGeo = new THREE.BufferGeometry();
-        const dustPos = new Float32Array(dustCount * 3);
-        for (let i = 0; i < dustCount; i++) {
-            const r = 18 + Math.random() * 12;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos((Math.random() * 2) - 1);
-            dustPos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
-            dustPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-            dustPos[i * 3 + 2] = r * Math.cos(phi);
-        }
-        dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
-        const dustMat = new THREE.PointsMaterial({
-            color: 0xEDEDED,
-            size: 0.04,
-            transparent: true,
-            opacity: 0.35,
-            sizeAttenuation: true,
             depthWrite: false
         });
-        const dust = new THREE.Points(dustGeo, dustMat);
-        scene.add(dust);
+        const plane = new THREE.Mesh(planeGeo, planeMat);
+        plane.position.z = -1;
+        scene.add(plane);
 
         // ============================================
-        // Mouse / theme / visibility
+        // Floating geometric shards for depth + detail
         // ============================================
-        let targetX = 0, targetY = 0, mouseX = 0, mouseY = 0;
+        const shards = new THREE.Group();
+        const SHARD_COUNT = 6;
+        for (let i = 0; i < SHARD_COUNT; i++) {
+            const geo = new THREE.OctahedronGeometry(0.25 + Math.random() * 0.15, 0);
+            const mat = new THREE.MeshBasicMaterial({
+                color: 0xEDEDED,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.25
+            });
+            const shard = new THREE.Mesh(geo, mat);
+            shard.position.set(
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 5,
+                (Math.random() - 0.5) * 3 + 1
+            );
+            shard.userData = {
+                rotX: (Math.random() - 0.5) * 0.005,
+                rotY: (Math.random() - 0.5) * 0.008,
+                floatAmp: 0.05 + Math.random() * 0.1,
+                floatSpeed: 0.3 + Math.random() * 0.4,
+                floatOffset: Math.random() * Math.PI * 2
+            };
+            shards.add(shard);
+        }
+        scene.add(shards);
+
+        // ============================================
+        // Mouse + theme + scroll
+        // ============================================
+        const targetMouse = new THREE.Vector2(0, 0);
+        const mouse = new THREE.Vector2(0, 0);
+        let targetStrength = 0, mouseStrength = 0;
+
         window.addEventListener('mousemove', e => {
-            targetX = (e.clientX / window.innerWidth - 0.5);
-            targetY = -(e.clientY / window.innerHeight - 0.5);
+            const rect = canvas.getBoundingClientRect();
+            if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                targetMouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                targetMouse.y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+                targetStrength = 1.0;
+            } else {
+                targetStrength = 0;
+            }
         });
+
+        let scrollOffset = 0;
+        window.addEventListener('scroll', () => {
+            scrollOffset = Math.min(window.scrollY / window.innerHeight, 1.5);
+        }, { passive: true });
 
         function updateTheme() {
             const isLight = document.body.classList.contains('light-mode');
-            nodeMat.uniforms.uColor.value.setHex(isLight ? 0x3D6FD8 : 0x5B8DEF);
-            edgeMat.uniforms.uColor.value.setHex(isLight ? 0x3D6FD8 : 0x5B8DEF);
-            edgeMat.uniforms.uGlobalOpacity.value = isLight ? 1.4 : 1.0;
-            dustMat.color.setHex(isLight ? 0x333333 : 0xEDEDED);
+            planeMat.uniforms.uLightMode.value = isLight ? 1.0 : 0.0;
+            if (isLight) {
+                planeMat.uniforms.uColor1.value.setHex(0xe8e4f0);
+                planeMat.uniforms.uColor2.value.setHex(0x2955C8);
+                planeMat.uniforms.uColor3.value.setHex(0x7C3AED);
+                planeMat.uniforms.uColor4.value.setHex(0xEC4899);
+                shards.children.forEach(s => {
+                    s.material.color.setHex(0x1a1a1a);
+                    s.material.opacity = 0.25;
+                });
+            } else {
+                planeMat.uniforms.uColor1.value.setHex(0x0a0a3a);
+                planeMat.uniforms.uColor2.value.setHex(0x2955C8);
+                planeMat.uniforms.uColor3.value.setHex(0x7C3AED);
+                planeMat.uniforms.uColor4.value.setHex(0xEC4899);
+                shards.children.forEach(s => {
+                    s.material.color.setHex(0xEDEDED);
+                    s.material.opacity = 0.22;
+                });
+            }
         }
         updateTheme();
         new MutationObserver(updateTheme).observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
+        // Visibility gating
         let visible = true;
         new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(heroSection);
 
         // ============================================
-        // Animate
+        // Animation loop
         // ============================================
         const clock = new THREE.Clock();
         function animate() {
             requestAnimationFrame(animate);
             if (!visible) return;
-
             const t = clock.getElapsedTime();
 
-            mouseX += (targetX - mouseX) * 0.04;
-            mouseY += (targetY - mouseY) * 0.04;
+            // Smooth mouse
+            mouse.x += (targetMouse.x - mouse.x) * 0.06;
+            mouse.y += (targetMouse.y - mouse.y) * 0.06;
+            mouseStrength += (targetStrength - mouseStrength) * 0.08;
 
-            // Network rotates steadily
-            graph.rotation.y = t * 0.08 + mouseX * 0.3;
-            graph.rotation.x = t * 0.03 + mouseY * 0.25;
-            graph.rotation.z = Math.sin(t * 0.05) * 0.05;
+            planeMat.uniforms.uTime.value = t;
+            planeMat.uniforms.uMouse.value.copy(mouse);
+            planeMat.uniforms.uMouseStrength.value = mouseStrength;
 
-            // Dust counter-rotates very slowly
-            dust.rotation.y = -t * 0.01;
-            dust.rotation.x = t * 0.005;
+            // Plane subtle rotate for parallax
+            plane.rotation.x = mouse.y * 0.08;
+            plane.rotation.y = mouse.x * 0.08;
 
-            nodeMat.uniforms.uTime.value = t;
+            // Shards float + spin
+            shards.children.forEach(s => {
+                s.rotation.x += s.userData.rotX;
+                s.rotation.y += s.userData.rotY;
+                s.position.y += Math.sin(t * s.userData.floatSpeed + s.userData.floatOffset) * 0.001;
+            });
+            // Shards rotate as a group with scroll — camera-journey feel
+            shards.rotation.y = t * 0.03 + scrollOffset * 0.4;
+            shards.rotation.x = -scrollOffset * 0.2;
+
+            // Camera subtle parallax + scroll push
+            camera.position.x = mouse.x * 0.3;
+            camera.position.y = -mouse.y * 0.2 - scrollOffset * 0.8;
+            camera.position.z = 5 + scrollOffset * 1.2;
+            camera.lookAt(0, 0, 0);
 
             renderer.render(scene, camera);
         }
@@ -251,16 +350,18 @@
             renderer.setSize(w, h, false);
         });
 
+        // Fade in dramatically
         canvas.style.opacity = '0';
-        canvas.style.transition = 'opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s';
+        canvas.style.transition = 'opacity 2.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s';
         requestAnimationFrame(() => { canvas.style.opacity = '1'; });
     }
 
+    // Lazy trigger
     const initObs = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
-            loadThreeAndInit();
+            loadAndInit();
             initObs.disconnect();
         }
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
     initObs.observe(heroSection);
 })();

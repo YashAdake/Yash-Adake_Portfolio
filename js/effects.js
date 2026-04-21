@@ -4,11 +4,12 @@
 // ============================================
 
 // ============================================
-// Simple Custom Cursor (desktop, no trail)
+// Cinematic Cursor with Contextual Text Label
 // ============================================
 if (window.innerWidth > 768 && !('ontouchstart' in window)) {
     const cursor = document.getElementById('customCursor');
     const cursorDot = document.getElementById('customCursorDot');
+    const cursorLabel = document.getElementById('cursorLabel');
 
     if (cursor && cursorDot) {
         document.body.classList.add('custom-cursor-enabled');
@@ -17,25 +18,64 @@ if (window.innerWidth > 768 && !('ontouchstart' in window)) {
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
         function animate() {
-            cx += (mx - cx) * 0.35;
-            cy += (my - cy) * 0.35;
-            cursor.style.left = cx + 'px';
-            cursor.style.top = cy + 'px';
+            cx += (mx - cx) * 0.4;
+            cy += (my - cy) * 0.4;
+            cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
 
-            rx += (mx - rx) * 0.12;
-            ry += (my - ry) * 0.12;
-            cursorDot.style.left = rx + 'px';
-            cursorDot.style.top = ry + 'px';
+            rx += (mx - rx) * 0.14;
+            ry += (my - ry) * 0.14;
+            cursorDot.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
 
             requestAnimationFrame(animate);
         }
         animate();
 
-        const interactive = document.querySelectorAll('a, button, .work-card, .writing-item, input, textarea');
-        interactive.forEach(el => {
+        // Contextual label logic
+        function setLabel(text, variant) {
+            if (!cursorLabel) return;
+            cursorLabel.textContent = text;
+            cursor.className = 'custom-cursor' + (text ? ' cursor-label-active' : '') + (variant ? ' cursor-' + variant : '');
+            cursorDot.className = 'custom-cursor-dot' + (text ? ' cursor-label-active' : '');
+        }
+
+        // Work cards → VISIT
+        document.querySelectorAll('.work-card:not(.work-card-draft)').forEach(el => {
+            el.addEventListener('mouseenter', () => setLabel('VISIT', 'work'));
+            el.addEventListener('mouseleave', () => setLabel(''));
+        });
+
+        // Writing items → READ
+        document.querySelectorAll('.writing-item').forEach(el => {
+            el.addEventListener('mouseenter', () => setLabel('READ', 'read'));
+            el.addEventListener('mouseleave', () => setLabel(''));
+        });
+
+        // Buttons → arrow
+        document.querySelectorAll('.btn-refined, .btn-primary').forEach(el => {
+            el.addEventListener('mouseenter', () => setLabel('→', 'btn'));
+            el.addEventListener('mouseleave', () => setLabel(''));
+        });
+
+        // Inputs → text cursor feel
+        document.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => setLabel('', 'text'));
+            el.addEventListener('mouseleave', () => setLabel(''));
+        });
+
+        // Hero photo → a nice little label
+        const heroPhoto = document.getElementById('mypic');
+        if (heroPhoto) {
+            heroPhoto.addEventListener('mouseenter', () => setLabel("THAT'S ME", 'photo'));
+            heroPhoto.addEventListener('mouseleave', () => setLabel(''));
+        }
+
+        // Generic links (not covered above)
+        document.querySelectorAll('a:not(.work-card):not(.writing-item):not(.btn-refined)').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.classList.add('cursor-hover');
-                cursorDot.classList.add('cursor-hover');
+                if (!cursor.classList.contains('cursor-label-active')) {
+                    cursor.classList.add('cursor-hover');
+                    cursorDot.classList.add('cursor-hover');
+                }
             });
             el.addEventListener('mouseleave', () => {
                 cursor.classList.remove('cursor-hover');
@@ -49,7 +89,7 @@ if (window.innerWidth > 768 && !('ontouchstart' in window)) {
         });
         document.addEventListener('mouseenter', () => {
             cursor.style.opacity = '1';
-            cursorDot.style.opacity = '0.3';
+            cursorDot.style.opacity = '0.35';
         });
     }
 }

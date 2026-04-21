@@ -88,7 +88,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/premium.css?v=8.0.0">
+    <link rel="stylesheet" href="css/premium.css?v=9.0.0">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -111,8 +111,10 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="customCursor"></div>
+    <!-- Custom Cursor (with contextual text label) -->
+    <div class="custom-cursor" id="customCursor">
+        <span class="cursor-label" id="cursorLabel"></span>
+    </div>
     <div class="custom-cursor-dot" id="customCursorDot"></div>
 
     <!-- Scroll to Top -->
@@ -156,11 +158,8 @@
     <main>
         <!-- HERO -->
         <section id="home">
-            <div class="hero-ambient" aria-hidden="true">
-                <div class="hero-mesh"></div>
-                <div class="hero-grid"></div>
-                <div class="hero-scanline"></div>
-            </div>
+            <canvas id="hero3d-canvas" class="hero3d-canvas" aria-hidden="true"></canvas>
+            <div class="hero-vignette" aria-hidden="true"></div>
             <div class="home">
                 <div class="container">
                     <div class="row hero-row align-items-center">
@@ -483,9 +482,10 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
-    <script src="js/core.js?v=8.0.0" defer></script>
-    <script src="js/effects.js?v=8.0.0" defer></script>
-    <script src="js/motion.js?v=8.0.0" defer></script>
+    <script src="js/core.js?v=9.0.0" defer></script>
+    <script src="js/effects.js?v=9.0.0" defer></script>
+    <script src="js/motion.js?v=9.0.0" defer></script>
+    <script src="js/hero3d.js?v=9.0.0" defer></script>
 
     <script>
         window.addEventListener('load', () => {

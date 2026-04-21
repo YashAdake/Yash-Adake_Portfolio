@@ -8452,3 +8452,459 @@ body.light-mode .navbar-toggler-icon i { color: #0D0D0D !important; }
         /* No lock — just dim anything behind naturally via menu's opacity */
     }
 }
+/* ===========================================================
+   V9.0 — CINEMATIC
+   Full-screen WebGL hero · contextual text cursor ·
+   dramatic scroll reveals · project browser-chrome previews ·
+   scroll-marquee dividers. Appended LAST.
+   =========================================================== */
+
+/* ---------- Kill legacy hero mesh/grid/ambient DOM ---------- */
+.hero-ambient,
+.hero-mesh,
+.hero-grid,
+.hero-scanline {
+    display: none !important;
+}
+
+/* ---------- HERO 3D canvas: full bleed background ---------- */
+.hero3d-canvas {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 1 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    mix-blend-mode: normal !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    display: block !important;
+}
+
+body.light-mode .hero3d-canvas {
+    opacity: 0.75 !important;
+    mix-blend-mode: multiply !important;
+}
+
+/* Vignette overlay — pulls content forward */
+.hero-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 50%, transparent 20%, rgba(10, 10, 10, 0.5) 70%, rgba(10, 10, 10, 0.85) 100%),
+        linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, transparent 15%, transparent 70%, rgba(10, 10, 10, 0.8) 100%);
+}
+body.light-mode .hero-vignette {
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 50%, transparent 25%, rgba(245, 242, 235, 0.4) 75%, rgba(245, 242, 235, 0.8) 100%),
+        linear-gradient(180deg, rgba(245, 242, 235, 0.25) 0%, transparent 15%, transparent 70%, rgba(245, 242, 235, 0.85) 100%);
+}
+
+/* Hero content stays above */
+#home .container {
+    position: relative;
+    z-index: 2;
+}
+#home { position: relative; overflow: hidden; }
+
+/* Subtle dark wash behind the text column for legibility */
+#myinfo-div {
+    position: relative;
+}
+#myinfo-div::before {
+    content: "";
+    position: absolute;
+    inset: -30px -120px -30px -40px;
+    background: radial-gradient(ellipse at 40% 50%, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.25) 60%, transparent 100%);
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 30px;
+    filter: blur(30px);
+}
+body.light-mode #myinfo-div::before {
+    background: radial-gradient(ellipse at 40% 50%, rgba(245, 242, 235, 0.7) 0%, rgba(245, 242, 235, 0.3) 60%, transparent 100%);
+}
+
+@media (max-width: 900px) {
+    #myinfo-div::before { display: none !important; }
+}
+
+/* ===========================================================
+   CONTEXTUAL TEXT CURSOR
+   =========================================================== */
+.custom-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 10px;
+    height: 10px;
+    background: #EDEDED;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100001;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(0.22,1,0.36,1),
+                height 0.3s cubic-bezier(0.22,1,0.36,1),
+                background 0.3s,
+                border-radius 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cursor-label {
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #0A0A0A;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.2s ease 0.05s;
+}
+
+.custom-cursor.cursor-label-active {
+    width: 96px;
+    height: 96px;
+    background: #EDEDED;
+    mix-blend-mode: normal;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 20px 60px rgba(0,0,0,0.4);
+}
+.custom-cursor.cursor-label-active .cursor-label {
+    opacity: 1;
+}
+
+/* Work card — VISIT (solid accent background) */
+.custom-cursor.cursor-work {
+    background: var(--accent);
+    width: 96px;
+    height: 96px;
+}
+.custom-cursor.cursor-work .cursor-label {
+    color: #fff;
+}
+
+/* Read — softer light panel */
+.custom-cursor.cursor-read {
+    background: #EDEDED;
+    width: 82px;
+    height: 82px;
+}
+.custom-cursor.cursor-read .cursor-label {
+    color: #0A0A0A;
+}
+
+/* Button arrow — smaller */
+.custom-cursor.cursor-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--accent);
+}
+.custom-cursor.cursor-btn .cursor-label {
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Photo — personal label */
+.custom-cursor.cursor-photo {
+    background: #EDEDED;
+    width: 110px;
+    height: 110px;
+}
+.custom-cursor.cursor-photo .cursor-label {
+    color: #0A0A0A;
+    font-size: 10px;
+}
+
+/* Text cursor (inputs) */
+.custom-cursor.cursor-text {
+    width: 2px;
+    height: 22px;
+    border-radius: 1px;
+    background: var(--accent);
+    mix-blend-mode: normal;
+}
+
+/* Cursor ring */
+.custom-cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(237, 237, 237, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate(-50%, -50%);
+    opacity: 0.35;
+    transition: opacity 0.3s, transform 0.3s, border-color 0.3s;
+}
+.custom-cursor-dot.cursor-hover {
+    opacity: 0.8;
+    width: 50px;
+    height: 50px;
+    border-color: var(--accent);
+}
+.custom-cursor-dot.cursor-label-active {
+    opacity: 0 !important;
+}
+
+body.light-mode .custom-cursor {
+    background: #0A0A0A;
+    mix-blend-mode: difference;
+}
+body.light-mode .custom-cursor-dot { border-color: rgba(10, 10, 10, 0.4); }
+body.light-mode .custom-cursor.cursor-read { background: #0A0A0A; }
+body.light-mode .custom-cursor.cursor-read .cursor-label { color: #fff; }
+body.light-mode .custom-cursor.cursor-photo { background: #0A0A0A; }
+body.light-mode .custom-cursor.cursor-photo .cursor-label { color: #fff; }
+
+.cursor-trail { display: none !important; }
+
+/* Hide cursor on touch */
+@media (max-width: 768px), (pointer: coarse) {
+    .custom-cursor, .custom-cursor-dot { display: none !important; }
+    body.custom-cursor-enabled { cursor: auto !important; }
+}
+
+/* ===========================================================
+   WORK CARDS — CINEMATIC UPGRADE
+   Browser-chrome mockup + dramatic reveal
+   =========================================================== */
+
+.work-visual {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Faux browser chrome at top of visual */
+.work-visual::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 28px;
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(6px);
+    z-index: 3;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background-image:
+        radial-gradient(circle at 14px 14px, #ff5f57 5px, transparent 6px),
+        radial-gradient(circle at 34px 14px, #febc2e 5px, transparent 6px),
+        radial-gradient(circle at 54px 14px, #28c840 5px, transparent 6px);
+}
+
+/* URL bar on the visual */
+.work-visual::after {
+    /* overridden by shine; use a separate layer for URL? Keep shine, use data attribute */
+    /* Shine stays — URL bar handled via work-logotype positioning below */
+}
+
+.work-logotype {
+    position: relative;
+    z-index: 2;
+    margin-top: 22px; /* push below fake chrome */
+}
+
+/* Hide the old "work-visit" abs positioning — we have cursor label now */
+.work-visit {
+    display: none !important;
+}
+
+/* Make the 3D tilt more dramatic */
+.work-card {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.5s,
+                border-color 0.3s;
+    will-change: transform;
+}
+
+.work-card:hover {
+    box-shadow:
+        0 60px 120px -30px rgba(0, 0, 0, 0.6),
+        0 0 0 1px var(--accent-soft);
+}
+body.light-mode .work-card:hover {
+    box-shadow:
+        0 60px 120px -30px rgba(41, 85, 200, 0.25),
+        0 0 0 1px rgba(41, 85, 200, 0.3);
+}
+
+/* Logotype pops forward on hover */
+.work-card:hover .work-logotype {
+    transform: translateZ(30px) scale(1.06);
+}
+
+/* Subtle visual color shift on hover */
+.work-card:hover .work-visual-agro {
+    background: linear-gradient(160deg, #0F4C3A 0%, #2ea57d 100%) !important;
+}
+.work-card:hover .work-visual-solar {
+    background: linear-gradient(160deg, #D96A0B 0%, #FFD54F 100%) !important;
+}
+
+/* ===========================================================
+   SCROLL MARQUEE DIVIDER — between sections
+   (injected via motion.js)
+   =========================================================== */
+.scroll-marquee-divider {
+    width: 100vw;
+    overflow: hidden;
+    margin-left: calc(-50vw + 50%);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 0;
+    background: transparent;
+}
+.scroll-marquee-divider .marquee-track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: marqueeDriftLeft 45s linear infinite;
+    will-change: transform;
+}
+.scroll-marquee-divider.right .marquee-track {
+    animation: marqueeDriftRight 45s linear infinite;
+}
+
+@keyframes marqueeDriftLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes marqueeDriftRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    color: var(--text-2);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+    transition: color 0.3s;
+}
+.marquee-item::after {
+    content: "✦";
+    color: var(--accent);
+    font-size: 0.75em;
+    font-style: normal;
+}
+.scroll-marquee-divider:hover .marquee-track {
+    animation-play-state: paused;
+}
+.scroll-marquee-divider:hover .marquee-item {
+    color: var(--text-0);
+}
+
+/* ===========================================================
+   SECTION TITLE — dramatic reveal mask
+   =========================================================== */
+.section-title {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.section-title {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.section-title.title-revealed {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Section headers get a subtle slide-up too */
+.section-header {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-header.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================================
+   PAGE TRANSITION WIPE (for nav link clicks)
+   =========================================================== */
+.page-wipe {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    pointer-events: none;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    background: linear-gradient(180deg, var(--accent) 0%, #7C3AED 100%);
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.page-wipe.wiping {
+    transform: scaleY(1);
+    transform-origin: top;
+}
+.page-wipe.clearing {
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+
+/* ===========================================================
+   HERO — typography polish under new canvas
+   =========================================================== */
+.hero-name {
+    /* Slightly larger and heavier shadow behind to help against WebGL bg */
+    text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+}
+body.light-mode .hero-name { text-shadow: 0 2px 30px rgba(245, 242, 235, 0.8); }
+
+.hero-tagline,
+.hero-meta,
+.hero-eyebrow {
+    text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+}
+body.light-mode .hero-tagline,
+body.light-mode .hero-meta,
+body.light-mode .hero-eyebrow {
+    text-shadow: 0 1px 12px rgba(245, 242, 235, 0.6);
+}
+
+/* ===========================================================
+   EXTRA POLISH
+   =========================================================== */
+
+/* Section dividers sit between sections — add breathing room */
+section + section { margin-top: 0; }
+
+/* Work visual shine blends cleaner */
+.work-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--shine-x, 50%) var(--shine-y, 50%),
+        rgba(255, 255, 255, 0.22) 0%,
+        transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 4;
+}
+.work-card:hover .work-visual::after { opacity: 1; }
+
+/* Reduced motion safety */
+@media (prefers-reduced-motion: reduce) {
+    .hero3d-canvas { display: none !important; }
+    .scroll-marquee-divider .marquee-track { animation: none !important; }
+    .section-title { clip-path: none !important; }
+    .section-header { opacity: 1 !important; transform: none !important; }
+}

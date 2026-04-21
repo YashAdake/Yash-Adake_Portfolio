@@ -229,3 +229,101 @@ const writingObs = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.2 });
 writingItems.forEach(w => writingObs.observe(w));
+
+// ============================================
+// 10. Section header slide-in
+// ============================================
+const sectionHeaderObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            sectionHeaderObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+document.querySelectorAll('.section-header').forEach(h => sectionHeaderObserver.observe(h));
+
+// ============================================
+// 11. Scroll-marquee dividers between sections
+// ============================================
+(function injectMarquees() {
+    const phrases = [
+        ['Building backend systems', 'Systems thinking', 'Python · Docker · Cloud', 'DevOps', 'Applied AI'],
+        ['Ship fast', 'Ship safe', 'Scale matters', 'Observability', 'Automation is leverage'],
+        ['Writing notes on AI', 'Infrastructure as craft', 'Quiet confidence', 'Reliability wins']
+    ];
+
+    const insertPoints = [
+        { after: '#work', direction: 'left', phrases: phrases[0] },
+        { after: '#about', direction: 'right', phrases: phrases[1] },
+        { after: '#writing', direction: 'left', phrases: phrases[2] }
+    ];
+
+    insertPoints.forEach(point => {
+        const section = document.querySelector(point.after);
+        if (!section) return;
+
+        const divider = document.createElement('div');
+        divider.className = 'scroll-marquee-divider' + (point.direction === 'right' ? ' right' : '');
+
+        const track = document.createElement('div');
+        track.className = 'marquee-track';
+
+        // Duplicate for seamless loop
+        for (let i = 0; i < 2; i++) {
+            point.phrases.forEach(p => {
+                const item = document.createElement('span');
+                item.className = 'marquee-item';
+                item.textContent = p;
+                track.appendChild(item);
+            });
+        }
+
+        divider.appendChild(track);
+        section.parentNode.insertBefore(divider, section.nextSibling);
+    });
+})();
+
+// ============================================
+// 12. Page-wipe transition on nav click (anchor links)
+// Adds a dramatic cinematic pause before scroll lands
+// ============================================
+(function pageWipe() {
+    const wipe = document.createElement('div');
+    wipe.className = 'page-wipe';
+    document.body.appendChild(wipe);
+
+    const navLinks = document.querySelectorAll('.nav-each-link[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (!target) return;
+
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            wipe.classList.remove('clearing');
+            wipe.classList.add('wiping');
+
+            setTimeout(() => {
+                const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({ top, behavior: 'auto' });
+
+                // Close mobile nav if open
+                const navCollapse = document.querySelector('.navbar-collapse');
+                if (navCollapse?.classList.contains('show') && window.bootstrap) {
+                    new bootstrap.Collapse(navCollapse, { toggle: false }).hide();
+                }
+
+                // Clear the wipe
+                setTimeout(() => {
+                    wipe.classList.remove('wiping');
+                    wipe.classList.add('clearing');
+                }, 120);
+            }, 500);
+        });
+    });
+})();
+
