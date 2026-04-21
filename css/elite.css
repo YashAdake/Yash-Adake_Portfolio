@@ -142,3 +142,30 @@ body.light-mode #mypic-div::after {
     color: #fff !important;
     box-shadow: 0 0 15px rgba(25, 167, 206, 0.4);
 }
+
+/* 7. Accessibility (Prefers Reduced Motion) */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .hero-parallax, .custom-cursor, .cursor-container {
+        transform: none !important;
+        display: none !important; /* Hide custom cursor safely */
+    }
+    body.has-custom-cursor, body.has-custom-cursor * {
+        cursor: auto !important; /* Re-enable native cursor */
+    }
+}
+
+/* 8. Fluid Typography (Modern Scaling) */
+.name-heading {
+    font-size: clamp(3rem, 8vw, 4.5rem) !important;
+}
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+}
+.hero-tagline {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+}

@@ -2,6 +2,15 @@
 // CORE — Form, Theme, Nav, Counter, Copy
 // ============================================
 
+// ----------------------------------------------------
+// FORM ENDPOINT CONFIGURATION
+// ----------------------------------------------------
+// The current direct Google Script URL (Client-exposed).
+// To switch to your new secure Serverless Edge API:
+// 1. Deploy the code from `cloudflare-worker-api.js` to Cloudflare Workers (Free)
+// 2. Uncomment the line below and paste your worker URL:
+// const SCRIPT_URL = 'https://your-worker-name.workers.dev/'; 
+
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsmf3WbfwIp9PwrjvSdBMxPnJ7YqKw8xvJnz8gq7v8VWobzaU9zYqImiy2MSUFhpoJ/exec';
 
 // ============================================
