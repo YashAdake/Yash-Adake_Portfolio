@@ -291,42 +291,41 @@ if (typedEl) {
 }
 
 // ============================================
-// Visitor Counter
+// Visitor Counter (base 750, localStorage increment, session-gated)
 // ============================================
-async function updateVisitorCount() {
+(function visitorCounter() {
     const el = document.getElementById('visitorCount');
     if (!el) return;
-    const visited = sessionStorage.getItem('hasVisited');
-    try {
-        const action = visited ? 'getCount' : 'count';
-        const res = await fetch(`${SCRIPT_URL}?action=${action}`, { method: 'GET', mode: 'cors' });
-        if (!res.ok) throw new Error('API failed');
-        const data = await res.json();
-        if (!visited) sessionStorage.setItem('hasVisited', 'true');
-        animateCounter(el, data.count);
-    } catch {
-        const today = new Date().toDateString();
-        let count = parseInt(localStorage.getItem('visitorCount')) || 100;
-        if (localStorage.getItem('lastVisit') !== today) {
-            count++;
-            localStorage.setItem('visitorCount', count);
-            localStorage.setItem('lastVisit', today);
-        }
-        animateCounter(el, count);
+
+    const BASE = 750;
+    const today = new Date().toDateString();
+
+    let count = parseInt(localStorage.getItem('visitorCount'), 10);
+    if (!count || count < BASE) count = BASE;
+
+    if (!sessionStorage.getItem('hasVisited')) {
+        count++;
+        localStorage.setItem('visitorCount', count);
+        localStorage.setItem('lastVisit', today);
+        sessionStorage.setItem('hasVisited', 'true');
+
+        // Also silent-ping the Apps Script to keep the real sheet count aligned
+        fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
     }
-}
 
-function animateCounter(el, target) {
-    let current = 0;
-    const step = Math.max(1, Math.ceil(target / 40));
-    const timer = setInterval(() => {
-        current += step;
-        if (current >= target) { current = target; clearInterval(timer); }
-        el.textContent = current.toLocaleString();
-    }, 25);
-}
-
-updateVisitorCount();
+    // Animate from count - 20 up to current count, feels alive
+    const start = Math.max(BASE, count - 20);
+    let cur = start;
+    el.textContent = cur.toLocaleString();
+    const tick = () => {
+        if (cur < count) {
+            cur++;
+            el.textContent = cur.toLocaleString();
+            setTimeout(tick, 40);
+        }
+    };
+    setTimeout(tick, 800);
+})();
 
 // ============================================
 // Form Input Focus

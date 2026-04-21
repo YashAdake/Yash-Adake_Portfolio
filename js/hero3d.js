@@ -1,10 +1,12 @@
 // ============================================
-// HERO 3D — Three.js animated geometric field
-// Lazy-loaded when #home is in viewport
+// HERO 3D — v6.1 "SYSTEMS GRAPH"
+// A slowly rotating 3D network of nodes connected by lines —
+// the visual metaphor for someone who builds backend systems,
+// APIs, and distributed infrastructure. Subtle, relevant, alive.
 // ============================================
 
 (function() {
-    if (window.innerWidth <= 768) return; // Skip on mobile for perf
+    if (window.innerWidth <= 768) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const heroSection = document.getElementById('home');
@@ -29,79 +31,219 @@
         const THREE = window.THREE;
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-        camera.position.z = 14;
+        const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 200);
+        camera.position.set(0, 0, 22);
 
         const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
         renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Icosahedron wireframe — signature geometric centerpiece
-        const geo = new THREE.IcosahedronGeometry(3.2, 1);
-        const mat = new THREE.MeshBasicMaterial({ color: 0x19a7ce, wireframe: true, transparent: true, opacity: 0.35 });
-        const mesh = new THREE.Mesh(geo, mat);
-        scene.add(mesh);
+        // ============================================
+        // Build a network topology: 50 nodes distributed on a sphere
+        // with connections drawn between nearest neighbors
+        // ============================================
+        const NODE_COUNT = 50;
+        const CONNECTION_DIST = 4.5;
+        const SPHERE_RADIUS = 7;
 
-        // Inner solid mesh with subtle color
-        const innerGeo = new THREE.IcosahedronGeometry(2.6, 0);
-        const innerMat = new THREE.MeshBasicMaterial({ color: 0x667eea, wireframe: true, transparent: true, opacity: 0.25 });
-        const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-        scene.add(innerMesh);
-
-        // Particle field
-        const pCount = 200;
-        const pGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(pCount * 3);
-        for (let i = 0; i < pCount * 3; i++) positions[i] = (Math.random() - 0.5) * 30;
-        pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const pMat = new THREE.PointsMaterial({ color: 0xf093fb, size: 0.08, transparent: true, opacity: 0.6 });
-        const points = new THREE.Points(pGeo, pMat);
-        scene.add(points);
-
-        // Mouse parallax
-        let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-        window.addEventListener('mousemove', e => {
-            targetX = (e.clientX / window.innerWidth - 0.5) * 0.4;
-            targetY = (e.clientY / window.innerHeight - 0.5) * 0.4;
-        });
-
-        // Theme reactive color
-        function updateColorsForTheme() {
-            const isLight = document.body.classList.contains('light-mode');
-            mat.color.setHex(isLight ? 0x764ba2 : 0x19a7ce);
-            innerMat.color.setHex(isLight ? 0x19a7ce : 0x667eea);
+        // Create nodes as positions
+        const nodePositions = [];
+        for (let i = 0; i < NODE_COUNT; i++) {
+            // Fibonacci sphere distribution for even spacing
+            const phi = Math.acos(1 - 2 * (i + 0.5) / NODE_COUNT);
+            const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+            const jitter = 0.4;
+            const r = SPHERE_RADIUS + (Math.random() - 0.5) * jitter * 2;
+            const x = r * Math.sin(phi) * Math.cos(theta);
+            const y = r * Math.sin(phi) * Math.sin(theta);
+            const z = r * Math.cos(phi);
+            nodePositions.push(new THREE.Vector3(x, y, z));
         }
-        updateColorsForTheme();
 
-        const themeObserver = new MutationObserver(updateColorsForTheme);
-        themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
-        // Pause when offscreen
-        let visible = true;
-        const visObs = new IntersectionObserver(entries => {
-            visible = entries[0].isIntersecting;
+        // ---- Node points (glowing dots) ----
+        const nodeGeometry = new THREE.BufferGeometry();
+        const nodeArray = new Float32Array(NODE_COUNT * 3);
+        const nodeSizes = new Float32Array(NODE_COUNT);
+        nodePositions.forEach((p, i) => {
+            nodeArray[i * 3] = p.x;
+            nodeArray[i * 3 + 1] = p.y;
+            nodeArray[i * 3 + 2] = p.z;
+            nodeSizes[i] = Math.random() * 0.6 + 0.4;
         });
-        visObs.observe(heroSection);
+        nodeGeometry.setAttribute('position', new THREE.BufferAttribute(nodeArray, 3));
+        nodeGeometry.setAttribute('aSize', new THREE.BufferAttribute(nodeSizes, 1));
 
-        let frameId;
+        const nodeVS = `
+            attribute float aSize;
+            uniform float uTime;
+            varying float vSize;
+            void main() {
+                vSize = aSize;
+                vec4 mv = modelViewMatrix * vec4(position, 1.0);
+                gl_Position = projectionMatrix * mv;
+                float pulse = 0.85 + 0.15 * sin(uTime * 1.2 + position.x * 2.0 + position.y * 3.0);
+                gl_PointSize = aSize * pulse * (280.0 / -mv.z);
+            }
+        `;
+        const nodeFS = `
+            uniform vec3 uColor;
+            varying float vSize;
+            void main() {
+                float d = length(gl_PointCoord - vec2(0.5));
+                if (d > 0.5) discard;
+                // Core bright, edge soft
+                float core = smoothstep(0.5, 0.0, d);
+                float halo = smoothstep(0.5, 0.35, d) * 0.5;
+                gl_FragColor = vec4(uColor, core * 0.95 + halo);
+            }
+        `;
+        const nodeMat = new THREE.ShaderMaterial({
+            vertexShader: nodeVS,
+            fragmentShader: nodeFS,
+            uniforms: {
+                uTime: { value: 0 },
+                uColor: { value: new THREE.Color(0x5B8DEF) }
+            },
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending
+        });
+        const nodes = new THREE.Points(nodeGeometry, nodeMat);
+        scene.add(nodes);
+
+        // ---- Edge lines (connections) ----
+        const edgeVertices = [];
+        const edgeOpacities = [];
+        for (let i = 0; i < NODE_COUNT; i++) {
+            for (let j = i + 1; j < NODE_COUNT; j++) {
+                const d = nodePositions[i].distanceTo(nodePositions[j]);
+                if (d < CONNECTION_DIST) {
+                    edgeVertices.push(
+                        nodePositions[i].x, nodePositions[i].y, nodePositions[i].z,
+                        nodePositions[j].x, nodePositions[j].y, nodePositions[j].z
+                    );
+                    // Stronger lines for closer pairs
+                    const strength = 1 - (d / CONNECTION_DIST);
+                    edgeOpacities.push(strength, strength);
+                }
+            }
+        }
+        const edgeGeo = new THREE.BufferGeometry();
+        edgeGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(edgeVertices), 3));
+        edgeGeo.setAttribute('aOpacity', new THREE.BufferAttribute(new Float32Array(edgeOpacities), 1));
+
+        const edgeVS = `
+            attribute float aOpacity;
+            varying float vOpacity;
+            void main() {
+                vOpacity = aOpacity;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+        const edgeFS = `
+            uniform vec3 uColor;
+            uniform float uGlobalOpacity;
+            varying float vOpacity;
+            void main() {
+                gl_FragColor = vec4(uColor, vOpacity * uGlobalOpacity * 0.45);
+            }
+        `;
+        const edgeMat = new THREE.ShaderMaterial({
+            vertexShader: edgeVS,
+            fragmentShader: edgeFS,
+            uniforms: {
+                uColor: { value: new THREE.Color(0x5B8DEF) },
+                uGlobalOpacity: { value: 1.0 }
+            },
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending
+        });
+        const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+        scene.add(edges);
+
+        // ---- Container group for rotation ----
+        const graph = new THREE.Group();
+        graph.add(nodes);
+        graph.add(edges);
+        scene.remove(nodes);
+        scene.remove(edges);
+        scene.add(graph);
+
+        // ---- Background dust particles (sparse, far) ----
+        const dustCount = 120;
+        const dustGeo = new THREE.BufferGeometry();
+        const dustPos = new Float32Array(dustCount * 3);
+        for (let i = 0; i < dustCount; i++) {
+            const r = 18 + Math.random() * 12;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            dustPos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+            dustPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+            dustPos[i * 3 + 2] = r * Math.cos(phi);
+        }
+        dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+        const dustMat = new THREE.PointsMaterial({
+            color: 0xEDEDED,
+            size: 0.04,
+            transparent: true,
+            opacity: 0.35,
+            sizeAttenuation: true,
+            depthWrite: false
+        });
+        const dust = new THREE.Points(dustGeo, dustMat);
+        scene.add(dust);
+
+        // ============================================
+        // Mouse / theme / visibility
+        // ============================================
+        let targetX = 0, targetY = 0, mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', e => {
+            targetX = (e.clientX / window.innerWidth - 0.5);
+            targetY = -(e.clientY / window.innerHeight - 0.5);
+        });
+
+        function updateTheme() {
+            const isLight = document.body.classList.contains('light-mode');
+            nodeMat.uniforms.uColor.value.setHex(isLight ? 0x3D6FD8 : 0x5B8DEF);
+            edgeMat.uniforms.uColor.value.setHex(isLight ? 0x3D6FD8 : 0x5B8DEF);
+            edgeMat.uniforms.uGlobalOpacity.value = isLight ? 1.4 : 1.0;
+            dustMat.color.setHex(isLight ? 0x333333 : 0xEDEDED);
+        }
+        updateTheme();
+        new MutationObserver(updateTheme).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+        let visible = true;
+        new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(heroSection);
+
+        // ============================================
+        // Animate
+        // ============================================
+        const clock = new THREE.Clock();
         function animate() {
-            frameId = requestAnimationFrame(animate);
+            requestAnimationFrame(animate);
             if (!visible) return;
-            mouseX += (targetX - mouseX) * 0.05;
-            mouseY += (targetY - mouseY) * 0.05;
-            mesh.rotation.x += 0.002;
-            mesh.rotation.y += 0.003;
-            innerMesh.rotation.x -= 0.003;
-            innerMesh.rotation.y -= 0.002;
-            points.rotation.y += 0.0008;
-            camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 3 - camera.position.y) * 0.05;
-            camera.lookAt(scene.position);
+
+            const t = clock.getElapsedTime();
+
+            mouseX += (targetX - mouseX) * 0.04;
+            mouseY += (targetY - mouseY) * 0.04;
+
+            // Network rotates steadily
+            graph.rotation.y = t * 0.08 + mouseX * 0.3;
+            graph.rotation.x = t * 0.03 + mouseY * 0.25;
+            graph.rotation.z = Math.sin(t * 0.05) * 0.05;
+
+            // Dust counter-rotates very slowly
+            dust.rotation.y = -t * 0.01;
+            dust.rotation.x = t * 0.005;
+
+            nodeMat.uniforms.uTime.value = t;
+
             renderer.render(scene, camera);
         }
         animate();
 
-        // Resize
         window.addEventListener('resize', () => {
             const w = canvas.clientWidth, h = canvas.clientHeight;
             camera.aspect = w / h;
@@ -109,18 +251,16 @@
             renderer.setSize(w, h, false);
         });
 
-        // Fade in
         canvas.style.opacity = '0';
-        canvas.style.transition = 'opacity 1.2s ease';
+        canvas.style.transition = 'opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s';
         requestAnimationFrame(() => { canvas.style.opacity = '1'; });
     }
 
-    // Lazy trigger
-    const initObserver = new IntersectionObserver(entries => {
+    const initObs = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
             loadThreeAndInit();
-            initObserver.disconnect();
+            initObs.disconnect();
         }
     }, { threshold: 0.1 });
-    initObserver.observe(heroSection);
+    initObs.observe(heroSection);
 })();
