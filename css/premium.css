@@ -7028,6 +7028,21 @@ body.light-mode #myinfo-div::before {
     font-weight: 600;
     color: var(--text-0);
     letter-spacing: 0.02em;
+    transition: opacity 0.3s ease;
+}
+
+/* Shimmer while fetching real count from server */
+#visitorCount.vc-loading {
+    background: linear-gradient(90deg, var(--text-2) 25%, var(--text-0) 50%, var(--text-2) 75%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: vcShimmer 1.2s ease-in-out infinite;
+}
+@keyframes vcShimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 .visitor-label {

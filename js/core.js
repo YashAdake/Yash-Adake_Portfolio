@@ -301,34 +301,24 @@ if (typedEl) {
 
 // ============================================
 // Visitor Counter — Universal server-side count
-// Every visitor worldwide sees the same number.
-// Google Apps Script ScriptProperties is the single source of truth.
-// The Cloudflare Worker proxies the request with proper CORS.
+// Two-layer speed: cached count shown instantly,
+// real count fetched in background and updated silently.
 // ============================================
 (function visitorCounter() {
     const el = document.getElementById('visitorCount');
     if (!el) return;
 
-    // Fallback only used when the network request fails
     const FALLBACK_COUNT = 850;
 
-    // Quick count-up animation — starts immediately, no delay
-    function animateCount(target) {
-        const start = Math.max(0, target - 15);
-        let cur = start;
-        el.textContent = cur.toLocaleString();
-
-        const tick = () => {
-            if (cur < target) {
-                cur++;
-                el.textContent = cur.toLocaleString();
-                setTimeout(tick, 25);
-            }
-        };
-        tick(); // start immediately — no delay
+    // Layer 1: Show cached count INSTANTLY (zero delay for returning visitors)
+    const cached = parseInt(localStorage.getItem('vc_last'), 10);
+    if (cached) {
+        el.textContent = cached.toLocaleString();
+    } else {
+        el.classList.add('vc-loading'); // shimmer for first-time visitors
     }
 
-    // Fetch the real global count from the server (increments it too)
+    // Layer 2: Fetch real count from server in background
     fetch(`${SCRIPT_URL}?action=count`, { method: 'GET' })
         .then(res => {
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -336,14 +326,17 @@ if (typedEl) {
         })
         .then(data => {
             if (data.success && typeof data.count === 'number') {
-                animateCount(data.count);
+                el.classList.remove('vc-loading');
+                el.textContent = data.count.toLocaleString();
+                localStorage.setItem('vc_last', data.count);
             } else {
-                el.textContent = FALLBACK_COUNT.toLocaleString();
+                el.classList.remove('vc-loading');
+                el.textContent = (cached || FALLBACK_COUNT).toLocaleString();
             }
         })
         .catch(() => {
-            // Network down or CORS issue — show fallback instantly
-            el.textContent = FALLBACK_COUNT.toLocaleString();
+            el.classList.remove('vc-loading');
+            el.textContent = (cached || FALLBACK_COUNT).toLocaleString();
         });
 })();
 
