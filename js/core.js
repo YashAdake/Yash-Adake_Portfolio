@@ -312,9 +312,9 @@ if (typedEl) {
     // Fallback only used when the network request fails
     const FALLBACK_COUNT = 850;
 
-    // Animate count rolling up for a satisfying visual
+    // Quick count-up animation — starts immediately, no delay
     function animateCount(target) {
-        const start = Math.max(0, target - 20);
+        const start = Math.max(0, target - 15);
         let cur = start;
         el.textContent = cur.toLocaleString();
 
@@ -322,10 +322,10 @@ if (typedEl) {
             if (cur < target) {
                 cur++;
                 el.textContent = cur.toLocaleString();
-                setTimeout(tick, 40);
+                setTimeout(tick, 25);
             }
         };
-        setTimeout(tick, 600);
+        tick(); // start immediately — no delay
     }
 
     // Fetch the real global count from the server (increments it too)
@@ -338,12 +338,12 @@ if (typedEl) {
             if (data.success && typeof data.count === 'number') {
                 animateCount(data.count);
             } else {
-                animateCount(FALLBACK_COUNT);
+                el.textContent = FALLBACK_COUNT.toLocaleString();
             }
         })
         .catch(() => {
-            // Network down or CORS issue — show fallback gracefully
-            animateCount(FALLBACK_COUNT);
+            // Network down or CORS issue — show fallback instantly
+            el.textContent = FALLBACK_COUNT.toLocaleString();
         });
 })();
 
