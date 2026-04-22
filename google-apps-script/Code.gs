@@ -265,3 +265,15 @@ function setupTriggers() {
   // Save trigger IDs
   PropertiesService.getScriptProperties().setProperty('triggers', JSON.stringify(newTriggers));
 }
+
+// ============================================
+// ONE-TIME UTILITY — Reset Visitor Counter
+// Run this ONCE from the Apps Script editor (Run → resetCounter)
+// Set to 849 because doGet increments BEFORE returning,
+// so the first real visit after this will show 850.
+// ============================================
+function resetCounter() {
+  var scriptProperties = PropertiesService.getScriptProperties();
+  scriptProperties.setProperty('visitorCount', '849');
+  Logger.log('✅ Visitor counter reset. Next visit will show: 850');
+}

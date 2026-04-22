@@ -300,42 +300,51 @@ if (typedEl) {
 }
 
 // ============================================
-// Visitor Counter — once per session, honest count
-// localStorage persists across sessions · sessionStorage prevents double-counting
+// Visitor Counter — Universal server-side count
+// Every visitor worldwide sees the same number.
+// Google Apps Script ScriptProperties is the single source of truth.
+// The Cloudflare Worker proxies the request with proper CORS.
 // ============================================
 (function visitorCounter() {
     const el = document.getElementById('visitorCount');
     if (!el) return;
 
-    // The baseline un-resettable authentic view count
-    const BASE_VIEWS = 842;
+    // Fallback only used when the network request fails
+    const FALLBACK_COUNT = 850;
 
-    // Track additional personal hits in localStorage
-    let personalHits = parseInt(localStorage.getItem('user_visits'), 10) || 0;
-    
-    // User requested strictly increasing on *every* view (no session gate)
-    personalHits++;
-    localStorage.setItem('user_visits', personalHits);
+    // Animate count rolling up for a satisfying visual
+    function animateCount(target) {
+        const start = Math.max(0, target - 20);
+        let cur = start;
+        el.textContent = cur.toLocaleString();
 
-    // Final count is the absolute baseline + their local device hits
-    const totalCount = BASE_VIEWS + personalHits;
+        const tick = () => {
+            if (cur < target) {
+                cur++;
+                el.textContent = cur.toLocaleString();
+                setTimeout(tick, 40);
+            }
+        };
+        setTimeout(tick, 600);
+    }
 
-    // Silent ping so the backend Apps Script records the global hit
-    fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
-
-    // Fast, satisfying animation from ~20 hits below current
-    const startOffset = Math.max(BASE_VIEWS, totalCount - 20);
-    let cur = startOffset;
-    el.textContent = cur.toLocaleString();
-    
-    const tick = () => {
-        if (cur < totalCount) {
-            cur++;
-            el.textContent = cur.toLocaleString();
-            setTimeout(tick, 40); // Fast tick speed for satisfaction
-        }
-    };
-    setTimeout(tick, 600);
+    // Fetch the real global count from the server (increments it too)
+    fetch(`${SCRIPT_URL}?action=count`, { method: 'GET' })
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+        })
+        .then(data => {
+            if (data.success && typeof data.count === 'number') {
+                animateCount(data.count);
+            } else {
+                animateCount(FALLBACK_COUNT);
+            }
+        })
+        .catch(() => {
+            // Network down or CORS issue — show fallback gracefully
+            animateCount(FALLBACK_COUNT);
+        });
 })();
 
 // ============================================
