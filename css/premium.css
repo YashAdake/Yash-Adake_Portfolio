@@ -10358,30 +10358,66 @@ body.light-mode .msg-error {
 }
 
 /* ============================================
-   Certifications Grid
+   Certifications Carousel
    ============================================ */
-.certi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
+.certi-carousel-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin: 1rem 0 1.5rem;
 }
 
+.certi-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+    padding: 0.25rem 0.1rem;
+}
+.certi-carousel::-webkit-scrollbar { display: none; }
+
+.certi-arrow {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-size: 1.3rem;
+    z-index: 2;
+}
+.certi-arrow:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
 .certi-card {
+    flex: 0 0 220px;
     background: var(--bg-card);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     overflow: hidden;
     transition: var(--transition-normal);
     cursor: pointer;
+    position: relative;
 }
-
 .certi-card:hover {
     transform: translateY(-4px);
     border-color: var(--primary);
     box-shadow: 0 8px 24px var(--primary-glow);
 }
-
 .certi-card img {
     width: 100%;
     aspect-ratio: 4/3;
@@ -10389,28 +10425,124 @@ body.light-mode .msg-error {
     display: block;
 }
 
+/* Hover overlay */
+.certi-hover-overlay {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: calc(100% - 52px);
+    background: rgba(25, 167, 206, 0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    backdrop-filter: blur(2px);
+}
+.certi-hover-overlay span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    border: 2px solid #fff;
+    padding: 6px 18px;
+    border-radius: 30px;
+}
+.certi-card:hover .certi-hover-overlay { opacity: 1; }
+
 .certi-info {
     padding: 0.6rem 0.8rem;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
 }
-
 .certi-title {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.3;
 }
-
 .certi-issuer {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--primary);
     font-weight: 500;
 }
 
-@media (max-width: 600px) {
-    .certi-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* Lightbox */
+.certi-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+.certi-lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+}
+.certi-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+}
+.certi-lightbox-content {
+    position: relative;
+    z-index: 1;
+    max-width: min(90vw, 860px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transform: scale(0.9);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.certi-lightbox.open .certi-lightbox-content {
+    transform: scale(1);
+}
+.certi-lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: 12px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+    object-fit: contain;
+}
+.certi-lightbox-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+.certi-lightbox-close:hover { background: var(--accent-1); }
+.certi-lightbox-caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    text-align: center;
+}
+#certiLightboxTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+}
+#certiLightboxIssuer {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 500;
 }

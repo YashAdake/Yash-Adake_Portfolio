@@ -348,3 +348,49 @@ console.log(
     'color:#19a7ce;font-size:20px;font-weight:bold;',
     'color:#f6f1f1;font-size:14px;'
 );
+
+// ============================================
+// Certificate Carousel + Lightbox
+// ============================================
+(function certiCarousel() {
+    const carousel = document.getElementById('certiCarousel');
+    const lightbox = document.getElementById('certiLightbox');
+    if (!carousel || !lightbox) return;
+
+    const lbImg    = document.getElementById('certiLightboxImg');
+    const lbTitle  = document.getElementById('certiLightboxTitle');
+    const lbIssuer = document.getElementById('certiLightboxIssuer');
+    const lbClose  = lightbox.querySelector('.certi-lightbox-close');
+    const backdrop = lightbox.querySelector('.certi-lightbox-backdrop');
+
+    // Arrow scroll
+    document.querySelector('.certi-arrow-left')?.addEventListener('click', () => {
+        carousel.scrollBy({ left: -240, behavior: 'smooth' });
+    });
+    document.querySelector('.certi-arrow-right')?.addEventListener('click', () => {
+        carousel.scrollBy({ left: 240, behavior: 'smooth' });
+    });
+
+    // Open lightbox on card click
+    carousel.querySelectorAll('.certi-card').forEach(card => {
+        card.addEventListener('click', () => {
+            lbImg.src = card.dataset.img;
+            lbImg.alt = card.dataset.title;
+            lbTitle.textContent = card.dataset.title;
+            lbIssuer.textContent = card.dataset.issuer;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    lbClose?.addEventListener('click', closeLightbox);
+    backdrop?.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+})();
