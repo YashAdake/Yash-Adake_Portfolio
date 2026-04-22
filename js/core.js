@@ -11,7 +11,7 @@
 // 2. Uncomment the line below and paste your worker URL:
 // const SCRIPT_URL = 'https://your-worker-name.workers.dev/'; 
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsmf3WbfwIp9PwrjvSdBMxPnJ7YqKw8xvJnz8gq7v8VWobzaU9zYqImiy2MSUFhpoJ/exec';
+const SCRIPT_URL = 'https://yashadake-form.yashadake91.workers.dev/';
 
 // ============================================
 // Form Validation + Submission
