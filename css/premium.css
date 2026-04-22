@@ -10366,16 +10366,23 @@ body.light-mode .msg-error {
     align-items: center;
     gap: 0.5rem;
     margin: 1rem 0 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .certi-carousel {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 1rem;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     padding: 0.25rem 0.1rem;
 }
 .certi-carousel::-webkit-scrollbar { display: none; }
@@ -10405,6 +10412,9 @@ body.light-mode .msg-error {
 
 .certi-card {
     flex: 0 0 220px;
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
     background: var(--bg-card);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
@@ -10420,6 +10430,8 @@ body.light-mode .msg-error {
 }
 .certi-card img {
     width: 100%;
+    height: 165px;
+    max-width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
     display: block;
@@ -10428,8 +10440,10 @@ body.light-mode .msg-error {
 /* Hover overlay */
 .certi-hover-overlay {
     position: absolute;
-    inset: 0 0 auto 0;
-    height: calc(100% - 52px);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 165px;
     background: rgba(25, 167, 206, 0.82);
     display: flex;
     align-items: center;
