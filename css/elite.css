@@ -124,25 +124,6 @@ body.light-mode #mypic-div::after {
     transition: transform 0.1s linear;
 }
 
-/* 6. Social Links Visibility (Dark Mode Pop) */
-.hero-socials a, 
-.contact-socials a, 
-.footer-socials a {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.hero-socials a:hover, 
-.contact-socials a:hover, 
-.footer-socials a:hover {
-    background: rgba(25, 167, 206, 0.2) !important;
-    border-color: rgba(25, 167, 206, 0.8) !important;
-    color: #fff !important;
-    box-shadow: 0 0 15px rgba(25, 167, 206, 0.4);
-}
-
 /* 7. Accessibility (Prefers Reduced Motion) */
 @media (prefers-reduced-motion: reduce) {
     *, ::before, ::after {

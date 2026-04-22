@@ -110,26 +110,6 @@ document.querySelectorAll('.work-card').forEach(card => {
 })();
 
 // ============================================
-// 7. Hero scroll parallax on photo
-// ============================================
-const heroPhoto = document.getElementById('mypic');
-if (heroPhoto && window.innerWidth > 768) {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                const y = window.scrollY;
-                if (y < window.innerHeight) {
-                    heroPhoto.style.transform = `translateY(${y * 0.12}px)`;
-                }
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-}
-
-// ============================================
 // 8. Work card reveal on scroll (clip-path)
 // ============================================
 const workCards = document.querySelectorAll('.work-card');

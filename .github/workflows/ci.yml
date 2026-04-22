@@ -1,0 +1,78 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: ["V2.0.0.0", "main"]
+  pull_request:
+    branches: ["V2.0.0.0", "main"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate & Audit
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify CNAME exists
+        run: |
+          if [ ! -f CNAME ]; then
+            echo "::error::CNAME file missing — custom domain will break!"
+            exit 1
+          fi
+          echo "✓ CNAME: $(cat CNAME)"
+
+      - name: Verify .nojekyll exists
+        run: |
+          if [ ! -f .nojekyll ]; then
+            echo "::warning::Missing .nojekyll — GitHub Pages will run Jekyll unnecessarily"
+          else
+            echo "✓ .nojekyll present"
+          fi
+
+      - name: Check for large files (>300 KB)
+        run: |
+          echo "Scanning for files over 300 KB..."
+          FOUND=0
+          while IFS= read -r -d '' f; do
+            SIZE=$(du -k "$f" | cut -f1)
+            if [ "$SIZE" -gt 300 ]; then
+              echo "::warning file=$f::Large file: $f (${SIZE} KB) — consider converting to WebP or compressing"
+              FOUND=1
+            fi
+          done < <(find . -not -path './.git/*' -type f -print0)
+          if [ "$FOUND" -eq 0 ]; then
+            echo "✓ No oversized files found"
+          fi
+
+      - name: Check for dev files that should not be in web root
+        run: |
+          BAD_FILES=("HOW_TO_COMBINE_PARTS.txt" "IMPROVEMENTS_SUMMARY.md")
+          for f in "${BAD_FILES[@]}"; do
+            if [ -f "$f" ]; then
+              echo "::warning file=$f::Dev file '$f' is publicly served — remove it from the repo root"
+            fi
+          done
+          echo "✓ Dev file check complete"
+
+      - name: Verify critical HTML files exist
+        run: |
+          for f in index.html 404.html robots.txt sitemap.xml; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Missing critical file: $f"
+              exit 1
+            fi
+            echo "✓ $f"
+          done
+
+      - name: Check sitemap does not contain fragment (hash) URLs
+        run: |
+          if grep -q '#' sitemap.xml; then
+            echo "::warning file=sitemap.xml::sitemap.xml contains fragment (#) URLs — search engines ignore these"
+          else
+            echo "✓ sitemap.xml is clean"
+          fi
+
+      - name: Summary
+        run: echo "✅ All quality checks passed for $(cat CNAME)"

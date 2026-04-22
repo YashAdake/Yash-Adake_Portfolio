@@ -1,21 +1,10 @@
 # Robots.txt for yashadake.com
-# Portfolio of Yash Adake - Software Engineer
+# Portfolio of Yash Adake — Software Engineer
 
 User-agent: *
 Allow: /
-
-# Point to sitemap
-Sitemap: https://yashadake.com/sitemap.xml
-
-# Allow all major search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Block backup and old directories from indexing
 Disallow: /backup/
 Disallow: /old/
 Disallow: /google-apps-script/
-Disallow: /.git/
+
+Sitemap: https://yashadake.com/sitemap.xml

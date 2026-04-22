@@ -20,8 +20,9 @@
 
         // Links
         { id: 'linkedin',    group: 'Links',    icon: 'bxl-linkedin',    title: 'LinkedIn',     sub: 'linkedin.com/in/yash-adake',   action: () => open('https://www.linkedin.com/in/yash-adake/') },
-        { id: 'twitter',     group: 'Links',    icon: 'bxl-twitter',     title: 'Twitter',      sub: '@yash_adake',                   action: () => open('https://twitter.com/yash_adake') },
-        { id: 'instagram',   group: 'Links',    icon: 'bxl-instagram',   title: 'Instagram',    sub: '@yash_adake',                   action: () => open('https://www.instagram.com/yash_adake/') },
+        { id: 'github',      group: 'Links',    icon: 'bxl-github',      title: 'GitHub',       sub: 'github.com/YashAdake',         action: () => open('https://github.com/YashAdake') },
+        { id: 'twitter',     group: 'Links',    icon: 'bxl-twitter',     title: 'Twitter',      sub: '@yash_adake',                  action: () => open('https://twitter.com/yash_adake') },
+        { id: 'instagram',   group: 'Links',    icon: 'bxl-instagram',   title: 'Instagram',    sub: '@yash_adake',                  action: () => open('https://www.instagram.com/yash_adake/') },
 
         // Projects
         { id: 'proj-navaved',group: 'Projects', icon: 'bx-link-external',title: 'Visit Navaved Agro', sub: 'navavedagro.in',          action: () => open('https://navavedagro.in/') },

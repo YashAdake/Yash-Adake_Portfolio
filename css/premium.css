@@ -10257,3 +10257,102 @@ body.light-mode .hero-socials a[aria-label="Twitter"]:hover {
 .contact-socials a[aria-label="Twitter"]:hover { color: #fff; background: #000; border-color: #000; }
 .contact-socials a[aria-label="Instagram"]:hover { color: #fff; border-color: transparent; background: linear-gradient(45deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%); }
 body.light-mode .contact-socials a { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.1); color: #333; }
+
+/* ===========================================================
+   GITHUB SOCIAL — branded hover color
+   =========================================================== */
+.hero-socials a[aria-label="GitHub"]:hover {
+    color: #fff !important;
+    border-color: #24292F !important;
+    background: #24292F !important;
+    box-shadow: 0 8px 20px -8px rgba(36, 41, 47, 0.6);
+}
+body.light-mode .hero-socials a[aria-label="GitHub"]:hover {
+    color: #fff !important;
+    background: #24292F !important;
+    border-color: #24292F !important;
+}
+.contact-socials a[aria-label="GitHub"]:hover {
+    color: #fff;
+    background: #24292F;
+    border-color: #24292F;
+    box-shadow: 0 8px 20px -8px rgba(36, 41, 47, 0.6);
+}
+
+/* ===========================================================
+   FORM FEEDBACK — .msg-success / .msg-error
+   Replaces inline style.cssText in core.js
+   =========================================================== */
+.msg-success {
+    color: var(--accent);
+    background: rgba(25, 167, 206, 0.08);
+    border: 1px solid rgba(25, 167, 206, 0.2);
+    padding: 14px 16px;
+    border-radius: var(--radius-sm, 8px);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+.msg-error {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.07);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 14px 16px;
+    border-radius: var(--radius-sm, 8px);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+body.light-mode .msg-success {
+    background: rgba(41, 85, 200, 0.06);
+    border-color: rgba(41, 85, 200, 0.2);
+    color: var(--accent);
+}
+body.light-mode .msg-error {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.15);
+    color: #dc2626;
+}
+
+/* ===========================================================
+   SCROLL HINT — bottom of hero, fades out on scroll
+   =========================================================== */
+.scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+.scroll-hint-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+}
+.scroll-hint-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--text-2), transparent);
+    animation: scrollHintDrop 1.8s ease-in-out infinite;
+}
+@keyframes scrollHintDrop {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+}
+@media (max-width: 768px) {
+    .scroll-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .scroll-hint-line { animation: none; }
+}

@@ -70,28 +70,28 @@ if (form) {
     form.addEventListener('submit', e => {
         e.preventDefault();
         if (!validateAllFields()) {
-            msg.innerHTML = '⚠️ Please fix the errors above before submitting.';
-            msg.style.cssText = 'color:#ff4444;background:rgba(255,68,68,0.1);padding:15px;border-radius:10px';
-            setTimeout(() => { msg.innerHTML = ''; msg.style.cssText = ''; }, 3000);
+            msg.textContent = '⚠️ Please fix the errors above before submitting.';
+            msg.className = 'message msg-error';
+            setTimeout(() => { msg.textContent = ''; msg.className = 'message'; }, 3000);
             return;
         }
         const btn = form.querySelector('button[type="submit"]');
         const btnText = btn.querySelector('.btn-text');
         const btnIcon = btn.querySelector('i');
-        btnText.textContent = 'Sending...';
+        btnText.textContent = 'Sending…';
         btnIcon.classList.remove('bx-send');
         btnIcon.classList.add('bx-loader-alt', 'bx-spin');
         btn.disabled = true;
         fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
             .then(() => {
-                msg.innerHTML = '✨ Thank you for reaching out. I\'ll respond within 1–2 business days.';
-                msg.style.cssText = 'color:#19a7ce;background:rgba(25,167,206,0.1);padding:15px;border-radius:10px';
+                msg.textContent = '✨ Thank you for reaching out. I\'ll respond within 1–2 business days.';
+                msg.className = 'message msg-success';
                 btnText.textContent = 'Message Sent';
                 btnIcon.classList.remove('bx-loader-alt', 'bx-spin');
                 btnIcon.classList.add('bx-check');
                 setTimeout(() => {
-                    msg.innerHTML = ''; msg.style.cssText = '';
-                    btnText.textContent = 'Send Message';
+                    msg.textContent = ''; msg.className = 'message';
+                    btnText.textContent = 'Send message';
                     btnIcon.classList.remove('bx-check');
                     btnIcon.classList.add('bx-send');
                     btn.disabled = false;
@@ -100,9 +100,9 @@ if (form) {
                 clearValidationStyles();
             })
             .catch(() => {
-                msg.innerHTML = '⚠️ Something went wrong. Please try again or reach out via email.';
-                msg.style.cssText = 'color:#ff4444;background:rgba(255,68,68,0.1);padding:15px;border-radius:10px';
-                btnText.textContent = 'Send Message';
+                msg.textContent = '⚠️ Something went wrong. Please try again or reach out via email.';
+                msg.className = 'message msg-error';
+                btnText.textContent = 'Send message';
                 btnIcon.classList.remove('bx-loader-alt', 'bx-spin');
                 btnIcon.classList.add('bx-send');
                 btn.disabled = false;
@@ -138,7 +138,7 @@ const navbar = document.querySelector('.navbar');
 const scrollBtn = document.getElementById('scrollToTop');
 const scrollProgress = document.getElementById('scrollProgress');
 const scrollHint = document.querySelector('.scroll-hint');
-const parallaxEls = document.querySelectorAll('#mypic, .about-image');
+const parallaxEls = document.querySelectorAll('.about-image');
 
 let scrollTicking = false;
 let lastScrollY = 0;
@@ -300,37 +300,36 @@ if (typedEl) {
 }
 
 // ============================================
-// Visitor Counter — every page load counts
-// Base 750 · localStorage persists count · pings Apps Script
+// Visitor Counter — once per session, honest count
+// localStorage persists across sessions · sessionStorage prevents double-counting
 // ============================================
 (function visitorCounter() {
     const el = document.getElementById('visitorCount');
     if (!el) return;
 
-    const BASE = 750;
+    let count = parseInt(localStorage.getItem('visitorCount'), 10) || 0;
 
-    let count = parseInt(localStorage.getItem('visitorCount'), 10);
-    if (!count || count < BASE) count = BASE;
+    // Only increment once per browser session (tab open), not every page load
+    if (!sessionStorage.getItem('visited')) {
+        count++;
+        localStorage.setItem('visitorCount', count);
+        sessionStorage.setItem('visited', '1');
+        // Silent ping so the Apps Script sheet count grows too
+        fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+    }
 
-    // Increment on EVERY page load (no session gate)
-    count++;
-    localStorage.setItem('visitorCount', count);
-
-    // Silent ping to backend so the real sheet count also grows
-    fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
-
-    // Animate from start number up to count — feels alive on every load
-    const start = Math.max(BASE, count - 15);
+    // Animate up to current count
+    const start = Math.max(0, count - 8);
     let cur = start;
     el.textContent = cur.toLocaleString();
     const tick = () => {
         if (cur < count) {
             cur++;
             el.textContent = cur.toLocaleString();
-            setTimeout(tick, 50);
+            setTimeout(tick, 60);
         }
     };
-    setTimeout(tick, 600);
+    setTimeout(tick, 700);
 })();
 
 // ============================================
