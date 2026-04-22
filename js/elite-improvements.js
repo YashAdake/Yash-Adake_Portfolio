@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(renderCursor);
 
         // Map elements to shiny text
-        const hoverTargets = document.querySelectorAll("#mypic, .work-card, .writing-item, a[href*='wa.me'], a[href*='newsletter'], a[href*='pulse']");
+        const hoverTargets = document.querySelectorAll("#mypic, .work-card, .writing-item, .certi-card, .certi-lightbox-close, .certi-arrow, a[href*='wa.me'], a[href*='newsletter'], a[href*='pulse']");
         hoverTargets.forEach(el => {
             el.addEventListener("mouseenter", () => {
                 let text = "";
@@ -43,6 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     text = "That's Me!";
                 } else if (el.classList.contains('work-card')) {
                     text = "Let's View!";
+                } else if (el.classList.contains('certi-card')) {
+                    text = "View Cert";
+                } else if (el.classList.contains('certi-lightbox-close')) {
+                    text = "Close X";
+                } else if (el.classList.contains('certi-arrow')) {
+                    text = "Scroll";
                 } else if (el.href && el.href.includes("wa.me")) {
                     text = "Let's Connect!";
                 } else if (el.classList.contains('writing-item') || (el.href && (el.href.includes("newsletter") || el.href.includes("pulse")))) {

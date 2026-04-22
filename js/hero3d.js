@@ -18,8 +18,10 @@
     const isTablet = window.innerWidth > 640 && window.innerWidth <= 1024;
     const isDesktop = window.innerWidth > 1024;
 
-    // On very small phones skip WebGL entirely (CSS mesh takes over)
-    if (window.innerWidth < 420) return;
+    // WORLD CLASS FIX: Skip WebGL entirely on ALL mobile devices (< 768px). 
+    // This saves massive battery drain and prevents scroll jitter. 
+    // The CSS gradient mesh will successfully take over rendering.
+    if (window.innerWidth < 768) return;
 
     let loaded = false;
 

@@ -11,7 +11,7 @@ body.has-custom-cursor * {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 9999999; /* MUST be higher than lightbox's 99999 */
     will-change: transform;
     /* Arrow tip is exactly at mouse coordinate */
     transform-origin: top left;
@@ -142,11 +142,36 @@ body.light-mode #mypic-div::after {
 
 /* 8. Fluid Typography (Modern Scaling) */
 .name-heading {
-    font-size: clamp(3rem, 8vw, 4.5rem) !important;
+    /* Floor lowered to 2rem to prevent horizontal container breaking on 320px screens */
+    font-size: clamp(2rem, 8vw, 4.5rem) !important;
 }
 .section-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
 }
 .hero-tagline {
     font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+}
+
+/* 9. Native Mobile Swipe Friction (UX) */
+.certi-carousel {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+.certi-carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+}
+.certi-card {
+    scroll-snap-align: start;
+}
+@media (max-width: 768px) {
+    /* Native thumb swipe is superior to tapping tiny arrows on mobile */
+    .certi-arrow { 
+        display: none !important; 
+    }
+}
+
+/* 10. Kill Cheap Mobile Tap Highlight */
+* {
+    -webkit-tap-highlight-color: transparent !important;
 }

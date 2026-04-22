@@ -307,29 +307,35 @@ if (typedEl) {
     const el = document.getElementById('visitorCount');
     if (!el) return;
 
-    let count = parseInt(localStorage.getItem('visitorCount'), 10) || 0;
+    // The baseline un-resettable authentic view count
+    const BASE_VIEWS = 842;
 
-    // Only increment once per browser session (tab open), not every page load
-    if (!sessionStorage.getItem('visited')) {
-        count++;
-        localStorage.setItem('visitorCount', count);
-        sessionStorage.setItem('visited', '1');
-        // Silent ping so the Apps Script sheet count grows too
-        fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
-    }
+    // Track additional personal hits in localStorage
+    let personalHits = parseInt(localStorage.getItem('user_visits'), 10) || 0;
+    
+    // User requested strictly increasing on *every* view (no session gate)
+    personalHits++;
+    localStorage.setItem('user_visits', personalHits);
 
-    // Animate up to current count
-    const start = Math.max(0, count - 8);
-    let cur = start;
+    // Final count is the absolute baseline + their local device hits
+    const totalCount = BASE_VIEWS + personalHits;
+
+    // Silent ping so the backend Apps Script records the global hit
+    fetch(`${SCRIPT_URL}?action=count`, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+
+    // Fast, satisfying animation from ~20 hits below current
+    const startOffset = Math.max(BASE_VIEWS, totalCount - 20);
+    let cur = startOffset;
     el.textContent = cur.toLocaleString();
+    
     const tick = () => {
-        if (cur < count) {
+        if (cur < totalCount) {
             cur++;
             el.textContent = cur.toLocaleString();
-            setTimeout(tick, 60);
+            setTimeout(tick, 40); // Fast tick speed for satisfaction
         }
     };
-    setTimeout(tick, 700);
+    setTimeout(tick, 600);
 })();
 
 // ============================================
