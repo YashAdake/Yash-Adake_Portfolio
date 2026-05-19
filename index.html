@@ -96,7 +96,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/premium.css?v=11.2.0">
+    <link rel="stylesheet" href="css/premium.css?v=11.3.0">
     <link rel="stylesheet" href="css/elite.css">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -145,6 +145,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav links-grp ms-auto">
                         <a class="nav-link nav-each-link active" href="#home">Home</a>
+                        <a class="nav-link nav-each-link" href="#products">Products</a>
                         <a class="nav-link nav-each-link" href="#work">Work</a>
                         <a class="nav-link nav-each-link" href="#about">About</a>
                         <a class="nav-link nav-each-link" href="#writing">Writing</a>
@@ -183,7 +184,7 @@
                             </p>
 
                             <div class="hero-actions">
-                                <a href="#work" class="btn-refined">View work <i class='bx bx-right-arrow-alt'></i></a>
+                                <a href="#products" class="btn-refined">View work <i class='bx bx-right-arrow-alt'></i></a>
                                 <a href="#contact" class="btn-refined btn-refined-ghost">Get in touch</a>
                             </div>
 
@@ -205,11 +206,87 @@
             </div>
         </section>
 
+        <!-- LIVE PRODUCTS -->
+        <section id="products">
+            <div class="container section-container">
+                <header class="section-header" data-aos="fade-up">
+                    <span class="section-number">01</span>
+                    <h2 class="section-title"><em>Live</em> products</h2>
+                    <p class="section-kicker">Tools I built end-to-end and shipped on <strong>yashadake.com</strong> — privacy-first, deeply engineered.</p>
+                </header>
+
+                <div class="work-grid">
+                    <!-- OptiResume -->
+                    <a href="https://optiresume.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="50">
+                        <div class="work-visual work-visual-optiresume" aria-hidden="true">
+                            <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
+                            <span class="work-logotype">Opti<br><em>Resume</em></span>
+                        </div>
+                        <div class="work-meta">
+                            <span class="work-tag">01 — SaaS · Applied AI</span>
+                            <h3 class="work-title">OptiResume</h3>
+                            <p class="work-desc">An AI-powered ATS resume analyzer. Hybrid design — deterministic local rules score parseability and keyword fit instantly; Gemini handles only semantic work (bullet rewrites, suggestions) behind a strict cost-aware gateway.</p>
+                            <ul class="work-outcomes">
+                                <li>Single AI gateway with caching, in-flight dedup, daily caps, and per-user lifetime quotas</li>
+                                <li>8-hour absolute session ceiling with refresh-token rotation and theft detection</li>
+                                <li>Parse-and-discard resume handling — file bytes never persisted</li>
+                            </ul>
+                            <div class="work-stack">
+                                <span>FastAPI</span>·<span>Postgres</span>·<span>Next.js 14</span>·<span>Gemini</span>·<span>Fly.io</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- AirDraw -->
+                    <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="work-visual work-visual-airdraw" aria-hidden="true">
+                            <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
+                            <span class="work-logotype">Air<br><em>Draw</em></span>
+                        </div>
+                        <div class="work-meta">
+                            <span class="work-tag">02 — Browser CV · Real-time</span>
+                            <h3 class="work-title">AirDraw</h3>
+                            <p class="work-desc">Gesture-controlled drawing in the browser — no install, no server, the camera feed never leaves your tab. MediaPipe HandLandmarker at 60 Hz, joint-angle finger detection, One-Euro pointer smoothing.</p>
+                            <ul class="work-outcomes">
+                                <li>Joint-angle finger detection — rotation-invariant, palm-size adaptive</li>
+                                <li>Persistent bitmap canvas with destination-out erase + velocity-modulated strokes</li>
+                                <li>Presence smoothing keeps strokes intact through 1–2 dropped frames</li>
+                            </ul>
+                            <div class="work-stack">
+                                <span>Next.js 15</span>·<span>React 19</span>·<span>MediaPipe</span>·<span>Zustand</span>·<span>TypeScript</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- MyJSON -->
+                    <a href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="work-visual work-visual-myjson" aria-hidden="true">
+                            <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
+                            <span class="work-logotype">My<br><em>JSON</em></span>
+                        </div>
+                        <div class="work-meta">
+                            <span class="work-tag">03 — Devtools · Privacy-first</span>
+                            <h3 class="work-title">MyJSON</h3>
+                            <p class="work-desc">A premium JSON/YAML workstation that runs entirely in your browser. Zero network calls during processing — grep-verified. Monaco editor, JSONPath, schema inference, RFC 6902 diff, codegen to seven languages.</p>
+                            <ul class="work-outcomes">
+                                <li>Zero telemetry, zero uploads — CSP locks all outbound calls to same-origin</li>
+                                <li>Self-hosted Monaco, 8 SEO landing pages, command palette with 30+ actions</li>
+                                <li>Shareable docs encoded entirely in the URL hash via lz-string compression</li>
+                            </ul>
+                            <div class="work-stack">
+                                <span>Next.js 14</span>·<span>Monaco</span>·<span>Zustand</span>·<span>Tailwind</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- WORK -->
         <section id="work">
             <div class="container section-container">
                 <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">01</span>
+                    <span class="section-number">02</span>
                     <h2 class="section-title"><em>Selected</em> work</h2>
                     <p class="section-kicker">Real products shipped for real businesses — from agritech to clean energy.</p>
                 </header>
@@ -255,20 +332,6 @@
                         </div>
                     </a>
 
-                    <!-- Next build -->
-                    <div class="work-card work-card-draft" data-aos="fade-up" data-aos-delay="150">
-                        <div class="work-visual work-visual-draft" aria-hidden="true">
-                            <span class="work-logotype work-logotype-muted"><em>In the</em><br>works</span>
-                        </div>
-                        <div class="work-meta">
-                            <span class="work-tag">03 — Soon</span>
-                            <h3 class="work-title">Next build</h3>
-                            <p class="work-desc">A production workflow engine — Python, Docker, and agentic AI tool-use. Shipping soon.</p>
-                            <div class="work-stack">
-                                <span>Python</span>·<span>Docker</span>·<span>Agents</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -277,7 +340,7 @@
         <section id="about">
             <div class="container section-container section-container-narrow">
                 <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">02</span>
+                    <span class="section-number">03</span>
                     <h2 class="section-title"><em>About</em> me</h2>
                     <p class="section-kicker">Engineer. Writer. Perpetually curious.</p>
                 </header>
@@ -419,7 +482,7 @@
         <section id="writing">
             <div class="container section-container">
                 <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">03</span>
+                    <span class="section-number">04</span>
                     <h2 class="section-title"><em>Writing</em></h2>
                     <p class="section-kicker">Notes on AI, DevOps, and the craft of building systems.</p>
                 </header>
@@ -468,7 +531,7 @@
         <section id="contact">
             <div class="container section-container section-container-narrow">
                 <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">04</span>
+                    <span class="section-number">05</span>
                     <h2 class="section-title"><em>Let's</em> talk</h2>
                     <p class="section-kicker">Have a project in mind, or just want to trade notes on systems? I'd love to hear from you.</p>
                 </header>
@@ -558,6 +621,7 @@
                     </div>
                     <div class="footer-links">
                         <a href="#home">Home</a>
+                        <a href="#products">Products</a>
                         <a href="#work">Work</a>
                         <a href="#about">About</a>
                         <a href="#writing">Writing</a>

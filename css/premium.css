@@ -10592,3 +10592,101 @@ body.light-mode .msg-error {
     .certi-lightbox-content img { max-height: calc(85vh - 60px); border-radius: 6px; }
     .certi-lightbox-close { top: 8px; right: 8px; width: 40px; height: 40px; }
 }
+
+/* ===========================================================
+   LIVE PRODUCTS — per-product visuals + status pill
+   Reuses .work-card / .work-grid / .work-visual structure.
+   =========================================================== */
+
+/* Brand gradients per product */
+.work-visual-optiresume {
+    background: linear-gradient(160deg, #0B1B2B 0%, #1E3A5F 55%, #C2410C 130%);
+    color: #FFF6E8;
+}
+.work-visual-airdraw {
+    background:
+        radial-gradient(120% 100% at 30% 25%, rgba(0, 240, 255, 0.28) 0%, transparent 55%),
+        radial-gradient(120% 100% at 80% 80%, rgba(255, 43, 214, 0.26) 0%, transparent 55%),
+        linear-gradient(160deg, #05060a 0%, #0c1020 100%);
+    color: #E6F7FF;
+}
+.work-visual-myjson {
+    background:
+        radial-gradient(80% 60% at 75% 30%, rgba(56, 189, 248, 0.16) 0%, transparent 60%),
+        linear-gradient(160deg, #0e1116 0%, #1f2937 55%, #334155 100%);
+    color: #E2E8F0;
+}
+
+/* Extend the existing shimmer animation (defined ~line 6603) to new visuals */
+.work-visual-optiresume,
+.work-visual-airdraw,
+.work-visual-myjson {
+    background-size: 200% 200% !important;
+    animation: visualShift 14s ease-in-out infinite;
+}
+
+/* Per-product hover color shifts (matches the agro/solar pattern ~line 8758) */
+.work-card:hover .work-visual-optiresume {
+    background: linear-gradient(160deg, #0B1B2B 0%, #2A5288 55%, #F97316 130%) !important;
+}
+.work-card:hover .work-visual-airdraw {
+    background:
+        radial-gradient(120% 100% at 30% 25%, rgba(0, 240, 255, 0.42) 0%, transparent 55%),
+        radial-gradient(120% 100% at 80% 80%, rgba(255, 43, 214, 0.40) 0%, transparent 55%),
+        linear-gradient(160deg, #05060a 0%, #0c1020 100%) !important;
+}
+.work-card:hover .work-visual-myjson {
+    background:
+        radial-gradient(80% 60% at 75% 30%, rgba(56, 189, 248, 0.28) 0%, transparent 60%),
+        linear-gradient(160deg, #111827 0%, #1f2937 55%, #475569 100%) !important;
+}
+
+/* LIVE / SOON status pill, anchored inside the faux browser-chrome bar */
+.work-status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 28px;                  /* matches .work-visual::before chrome height */
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 14px 0 12px;
+    font-family: ui-monospace, "JetBrains Mono", "Fira Code", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
+    background: transparent;
+    z-index: 4;                    /* above the chrome ::before (z-index: 3) */
+    pointer-events: none;
+}
+.work-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #6EE7B7;
+    box-shadow: 0 0 6px #6EE7B7, 0 0 14px rgba(110, 231, 183, 0.5);
+    animation: statusPulse 1.8s ease-in-out infinite;
+}
+.work-status-soon {
+    color: rgba(252, 211, 77, 0.95);
+}
+.work-status-soon .work-status-dot {
+    background: #FCD34D;
+    box-shadow: 0 0 6px #FCD34D, 0 0 14px rgba(252, 211, 77, 0.5);
+}
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.55; transform: scale(0.82); }
+}
+
+/* Outcomes list: the work-outcomes block already exists (~line 9558), so
+   nothing to add — these cards inherit it. */
+
+/* Light-mode tweaks so the dark product visuals still play nice */
+body.light-mode .work-visual-optiresume,
+body.light-mode .work-visual-airdraw,
+body.light-mode .work-visual-myjson {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
