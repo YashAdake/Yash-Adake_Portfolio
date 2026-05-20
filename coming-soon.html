@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0A0A0A">
+    <title>Coming Soon — Yash Adake</title>
+    <meta name="description" content="A product I'm building. Launching on yashadake.com soon.">
+
+    <link rel="icon" type="image/x-icon" href="photos/nav-brand.png">
+    <link rel="apple-touch-icon" href="photos/nav-brand.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-glass: rgba(255, 255, 255, 0.06);
+            --text-primary: #F6F1F1;
+            --text-secondary: #b0b0b0;
+            --text-muted: #6b6b6b;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.14);
+            --soon: #FCD34D;
+            --soon-glow: rgba(252, 211, 77, 0.5);
+
+            /* Per-product tint, set via JS */
+            --product-tint-a: #667eea;
+            --product-tint-b: #764ba2;
+        }
+
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background — radial tint takes the product color */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--product-tint-a) 22%, transparent) 0%, transparent 60%),
+                radial-gradient(40% 40% at 80% 80%, color-mix(in srgb, var(--product-tint-b) 16%, transparent) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Faint grid */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 32px 24px 96px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top bar */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 80px;
+            font-size: 13px;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+        .brand-domain {
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+        }
+        .topbar-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+            transition: color 0.2s ease;
+        }
+        .topbar-back:hover { color: var(--text-primary); }
+
+        /* Status pill */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 14px;
+            border: 1px solid color-mix(in srgb, var(--soon) 35%, transparent);
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--soon) 8%, transparent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--soon);
+            margin-bottom: 32px;
+            align-self: flex-start;
+        }
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--soon);
+            box-shadow: 0 0 8px var(--soon-glow), 0 0 18px var(--soon-glow);
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Hero wordmark */
+        .wordmark {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(64px, 12vw, 128px);
+            line-height: 0.94;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin: 0 0 28px;
+            color: var(--text-primary);
+        }
+        .wordmark em {
+            font-style: italic;
+            background: linear-gradient(135deg, var(--product-tint-a) 0%, var(--product-tint-b) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: clamp(18px, 2.2vw, 22px);
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin: 0 0 20px;
+            max-width: 640px;
+        }
+        .description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin: 0 0 48px;
+            max-width: 620px;
+        }
+
+        /* Feature list */
+        .features {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .feature {
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 18px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .feature:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+        }
+        .feature-icon {
+            width: 22px;
+            height: 22px;
+            margin-top: 1px;
+            color: var(--product-tint-a);
+            flex-shrink: 0;
+        }
+        .feature-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+        .feature-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ETA line */
+        .eta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border: 1px dashed var(--border-strong);
+            border-radius: 10px;
+            background: var(--bg-glass);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        .eta-label {
+            color: var(--soon);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 10px;
+        }
+
+        /* CTAs */
+        .ctas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+        .btn-primary:hover { transform: translateY(-1px); }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+        .btn-ghost:hover {
+            background: var(--bg-glass);
+            border-color: var(--text-secondary);
+        }
+
+        /* Footer mini */
+        .footer-mini {
+            margin-top: auto;
+            padding-top: 56px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .footer-mini a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .footer-mini a:hover { color: var(--text-secondary); }
+
+        @media (max-width: 560px) {
+            main { padding: 24px 20px 64px; }
+            .topbar { margin-bottom: 56px; }
+            .features { gap: 12px; }
+            .feature { padding: 14px 16px; }
+            .ctas { width: 100%; }
+            .btn { flex: 1 1 auto; justify-content: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .status-dot { animation: none; }
+            .feature, .btn-primary { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="topbar">
+            <a href="index.html" class="brand">
+                <img src="photos/nav-brand2.webp" alt="" width="28" height="28">
+                <span>Yash Adake</span>
+                <span class="brand-domain">/ yashadake.com</span>
+            </a>
+            <a href="index.html#products" class="topbar-back">← Back to portfolio</a>
+        </div>
+
+        <span class="status-pill">
+            <span class="status-dot"></span>
+            <span id="statusLabel">Launching Soon</span>
+        </span>
+
+        <h1 class="wordmark" id="wordmark">Coming<br><em>Soon</em></h1>
+
+        <p class="tagline" id="tagline">A new product I'm building on yashadake.com.</p>
+        <p class="description" id="description">I'm putting the final pieces in place. Drop your email if you'd like a note when it ships, or head back to the portfolio to see what's already live.</p>
+
+        <div class="features" id="features">
+            <!-- populated by script -->
+        </div>
+
+        <div class="eta">
+            <span class="eta-label">Status</span>
+            <span id="etaText">In active development · Targeting public launch in the coming weeks.</span>
+        </div>
+
+        <div class="ctas">
+            <a href="#" class="btn btn-primary" id="notifyBtn">
+                <svg class="feature-icon" style="width:16px;height:16px;color:currentColor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Notify me at launch
+            </a>
+            <a href="index.html#products" class="btn btn-ghost">
+                See what's already live
+                <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </div>
+
+        <div class="footer-mini">
+            <span>© <span id="year"></span> Yash Adake · All rights reserved</span>
+            <span><a href="index.html#contact">Get in touch</a> · <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            const PRODUCTS = {
+                optiresume: {
+                    title: 'Opti<br><em>Resume</em>',
+                    tagline: 'AI-powered ATS resume analyzer — built so the cost of intelligence stays low.',
+                    description: 'Hybrid design: deterministic local rules score parseability and keyword fit instantly, while Gemini handles only the semantic work — bullet rewrites, contextual suggestions — behind a strict cost-aware gateway.',
+                    features: [
+                        'Single AI gateway with response caching, in-flight dedup, daily caps and per-user lifetime quotas.',
+                        '8-hour absolute session ceiling with refresh-token rotation and reuse-detection family revocation.',
+                        'Parse-and-discard resume handling — file bytes are never persisted to disk or database.'
+                    ],
+                    eta: 'In active development — final polish before public launch.',
+                    tintA: '#22D3EE',
+                    tintB: '#A78BFA',
+                    docTitle: 'OptiResume — Coming Soon · Yash Adake',
+                    notifySubject: 'Notify me when OptiResume launches',
+                    notifyBody: 'Hi Yash,\n\nI saw OptiResume on yashadake.com and would like a note when it ships.\n\nMy name: \nMy use case: \n\nThanks!'
+                },
+                airdraw: {
+                    title: 'Air<br><em>Draw</em>',
+                    tagline: 'Gesture-controlled drawing in the browser — your camera feed never leaves the tab.',
+                    description: 'MediaPipe HandLandmarker at 60 Hz, joint-angle finger detection, One-Euro pointer smoothing, and a persistent bitmap canvas with destination-out erase. No install, no server, no GPU required.',
+                    features: [
+                        'Joint-angle finger detection — rotation-invariant and palm-size adaptive, so gestures stay reliable as your hand moves.',
+                        'One-Euro pointer smoothing and velocity-modulated stroke width give air-drawn lines a hand-drawn feel.',
+                        'Presence smoothing keeps strokes intact through 1–2 dropped frames; bitmap canvas keeps render cost O(1).'
+                    ],
+                    eta: 'In active development — final polish before public launch.',
+                    tintA: '#F472B6',
+                    tintB: '#8B5CF6',
+                    docTitle: 'AirDraw — Coming Soon · Yash Adake',
+                    notifySubject: 'Notify me when AirDraw launches',
+                    notifyBody: 'Hi Yash,\n\nI saw AirDraw on yashadake.com and would like a note when it ships.\n\nMy name: \n\nThanks!'
+                }
+            };
+
+            const params = new URLSearchParams(window.location.search);
+            const key = (params.get('product') || '').toLowerCase();
+            const p = PRODUCTS[key];
+
+            // Year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            if (!p) {
+                // Generic fallback — leave default copy in place, just wire the notify CTA.
+                document.getElementById('notifyBtn').href =
+                    'mailto:yashadakeofficial@gmail.com?subject=' +
+                    encodeURIComponent('Notify me when your next product launches');
+                return;
+            }
+
+            // Set per-product tint via custom properties
+            document.documentElement.style.setProperty('--product-tint-a', p.tintA);
+            document.documentElement.style.setProperty('--product-tint-b', p.tintB);
+
+            // Title + meta
+            document.title = p.docTitle;
+
+            // Wordmark + copy
+            document.getElementById('wordmark').innerHTML = p.title;
+            document.getElementById('tagline').textContent = p.tagline;
+            document.getElementById('description').textContent = p.description;
+            document.getElementById('etaText').textContent = p.eta;
+
+            // Features
+            const featSvg = '<svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const featuresEl = document.getElementById('features');
+            featuresEl.innerHTML = p.features.map(function (f) {
+                return '<div class="feature">' + featSvg + '<div class="feature-text">' + f + '</div></div>';
+            }).join('');
+
+            // Notify CTA
+            document.getElementById('notifyBtn').href =
+                'mailto:yashadakeofficial@gmail.com' +
+                '?subject=' + encodeURIComponent(p.notifySubject) +
+                '&body=' + encodeURIComponent(p.notifyBody);
+        })();
+    </script>
+</body>
+</html>
