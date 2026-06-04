@@ -28,10 +28,11 @@
     <meta property="og:title" content="Yash Adake — Software Engineer">
     <meta property="og:description" content="Backend systems, cloud infrastructure, and applied AI. Remote-friendly · Based in India (GMT+5:30) · Open to roles worldwide.">
     <meta property="og:url" content="https://yashadake.com/">
-    <meta property="og:image" content="https://yashadake.com/photos/me1.jpeg">
+    <meta property="og:image" content="https://yashadake.com/photos/og-image.png">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Yash Adake — Software Engineer">
+    <meta property="og:image:alt" content="Yash Adake — Software Engineer · Backend, cloud, and applied AI">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="en_GB">
     <meta property="og:locale:alternate" content="en_IN">
@@ -41,7 +42,8 @@
     <meta name="twitter:creator" content="@yash_adake">
     <meta name="twitter:title" content="Yash Adake — Software Engineer">
     <meta name="twitter:description" content="Backend systems, cloud infrastructure, and applied AI. Remote-friendly · Open to roles worldwide.">
-    <meta name="twitter:image" content="https://yashadake.com/photos/me1.jpeg">
+    <meta name="twitter:image" content="https://yashadake.com/photos/og-image.png">
+    <meta name="twitter:image:alt" content="Yash Adake — Software Engineer · Backend, cloud, and applied AI">
 
     <meta name="theme-color" content="#0A0A0A">
 
@@ -56,7 +58,6 @@
         "worksFor": { "@type": "Organization", "name": "ArthaVedh Consulting Pvt Ltd", "url": "https://arthavedh.com/" },
         "description": "Software Engineer specializing in backend systems, cloud infrastructure, and applied AI. Remote-friendly and open to roles worldwide.",
         "email": "yashadakeofficial@gmail.com",
-        "telephone": "+91-7715982570",
         "address": { "@type": "PostalAddress", "addressRegion": "Maharashtra", "addressCountry": "IN" },
         "workLocation": [
             { "@type": "Place", "name": "Remote — Worldwide" },
@@ -225,14 +226,14 @@
                         <div class="work-meta">
                             <span class="work-tag">01 — Devtools · Privacy-first</span>
                             <h3 class="work-title">MyJSON</h3>
-                            <p class="work-desc">A premium JSON/YAML workstation that runs entirely in your browser. Zero network calls during processing — grep-verified. Monaco editor, JSONPath, schema inference, RFC 6902 diff, codegen to seven languages.</p>
+                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs entirely in your browser — open DevTools and watch the Network tab stay silent while it works. Monaco editor with 15 themes, live JSONPath, Ajv schema validate/infer, a 3-mode diff, codegen to seven targets, and a decoders suite.</p>
                             <ul class="work-outcomes">
-                                <li>Zero telemetry, zero uploads — CSP locks all outbound calls to same-origin</li>
-                                <li>Self-hosted Monaco, 8 SEO landing pages, command palette with 30+ actions</li>
-                                <li>Shareable docs encoded entirely in the URL hash via lz-string compression</li>
+                                <li>Tree &amp; table views (CSV export), JSONPath playground, and diff in Monaco, structured, and RFC 6902 JSON Patch modes</li>
+                                <li>Decoders for JWT / Base64 / URL / hex / Unicode, an NDJSON viewer, secret-on-paste detection, and a Ctrl+P palette</li>
+                                <li>Codegen to TS, Zod, Go, Rust, dataclass, Pydantic &amp; JSON Schema — and shareable links LZ-compressed into the URL hash, nothing uploaded</li>
                             </ul>
                             <div class="work-stack">
-                                <span>Next.js 14</span>·<span>Monaco</span>·<span>Zustand</span>·<span>Tailwind</span>
+                                <span>Next.js 14</span>·<span>Monaco</span>·<span>Zustand</span>·<span>Ajv</span>·<span>Tailwind</span>
                             </div>
                         </div>
                     </a>
@@ -246,32 +247,32 @@
                         <div class="work-meta">
                             <span class="work-tag">02 — SaaS · Applied AI</span>
                             <h3 class="work-title">OptiResume</h3>
-                            <p class="work-desc">An AI-powered ATS resume analyzer. Hybrid design — deterministic local rules score parseability and keyword fit instantly; Gemini handles only semantic work (bullet rewrites, suggestions) behind a strict cost-aware gateway.</p>
+                            <p class="work-desc">An AI career toolkit, not just a resume checker: it scores resumes, LinkedIn profiles and live applications, then tailors them per job. Deterministic Python rules handle parseability, keyword fit and skill matching for free; an LLM (Google Gemma 4 31B) does only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a single cost-aware gateway.</p>
                             <ul class="work-outcomes">
-                                <li>Single AI gateway with caching, in-flight dedup, daily caps, and per-user lifetime quotas</li>
-                                <li>8-hour absolute session ceiling with refresh-token rotation and theft detection</li>
-                                <li>Parse-and-discard resume handling — file bytes never persisted</li>
+                                <li>One AI chokepoint — caching by prompt hash, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction &amp; per-call token-cost logging</li>
+                                <li>LinkedIn-profile scoring &amp; resume cross-check, multi-resume tailoring, skill proofs, an applications tracker and a share-to-earn credit ledger</li>
+                                <li>Parse-and-discard files (only extracted text + a hash persists) and an 8-hour absolute auth ceiling with reuse-detection refresh rotation</li>
                             </ul>
                             <div class="work-stack">
-                                <span>FastAPI</span>·<span>Postgres</span>·<span>Next.js 14</span>·<span>Gemini</span>·<span>Fly.io</span>
+                                <span>FastAPI</span>·<span>Neon Postgres</span>·<span>Next.js 14</span>·<span>Gemma 4</span>·<span>Fly.io</span>
                             </div>
                         </div>
                     </a>
 
                     <!-- AirDraw -->
-                    <a href="coming-soon.html?product=airdraw" class="work-card" data-aos="fade-up" data-aos-delay="150">
+                    <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="150">
                         <div class="work-visual work-visual-airdraw" aria-hidden="true">
-                            <span class="work-status work-status-soon"><span class="work-status-dot"></span>Coming Soon</span>
+                            <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
                             <span class="work-logotype">Air<br><em>Draw</em></span>
                         </div>
                         <div class="work-meta">
                             <span class="work-tag">03 — Browser CV · Real-time</span>
                             <h3 class="work-title">AirDraw</h3>
-                            <p class="work-desc">Gesture-controlled drawing in the browser — no install, no server, the camera feed never leaves your tab. MediaPipe HandLandmarker at 60 Hz, joint-angle finger detection, One-Euro pointer smoothing.</p>
+                            <p class="work-desc">Gesture-controlled drawing in the browser — no install, no server, no GPU; the camera feed never leaves your tab. A five-gesture vocabulary (draw, erase, lift, cycle palette, clear) runs on MediaPipe HandLandmarker entirely in WebAssembly.</p>
                             <ul class="work-outcomes">
-                                <li>Joint-angle finger detection — rotation-invariant, palm-size adaptive</li>
-                                <li>Persistent bitmap canvas with destination-out erase + velocity-modulated strokes</li>
-                                <li>Presence smoothing keeps strokes intact through 1–2 dropped frames</li>
+                                <li>Joint-angle finger detection — rotation-invariant and palm-size adaptive, so gestures hold as the hand turns</li>
+                                <li>One-Euro pointer smoothing + velocity-modulated width; bitmap canvas with destination-out erase keeps render O(1)</li>
+                                <li>Presence smoothing reuses the last frame for 180 ms, so strokes survive 1–2 dropped frames instead of breaking</li>
                             </ul>
                             <div class="work-stack">
                                 <span>Next.js 15</span>·<span>React 19</span>·<span>MediaPipe</span>·<span>Zustand</span>·<span>TypeScript</span>
@@ -324,7 +325,7 @@
                             <p class="work-desc">Marketing site for a Tasgaon-based solar installer — showcases residential and commercial services, government subsidy programs, and distributor partnerships.</p>
                             <ul class="work-outcomes">
                                 <li>Lead-capture pipeline via WhatsApp API — zero-click enquiries</li>
-                                <li>Consolidated 4 distinct service tracks into one clear narrative</li>
+                                <li>Consolidated 6 distinct service tracks into one clear narrative</li>
                             </ul>
                             <div class="work-stack">
                                 <span>HTML</span>·<span>CSS</span>·<span>JavaScript</span>·<span>WhatsApp API</span>
@@ -355,7 +356,7 @@
                     </p>
 
                     <p>
-                        Before that, I spent a year there as an intern (Mar–Sep 2024), got my first
+                        I started there as an intern (Mar–Sep 2024), got my first
                         production exposure to cloud infrastructure, and learned how to write Go that
                         doesn't embarrass me a week later. Earlier experience came from
                         <strong>LiNS</strong> (Spring Boot, JDBC), <strong>ONE IT Solutions</strong>
@@ -399,7 +400,7 @@
                     <div class="certi-carousel-wrap">
                         <button class="certi-arrow certi-arrow-left" aria-label="Scroll left"><i class='bx bx-chevron-left'></i></button>
                         <div class="certi-carousel" id="certiCarousel">
-                            <div class="certi-card" data-img="photos/Claude101.webp" data-title="Claude AI Fundamentals" data-issuer="Anthropic">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude AI Fundamentals, Anthropic" data-img="photos/Claude101.webp" data-title="Claude AI Fundamentals" data-issuer="Anthropic">
                                 <img src="photos/Claude101.webp" alt="Claude AI Fundamentals Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -407,7 +408,7 @@
                                     <span class="certi-issuer">Anthropic</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/ClaudeCode101.webp" data-title="Claude Code 101" data-issuer="Anthropic">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude Code 101, Anthropic" data-img="photos/ClaudeCode101.webp" data-title="Claude Code 101" data-issuer="Anthropic">
                                 <img src="photos/ClaudeCode101.webp" alt="Claude Code 101 Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -415,7 +416,7 @@
                                     <span class="certi-issuer">Anthropic</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/ClaudeCodeInAction.webp" data-title="Claude Code in Action" data-issuer="Anthropic">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude Code in Action, Anthropic" data-img="photos/ClaudeCodeInAction.webp" data-title="Claude Code in Action" data-issuer="Anthropic">
                                 <img src="photos/ClaudeCodeInAction.webp" alt="Claude Code in Action Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -423,7 +424,7 @@
                                     <span class="certi-issuer">Anthropic</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/certi-4.webp" data-title="Career Essentials in Software Development" data-issuer="Microsoft &amp; LinkedIn">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Career Essentials in Software Development, Microsoft and LinkedIn" data-img="photos/certi-4.webp" data-title="Career Essentials in Software Development" data-issuer="Microsoft &amp; LinkedIn">
                                 <img src="photos/certi-4.webp" alt="Career Essentials in Software Development Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -431,7 +432,7 @@
                                     <span class="certi-issuer">Microsoft &amp; LinkedIn</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/certi-1.webp" data-title="Full Stack Internship" data-issuer="IEEE Bombay Section">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Full Stack Internship, IEEE Bombay Section" data-img="photos/certi-1.webp" data-title="Full Stack Internship" data-issuer="IEEE Bombay Section">
                                 <img src="photos/certi-1.webp" alt="IEEE Full Stack Internship Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -439,7 +440,7 @@
                                     <span class="certi-issuer">IEEE Bombay Section</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/certi-3.webp" data-title="Android Development Bootcamp" data-issuer="IITB TechFeast">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Android Development Bootcamp, IITB TechFeast" data-img="photos/certi-3.webp" data-title="Android Development Bootcamp" data-issuer="IITB TechFeast">
                                 <img src="photos/certi-3.webp" alt="IITB TechFeast Android Development Bootcamp Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -447,7 +448,7 @@
                                     <span class="certi-issuer">IITB TechFeast</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/certi-5.webp" data-title="Networking Essentials" data-issuer="Cisco">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Networking Essentials, Cisco" data-img="photos/certi-5.webp" data-title="Networking Essentials" data-issuer="Cisco">
                                 <img src="photos/certi-5.webp" alt="Cisco Networking Essentials Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -455,7 +456,7 @@
                                     <span class="certi-issuer">Cisco</span>
                                 </div>
                             </div>
-                            <div class="certi-card" data-img="photos/certi-2.webp" data-title="Industry Certificate" data-issuer="OneIT Solutions Pvt Ltd">
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Industry Certificate, OneIT Solutions Pvt Ltd" data-img="photos/certi-2.webp" data-title="Industry Certificate" data-issuer="OneIT Solutions Pvt Ltd">
                                 <img src="photos/certi-2.webp" alt="OneIT Solutions Certificate" loading="lazy">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
@@ -545,11 +546,6 @@
                                 <span class="contact-label">Email</span>
                                 <a href="mailto:yashadakeofficial@gmail.com" class="contact-value">yashadakeofficial@gmail.com</a>
                                 <button class="copy-btn" onclick="copyText('yashadakeofficial@gmail.com', this)" aria-label="Copy email"><span class="copy-text">Copy</span></button>
-                            </div>
-                            <div class="contact-row">
-                                <span class="contact-label">Phone</span>
-                                <a href="tel:+917715982570" class="contact-value">+91 77159 82570</a>
-                                <button class="copy-btn" onclick="copyText('+917715982570', this)" aria-label="Copy phone"><span class="copy-text">Copy</span></button>
                             </div>
                             <div class="contact-row">
                                 <span class="contact-label">WhatsApp</span>

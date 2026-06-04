@@ -14,7 +14,6 @@
 
         // Contact / copy
         { id: 'copy-email',  group: 'Contact',  icon: 'bx-copy',         title: 'Copy email',   sub: 'yashadakeofficial@gmail.com',  action: () => copy('yashadakeofficial@gmail.com', 'Email copied') },
-        { id: 'copy-phone',  group: 'Contact',  icon: 'bx-phone',        title: 'Copy phone',   sub: '+91 77159 82570',              action: () => copy('+917715982570', 'Phone copied') },
         { id: 'whatsapp',    group: 'Contact',  icon: 'bxl-whatsapp',    title: 'WhatsApp chat',sub: 'Opens in new tab',             action: () => open('https://wa.me/917715982570?text=Hi%20Yash!%20I%20visited%20your%20portfolio.') },
         { id: 'send-email',  group: 'Contact',  icon: 'bx-envelope',     title: 'Compose email',sub: 'Opens your mail client',       action: () => open('mailto:yashadakeofficial@gmail.com') },
 

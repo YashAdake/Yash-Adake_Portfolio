@@ -68,10 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Typing Animation
     const eyebrow = document.querySelector(".hero-eyebrow");
-    if (eyebrow) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (eyebrow && reducedMotion) {
+        // Respect reduced-motion: show the line statically, no looping animation.
+        eyebrow.innerHTML = "Software Engineer · Based in India · Building backend systems.";
+    } else if (eyebrow) {
         // Keep initial test, append typing elements
         eyebrow.innerHTML = "Software Engineer · Based in India · ";
-        
+
         const typingSpan = document.createElement("span");
         typingSpan.classList.add("typing-text");
         eyebrow.appendChild(typingSpan);
@@ -117,16 +121,23 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typingEffect, 1000); // start after 1 sec
     }
 
-    // 3. Hero Parallax Scroll
+    // 3. Hero Parallax Scroll (skipped when the user prefers reduced motion)
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const heroImgDiv = document.getElementById("mypic-div");
-    if (heroImgDiv) {
+    if (heroImgDiv && !prefersReducedMotion) {
         heroImgDiv.classList.add("hero-parallax");
+        let parallaxTicking = false;
         window.addEventListener("scroll", () => {
-            const scrollY = window.scrollY;
-            if (scrollY < window.innerHeight) {
-                // Slower scroll for the image to create depth
-                heroImgDiv.style.transform = `translateY(${scrollY * 0.15}px)`;
-            }
-        });
+            if (parallaxTicking) return;
+            parallaxTicking = true;
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                if (scrollY < window.innerHeight) {
+                    // Slower scroll for the image to create depth
+                    heroImgDiv.style.transform = `translateY(${scrollY * 0.15}px)`;
+                }
+                parallaxTicking = false;
+            });
+        }, { passive: true });
     }
 });

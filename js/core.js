@@ -78,12 +78,31 @@ if (form) {
         const btn = form.querySelector('button[type="submit"]');
         const btnText = btn.querySelector('.btn-text');
         const btnIcon = btn.querySelector('i');
+
+        const resetButton = () => {
+            btnText.textContent = 'Send message';
+            btnIcon.classList.remove('bx-loader-alt', 'bx-spin', 'bx-check');
+            btnIcon.classList.add('bx-send');
+            btn.disabled = false;
+        };
+        const showError = () => {
+            msg.textContent = '⚠️ Something went wrong. Please try again or reach out via email.';
+            msg.className = 'message msg-error';
+            resetButton();
+        };
+
         btnText.textContent = 'Sending…';
         btnIcon.classList.remove('bx-send');
         btnIcon.classList.add('bx-loader-alt', 'bx-spin');
         btn.disabled = true;
-        fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
-            .then(() => {
+
+        // The Cloudflare Worker returns CORS headers + a real {success} JSON body,
+        // so we can drop `no-cors` and actually trust the result instead of
+        // assuming success on every opaque response.
+        fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form) })
+            .then(res => res.json().catch(() => ({ success: res.ok })))
+            .then(data => {
+                if (!data || data.success === false) { showError(); return; }
                 msg.textContent = '✨ Thank you for reaching out. I\'ll respond within 1–2 business days.';
                 msg.className = 'message msg-success';
                 btnText.textContent = 'Message Sent';
@@ -91,22 +110,12 @@ if (form) {
                 btnIcon.classList.add('bx-check');
                 setTimeout(() => {
                     msg.textContent = ''; msg.className = 'message';
-                    btnText.textContent = 'Send message';
-                    btnIcon.classList.remove('bx-check');
-                    btnIcon.classList.add('bx-send');
-                    btn.disabled = false;
+                    resetButton();
                 }, 5000);
                 form.reset();
                 clearValidationStyles();
             })
-            .catch(() => {
-                msg.textContent = '⚠️ Something went wrong. Please try again or reach out via email.';
-                msg.className = 'message msg-error';
-                btnText.textContent = 'Send message';
-                btnIcon.classList.remove('bx-loader-alt', 'bx-spin');
-                btnIcon.classList.add('bx-send');
-                btn.disabled = false;
-            });
+            .catch(showError);
     });
 }
 
@@ -149,16 +158,8 @@ function onScrollFrame() {
     // Navbar scrolled state
     if (navbar) navbar.classList.toggle('scrolled', y > 80);
 
-    // Scroll-to-top button
-    if (scrollBtn) {
-        if (y > 300) {
-            scrollBtn.style.display = 'flex';
-            scrollBtn.style.opacity = '1';
-        } else {
-            scrollBtn.style.opacity = '0';
-            setTimeout(() => { if (window.scrollY <= 300) scrollBtn.style.display = 'none'; }, 200);
-        }
-    }
+    // Scroll-to-top button (visibility handled by the .visible CSS class)
+    if (scrollBtn) scrollBtn.classList.toggle('visible', y > 300);
 
     // Scroll progress bar
     if (scrollProgress) {
@@ -281,23 +282,9 @@ window.copyText = function(text, button) {
     }).catch(() => alert('Copied: ' + text));
 };
 
-// ============================================
-// Typing Effect
-// ============================================
-const typedEl = document.getElementById('typed-text');
-if (typedEl) {
-    const roles = ['Software Engineer', 'DevOps Engineer', 'Backend Developer', 'Cloud Practitioner', 'AI Explorer'];
-    let idx = 0, char = 0, deleting = false;
-    function type() {
-        const word = roles[idx];
-        typedEl.textContent = word.substring(0, deleting ? --char : ++char);
-        let speed = deleting ? 50 : 100;
-        if (!deleting && char === word.length) { speed = 2000; deleting = true; }
-        else if (deleting && char === 0) { deleting = false; idx = (idx + 1) % roles.length; speed = 500; }
-        setTimeout(type, speed);
-    }
-    setTimeout(type, 1500);
-}
+// Note: the hero eyebrow typing effect lives in elite-improvements.js
+// (targets .hero-eyebrow). The old #typed-text variant was dead code and
+// has been removed.
 
 // ============================================
 // Visitor Counter — Universal server-side count
@@ -371,6 +358,8 @@ console.log(
     const lbClose  = lightbox.querySelector('.certi-lightbox-close');
     const backdrop = lightbox.querySelector('.certi-lightbox-backdrop');
 
+    let lastFocused = null; // restore focus here when the lightbox closes
+
     // Arrow scroll
     document.querySelector('.certi-arrow-left')?.addEventListener('click', () => {
         carousel.scrollBy({ left: -240, behavior: 'smooth' });
@@ -379,26 +368,45 @@ console.log(
         carousel.scrollBy({ left: 240, behavior: 'smooth' });
     });
 
-    // Open lightbox on card click
+    function openLightbox(card) {
+        lastFocused = card;
+        lbImg.src = card.dataset.img;
+        lbImg.alt = card.dataset.title;
+        lbTitle.textContent = card.dataset.title;
+        lbIssuer.textContent = card.dataset.issuer;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lbClose?.focus(); // move focus into the dialog
+    }
+
+    // Open on click + keyboard (cards are role="button" tabindex="0")
     carousel.querySelectorAll('.certi-card').forEach(card => {
-        card.addEventListener('click', () => {
-            lbImg.src = card.dataset.img;
-            lbImg.alt = card.dataset.title;
-            lbTitle.textContent = card.dataset.title;
-            lbIssuer.textContent = card.dataset.issuer;
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
+        card.addEventListener('click', () => openLightbox(card));
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox(card);
+            }
         });
     });
 
     function closeLightbox() {
         lightbox.classList.remove('open');
         document.body.style.overflow = '';
+        if (lastFocused) { lastFocused.focus(); lastFocused = null; }
     }
 
     lbClose?.addEventListener('click', closeLightbox);
     backdrop?.addEventListener('click', closeLightbox);
+
+    // Escape closes; Tab is trapped inside the dialog while it's open
     document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') { closeLightbox(); return; }
+        if (e.key === 'Tab') {
+            // Only the close button is focusable inside — keep focus on it
+            e.preventDefault();
+            lbClose?.focus();
+        }
     });
 })();

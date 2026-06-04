@@ -141,12 +141,22 @@ body::before {
     border-radius: var(--radius-md);
     font-size: 22px;
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition-normal);
     z-index: 100;
     backdrop-filter: blur(10px);
+    /* Hidden by default; .visible (toggled in JS) fades it in. */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .scroll-to-top i {
@@ -4394,7 +4404,7 @@ body {
     z-index: 9998 !important;
 }
 
-/* Scroll-to-top - let JS control display, just ensure proper z-index */
+/* Scroll-to-top - JS toggles the .visible class; just ensure proper z-index */
 .scroll-to-top {
     z-index: 9998 !important;
 }

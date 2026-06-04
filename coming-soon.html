@@ -367,12 +367,12 @@
             const PRODUCTS = {
                 optiresume: {
                     title: 'Opti<br><em>Resume</em>',
-                    tagline: 'AI-powered ATS resume analyzer — built so the cost of intelligence stays low.',
-                    description: 'Hybrid design: deterministic local rules score parseability and keyword fit instantly, while Gemini handles only the semantic work — bullet rewrites, contextual suggestions — behind a strict cost-aware gateway.',
+                    tagline: 'An AI career toolkit — score and tailor resumes, LinkedIn profiles and applications, with the cost of intelligence kept low.',
+                    description: 'Hybrid design: deterministic local rules score parseability, keyword fit and skill matching instantly, while an LLM (Google Gemma 4 31B) handles only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a strict cost-aware gateway.',
                     features: [
-                        'Single AI gateway with response caching, in-flight dedup, daily caps and per-user lifetime quotas.',
-                        '8-hour absolute session ceiling with refresh-token rotation and reuse-detection family revocation.',
-                        'Parse-and-discard resume handling — file bytes are never persisted to disk or database.'
+                        'Single AI gateway: caching by prompt hash, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction and per-call token-cost logging.',
+                        'LinkedIn-profile scoring and resume cross-check, multi-resume tailoring, skill proofs, an applications tracker and a share-to-earn credit ledger.',
+                        'Parse-and-discard resume handling (only extracted text + a hash persists) and an 8-hour absolute auth ceiling with reuse-detection refresh rotation.'
                     ],
                     eta: 'In active development — final polish before public launch.',
                     tintA: '#22D3EE',
@@ -384,11 +384,11 @@
                 airdraw: {
                     title: 'Air<br><em>Draw</em>',
                     tagline: 'Gesture-controlled drawing in the browser — your camera feed never leaves the tab.',
-                    description: 'MediaPipe HandLandmarker at 60 Hz, joint-angle finger detection, One-Euro pointer smoothing, and a persistent bitmap canvas with destination-out erase. No install, no server, no GPU required.',
+                    description: 'A five-gesture vocabulary (draw, erase, lift, cycle palette, clear) runs on MediaPipe HandLandmarker entirely in WebAssembly, with joint-angle finger detection, One-Euro pointer smoothing and a persistent bitmap canvas. No install, no server, no GPU required.',
                     features: [
                         'Joint-angle finger detection — rotation-invariant and palm-size adaptive, so gestures stay reliable as your hand moves.',
                         'One-Euro pointer smoothing and velocity-modulated stroke width give air-drawn lines a hand-drawn feel.',
-                        'Presence smoothing keeps strokes intact through 1–2 dropped frames; bitmap canvas keeps render cost O(1).'
+                        'Presence smoothing reuses the last frame for 180 ms — strokes survive 1–2 dropped frames; the bitmap canvas keeps render cost O(1).'
                     ],
                     eta: 'In active development — final polish before public launch.',
                     tintA: '#F472B6',

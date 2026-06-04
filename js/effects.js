@@ -110,7 +110,7 @@ if (brand) {
 window.yash = {
     help() {
         console.log(
-            '%cContact Yash\n\n%cEmail · yashadakeofficial@gmail.com\nPhone · +91 77159 82570\nLinkedIn · linkedin.com/in/yash-adake\nTwitter · @yash_adake',
+            '%cContact Yash\n\n%cEmail · yashadakeofficial@gmail.com\nWhatsApp · wa.me/917715982570\nLinkedIn · linkedin.com/in/yash-adake\nTwitter · @yash_adake',
             'color:#5B8DEF;font-size:16px;font-weight:600;font-family:Georgia,serif;font-style:italic',
             'color:#EDEDED;font-size:12px;font-family:monospace;line-height:1.8'
         );
