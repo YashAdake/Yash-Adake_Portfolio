@@ -17,8 +17,8 @@
 // ============================================
 
 const ANALYTICS = {
-  GA4_ID: 'G-XXXXXXXXXX',        // ← paste your GA4 Measurement ID
-  CLARITY_ID: 'XXXXXXXXXX',      // ← paste your Clarity Project ID
+  GA4_ID: 'G-8C9MWV2XKP',        // ← paste your GA4 Measurement ID
+  CLARITY_ID: 'x24hkhmf88',      // ← paste your Clarity Project ID
 };
 
 const CONSENT_KEY = 'analytics_consent'; // 'granted' | 'denied'
