@@ -268,8 +268,10 @@ if (themeToggle && themeIcon) {
 
 // ============================================
 // Copy to Clipboard
+// Buttons declare their payload via data-copy="…" (no inline onclick,
+// no window global — nothing else uses this).
 // ============================================
-window.copyText = function(text, button) {
+function copyText(text, button) {
     navigator.clipboard.writeText(text).then(() => {
         const span = button.querySelector('.copy-text');
         const orig = span.textContent;
@@ -280,7 +282,11 @@ window.copyText = function(text, button) {
             button.classList.remove('copied');
         }, 2000);
     }).catch(() => alert('Copied: ' + text));
-};
+}
+
+document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => copyText(btn.dataset.copy, btn));
+});
 
 // Note: the hero eyebrow typing effect lives in elite-improvements.js
 // (targets .hero-eyebrow). The old #typed-text variant was dead code and
@@ -399,14 +405,15 @@ console.log(
     lbClose?.addEventListener('click', closeLightbox);
     backdrop?.addEventListener('click', closeLightbox);
 
-    // Escape closes; Tab is trapped inside the dialog while it's open
+    // Escape closes; Tab is trapped inside the dialog while it's open.
+    // The close button is the ONLY focusable element in the dialog, so the
+    // trap is trivial: both Tab and Shift+Tab just keep focus parked on it.
     document.addEventListener('keydown', e => {
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') { closeLightbox(); return; }
         if (e.key === 'Tab') {
-            // Only the close button is focusable inside — keep focus on it
-            e.preventDefault();
-            lbClose?.focus();
+            e.preventDefault(); // covers Shift+Tab too — same single target
+            if (lbClose) lbClose.focus();
         }
     });
 })();

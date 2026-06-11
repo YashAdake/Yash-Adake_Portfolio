@@ -18,6 +18,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
     <link rel="canonical" href="https://yashadake.com/">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
     <meta name="geo.region" content="IN-MH">
     <meta name="geo.placename" content="Maharashtra, India">
@@ -545,7 +546,7 @@
                             <div class="contact-row">
                                 <span class="contact-label">Email</span>
                                 <a href="mailto:yashadakeofficial@gmail.com" class="contact-value">yashadakeofficial@gmail.com</a>
-                                <button class="copy-btn" onclick="copyText('yashadakeofficial@gmail.com', this)" aria-label="Copy email"><span class="copy-text">Copy</span></button>
+                                <button class="copy-btn" data-copy="yashadakeofficial@gmail.com" aria-label="Copy email"><span class="copy-text">Copy</span></button>
                             </div>
                             <div class="contact-row">
                                 <span class="contact-label">WhatsApp</span>
@@ -639,12 +640,12 @@
     </footer>
 
     <!-- Global Certificate Lightbox (Moved to root to prevent transform trapping) -->
-    <div class="certi-lightbox" id="certiLightbox" role="dialog" aria-modal="true" aria-label="Certificate viewer">
+    <div class="certi-lightbox" id="certiLightbox" role="dialog" aria-modal="true" aria-label="Certificate viewer" aria-describedby="certiLightboxCaption">
         <div class="certi-lightbox-backdrop"></div>
         <div class="certi-lightbox-content">
             <button class="certi-lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
-            <img src="" alt="" id="certiLightboxImg">
-            <div class="certi-lightbox-caption">
+            <img src="" alt="Selected certificate" id="certiLightboxImg">
+            <div class="certi-lightbox-caption" id="certiLightboxCaption">
                 <span id="certiLightboxTitle"></span>
                 <span id="certiLightboxIssuer"></span>
             </div>

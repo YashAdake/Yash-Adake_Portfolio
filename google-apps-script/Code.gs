@@ -85,21 +85,45 @@ function doGet(e) {
   }
 }
 
+// Defense-in-depth sanitizers. The Cloudflare Worker already validates and
+// length-limits fields, but these keep the email layer safe on its own:
+//  - oneLine(): strip CR/LF + control chars (header-injection guard) and cap
+//    length, for values placed in single-line positions (subject, name).
+//  - block():  strip control chars except newline/tab and cap length, for the
+//    multi-line message body. Emails are sent as PLAINTEXT (3-arg sendEmail),
+//    so no HTML is interpreted — this is purely about clean, bounded content.
+function oneLine(value, max) {
+  return String(value || '')
+    .replace(/\s+/g, ' ')   // collapse all whitespace (incl. CR/LF) to a space
+    .trim()
+    .slice(0, max || 200);
+}
+
+function block(value, max) {
+  // Multi-line body: just trim and length-cap. Plaintext email, so line
+  // endings render fine as-is; the Worker already length-limits upstream.
+  return String(value || '').trim().slice(0, max || 5000);
+}
+
 // Function to send email notification to you
 function sendEmailNotification(params) {
   var recipient = "yashadakeofficial@gmail.com"; // Change to your email
-  var subject = "New Portfolio Contact: " + (params.Subject || 'No Subject');
+  var name = oneLine(params.Name, 100);
+  var email = oneLine(params.Email, 254);
+  var subj = oneLine(params.Subject, 200) || 'No Subject';
+  var body = block(params.Message || params.Feedback, 5000);
+  var subject = "New Portfolio Contact: " + subj;
   
   var message = `
 New contact form submission from your portfolio:
 
-From: ${params.Name}
-Email: ${params.Email}
-Subject: ${params.Subject || 'No Subject'}
+From: ${name}
+Email: ${email}
+Subject: ${subj}
 Time: ${new Date().toLocaleString()}
 
 Message:
-${params.Message || params.Feedback}
+${body}
 
 ---------------------
 Sent from your portfolio contact form
@@ -114,17 +138,22 @@ Sent from your portfolio contact form
 
 // Function to send auto-reply to the sender
 function sendAutoReply(params) {
-  if (!params.Email) return; // Skip if no email provided
-  
+  var email = oneLine(params.Email, 254);
+  if (!email) return; // Skip if no email provided
+
+  var name = oneLine(params.Name, 100) || 'there';
+  var subj = oneLine(params.Subject, 200) || 'No Subject';
+  var body = block(params.Message || params.Feedback, 5000);
+
   var subject = "Thank you for contacting Yash Adake";
   var message = `
-Dear ${params.Name || 'there'},
+Dear ${name},
 
 Thank you for reaching out! I've received your message and will get back to you as soon as possible.
 
 Your message:
-Subject: ${params.Subject || 'No Subject'}
-Message: ${params.Message || params.Feedback}
+Subject: ${subj}
+Message: ${body}
 
 I typically respond within 1-2 business days.
 
@@ -136,9 +165,9 @@ ArthaVedh Consulting Pvt Ltd
 ---------------------
 This is an automated response. Please do not reply to this email.
   `;
-  
+
   try {
-    GmailApp.sendEmail(params.Email, subject, message);
+    GmailApp.sendEmail(email, subject, message);
   } catch (error) {
     Logger.log('Auto-reply error: ' + error.toString());
   }
