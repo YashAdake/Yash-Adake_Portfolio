@@ -95,6 +95,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
 
+    <!-- PORT-07: Bootstrap CSS is kept render-blocking on purpose. The above-the-fold
+         navbar (.navbar-expand-lg .fixed-top, .navbar-collapse, .navbar-toggler) and the
+         hero grid (.container/.row/.col-md-*) depend on it, so deferring via media="print"
+         would cause a visible layout flash on first paint. Do not lazy-load this one. -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -170,7 +174,7 @@
                 <div class="container">
                     <div class="row hero-row align-items-center">
                         <div class="col-md-5" id="mypic-div">
-                            <img src="photos/me1.webp" alt="Yash Adake" id="mypic" width="420" height="420" fetchpriority="high">
+                            <img src="photos/me1.webp" srcset="photos/me1.webp 723w" sizes="(max-width: 575px) 70vw, (max-width: 991px) 40vw, 420px" alt="Yash Adake" id="mypic" width="420" height="420" decoding="async" fetchpriority="high">
                         </div>
                         <div class="col-md-7" id="myinfo-div">
                             <p class="hero-eyebrow">Software Engineer · Based in India · Available worldwide · GMT+5:30</p>
@@ -402,7 +406,7 @@
                         <button class="certi-arrow certi-arrow-left" aria-label="Scroll left"><i class='bx bx-chevron-left'></i></button>
                         <div class="certi-carousel" id="certiCarousel">
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude AI Fundamentals, Anthropic" data-img="photos/Claude101.webp" data-title="Claude AI Fundamentals" data-issuer="Anthropic">
-                                <img src="photos/Claude101.webp" alt="Claude AI Fundamentals Certificate" loading="lazy">
+                                <img src="photos/Claude101.webp" alt="Claude AI Fundamentals Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Claude AI Fundamentals</span>
@@ -410,7 +414,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude Code 101, Anthropic" data-img="photos/ClaudeCode101.webp" data-title="Claude Code 101" data-issuer="Anthropic">
-                                <img src="photos/ClaudeCode101.webp" alt="Claude Code 101 Certificate" loading="lazy">
+                                <img src="photos/ClaudeCode101.webp" alt="Claude Code 101 Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Claude Code 101</span>
@@ -418,7 +422,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude Code in Action, Anthropic" data-img="photos/ClaudeCodeInAction.webp" data-title="Claude Code in Action" data-issuer="Anthropic">
-                                <img src="photos/ClaudeCodeInAction.webp" alt="Claude Code in Action Certificate" loading="lazy">
+                                <img src="photos/ClaudeCodeInAction.webp" alt="Claude Code in Action Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Claude Code in Action</span>
@@ -426,7 +430,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Career Essentials in Software Development, Microsoft and LinkedIn" data-img="photos/certi-4.webp" data-title="Career Essentials in Software Development" data-issuer="Microsoft &amp; LinkedIn">
-                                <img src="photos/certi-4.webp" alt="Career Essentials in Software Development Certificate" loading="lazy">
+                                <img src="photos/certi-4.webp" alt="Career Essentials in Software Development Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Career Essentials in Software Development</span>
@@ -434,7 +438,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Full Stack Internship, IEEE Bombay Section" data-img="photos/certi-1.webp" data-title="Full Stack Internship" data-issuer="IEEE Bombay Section">
-                                <img src="photos/certi-1.webp" alt="IEEE Full Stack Internship Certificate" loading="lazy">
+                                <img src="photos/certi-1.webp" alt="IEEE Full Stack Internship Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Full Stack Internship</span>
@@ -442,7 +446,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Android Development Bootcamp, IITB TechFeast" data-img="photos/certi-3.webp" data-title="Android Development Bootcamp" data-issuer="IITB TechFeast">
-                                <img src="photos/certi-3.webp" alt="IITB TechFeast Android Development Bootcamp Certificate" loading="lazy">
+                                <img src="photos/certi-3.webp" alt="IITB TechFeast Android Development Bootcamp Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Android Development Bootcamp</span>
@@ -450,7 +454,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Networking Essentials, Cisco" data-img="photos/certi-5.webp" data-title="Networking Essentials" data-issuer="Cisco">
-                                <img src="photos/certi-5.webp" alt="Cisco Networking Essentials Certificate" loading="lazy">
+                                <img src="photos/certi-5.webp" alt="Cisco Networking Essentials Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Networking Essentials</span>
@@ -458,7 +462,7 @@
                                 </div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Industry Certificate, OneIT Solutions Pvt Ltd" data-img="photos/certi-2.webp" data-title="Industry Certificate" data-issuer="OneIT Solutions Pvt Ltd">
-                                <img src="photos/certi-2.webp" alt="OneIT Solutions Certificate" loading="lazy">
+                                <img src="photos/certi-2.webp" alt="OneIT Solutions Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>Let's View</span></div>
                                 <div class="certi-info">
                                     <span class="certi-title">Industry Certificate</span>

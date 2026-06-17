@@ -18,10 +18,22 @@
     const isTablet = window.innerWidth > 640 && window.innerWidth <= 1024;
     const isDesktop = window.innerWidth > 1024;
 
-    // WORLD CLASS FIX: Skip WebGL entirely on ALL mobile devices (< 768px). 
-    // This saves massive battery drain and prevents scroll jitter. 
+    // WORLD CLASS FIX: Skip WebGL entirely on ALL mobile devices (< 768px).
+    // This saves massive battery drain and prevents scroll jitter.
     // The CSS gradient mesh will successfully take over rendering.
     if (window.innerWidth < 768) return;
+
+    // PORT-08: also bail on low-end / memory-constrained devices even above 768px
+    // (cheap tablets, low-RAM laptops). The CSS gradient mesh fallback covers these.
+    // navigator.deviceMemory: GB of RAM (Chromium only); <= 4 GB is treated as low-end.
+    // navigator.hardwareConcurrency: logical CPU cores; <= 4 is treated as low-end.
+    const deviceMemory = navigator.deviceMemory;            // undefined on Safari/FF
+    const cores = navigator.hardwareConcurrency;            // undefined on very old browsers
+    const lowMemory = typeof deviceMemory === 'number' && deviceMemory <= 4;
+    const lowCores = typeof cores === 'number' && cores <= 4;
+    // Coarse pointer + no hover usually means a touch device (phone/tablet).
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    if (lowMemory || (lowCores && coarsePointer)) return;
 
     let loaded = false;
 

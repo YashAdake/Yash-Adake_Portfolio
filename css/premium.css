@@ -9164,7 +9164,8 @@ body.light-mode .cmdk-overlay { background: rgba(245, 242, 235, 0.7); }
 
 .cmdk-panel {
     width: 100%;
-    max-width: 620px;
+    /* PORT-05: cap to 92vw so it keeps a safe margin on <=360px phones */
+    max-width: min(620px, 92vw);
     background: rgba(18, 18, 20, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 14px;
@@ -9441,6 +9442,16 @@ body.light-mode .cmdk-trigger kbd { background: rgba(0, 0, 0, 0.05); }
 
 @media (min-width: 992px) { .cmdk-fab { display: none; } }
 @media (max-width: 991px) { .cmdk-trigger { display: none; } }
+
+/* PORT-04: keep the command-palette FAB clear of the scroll-to-top button.
+   scroll-to-top sits bottom-right (bottom:20px, ~48px tall -> top edge ~68px),
+   so the FAB is stacked above it with a comfortable gap on small screens. */
+@media (max-width: 991px) {
+    .cmdk-fab { bottom: 90px; right: 16px; }
+}
+@media (max-width: 480px) {
+    .cmdk-fab { bottom: 82px; right: 15px; }
+}
 
 body.cmdk-open { overflow: hidden; }
 
@@ -10540,11 +10551,13 @@ body.light-mode .msg-error {
     max-height: 92vh;
 }
 
-/* Close button — fixed top-right of viewport for reliability */
+/* Close button — fixed top-right of viewport for reliability.
+   PORT-06: respect notch/safe-area insets so it stays reachable on
+   notched phones (landscape insets live on the right). */
 .certi-lightbox-close {
     position: fixed;
-    top: 16px;
-    right: 16px;
+    top: max(16px, env(safe-area-inset-top));
+    right: max(16px, env(safe-area-inset-right));
     z-index: 100000;
     width: 44px;
     height: 44px;
@@ -10600,7 +10613,23 @@ body.light-mode .msg-error {
     .certi-lightbox { padding: 0.5rem; }
     .certi-lightbox-content { width: 98vw; }
     .certi-lightbox-content img { max-height: calc(85vh - 60px); border-radius: 6px; }
-    .certi-lightbox-close { top: 8px; right: 8px; width: 40px; height: 40px; }
+    .certi-lightbox-close { top: max(8px, env(safe-area-inset-top)); right: max(8px, env(safe-area-inset-right)); width: 40px; height: 40px; }
+}
+
+/* PORT-06: phones in landscape have a very short viewport. Keep the close
+   button reachable (pinned to the safe-area top-right, smaller) and leave
+   room for it so the image never covers the only way to dismiss. */
+@media (max-height: 480px) and (orientation: landscape) {
+    .certi-lightbox { padding: 0.4rem; align-items: flex-start; }
+    .certi-lightbox-content { width: min(92vw, 880px); max-height: 100vh; padding-top: 8px; }
+    .certi-lightbox-content img { max-height: calc(100vh - 70px); }
+    .certi-lightbox-close {
+        top: max(8px, env(safe-area-inset-top));
+        right: max(8px, env(safe-area-inset-right));
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+    }
 }
 
 /* ===========================================================
