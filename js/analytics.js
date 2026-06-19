@@ -114,7 +114,7 @@ const CONSENT_KEY = 'analytics_consent'; // 'granted' | 'denied'
     bar.innerHTML = `
       <span class="consent-text">
         This site uses analytics (Google Analytics &amp; Microsoft Clarity) to understand
-        how visitors use it. No data is sold. You can decline.
+        how visitors use it. No data is sold.
       </span>
       <span class="consent-actions">
         <button class="consent-btn consent-decline" type="button">Decline</button>

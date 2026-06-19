@@ -177,14 +177,14 @@
                             <img src="photos/me1.webp" srcset="photos/me1.webp 723w" sizes="(max-width: 575px) 70vw, (max-width: 991px) 40vw, 420px" alt="Yash Adake" id="mypic" width="420" height="420" decoding="async" fetchpriority="high">
                         </div>
                         <div class="col-md-7" id="myinfo-div">
-                            <p class="hero-eyebrow">Software Engineer · Based in India · Available worldwide · GMT+5:30</p>
+                            <p class="hero-eyebrow">Software engineer · Backend systems &amp; applied AI</p>
                             <h1 class="hero-name">Yash <em>Adake</em></h1>
                             <p class="hero-tagline">
-                                I build backend systems that handle messy, real-world scale —
-                                <span class="hero-accent">API gateways, data pipelines, and AI-driven automation.</span>
+                                I build and ship AI products end-to-end — backend systems that handle messy, real-world scale, and the
+                                <span class="hero-accent">applied AI that makes them smart.</span>
                             </p>
                             <p class="hero-meta">
-                                Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer" class="inline-link-subtle">ArthaVedh Consulting</a>
+                                Based in India (GMT+5:30) · Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer" class="inline-link-subtle">ArthaVedh Consulting</a>
                                 · Exploring <a href="#writing" class="inline-link-subtle">agentic AI</a>
                                 · <strong>Open to remote roles &amp; consulting worldwide.</strong>
                             </p>
@@ -225,13 +225,15 @@
                     <!-- MyJSON -->
                     <a href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="50">
                         <div class="work-visual work-visual-myjson" aria-hidden="true">
+                            <img class="work-shot" src="photos/projects/myjson.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
                             <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
                             <span class="work-logotype">My<br><em>JSON</em></span>
                         </div>
                         <div class="work-meta">
                             <span class="work-tag">01 — Devtools · Privacy-first</span>
                             <h3 class="work-title">MyJSON</h3>
-                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs entirely in your browser — open DevTools and watch the Network tab stay silent while it works. Monaco editor with 15 themes, live JSONPath, Ajv schema validate/infer, a 3-mode diff, codegen to seven targets, and a decoders suite.</p>
+                            <p class="work-stats">14 themes · 7 codegen targets · 100% in-browser</p>
+                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs entirely in your browser — open DevTools and watch the Network tab stay silent while it works. Monaco editor with 14 themes, live JSONPath, Ajv schema validate/infer, a 3-mode diff, codegen to seven targets, and a decoders suite.</p>
                             <ul class="work-outcomes">
                                 <li>Tree &amp; table views (CSV export), JSONPath playground, and diff in Monaco, structured, and RFC 6902 JSON Patch modes</li>
                                 <li>Decoders for JWT / Base64 / URL / hex / Unicode, an NDJSON viewer, secret-on-paste detection, and a Ctrl+P palette</li>
@@ -246,12 +248,14 @@
                     <!-- OptiResume -->
                     <a href="coming-soon.html?product=optiresume" class="work-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="work-visual work-visual-optiresume" aria-hidden="true">
+                            <img class="work-shot" src="photos/projects/optiresume.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
                             <span class="work-status work-status-soon"><span class="work-status-dot"></span>Coming Soon</span>
                             <span class="work-logotype">Opti<br><em>Resume</em></span>
                         </div>
                         <div class="work-meta">
                             <span class="work-tag">02 — SaaS · Applied AI</span>
                             <h3 class="work-title">OptiResume</h3>
+                            <p class="work-stats">27 ATS rules · hybrid local + AI · parse-and-discard</p>
                             <p class="work-desc">An AI career toolkit, not just a resume checker: it scores resumes, LinkedIn profiles and live applications, then tailors them per job. Deterministic Python rules handle parseability, keyword fit and skill matching for free; an LLM (Google Gemma 4 31B) does only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a single cost-aware gateway.</p>
                             <ul class="work-outcomes">
                                 <li>One AI chokepoint — caching by prompt hash, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction &amp; per-call token-cost logging</li>
@@ -267,12 +271,14 @@
                     <!-- AirDraw -->
                     <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="150">
                         <div class="work-visual work-visual-airdraw" aria-hidden="true">
+                            <img class="work-shot" src="photos/projects/airdraw.gif" alt="" loading="lazy" decoding="async" onerror="this.remove()">
                             <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
                             <span class="work-logotype">Air<br><em>Draw</em></span>
                         </div>
                         <div class="work-meta">
                             <span class="work-tag">03 — Browser CV · Real-time</span>
                             <h3 class="work-title">AirDraw</h3>
+                            <p class="work-stats">5 gestures · ~28 fps · 0 servers</p>
                             <p class="work-desc">Gesture-controlled drawing in the browser — no install, no server, no GPU; the camera feed never leaves your tab. A five-gesture vocabulary (draw, erase, lift, cycle palette, clear) runs on MediaPipe HandLandmarker entirely in WebAssembly.</p>
                             <ul class="work-outcomes">
                                 <li>Joint-angle finger detection — rotation-invariant and palm-size adaptive, so gestures hold as the hand turns</li>

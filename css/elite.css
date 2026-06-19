@@ -233,3 +233,64 @@ body.light-mode #mypic-div::after {
 @media (prefers-reduced-motion: reduce) {
     .consent-banner { transition: opacity 0.2s ease; transform: translateX(-50%); }
 }
+
+/* ============================================================
+   PRODUCT CARD SUBSTANCE — real screenshots + verifiable stats
+   The .work-shot <img> is wired into each product card; until the
+   screenshot file exists it self-removes (onerror), so cards fall
+   back to the gradient + logotype exactly as before. Once an image
+   is dropped into photos/projects/, it renders as a framed shot.
+   ============================================================ */
+.work-visual { position: relative; overflow: hidden; }
+
+.work-shot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    z-index: 0;              /* sits behind the status badge + logotype */
+    opacity: 0.92;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+}
+.work-card:hover .work-shot { transform: scale(1.045); opacity: 1; }
+
+/* Readability scrim — only applied when a real screenshot is present,
+   so the gradient-only fallback panels aren't needlessly darkened. */
+.work-visual:has(.work-shot)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.42) 0%,
+        rgba(0, 0, 0, 0.12) 38%,
+        rgba(0, 0, 0, 0.58) 100%
+    );
+}
+/* Keep status badge + logotype above the screenshot and scrim. */
+.work-visual .work-status,
+.work-visual .work-logotype { position: relative; z-index: 2; }
+/* Soften the big logotype slightly when a screenshot shows through. */
+.work-visual:has(.work-shot) .work-logotype { opacity: 0.9; }
+
+/* Verifiable stat line — punchy, true numbers under the title. */
+.work-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.7rem;
+    margin: 0.2rem 0 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--accent, #5B8DEF);
+}
+body.light-mode .work-stats { color: var(--accent-hover, #7BA5F5); }
+
+@media (prefers-reduced-motion: reduce) {
+    .work-shot { transition: opacity 0.2s ease; }
+    .work-card:hover .work-shot { transform: none; }
+}
