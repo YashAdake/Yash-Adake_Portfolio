@@ -46,7 +46,7 @@
     <meta name="twitter:image" content="https://yashadake.com/photos/og-image.png">
     <meta name="twitter:image:alt" content="Yash Adake — Software Engineer · Backend, cloud, and applied AI">
 
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="theme-color" content="#0B0E14">
 
     <script type="application/ld+json">
     {
@@ -88,195 +88,213 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    <!-- Fonts: Inter (body) + Instrument Serif (display) -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
+    <!-- Fonts: Inter (body) · Instrument Serif (display) · JetBrains Mono (data) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
 
-    <!-- PORT-07: Bootstrap CSS is kept render-blocking on purpose. The above-the-fold
-         navbar (.navbar-expand-lg .fixed-top, .navbar-collapse, .navbar-toggler) and the
-         hero grid (.container/.row/.col-md-*) depend on it, so deferring via media="print"
-         would cause a visible layout flash on first paint. Do not lazy-load this one. -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/premium.css?v=11.3.0">
-    <link rel="stylesheet" href="css/elite.css">
-
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"></noscript>
+    <link rel="stylesheet" href="css/site.css?v=2.0.0">
 
     <link rel="icon" type="image/x-icon" href="photos/nav-brand.png">
     <link rel="apple-touch-icon" href="photos/nav-brand.png">
 </head>
 
 <body>
-    <!-- Loading -->
-    <div id="loading">
-        <div class="loading-logo">
-            <div class="loading-logo-ring"></div>
-            <span class="loading-logo-text">YA</span>
-        </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Inline SVG icon sprite (no icon-font dependency) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></symbol>
+            <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+            <symbol id="i-twitter" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+            <symbol id="i-instagram" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+            <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+            <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+            <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 19V5"/></symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+            <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+            <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+            <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+            <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></symbol>
+            <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6"/></symbol>
+        </defs>
+    </svg>
+
+    <!-- Preloader -->
+    <div id="loading" aria-hidden="true">
+        <div class="loading-logo">YA</div>
     </div>
 
-    <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Scroll to Top -->
-    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-        <i class='bx bx-chevrons-up'></i>
-    </button>
+    <!-- NAV -->
+    <header class="site-nav" id="siteNav">
+        <nav class="container nav-inner" aria-label="Primary">
+            <a class="brand" href="#home" aria-label="Yash Adake — home">
+                <span class="brand-mark mono">YA</span>
+            </a>
 
-    <!-- Visitor Counter -->
-    <div class="visitor-counter" id="visitorCounter">
-        <span class="visitor-dot"></span>
-        <span id="visitorCount">···</span>
-        <span class="visitor-label">visits</span>
-    </div>
+            <div class="nav-links">
+                <a class="nav-link active" href="#home">Home</a>
+                <a class="nav-link" href="#products">Products</a>
+                <a class="nav-link" href="#work">Work</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#writing">Writing</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
 
-    <header>
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container mynav">
-                <a class="navbar-brand" href="#home">
-                    <img src="photos/nav-brand2.webp" alt="Yash Adake" id="mynav-brand" width="40" height="40">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"><i class='bx bx-menu'></i></span>
+            <div class="nav-actions">
+                <button class="nav-console" id="navConsole" type="button" aria-label="Open command menu">
+                    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+                    <span>Search</span>
+                    <kbd>⌘K</kbd>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav links-grp ms-auto">
-                        <a class="nav-link nav-each-link active" href="#home">Home</a>
-                        <a class="nav-link nav-each-link" href="#products">Products</a>
-                        <a class="nav-link nav-each-link" href="#work">Work</a>
-                        <a class="nav-link nav-each-link" href="#about">About</a>
-                        <a class="nav-link nav-each-link" href="#writing">Writing</a>
-                        <a class="nav-link nav-each-link" href="#contact">Contact</a>
-                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
-                            <i class='bx bx-sun' id="themeIcon"></i>
-                        </button>
-                    </div>
-                </div>
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark / light mode">
+                    <svg class="icon" id="themeIcon" aria-hidden="true"><use href="#i-sun"/></svg>
+                </button>
+                <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+                    <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+                </button>
             </div>
         </nav>
     </header>
 
-    <main>
+    <div class="nav-panel" id="navPanel">
+        <a href="#home">Home <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#products">Products <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#work">Work <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#about">About <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#writing">Writing <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <main id="main">
         <!-- HERO -->
-        <section id="home">
-            <canvas id="hero3d-canvas" class="hero3d-canvas" aria-hidden="true"></canvas>
-            <div class="hero-vignette" aria-hidden="true"></div>
-            <div class="home">
-                <div class="container">
-                    <div class="row hero-row align-items-center">
-                        <div class="col-md-5" id="mypic-div">
-                            <img src="photos/me1.webp" srcset="photos/me1.webp 723w" sizes="(max-width: 575px) 70vw, (max-width: 991px) 40vw, 420px" alt="Yash Adake" id="mypic" width="420" height="420" decoding="async" fetchpriority="high">
-                        </div>
-                        <div class="col-md-7" id="myinfo-div">
-                            <p class="hero-eyebrow">Software engineer · Backend systems &amp; applied AI</p>
-                            <h1 class="hero-name">Yash <em>Adake</em></h1>
-                            <p class="hero-tagline">
-                                I build and ship AI products end-to-end — backend systems that handle messy, real-world scale, and the
-                                <span class="hero-accent">applied AI that makes them smart.</span>
-                            </p>
-                            <p class="hero-meta">
-                                Based in India (GMT+5:30) · Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer" class="inline-link-subtle">ArthaVedh Consulting</a>
-                                · Exploring <a href="#writing" class="inline-link-subtle">agentic AI</a>
-                                · <strong>Open to remote roles &amp; consulting worldwide.</strong>
-                            </p>
+        <section id="home" class="hero">
+            <div class="hero-field" aria-hidden="true">
+                <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+                    <g class="topo-lines">
+                        <path class="topo-line" d="M120,140 L360,260 L300,440 M360,260 L640,180 L900,300 M640,180 L760,420 M900,300 L1080,200 M900,300 L1040,460 M300,440 L600,520 L760,420 M600,520 L1040,460"/>
+                    </g>
+                    <g class="topo-dots">
+                        <circle class="topo-node is-accent" cx="640" cy="180" r="4"/>
+                        <circle class="topo-node" cx="120" cy="140" r="3"/>
+                        <circle class="topo-node" cx="360" cy="260" r="3"/>
+                        <circle class="topo-node" cx="300" cy="440" r="3"/>
+                        <circle class="topo-node is-accent" cx="900" cy="300" r="4"/>
+                        <circle class="topo-node" cx="760" cy="420" r="3"/>
+                        <circle class="topo-node" cx="1080" cy="200" r="3"/>
+                        <circle class="topo-node" cx="600" cy="520" r="3"/>
+                        <circle class="topo-node" cx="1040" cy="460" r="3"/>
+                    </g>
+                </svg>
+                <canvas id="heroCanvas"></canvas>
+            </div>
 
-                            <div class="hero-actions">
-                                <a href="#products" class="btn-refined">View work <i class='bx bx-right-arrow-alt'></i></a>
-                                <a href="#contact" class="btn-refined btn-refined-ghost">Get in touch</a>
-                            </div>
+            <div class="container hero-inner">
+                <div class="hero-content">
+                    <p class="eyebrow hero-status"><span class="status status-live"><span class="status-dot"></span></span> Available for remote roles &amp; consulting</p>
+                    <h1 class="hero-name">Yash <em>Adake</em></h1>
+                    <p class="hero-tagline">I build and ship AI products end-to-end — backend systems that handle messy, real-world scale, and the <strong>applied AI that makes them smart.</strong></p>
+                    <p class="hero-meta">
+                        Based in India (GMT+5:30) · Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a>
+                        · Exploring <a href="#writing">agentic AI</a>. Open to remote roles &amp; consulting worldwide.
+                    </p>
 
-                            <div class="hero-socials">
-                                <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
-                                <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class='bx bxl-github'></i></a>
-                                <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
-                                <a href="https://www.instagram.com/yash_adake/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
-                                <a href="mailto:yashadakeofficial@gmail.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
-                                <a href="photos/Yash-Adake_Resume.pdf" download aria-label="Resume"><i class='bx bx-file'></i></a>
-                            </div>
-                        </div>
+                    <div class="hero-actions">
+                        <a href="#products" class="btn">View work <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+                    </div>
+
+                    <div class="hero-socials">
+                        <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                        <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-github"/></svg></a>
+                        <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+                        <a href="https://www.instagram.com/yash_adake/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-instagram"/></svg></a>
+                        <a href="mailto:yashadakeofficial@gmail.com" aria-label="Email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+                        <a href="photos/Yash-Adake_Resume.pdf" download aria-label="Download résumé"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></a>
+                    </div>
+
+                    <div class="hero-metrics">
+                        <div class="metric"><span class="metric-value">3</span><span class="metric-label">Products shipped</span></div>
+                        <div class="metric"><span class="metric-value">2</span><span class="metric-label">Live in prod</span></div>
+                        <div class="metric"><span class="metric-value">Remote</span><span class="metric-label">GMT+5:30 · worldwide</span></div>
                     </div>
                 </div>
+
+                <div class="hero-portrait">
+                    <img src="photos/me1.webp" srcset="photos/me1.webp 723w" sizes="(max-width: 575px) 60vw, (max-width: 1023px) 40vw, 460px" alt="Yash Adake" width="460" height="460" decoding="async" fetchpriority="high">
+                </div>
             </div>
-            <div class="scroll-hint" aria-hidden="true">
-                <span class="scroll-hint-label">Scroll</span>
-                <div class="scroll-hint-line"></div>
-            </div>
+
+            <div class="scroll-hint" aria-hidden="true">Scroll<span></span></div>
         </section>
 
         <!-- LIVE PRODUCTS -->
-        <section id="products">
-            <div class="container section-container">
-                <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">01</span>
-                    <h2 class="section-title"><em>Live</em> products</h2>
+        <section id="products" class="section">
+            <div class="container">
+                <header class="section-header" data-reveal>
+                    <p class="eyebrow">Live products</p>
+                    <h2 class="section-title"><em>Built</em> &amp; shipped</h2>
                     <p class="section-kicker">Tools I built end-to-end and shipped on <strong>yashadake.com</strong> — privacy-first, deeply engineered.</p>
                 </header>
 
                 <div class="work-grid">
-                    <!-- MyJSON -->
-                    <a href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="50">
-                        <div class="work-visual work-visual-myjson" aria-hidden="true">
+                    <a href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                        <div class="work-visual">
                             <img class="work-shot" src="photos/projects/myjson.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
-                            <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
-                            <span class="work-logotype">My<br><em>JSON</em></span>
+                            <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
+                            <span class="work-logotype">My<em>JSON</em></span>
                         </div>
                         <div class="work-meta">
-                            <span class="work-tag">01 — Devtools · Privacy-first</span>
+                            <span class="work-tag">Devtools · Privacy-first</span>
                             <h3 class="work-title">MyJSON</h3>
                             <p class="work-stats">14 themes · 7 codegen targets · 100% in-browser</p>
                             <p class="work-desc">A keyboard-first JSON/YAML workstation that runs entirely in your browser — open DevTools and watch the Network tab stay silent while it works. Monaco editor with 14 themes, live JSONPath, Ajv schema validate/infer, a 3-mode diff, codegen to seven targets, and a decoders suite.</p>
                             <ul class="work-outcomes">
                                 <li>Tree &amp; table views (CSV export), JSONPath playground, and diff in Monaco, structured, and RFC 6902 JSON Patch modes</li>
                                 <li>Decoders for JWT / Base64 / URL / hex / Unicode, an NDJSON viewer, secret-on-paste detection, and a Ctrl+P palette</li>
-                                <li>Codegen to TS, Zod, Go, Rust, dataclass, Pydantic &amp; JSON Schema — and shareable links LZ-compressed into the URL hash, nothing uploaded</li>
+                                <li>Codegen to TS, Zod, Go, Rust, dataclass, Pydantic &amp; JSON Schema — shareable links LZ-compressed into the URL hash, nothing uploaded</li>
                             </ul>
-                            <div class="work-stack">
-                                <span>Next.js 14</span>·<span>Monaco</span>·<span>Zustand</span>·<span>Ajv</span>·<span>Tailwind</span>
-                            </div>
+                            <div class="work-stack"><span>Next.js 14</span><span>Monaco</span><span>Zustand</span><span>Ajv</span><span>Tailwind</span></div>
                         </div>
                     </a>
 
-                    <!-- OptiResume -->
-                    <a href="coming-soon.html?product=optiresume" class="work-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="work-visual work-visual-optiresume" aria-hidden="true">
+                    <a href="coming-soon.html?product=optiresume" class="work-card" data-reveal>
+                        <div class="work-visual">
                             <img class="work-shot" src="photos/projects/optiresume.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
-                            <span class="work-status work-status-soon"><span class="work-status-dot"></span>Coming Soon</span>
-                            <span class="work-logotype">Opti<br><em>Resume</em></span>
+                            <span class="work-status"><span class="status status-soon"><span class="status-dot"></span>Coming soon</span></span>
+                            <span class="work-logotype">Opti<em>Resume</em></span>
                         </div>
                         <div class="work-meta">
-                            <span class="work-tag">02 — SaaS · Applied AI</span>
+                            <span class="work-tag">SaaS · Applied AI</span>
                             <h3 class="work-title">OptiResume</h3>
                             <p class="work-stats">27 ATS rules · hybrid local + AI · parse-and-discard</p>
-                            <p class="work-desc">An AI career toolkit, not just a resume checker: it scores resumes, LinkedIn profiles and live applications, then tailors them per job. Deterministic Python rules handle parseability, keyword fit and skill matching for free; an LLM (Google Gemma 4 31B) does only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a single cost-aware gateway.</p>
+                            <p class="work-desc">An AI career toolkit, not just a resume checker: it scores resumes, LinkedIn profiles and live applications, then tailors them per job. Deterministic Python rules handle parseability, keyword fit and skill matching for free; an LLM does only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a single cost-aware gateway.</p>
                             <ul class="work-outcomes">
                                 <li>One AI chokepoint — caching by prompt hash, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction &amp; per-call token-cost logging</li>
                                 <li>LinkedIn-profile scoring &amp; resume cross-check, multi-resume tailoring, skill proofs, an applications tracker and a share-to-earn credit ledger</li>
                                 <li>Parse-and-discard files (only extracted text + a hash persists) and an 8-hour absolute auth ceiling with reuse-detection refresh rotation</li>
                             </ul>
-                            <div class="work-stack">
-                                <span>FastAPI</span>·<span>Neon Postgres</span>·<span>Next.js 14</span>·<span>Gemma 4</span>·<span>Fly.io</span>
-                            </div>
+                            <div class="work-stack"><span>FastAPI</span><span>Neon Postgres</span><span>Next.js 14</span><span>Gemma</span><span>Fly.io</span></div>
                         </div>
                     </a>
 
-                    <!-- AirDraw -->
-                    <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="150">
-                        <div class="work-visual work-visual-airdraw" aria-hidden="true">
+                    <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                        <div class="work-visual">
                             <img class="work-shot" src="photos/projects/airdraw.gif" alt="" loading="lazy" decoding="async" onerror="this.remove()">
-                            <span class="work-status work-status-live"><span class="work-status-dot"></span>Live</span>
-                            <span class="work-logotype">Air<br><em>Draw</em></span>
+                            <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
+                            <span class="work-logotype">Air<em>Draw</em></span>
                         </div>
                         <div class="work-meta">
-                            <span class="work-tag">03 — Browser CV · Real-time</span>
+                            <span class="work-tag">Browser CV · Real-time</span>
                             <h3 class="work-title">AirDraw</h3>
                             <p class="work-stats">5 gestures · ~28 fps · 0 servers</p>
                             <p class="work-desc">Gesture-controlled drawing in the browser — no install, no server, no GPU; the camera feed never leaves your tab. A five-gesture vocabulary (draw, erase, lift, cycle palette, clear) runs on MediaPipe HandLandmarker entirely in WebAssembly.</p>
@@ -285,307 +303,237 @@
                                 <li>One-Euro pointer smoothing + velocity-modulated width; bitmap canvas with destination-out erase keeps render O(1)</li>
                                 <li>Presence smoothing reuses the last frame for 180 ms, so strokes survive 1–2 dropped frames instead of breaking</li>
                             </ul>
-                            <div class="work-stack">
-                                <span>Next.js 15</span>·<span>React 19</span>·<span>MediaPipe</span>·<span>Zustand</span>·<span>TypeScript</span>
-                            </div>
+                            <div class="work-stack"><span>Next.js 15</span><span>React 19</span><span>MediaPipe</span><span>Zustand</span><span>TypeScript</span></div>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- WORK -->
-        <section id="work">
-            <div class="container section-container">
-                <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">02</span>
+        <!-- SELECTED WORK -->
+        <section id="work" class="section">
+            <div class="container">
+                <header class="section-header" data-reveal>
+                    <p class="eyebrow">Selected work</p>
                     <h2 class="section-title"><em>Selected</em> work</h2>
                     <p class="section-kicker">Real products shipped for real businesses — from agritech to clean energy.</p>
                 </header>
 
                 <div class="work-grid">
-                    <!-- Navaved Agro -->
-                    <a href="https://navavedagro.in/" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="50">
-                        <div class="work-visual work-visual-agro" aria-hidden="true">
-                            <span class="work-logotype">Navaved<br><em>Agro</em></span>
-                            <span class="work-visit">Visit site <i class='bx bx-right-arrow-alt'></i></span>
+                    <a href="https://navavedagro.in/" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                        <div class="work-visual">
+                            <span class="work-logotype">Navaved<em>Agro</em></span>
+                            <span class="work-visit">Visit <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></span>
                         </div>
                         <div class="work-meta">
-                            <span class="work-tag">01 — E-commerce · Agritech</span>
+                            <span class="work-tag">E-commerce · Agritech</span>
                             <h3 class="work-title">Navaved Agro</h3>
                             <p class="work-desc">Brand and storefront for an Ayurvedic food-products company in Kolhapur — clean consumer-facing design, responsive catalog, natural palette.</p>
                             <ul class="work-outcomes">
                                 <li>Shipped a live D2C storefront with WhatsApp-based ordering</li>
                                 <li>Mobile-first catalog for a non-technical merchant team</li>
                             </ul>
-                            <div class="work-stack">
-                                <span>HTML</span>·<span>CSS</span>·<span>JavaScript</span>
-                            </div>
+                            <div class="work-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
                         </div>
                     </a>
 
-                    <!-- Urja Solar -->
-                    <a href="https://urjasolar.netlify.app/" target="_blank" rel="noopener noreferrer" class="work-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="work-visual work-visual-solar" aria-hidden="true">
-                            <span class="work-logotype">Urja<br><em>Solar</em></span>
-                            <span class="work-visit">Visit site <i class='bx bx-right-arrow-alt'></i></span>
+                    <a href="https://urjasolar.netlify.app/" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                        <div class="work-visual">
+                            <span class="work-logotype">Urja<em>Solar</em></span>
+                            <span class="work-visit">Visit <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></span>
                         </div>
                         <div class="work-meta">
-                            <span class="work-tag">02 — Marketing · Clean energy</span>
+                            <span class="work-tag">Marketing · Clean energy</span>
                             <h3 class="work-title">Urja Solar</h3>
                             <p class="work-desc">Marketing site for a Tasgaon-based solar installer — showcases residential and commercial services, government subsidy programs, and distributor partnerships.</p>
                             <ul class="work-outcomes">
                                 <li>Lead-capture pipeline via WhatsApp API — zero-click enquiries</li>
                                 <li>Consolidated 6 distinct service tracks into one clear narrative</li>
                             </ul>
-                            <div class="work-stack">
-                                <span>HTML</span>·<span>CSS</span>·<span>JavaScript</span>·<span>WhatsApp API</span>
-                            </div>
+                            <div class="work-stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>WhatsApp API</span></div>
                         </div>
                     </a>
-
                 </div>
             </div>
         </section>
 
-        <!-- ABOUT / JOURNEY -->
-        <section id="about">
-            <div class="container section-container section-container-narrow">
-                <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">03</span>
+        <!-- ABOUT -->
+        <section id="about" class="section">
+            <div class="container container-narrow">
+                <header class="section-header" data-reveal>
+                    <p class="eyebrow">About</p>
                     <h2 class="section-title"><em>About</em> me</h2>
                     <p class="section-kicker">Engineer. Writer. Perpetually curious.</p>
                 </header>
 
-                <div class="about-prose" data-aos="fade-up">
-                    <p class="about-lead">
-                        I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer" class="inline-link-subtle">ArthaVedh Consulting</a></strong>, where I ship
-                        enterprise platforms in Python, Docker, and PostgreSQL. My work sits at the
-                        intersection of backend engineering and DevOps — designing service boundaries,
-                        running API gateways, and making infrastructure invisible to the developers
-                        who depend on it.
-                    </p>
+                <div class="about-prose" data-reveal>
+                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>, where I ship enterprise platforms in Python, Docker, and PostgreSQL. My work sits at the intersection of backend engineering and DevOps — designing service boundaries, running API gateways, and making infrastructure invisible to the developers who depend on it.</p>
+                    <p>I started there as an intern (Mar–Sep 2024), got my first production exposure to cloud infrastructure, and learned how to write Go that doesn't embarrass me a week later. Earlier experience came from <strong>LiNS</strong> (Spring Boot, JDBC), <strong>ONE IT Solutions</strong> (client-facing web work), and <strong>IEEE Bombay Section</strong> (volunteer full-stack).</p>
+                    <p>Right now, I'm going deep on <strong>generative and agentic AI</strong> — not just using the APIs, but understanding how agents plan, use tools, and recover from failure. The next generation of software will be AI-native, and I intend to build parts of it.</p>
 
-                    <p>
-                        I started there as an intern (Mar–Sep 2024), got my first
-                        production exposure to cloud infrastructure, and learned how to write Go that
-                        doesn't embarrass me a week later. Earlier experience came from
-                        <strong>LiNS</strong> (Spring Boot, JDBC), <strong>ONE IT Solutions</strong>
-                        (client-facing web work), and <strong>IEEE Bombay Section</strong>
-                        (volunteer full-stack).
-                    </p>
-
-                    <p>
-                        Right now, I'm going deep on <strong>generative and agentic AI</strong> —
-                        not just using the APIs, but understanding how agents plan, use tools, and
-                        recover from failure. The next generation of software will be AI-native, and
-                        I intend to build parts of it.
-                    </p>
-
-                    <blockquote class="about-quote">
-                        <em>"Great systems aren't loud. They disappear into reliability."</em>
-                    </blockquote>
+                    <blockquote class="about-quote">Great systems aren't loud. They disappear into reliability.</blockquote>
 
                     <h3 class="about-subtitle">Currently</h3>
                     <ul class="about-list">
-                        <li><span class="list-label">Role</span>Software Engineer · ArthaVedh Consulting</li>
-                        <li><span class="list-label">Location</span>Maharashtra, India (IST)</li>
-                        <li><span class="list-label">Exploring</span>Agentic AI, LLM tool-use, workflow automation</li>
-                        <li><span class="list-label">Reading</span>Designing Data-Intensive Applications · Kleppmann</li>
+                        <li><span class="list-label">Role</span><span>Software Engineer · ArthaVedh Consulting</span></li>
+                        <li><span class="list-label">Location</span><span>Maharashtra, India (IST)</span></li>
+                        <li><span class="list-label">Exploring</span><span>Agentic AI, LLM tool-use, workflow automation</span></li>
+                        <li><span class="list-label">Reading</span><span>Designing Data-Intensive Applications · Kleppmann</span></li>
                     </ul>
 
                     <h3 class="about-subtitle">Stack I work with</h3>
                     <div class="about-stack">
-                        <div class="stack-row"><span class="stack-label">Daily</span>Python · Docker · PostgreSQL · Git</div>
-                        <div class="stack-row"><span class="stack-label">Also</span>Go · Java · Spring Boot · Apache NiFi · Flask</div>
-                        <div class="stack-row"><span class="stack-label">Cloud</span>CloudJiffy · Azure API Management · KrakenD Gateway</div>
-                        <div class="stack-row"><span class="stack-label">Exploring</span>Generative AI · Agentic AI · LLM tooling</div>
+                        <div class="stack-row"><span class="stack-label">Daily</span><span>Python · Docker · PostgreSQL · Git</span></div>
+                        <div class="stack-row"><span class="stack-label">Also</span><span>Go · Java · Spring Boot · Apache NiFi · Flask</span></div>
+                        <div class="stack-row"><span class="stack-label">Cloud</span><span>CloudJiffy · Azure API Management · KrakenD Gateway</span></div>
+                        <div class="stack-row"><span class="stack-label">Exploring</span><span>Generative AI · Agentic AI · LLM tooling</span></div>
                     </div>
 
                     <h3 class="about-subtitle">Education</h3>
                     <ul class="about-list">
-                        <li><span class="list-label">2020 – 2024</span>B.Tech Computer Science · DKTE Institute · CGPA 8.5/10</li>
+                        <li><span class="list-label">2020–2024</span><span>B.Tech Computer Science · DKTE Institute · CGPA 8.5/10</span></li>
                     </ul>
 
                     <h3 class="about-subtitle">Certifications</h3>
                     <div class="certi-carousel-wrap">
-                        <button class="certi-arrow certi-arrow-left" aria-label="Scroll left"><i class='bx bx-chevron-left'></i></button>
+                        <button class="certi-arrow certi-arrow-left" type="button" aria-label="Scroll certificates left"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg></button>
                         <div class="certi-carousel" id="certiCarousel">
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude AI Fundamentals, Anthropic" data-img="photos/Claude101.webp" data-title="Claude AI Fundamentals" data-issuer="Anthropic">
                                 <img src="photos/Claude101.webp" alt="Claude AI Fundamentals Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Claude AI Fundamentals</span>
-                                    <span class="certi-issuer">Anthropic</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Claude AI Fundamentals</span><span class="certi-issuer">Anthropic</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude Code 101, Anthropic" data-img="photos/ClaudeCode101.webp" data-title="Claude Code 101" data-issuer="Anthropic">
                                 <img src="photos/ClaudeCode101.webp" alt="Claude Code 101 Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Claude Code 101</span>
-                                    <span class="certi-issuer">Anthropic</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Claude Code 101</span><span class="certi-issuer">Anthropic</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude Code in Action, Anthropic" data-img="photos/ClaudeCodeInAction.webp" data-title="Claude Code in Action" data-issuer="Anthropic">
                                 <img src="photos/ClaudeCodeInAction.webp" alt="Claude Code in Action Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Claude Code in Action</span>
-                                    <span class="certi-issuer">Anthropic</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Claude Code in Action</span><span class="certi-issuer">Anthropic</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Career Essentials in Software Development, Microsoft and LinkedIn" data-img="photos/certi-4.webp" data-title="Career Essentials in Software Development" data-issuer="Microsoft &amp; LinkedIn">
                                 <img src="photos/certi-4.webp" alt="Career Essentials in Software Development Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Career Essentials in Software Development</span>
-                                    <span class="certi-issuer">Microsoft &amp; LinkedIn</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Career Essentials in Software Development</span><span class="certi-issuer">Microsoft &amp; LinkedIn</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Full Stack Internship, IEEE Bombay Section" data-img="photos/certi-1.webp" data-title="Full Stack Internship" data-issuer="IEEE Bombay Section">
                                 <img src="photos/certi-1.webp" alt="IEEE Full Stack Internship Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Full Stack Internship</span>
-                                    <span class="certi-issuer">IEEE Bombay Section</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Full Stack Internship</span><span class="certi-issuer">IEEE Bombay Section</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Android Development Bootcamp, IITB TechFeast" data-img="photos/certi-3.webp" data-title="Android Development Bootcamp" data-issuer="IITB TechFeast">
                                 <img src="photos/certi-3.webp" alt="IITB TechFeast Android Development Bootcamp Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Android Development Bootcamp</span>
-                                    <span class="certi-issuer">IITB TechFeast</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Android Development Bootcamp</span><span class="certi-issuer">IITB TechFeast</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Networking Essentials, Cisco" data-img="photos/certi-5.webp" data-title="Networking Essentials" data-issuer="Cisco">
                                 <img src="photos/certi-5.webp" alt="Cisco Networking Essentials Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Networking Essentials</span>
-                                    <span class="certi-issuer">Cisco</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Networking Essentials</span><span class="certi-issuer">Cisco</span></div>
                             </div>
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Industry Certificate, OneIT Solutions Pvt Ltd" data-img="photos/certi-2.webp" data-title="Industry Certificate" data-issuer="OneIT Solutions Pvt Ltd">
                                 <img src="photos/certi-2.webp" alt="OneIT Solutions Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>Let's View</span></div>
-                                <div class="certi-info">
-                                    <span class="certi-title">Industry Certificate</span>
-                                    <span class="certi-issuer">OneIT Solutions Pvt Ltd</span>
-                                </div>
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Industry Certificate</span><span class="certi-issuer">OneIT Solutions Pvt Ltd</span></div>
                             </div>
                         </div>
-                        <button class="certi-arrow certi-arrow-right" aria-label="Scroll right"><i class='bx bx-chevron-right'></i></button>
+                        <button class="certi-arrow certi-arrow-right" type="button" aria-label="Scroll certificates right"><svg class="icon" aria-hidden="true"><use href="#i-chev-right"/></svg></button>
                     </div>
 
-
-
                     <div class="about-cta">
-                        <a href="photos/Yash-Adake_Resume.pdf" download class="btn-refined">
-                            <i class='bx bx-download'></i> Download full résumé
-                        </a>
+                        <a href="photos/Yash-Adake_Resume.pdf" download class="btn"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg> Download full résumé</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- WRITING -->
-        <section id="writing">
-            <div class="container section-container">
-                <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">04</span>
+        <section id="writing" class="section">
+            <div class="container">
+                <header class="section-header" data-reveal>
+                    <p class="eyebrow">Writing</p>
                     <h2 class="section-title"><em>Writing</em></h2>
                     <p class="section-kicker">Notes on AI, DevOps, and the craft of building systems.</p>
                 </header>
 
                 <div class="writing-list">
-                    <a href="https://www.linkedin.com/pulse/tech-talks-yash-building-ai-agents-n8n-turn-ideas-automation-adake-fkg6f" target="_blank" rel="noopener noreferrer" class="writing-item" data-aos="fade-up">
-                        <div class="writing-meta">
-                            <span class="writing-tag">AI · Automation</span>
-                            <span class="writing-date">Tech Talks Series</span>
-                        </div>
+                    <a href="https://www.linkedin.com/pulse/tech-talks-yash-building-ai-agents-n8n-turn-ideas-automation-adake-fkg6f" target="_blank" rel="noopener noreferrer" class="writing-item" data-reveal>
+                        <div class="writing-meta"><span class="writing-tag">AI · Automation</span><span class="writing-date">Tech Talks Series</span></div>
                         <h3 class="writing-title">Building AI agents with N8N — ideas into intelligent automation</h3>
                         <p class="writing-excerpt">How to wire up AI agents on the N8N workflow platform, from idea to running automation.</p>
-                        <span class="writing-arrow">Read on LinkedIn <i class='bx bx-link-external'></i></span>
+                        <span class="writing-arrow">Read on LinkedIn <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></span>
                     </a>
-
-                    <a href="https://www.linkedin.com/pulse/what-docker-simple-guide-everyone-yash-adake-65dtf" target="_blank" rel="noopener noreferrer" class="writing-item" data-aos="fade-up">
-                        <div class="writing-meta">
-                            <span class="writing-tag">DevOps</span>
-                            <span class="writing-date">Beginner Guide</span>
-                        </div>
+                    <a href="https://www.linkedin.com/pulse/what-docker-simple-guide-everyone-yash-adake-65dtf" target="_blank" rel="noopener noreferrer" class="writing-item" data-reveal>
+                        <div class="writing-meta"><span class="writing-tag">DevOps</span><span class="writing-date">Beginner Guide</span></div>
                         <h3 class="writing-title">What is Docker? A simple guide for everyone</h3>
                         <p class="writing-excerpt">Containerization explained without jargon — the mental model behind Docker, for newcomers.</p>
-                        <span class="writing-arrow">Read on LinkedIn <i class='bx bx-link-external'></i></span>
+                        <span class="writing-arrow">Read on LinkedIn <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></span>
                     </a>
-
-                    <a href="https://www.linkedin.com/pulse/understanding-genai-agentic-ai-beginners-guide-yash-adake-zzjsf" target="_blank" rel="noopener noreferrer" class="writing-item" data-aos="fade-up">
-                        <div class="writing-meta">
-                            <span class="writing-tag">AI / ML</span>
-                            <span class="writing-date">Beginner Guide</span>
-                        </div>
+                    <a href="https://www.linkedin.com/pulse/understanding-genai-agentic-ai-beginners-guide-yash-adake-zzjsf" target="_blank" rel="noopener noreferrer" class="writing-item" data-reveal>
+                        <div class="writing-meta"><span class="writing-tag">AI / ML</span><span class="writing-date">Beginner Guide</span></div>
                         <h3 class="writing-title">Understanding GenAI and agentic AI — a beginner's guide</h3>
                         <p class="writing-excerpt">The landscape of Generative and Agentic AI — what they are, how they differ, and why they matter.</p>
-                        <span class="writing-arrow">Read on LinkedIn <i class='bx bx-link-external'></i></span>
+                        <span class="writing-arrow">Read on LinkedIn <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></span>
                     </a>
                 </div>
 
-                <div class="writing-footer" data-aos="fade-up">
-                    <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7329856064940675072" target="_blank" rel="noopener noreferrer" class="inline-link">
-                        Subscribe to the newsletter <i class='bx bx-right-arrow-alt'></i>
-                    </a>
+                <div class="writing-footer" data-reveal>
+                    <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7329856064940675072" target="_blank" rel="noopener noreferrer" class="inline-link">Subscribe to the newsletter <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                 </div>
             </div>
         </section>
 
         <!-- CONTACT -->
-        <section id="contact">
-            <div class="container section-container section-container-narrow">
-                <header class="section-header" data-aos="fade-up">
-                    <span class="section-number">05</span>
-                    <h2 class="section-title"><em>Let's</em> talk</h2>
+        <section id="contact" class="section">
+            <div class="container">
+                <header class="section-header" data-reveal>
+                    <p class="eyebrow">Contact</p>
+                    <h2 class="section-title">Let's <em>talk</em></h2>
                     <p class="section-kicker">Have a project in mind, or just want to trade notes on systems? I'd love to hear from you.</p>
                 </header>
 
                 <div class="contact-grid">
-                    <div class="contact-info-col" data-aos="fade-up">
-                        <p class="contact-reply">I typically respond within 1–2 business days.</p>
-
+                    <div class="contact-info-col" data-reveal>
+                        <p class="contact-reply">// typically replies within 1–2 business days</p>
                         <div class="contact-rows">
                             <div class="contact-row">
                                 <span class="contact-label">Email</span>
                                 <a href="mailto:yashadakeofficial@gmail.com" class="contact-value">yashadakeofficial@gmail.com</a>
-                                <button class="copy-btn" data-copy="yashadakeofficial@gmail.com" aria-label="Copy email"><span class="copy-text">Copy</span></button>
+                                <button class="copy-btn" data-copy="yashadakeofficial@gmail.com" aria-label="Copy email">Copy</button>
                             </div>
                             <div class="contact-row">
                                 <span class="contact-label">WhatsApp</span>
                                 <a href="https://wa.me/917715982570?text=Hi%20Yash!%20I%20visited%20your%20portfolio." target="_blank" rel="noopener noreferrer" class="contact-value">Start a chat →</a>
+                                <span></span>
                             </div>
                             <div class="contact-row">
                                 <span class="contact-label">Based in</span>
-                                <span class="contact-value">India · GMT+5:30 · Remote-friendly worldwide</span>
+                                <span class="contact-value">India · GMT+5:30 · Remote-friendly</span>
+                                <span></span>
                             </div>
                             <div class="contact-row">
                                 <span class="contact-label">Overlap</span>
-                                <span class="contact-value">Full day with Dubai &amp; Singapore · 4h+ with London · 3h+ with US East evenings</span>
+                                <span class="contact-value">Full day with Dubai &amp; Singapore · 4h+ London · 3h+ US East eve</span>
+                                <span></span>
                             </div>
                             <div class="contact-row">
-                                <span class="contact-label">Working in</span>
+                                <span class="contact-label">Languages</span>
                                 <span class="contact-value">English (fluent) · Hindi · Marathi</span>
+                                <span></span>
                             </div>
                         </div>
-
                         <div class="contact-socials">
-                            <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
-                            <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class='bx bxl-github'></i></a>
-                            <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
-                            <a href="https://www.instagram.com/yash_adake/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                            <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                            <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-github"/></svg></a>
+                            <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+                            <a href="https://www.instagram.com/yash_adake/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-instagram"/></svg></a>
                         </div>
                     </div>
 
-                    <div class="contact-form-col" data-aos="fade-up" data-aos-delay="80">
-                        <form name="submit-to-google-sheet" id="contactForm" class="contact-form-refined" novalidate>
+                    <div class="contact-form-col" data-reveal>
+                        <form name="submit-to-google-sheet" id="contactForm" class="contact-form" novalidate>
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="Name" id="name" placeholder="Your name" required minlength="2" autocomplete="name">
@@ -593,7 +541,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="Email" id="email" placeholder="you@domain.com" required autocomplete="email">
+                                <input type="email" name="Email" id="email" placeholder="you@domain.com" required autocomplete="email" inputmode="email">
                                 <span class="error-message" id="emailError" role="alert"></span>
                             </div>
                             <div class="form-group">
@@ -606,9 +554,9 @@
                                 <textarea name="Message" id="message" rows="5" placeholder="Tell me a bit about your project or question…" required minlength="10"></textarea>
                                 <span class="error-message" id="messageError" role="alert"></span>
                             </div>
-                            <button type="submit" class="btn-refined btn-refined-full" id="submitBtn">
+                            <button type="submit" class="btn btn-full" id="submitBtn">
                                 <span class="btn-text">Send message</span>
-                                <i class='bx bx-send'></i>
+                                <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
                             </button>
                             <div id="msg" class="message" aria-live="polite"></div>
                         </form>
@@ -618,42 +566,47 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-refined">
-            <div class="container">
-                <div class="footer-row">
-                    <div class="footer-brand">
-                        <p class="footer-name">Yash Adake</p>
-                        <p class="footer-tagline">Software Engineer · Remote-friendly worldwide · GMT+5:30</p>
-                    </div>
-                    <div class="footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#products">Products</a>
-                        <a href="#work">Work</a>
-                        <a href="#about">About</a>
-                        <a href="#writing">Writing</a>
-                        <a href="#contact">Contact</a>
-                    </div>
-                    <div class="footer-socials">
-                        <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
-                        <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class='bx bxl-github'></i></a>
-                        <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
-                        <a href="mailto:yashadakeofficial@gmail.com" aria-label="Email"><i class='bx bx-envelope'></i></a>
-                    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-brand">
+                    <p class="footer-name">Yash Adake</p>
+                    <p class="footer-tagline">Software Engineer · Remote-friendly worldwide · GMT+5:30</p>
                 </div>
-                <div class="footer-bottom">
-                    <span>© <span id="currentYear">2026</span> Yash Adake</span>
-                    <span class="footer-meta">Typeset in Inter &amp; Instrument Serif</span>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#products">Products</a>
+                    <a href="#work">Work</a>
+                    <a href="#about">About</a>
+                    <a href="#writing">Writing</a>
+                    <a href="#contact">Contact</a>
                 </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                    <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-github"/></svg></a>
+                    <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+                    <a href="mailto:yashadakeofficial@gmail.com" aria-label="Email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© <span id="currentYear">2026</span> Yash Adake</span>
+                <span>Typeset in Inter, Instrument Serif &amp; JetBrains Mono</span>
             </div>
         </div>
     </footer>
 
-    <!-- Global Certificate Lightbox (Moved to root to prevent transform trapping) -->
+    <!-- Floating chrome -->
+    <button id="scrollToTop" class="scroll-to-top" type="button" aria-label="Scroll to top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></button>
+    <button id="cmdkFab" class="cmdk-fab" type="button" aria-label="Open command menu"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+    <div class="visitor-counter" id="visitorCounter" aria-label="Visitor count">
+        <span class="visitor-dot"></span><span id="visitorCount">···</span><span class="visitor-label">visits</span>
+    </div>
+
+    <!-- Certificate lightbox -->
     <div class="certi-lightbox" id="certiLightbox" role="dialog" aria-modal="true" aria-label="Certificate viewer" aria-describedby="certiLightboxCaption">
         <div class="certi-lightbox-backdrop"></div>
         <div class="certi-lightbox-content">
-            <button class="certi-lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
+            <button class="certi-lightbox-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
             <img src="" alt="Selected certificate" id="certiLightboxImg">
             <div class="certi-lightbox-caption" id="certiLightboxCaption">
                 <span id="certiLightboxTitle"></span>
@@ -662,25 +615,15 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
-    <script src="js/core.js?v=11.2.0" defer></script>
-    <script src="js/effects.js?v=11.2.0" defer></script>
-    <script src="js/motion.js?v=11.2.0" defer></script>
-    <script src="js/delights.js?v=11.2.0" defer></script>
-    <script src="js/palette.js?v=11.2.0" defer></script>
-    <script src="js/hero3d.js?v=11.2.0" defer></script>
-    <script src="js/elite-improvements.js?v=11.2.0" defer></script>
-    <script src="js/analytics.js?v=1.0.0" defer></script>
+    <!-- Custom cursor (desktop, fine pointer) -->
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-label" id="cursorLabel"></div>
+    </div>
 
-    <script>
-        window.addEventListener('load', () => {
-            if (window.AOS) AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="js/app.js?v=2.0.0" defer></script>
+    <script src="js/analytics.js?v=2.0.0" defer></script>
 </body>
 
 </html>

@@ -99,10 +99,9 @@ const CONSENT_KEY = 'analytics_consent'; // 'granted' | 'denied'
       });
     });
 
-    // Command palette opened (Cmd/Ctrl+K) — signals an engaged power user
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') track('command_palette_open');
-    });
+    // Command palette opened — app.js owns the ⌘K shortcut and dispatches
+    // this event, so we track once here without a duplicate key listener.
+    document.addEventListener('palette:open', () => track('command_palette_open'));
   }
 
   // ---- Consent banner ---------------------------------------------------

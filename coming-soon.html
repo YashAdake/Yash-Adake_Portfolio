@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="theme-color" content="#0B0E14">
     <title>Coming Soon — Yash Adake</title>
     <meta name="description" content="A product I'm building. Launching on yashadake.com soon.">
 
@@ -17,20 +17,37 @@
 
     <style>
         :root {
-            --bg-primary: #0a0a0a;
+            --bg-primary: #0B0E14;
             --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-glass: rgba(255, 255, 255, 0.06);
-            --text-primary: #F6F1F1;
-            --text-secondary: #b0b0b0;
-            --text-muted: #6b6b6b;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-strong: rgba(255, 255, 255, 0.14);
-            --soon: #FCD34D;
-            --soon-glow: rgba(252, 211, 77, 0.5);
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --text-primary: #E7EAF0;
+            --text-secondary: #98A2B3;
+            --text-muted: #7B8698;
+            --border-subtle: rgba(255, 255, 255, 0.09);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --soon: #F5B544;
+            --soon-glow: rgba(245, 181, 68, 0.45);
 
-            /* Per-product tint, set via JS */
-            --product-tint-a: #667eea;
-            --product-tint-b: #764ba2;
+            /* Per-product tint, set via JS (defaults to brand iris) */
+            --product-tint-a: #7C8CF8;
+            --product-tint-b: #97A4FF;
+            color-scheme: dark;
+        }
+
+        body.light-mode {
+            --bg-primary: #F6F7F9;
+            --bg-card: rgba(11, 14, 20, 0.03);
+            --bg-glass: rgba(11, 14, 20, 0.04);
+            --text-primary: #121620;
+            --text-secondary: #4A5568;
+            --text-muted: #6B7280;
+            --border-subtle: rgba(11, 14, 20, 0.10);
+            --border-strong: rgba(11, 14, 20, 0.18);
+            --soon: #B7791F;
+            --soon-glow: rgba(183, 121, 31, 0.30);
+            --product-tint-a: #4B57D6;
+            --product-tint-b: #3A45C0;
+            color-scheme: light;
         }
 
         * { box-sizing: border-box; }
@@ -316,6 +333,7 @@
     </style>
 </head>
 <body>
+    <script>try { document.body.classList.toggle('light-mode', localStorage.getItem('theme') === 'light'); } catch (e) { }</script>
     <main>
         <div class="topbar">
             <a href="index.html" class="brand">
