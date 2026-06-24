@@ -130,7 +130,44 @@
     <!-- Preloader -->
     <div id="loading" aria-hidden="true">
         <div class="loading-logo">YA</div>
+        <p class="loading-line"><span class="loading-text">systems that disappear into reliability</span><span class="loading-caret"></span></p>
     </div>
+    <script>
+        (function () {
+            var lines = [
+                "systems that disappear into reliability",
+                "where backend meets applied AI",
+                "building things that don't break",
+                "spinning up containers…",
+                "reliability you never have to think about",
+                "making infrastructure invisible",
+                "shipping software that earns its uptime",
+                "from service boundaries to shipped product",
+                "engineering calm into complex systems",
+                "agents that plan, act, and recover",
+                "good systems are quiet systems",
+                "designed to hold up in production",
+                "turning messy data into dependable systems",
+                "API gateways, pipelines, and the AI on top",
+                "warming up the reactors…",
+                "from idea to production, end to end",
+                "infrastructure that gets out of the way",
+                "less magic, more reliability",
+                "provisioning brilliance…",
+                "Python, Docker, Postgres — and a plan",
+                "resilient by design, fast by default",
+                "code that still reads well a week later",
+                "scaling without the drama",
+                "the boring parts, done right",
+                "quietly keeping the lights on",
+                "orchestrating the unglamorous",
+                "built end-to-end, shipped for real",
+                "backend, cloud, and applied AI"
+            ];
+            var el = document.querySelector('.loading-text');
+            if (el) el.textContent = lines[Math.floor(Math.random() * lines.length)];
+        })();
+    </script>
 
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -138,7 +175,7 @@
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
             <a class="brand" href="#home" aria-label="Yash Adake — home">
-                <span class="brand-mark mono">YA</span>
+                <img class="brand-mark" src="photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
             <div class="nav-links">
@@ -200,9 +237,9 @@
 
             <div class="container hero-inner">
                 <div class="hero-content">
-                    <p class="eyebrow hero-status"><span class="status status-live"><span class="status-dot"></span></span> Available for remote roles &amp; consulting</p>
+                    <p class="eyebrow hero-status"><span class="status status-live"><span class="status-dot"></span></span> Open to remote roles &amp; consulting</p>
                     <h1 class="hero-name">Yash <em>Adake</em></h1>
-                    <p class="hero-tagline">I build and ship AI products end-to-end — backend systems that handle messy, real-world scale, and the <strong>applied AI that makes them smart.</strong></p>
+                    <p class="hero-tagline">I design backend systems and cloud infrastructure, then build the AI that runs on top of them — from service boundaries and API gateways to <strong>applied AI that holds up against messy, real-world scale.</strong></p>
                     <p class="hero-meta">
                         Based in India (GMT+5:30) · Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a>
                         · Exploring <a href="#writing">agentic AI</a>. Open to remote roles &amp; consulting worldwide.
@@ -224,8 +261,8 @@
 
                     <div class="hero-metrics">
                         <div class="metric"><span class="metric-value">3</span><span class="metric-label">Products shipped</span></div>
-                        <div class="metric"><span class="metric-value">2</span><span class="metric-label">Live in prod</span></div>
-                        <div class="metric"><span class="metric-value">Remote</span><span class="metric-label">GMT+5:30 · worldwide</span></div>
+                        <div class="metric"><span class="metric-value">2</span><span class="metric-label">Live in production</span></div>
+                        <div class="metric"><span class="metric-value">Remote</span><span class="metric-label">Worldwide · GMT+5:30</span></div>
                     </div>
                 </div>
 
@@ -243,7 +280,7 @@
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">Live products</p>
                     <h2 class="section-title"><em>Built</em> &amp; shipped</h2>
-                    <p class="section-kicker">Tools I built end-to-end and shipped on <strong>yashadake.com</strong> — privacy-first, deeply engineered.</p>
+                    <p class="section-kicker">Products I designed, built, and shipped end-to-end on <strong>yashadake.com</strong> — privacy-first, in-browser, engineered to the details.</p>
                 </header>
 
                 <div class="work-grid">
@@ -316,7 +353,7 @@
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">Selected work</p>
                     <h2 class="section-title"><em>Selected</em> work</h2>
-                    <p class="section-kicker">Real products shipped for real businesses — from agritech to clean energy.</p>
+                    <p class="section-kicker">Client work shipped to production — from agritech storefronts to clean-energy lead pipelines.</p>
                 </header>
 
                 <div class="work-grid">
@@ -359,20 +396,24 @@
 
         <!-- ABOUT -->
         <section id="about" class="section">
-            <div class="container container-narrow">
+            <div class="container">
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">About</p>
                     <h2 class="section-title"><em>About</em> me</h2>
-                    <p class="section-kicker">Engineer. Writer. Perpetually curious.</p>
+                    <p class="section-kicker">Engineer. Builder. Writer.</p>
                 </header>
 
+                <div class="about-grid">
                 <div class="about-prose" data-reveal>
-                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>, where I ship enterprise platforms in Python, Docker, and PostgreSQL. My work sits at the intersection of backend engineering and DevOps — designing service boundaries, running API gateways, and making infrastructure invisible to the developers who depend on it.</p>
+                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>, building platforms in Python, Docker, and PostgreSQL where backend engineering meets DevOps — defining service boundaries, running API gateways, and keeping infrastructure dependable enough that the developers who rely on it never have to think about it. On my own time I've built three products end-to-end on yashadake.com — two live in production today — and I work in applied and agentic AI in depth.</p>
                     <p>I started there as an intern (Mar–Sep 2024), got my first production exposure to cloud infrastructure, and learned how to write Go that doesn't embarrass me a week later. Earlier experience came from <strong>LiNS</strong> (Spring Boot, JDBC), <strong>ONE IT Solutions</strong> (client-facing web work), and <strong>IEEE Bombay Section</strong> (volunteer full-stack).</p>
                     <p>Right now, I'm going deep on <strong>generative and agentic AI</strong> — not just using the APIs, but understanding how agents plan, use tools, and recover from failure. The next generation of software will be AI-native, and I intend to build parts of it.</p>
 
                     <blockquote class="about-quote">Great systems aren't loud. They disappear into reliability.</blockquote>
+                </div>
 
+                <aside class="about-panel" data-reveal aria-label="At a glance">
+                    <div class="about-panel-group">
                     <h3 class="about-subtitle">Currently</h3>
                     <ul class="about-list">
                         <li><span class="list-label">Role</span><span>Software Engineer · ArthaVedh Consulting</span></li>
@@ -380,7 +421,9 @@
                         <li><span class="list-label">Exploring</span><span>Agentic AI, LLM tool-use, workflow automation</span></li>
                         <li><span class="list-label">Reading</span><span>Designing Data-Intensive Applications · Kleppmann</span></li>
                     </ul>
+                    </div>
 
+                    <div class="about-panel-group">
                     <h3 class="about-subtitle">Stack I work with</h3>
                     <div class="about-stack">
                         <div class="stack-row"><span class="stack-label">Daily</span><span>Python · Docker · PostgreSQL · Git</span></div>
@@ -388,12 +431,18 @@
                         <div class="stack-row"><span class="stack-label">Cloud</span><span>CloudJiffy · Azure API Management · KrakenD Gateway</span></div>
                         <div class="stack-row"><span class="stack-label">Exploring</span><span>Generative AI · Agentic AI · LLM tooling</span></div>
                     </div>
+                    </div>
 
+                    <div class="about-panel-group">
                     <h3 class="about-subtitle">Education</h3>
                     <ul class="about-list">
                         <li><span class="list-label">2020–2024</span><span>B.Tech Computer Science · DKTE Institute · CGPA 8.5/10</span></li>
                     </ul>
+                    </div>
+                </aside>
+                </div>
 
+                <div class="about-extra" data-reveal>
                     <h3 class="about-subtitle">Certifications</h3>
                     <div class="certi-carousel-wrap">
                         <button class="certi-arrow certi-arrow-left" type="button" aria-label="Scroll certificates left"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg></button>
@@ -455,7 +504,7 @@
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">Writing</p>
                     <h2 class="section-title"><em>Writing</em></h2>
-                    <p class="section-kicker">Notes on AI, DevOps, and the craft of building systems.</p>
+                    <p class="section-kicker">Notes on backend systems, DevOps, and applied AI.</p>
                 </header>
 
                 <div class="writing-list">
@@ -491,7 +540,7 @@
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">Contact</p>
                     <h2 class="section-title">Let's <em>talk</em></h2>
-                    <p class="section-kicker">Have a project in mind, or just want to trade notes on systems? I'd love to hear from you.</p>
+                    <p class="section-kicker">Have a backend, infrastructure, or AI project on the horizon? I'd be glad to talk it through.</p>
                 </header>
 
                 <div class="contact-grid">

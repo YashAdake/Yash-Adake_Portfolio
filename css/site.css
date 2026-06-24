@@ -169,8 +169,33 @@ ul {
 }
 
 ::selection {
-    background: var(--accent);
+    background: var(--accent-solid);
     color: #fff;
+}
+
+/* Modern, slim, brand-coloured scrollbar (replaces the default) */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+    border-radius: 999px;
+    border: 3px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-strong);
 }
 
 /* ---------- 3. ACCESSIBILITY BASELINE ----------------------- */
@@ -487,20 +512,19 @@ h3 {
 }
 
 .brand-mark {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    border: 1px solid var(--line-strong);
-    display: grid;
-    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--line-strong);
     background: var(--surface);
-    color: var(--accent);
-    transition: border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+    object-fit: cover;
+    transition: transform 0.65s var(--ease), border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
 }
 
 .brand:hover .brand-mark {
+    transform: rotate(360deg) scale(1.08);
     border-color: var(--accent);
-    transform: translateY(-1px);
+    box-shadow: 0 0 0 3px var(--accent-tint), 0 0 22px var(--accent-tint);
 }
 
 /* Desktop link cluster — hidden on mobile (panel used instead) */
@@ -562,9 +586,9 @@ h3 {
 }
 
 .icon-btn:hover {
-    color: var(--text);
-    background: var(--surface);
-    border-color: var(--line);
+    color: var(--accent);
+    background: var(--accent-tint);
+    border-color: transparent;
 }
 
 /* Desktop ⌘K console hint */
@@ -785,8 +809,9 @@ body.hero-canvas-on .hero-field svg {
 
 .hero-socials a:hover {
     color: var(--accent);
-    background: var(--surface);
+    background: var(--accent-tint);
     transform: translateY(-2px);
+    box-shadow: 0 0 0 1px var(--accent-tint);
 }
 
 /* Mono metrics row — tabular figures, the "instrumented" proof */
@@ -1115,12 +1140,53 @@ body.hero-canvas-on .hero-field svg {
 }
 
 /* ---------- 14. ABOUT -------------------------------------- */
+.about-grid {
+    display: grid;
+    gap: var(--space-6);
+}
+
 .about-prose {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-4);
     color: var(--text-dim);
-    max-width: 68ch;
+    align-content: start;
+}
+
+.about-panel {
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+}
+
+.about-panel-group {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.about-panel .about-subtitle,
+.about-extra .about-subtitle {
+    margin-top: 0;
+}
+
+.about-extra {
+    margin-top: var(--space-7);
+}
+
+@media (min-width: 1024px) {
+    .about-grid {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        align-items: start;
+        gap: var(--space-7);
+    }
+
+    .about-panel {
+        position: sticky;
+        top: calc(64px + var(--space-4));
+    }
 }
 
 .about-lead {
@@ -1131,6 +1197,12 @@ body.hero-canvas-on .hero-field svg {
 .about-prose a {
     color: var(--accent);
     border-bottom: 1px solid var(--accent-tint);
+    transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+
+.about-prose a:hover {
+    color: var(--accent-strong);
+    border-bottom-color: var(--accent);
 }
 
 .about-prose strong {
@@ -1457,6 +1529,12 @@ body.hero-canvas-on .hero-field svg {
     gap: 0.4rem;
     color: var(--accent);
     font-weight: 500;
+    transition: gap var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+
+.inline-link:hover {
+    color: var(--accent-strong);
+    gap: 0.65rem;
 }
 
 /* ---------- 18. CONTACT ------------------------------------ */
@@ -1539,7 +1617,7 @@ a.contact-value:hover {
 
 .contact-socials a:hover {
     color: var(--accent);
-    background: var(--surface);
+    background: var(--accent-tint);
 }
 
 /* Form */
@@ -1679,7 +1757,7 @@ a.contact-value:hover {
 
 .footer-socials a:hover {
     color: var(--accent);
-    background: var(--surface);
+    background: var(--accent-tint);
 }
 
 .footer-bottom {
@@ -1781,8 +1859,11 @@ a.contact-value:hover {
     position: fixed;
     inset: 0;
     z-index: var(--z-overlay);
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
     background: var(--bg);
     transition: opacity var(--dur-3) var(--ease), visibility var(--dur-3);
 }
@@ -1795,10 +1876,40 @@ a.contact-value:hover {
 .loading-logo {
     font-family: var(--font-mono);
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.85rem;
     color: var(--accent);
-    letter-spacing: 0.1em;
-    animation: blink 1.2s var(--ease) infinite;
+    letter-spacing: 0.14em;
+}
+
+.loading-line {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.03em;
+    color: var(--text-mute);
+    animation: fadeLine 0.7s var(--ease) 0.15s both;
+}
+
+.loading-caret {
+    display: inline-block;
+    width: 7px;
+    height: 1em;
+    margin-left: 5px;
+    background: var(--accent);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes fadeLine {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 @keyframes blink {
@@ -1809,7 +1920,7 @@ a.contact-value:hover {
     }
 
     50% {
-        opacity: 0.3;
+        opacity: 0;
     }
 }
 
@@ -2075,5 +2186,127 @@ a.contact-value:hover {
 
 .consent-decline:hover {
     color: var(--text);
+}
+
+/* ---------- 24. MOTION / EYE-CATCH ------------------------- */
+/* Hero entrance — staggered rise on load */
+@keyframes heroIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.hero-content>* {
+    animation: heroIn 0.7s var(--ease) both;
+}
+
+.hero-content>*:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.hero-content>*:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.hero-content>*:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+.hero-content>*:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+.hero-content>*:nth-child(5) {
+    animation-delay: 0.33s;
+}
+
+.hero-content>*:nth-child(6) {
+    animation-delay: 0.40s;
+}
+
+.hero-content>*:nth-child(7) {
+    animation-delay: 0.47s;
+}
+
+.hero-portrait {
+    animation: heroIn 0.85s var(--ease) 0.2s both;
+}
+
+/* Soft iris glow behind the hero (eye-catch, on-brand) */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-bg);
+    background: radial-gradient(55% 50% at 78% 24%, var(--accent-tint), transparent 62%);
+    pointer-events: none;
+}
+
+/* Animated gradient on the accent name */
+.hero-name em {
+    background: linear-gradient(100deg, var(--accent) 0%, var(--accent-strong) 36%, #CBB8FF 50%, var(--accent-strong) 64%, var(--accent) 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: nameShimmer 7s linear infinite;
+}
+
+@keyframes nameShimmer {
+    to {
+        background-position: 220% center;
+    }
+}
+
+/* Light mode: keep the name solid for contrast (no light lavender on paper) */
+body.light-mode .hero-name em {
+    background: none;
+    -webkit-text-fill-color: var(--accent);
+    color: var(--accent);
+    animation: none;
+}
+
+/* Work-card shine sweep on hover */
+.work-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.10) 50%, transparent 68%);
+    transform: translateX(-120%);
+    transition: transform 0.7s var(--ease);
+    pointer-events: none;
+}
+
+.work-card:hover .work-visual::before {
+    transform: translateX(120%);
+}
+
+/* Static topology (mobile / no-JS): a touch more presence + a living accent node */
+.hero-field .topo-line {
+    stroke-width: 1.4;
+}
+
+.hero-field .topo-node.is-accent {
+    animation: nodePulse 3s var(--ease) infinite;
+}
+
+@keyframes nodePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
 }
 

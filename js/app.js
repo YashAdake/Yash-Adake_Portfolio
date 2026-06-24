@@ -381,7 +381,7 @@
         const edges = [[0, 1], [1, 2], [1, 3], [3, 4], [3, 5], [4, 6], [4, 8], [2, 7], [5, 7], [7, 8]];
         const accent = new Set([3, 4]);
         let W = 0, H = 0, dpr = Math.min(devicePixelRatio || 1, 2), running = false, raf = 0;
-        const pulses = edges.map((e, i) => ({ e, p: Math.random(), speed: 0.0016 + Math.random() * 0.0018, on: i % 3 === 0 }));
+        const pulses = edges.map((e, i) => ({ e, p: Math.random(), speed: 0.0016 + Math.random() * 0.0018, on: i % 2 === 0 }));
 
         const css = (v) => getComputedStyle(document.body).getPropertyValue(v).trim();
         function resize() {
@@ -407,14 +407,17 @@
                 const [a, b] = pl.e, [ax, ay] = pt(a), [bx, by] = pt(b);
                 const px = ax + (bx - ax) * pl.p, py = ay + (by - ay) * pl.p;
                 ctx.fillStyle = acc; ctx.globalAlpha = Math.sin(pl.p * Math.PI);
-                ctx.beginPath(); ctx.arc(px, py, 2.4, 0, Math.PI * 2); ctx.fill();
-                ctx.globalAlpha = 1;
+                ctx.shadowColor = acc; ctx.shadowBlur = 12;
+                ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
+                ctx.shadowBlur = 0; ctx.globalAlpha = 1;
             });
             nodes.forEach((n, i) => {
-                ctx.fillStyle = accent.has(i) ? acc : dim;
-                ctx.globalAlpha = accent.has(i) ? 0.9 : 0.5;
-                ctx.beginPath(); ctx.arc(n[0] * W, n[1] * H, accent.has(i) ? 3.2 : 2.2, 0, Math.PI * 2); ctx.fill();
-                ctx.globalAlpha = 1;
+                const isA = accent.has(i);
+                ctx.fillStyle = isA ? acc : dim;
+                ctx.globalAlpha = isA ? 0.95 : 0.5;
+                if (isA) { ctx.shadowColor = acc; ctx.shadowBlur = 10; }
+                ctx.beginPath(); ctx.arc(n[0] * W, n[1] * H, isA ? 3.6 : 2.2, 0, Math.PI * 2); ctx.fill();
+                ctx.shadowBlur = 0; ctx.globalAlpha = 1;
             });
             // occasionally re-arm pulses so the field keeps breathing
             if (Math.random() < 0.01) { const k = (Math.random() * pulses.length) | 0; pulses[k].on = true; }
@@ -427,6 +430,41 @@
         document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
         const io = new IntersectionObserver((es) => es[0].isIntersecting ? start() : stop(), { threshold: 0.01 });
         io.observe(hero);
+    })();
+
+    /* ---------- Metric count-up ------------------------------- */
+    (function countUp() {
+        if (prefersReduced) return;
+        const io = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target, raw = el.textContent.trim();
+                obs.unobserve(el);
+                if (!/^\d+$/.test(raw)) return;
+                const target = +raw, dur = 1000, t0 = performance.now();
+                const tick = (now) => {
+                    const p = Math.min(1, (now - t0) / dur);
+                    el.textContent = String(Math.round(target * (1 - Math.pow(1 - p, 3))));
+                    if (p < 1) requestAnimationFrame(tick); else el.textContent = String(target);
+                };
+                requestAnimationFrame(tick);
+            });
+        }, { threshold: 0.6 });
+        $$('.metric-value').forEach(el => io.observe(el));
+    })();
+
+    /* ---------- Magnetic buttons (desktop, fine pointer) ------ */
+    (function magnetic() {
+        if (prefersReduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        $$('.btn').forEach(btn => {
+            btn.addEventListener('pointermove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const mx = e.clientX - (r.left + r.width / 2);
+                const my = e.clientY - (r.top + r.height / 2);
+                btn.style.transform = `translate(${mx * 0.18}px, ${my * 0.32}px)`;
+            });
+            btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+        });
     })();
 
     /* ---------- Console banner -------------------------------- */
