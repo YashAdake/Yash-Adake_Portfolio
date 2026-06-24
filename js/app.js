@@ -342,10 +342,19 @@
         const el = $('#cursor'), dot = $('.cursor-dot', el), label = $('#cursorLabel');
         if (!el) return;
         document.body.classList.add('cursor-on');
-        const labels = [
-            ['.work-card', 'View'], ['.certi-card', 'View cert'], ['.writing-item', 'Read'],
-            ['a[href^="mailto"]', 'Email'], ['a[href*="wa.me"]', 'Chat'], ['.btn', '']
-        ];
+        // Resolve a contextual label for the hovered target. Socials/icon links
+        // use their own aria-label, so every icon shows its name (not just email).
+        function resolveLabel(t) {
+            if (t.closest('.work-card')) return 'View';
+            if (t.closest('.certi-card')) return 'View cert';
+            if (t.closest('.writing-item')) return 'Read';
+            if (t.closest('a[download]')) return 'Résumé';
+            const soc = t.closest('.hero-socials a, .contact-socials a, .footer-socials a');
+            if (soc && soc.getAttribute('aria-label')) return soc.getAttribute('aria-label');
+            if (t.closest('a[href^="mailto"]')) return 'Email';
+            if (t.closest('a[href*="wa.me"]')) return 'Chat';
+            return null;
+        }
         let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, raf = 0;
         function loop() {
             x += (tx - x) * 0.25; y += (ty - y) * 0.25;
@@ -355,10 +364,11 @@
         window.addEventListener('pointermove', (e) => {
             tx = e.clientX; ty = e.clientY;
             if (!raf) raf = requestAnimationFrame(loop);
-            const hit = labels.find(([sel]) => e.target.closest(sel));
-            if (hit && hit[1]) { label.textContent = hit[1]; el.classList.add('has-label'); }
+            const lbl = resolveLabel(e.target);
+            const clickable = e.target.closest('a, button, [role="button"], input, textarea, label, .certi-card');
+            if (lbl) { label.textContent = lbl; el.classList.add('has-label'); }
             else el.classList.remove('has-label');
-            dot.style.transform = (hit ? 'translate(-50%,-50%) scale(1.8)' : 'translate(-50%,-50%) scale(1)');
+            dot.style.transform = clickable ? 'translate(-50%,-50%) scale(1.8)' : 'translate(-50%,-50%) scale(1)';
         }, { passive: true });
         document.addEventListener('mouseleave', () => { el.style.opacity = '0'; });
         document.addEventListener('mouseenter', () => { el.style.opacity = '1'; });
