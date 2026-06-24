@@ -262,7 +262,7 @@
             { g: 'Products', t: 'OptiResume', s: 'soon', run: () => go('coming-soon.html?product=optiresume', false) },
             { g: 'Actions', t: 'Toggle theme', run: () => { close(); $('#themeToggle')?.click(); } },
             { g: 'Actions', t: 'Copy email', s: 'yashadakeofficial@gmail.com', run: () => copy('yashadakeofficial@gmail.com') },
-            { g: 'Actions', t: 'Download résumé', run: () => go('photos/Yash-Adake_Resume.pdf', false) },
+            { g: 'Actions', t: 'Download resume', run: () => go('photos/Yash-Adake_Resume.pdf', false) },
             { g: 'Links', t: 'LinkedIn', run: () => go('https://www.linkedin.com/in/yash-adake/') },
             { g: 'Links', t: 'GitHub', run: () => go('https://github.com/YashAdake') },
             { g: 'Links', t: 'Twitter / X', run: () => go('https://twitter.com/yash_adake') },
@@ -348,7 +348,7 @@
             if (t.closest('.work-card')) return 'View';
             if (t.closest('.certi-card')) return 'View cert';
             if (t.closest('.writing-item')) return 'Read';
-            if (t.closest('a[download]')) return 'Résumé';
+            if (t.closest('a[download]')) return 'Resume';
             const soc = t.closest('.hero-socials a, .contact-socials a, .footer-socials a');
             if (soc && soc.getAttribute('aria-label')) return soc.getAttribute('aria-label');
             if (t.closest('a[href^="mailto"]')) return 'Email';
