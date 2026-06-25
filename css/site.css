@@ -5,6 +5,39 @@
    Replaces premium.css + elite.css (legacy retired)
    ============================================================ */
 
+/* ---------- 0. FONTS (self-hosted, latin subset, no 3rd-party) */
+@font-face {
+    font-family: 'Instrument Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/instrumentserif-latin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Instrument Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/instrumentserif-italic-latin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('../fonts/inter-latin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('../fonts/jetbrainsmono-latin.woff2') format('woff2');
+}
+
 /* ---------- 1. TOKENS ---------------------------------------- */
 :root {
     /* Surfaces (deep blue-black, layered — not flat black) */
@@ -267,6 +300,17 @@ ul {
     padding-block: var(--section-y);
 }
 
+/* Skip layout/paint for below-fold sections on first render (faster) */
+#products,
+#work,
+#about,
+#writing,
+#contact,
+.site-footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+}
+
 /* Hairline divider */
 .rule {
     border: 0;
@@ -337,6 +381,16 @@ h3 {
 
 .section-title em {
     font-style: italic;
+    background: linear-gradient(100deg, var(--accent), var(--accent-strong) 55%, #CBB8FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+body.light-mode .section-title em {
+    background: none;
+    -webkit-text-fill-color: var(--accent);
     color: var(--accent);
 }
 
@@ -348,7 +402,7 @@ h3 {
 
 /* ---------- 7. BUTTONS -------------------------------------- */
 .btn {
-    --btn-bg: var(--accent-solid);
+    --btn-bg: linear-gradient(135deg, var(--accent-solid), var(--accent-solid-hover));
     --btn-fg: #fff;
     display: inline-flex;
     align-items: center;
@@ -370,9 +424,9 @@ h3 {
 }
 
 .btn:hover {
-    background: var(--accent-solid-hover);
+    --btn-bg: linear-gradient(135deg, var(--accent-solid-hover), var(--accent-solid));
     transform: translateY(-2px);
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow-2), 0 10px 30px -10px var(--accent-tint);
 }
 
 .btn:active {
@@ -424,6 +478,25 @@ h3 {
     background: var(--warn);
 }
 
+/* Tint the whole status label + pill by state (functional colour, more visible) */
+.status-live {
+    color: var(--ok);
+}
+
+.status-soon {
+    color: var(--warn);
+}
+
+.work-status:has(.status-live) {
+    background: color-mix(in srgb, var(--ok) 14%, transparent);
+    border-color: color-mix(in srgb, var(--ok) 35%, var(--line));
+}
+
+.work-status:has(.status-soon) {
+    background: color-mix(in srgb, var(--warn) 16%, transparent);
+    border-color: color-mix(in srgb, var(--warn) 40%, var(--line));
+}
+
 @keyframes pulse-dot {
     0% {
         box-shadow: 0 0 0 0 rgba(61, 214, 140, 0.5);
@@ -443,7 +516,7 @@ h3 {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
-    will-change: opacity, transform;
+    transition-delay: var(--reveal-d, 0ms);
 }
 
 [data-reveal].is-visible {
@@ -833,6 +906,16 @@ body.hero-canvas-on .hero-field svg {
     font-variant-numeric: tabular-nums;
     font-size: var(--step-1);
     font-weight: 600;
+    background: linear-gradient(170deg, var(--text), var(--accent-strong));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+body.light-mode .metric-value {
+    background: none;
+    -webkit-text-fill-color: var(--text);
     color: var(--text);
 }
 
@@ -959,9 +1042,9 @@ body.hero-canvas-on .hero-field svg {
 }
 
 .work-card:hover {
-    border-color: var(--line-strong);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line-strong));
     transform: translateY(-4px);
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow-2), 0 0 0 1px var(--accent-tint), 0 18px 50px -18px var(--accent-tint);
 }
 
 .work-visual {
@@ -1825,10 +1908,11 @@ a.contact-value:hover {
     position: fixed;
     top: 0;
     left: 0;
-    height: 2px;
+    height: 3px;
     width: 0;
     z-index: calc(var(--z-nav) + 1);
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent-solid), var(--accent), var(--accent-strong));
+    box-shadow: 0 0 10px var(--accent-tint);
     transition: width 80ms linear;
 }
 
@@ -2335,8 +2419,20 @@ body.light-mode .loading-ya {
     animation-delay: 0.47s;
 }
 
+/* Translate-only (opacity stays 1) so the portrait — the LCP element —
+   paints immediately instead of fading in late. */
 .hero-portrait {
-    animation: heroIn 0.85s var(--ease) 0.2s both;
+    animation: heroRise 0.7s var(--ease) 0.1s both;
+}
+
+@keyframes heroRise {
+    from {
+        transform: translateY(22px);
+    }
+
+    to {
+        transform: none;
+    }
 }
 
 /* Soft iris glow behind the hero (eye-catch, on-brand) */
@@ -2347,6 +2443,30 @@ body.light-mode .loading-ya {
     z-index: var(--z-bg);
     background: radial-gradient(55% 50% at 78% 24%, var(--accent-tint), transparent 62%);
     pointer-events: none;
+}
+
+/* Slow drifting aurora — compositor-only (transform), adds living depth */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: -25%;
+    z-index: var(--z-bg);
+    background:
+        radial-gradient(38% 38% at 28% 72%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%),
+        radial-gradient(32% 32% at 72% 30%, color-mix(in srgb, var(--accent-strong) 14%, transparent), transparent 70%);
+    pointer-events: none;
+    animation: auroraDrift 26s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes auroraDrift {
+    0% {
+        transform: translate3d(-5%, 4%, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(7%, -6%, 0) scale(1.18);
+    }
 }
 
 /* Animated gradient on the accent name */
@@ -2380,7 +2500,7 @@ body.light-mode .hero-name em {
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.10) 50%, transparent 68%);
+    background: linear-gradient(110deg, transparent 32%, color-mix(in srgb, var(--accent) 22%, rgba(255, 255, 255, 0.12)) 50%, transparent 68%);
     transform: translateX(-120%);
     transition: transform 0.7s var(--ease);
     pointer-events: none;
@@ -2388,6 +2508,20 @@ body.light-mode .hero-name em {
 
 .work-card:hover .work-visual::before {
     transform: translateX(120%);
+}
+
+/* Arrow / icon nudge on hover across CTAs */
+.btn .icon,
+.writing-arrow .icon,
+.work-visit .icon,
+.inline-link .icon {
+    transition: transform var(--dur-1) var(--ease);
+}
+
+.btn:hover .icon,
+.writing-item:hover .writing-arrow .icon,
+.work-card:hover .work-visit .icon {
+    transform: translateX(3px);
 }
 
 /* Static topology (mobile / no-JS): a touch more presence + a living accent node */

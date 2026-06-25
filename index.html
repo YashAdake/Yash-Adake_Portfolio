@@ -86,17 +86,15 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Self-hosted fonts (latin subset, woff2) — @font-face declared in css/site.css -->
+    <link rel="preload" as="font" type="font/woff2" href="fonts/instrumentserif-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/instrumentserif-italic-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/jetbrainsmono-latin.woff2" crossorigin>
 
-    <!-- Fonts: Inter (body) · Instrument Serif (display) · JetBrains Mono (data) -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="css/site.css?v=3.0.0">
 
-    <link rel="stylesheet" href="css/site.css?v=2.0.0">
-
-    <link rel="icon" type="image/x-icon" href="photos/nav-brand.png">
+    <link rel="icon" type="image/x-icon" href="photos/YA-Favicon.ico">
     <link rel="apple-touch-icon" href="photos/nav-brand.png">
 </head>
 
@@ -289,7 +287,6 @@
                 <div class="work-grid">
                     <a href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
                         <div class="work-visual">
-                            <img class="work-shot" src="photos/projects/myjson.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
                             <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
                             <span class="work-logotype">My<em>JSON</em></span>
                         </div>
@@ -309,7 +306,6 @@
 
                     <a href="coming-soon.html?product=optiresume" class="work-card" data-reveal>
                         <div class="work-visual">
-                            <img class="work-shot" src="photos/projects/optiresume.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">
                             <span class="work-status"><span class="status status-soon"><span class="status-dot"></span>Coming soon</span></span>
                             <span class="work-logotype">Opti<em>Resume</em></span>
                         </div>
@@ -329,7 +325,6 @@
 
                     <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
                         <div class="work-visual">
-                            <img class="work-shot" src="photos/projects/airdraw.gif" alt="" loading="lazy" decoding="async" onerror="this.remove()">
                             <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
                             <span class="work-logotype">Air<em>Draw</em></span>
                         </div>
@@ -673,7 +668,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/app.js?v=2.0.0" defer></script>
+    <script src="js/app.js?v=3.0.0" defer></script>
     <script src="js/analytics.js?v=2.0.0" defer></script>
 </body>
 

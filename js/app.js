@@ -14,7 +14,7 @@
     /* ---------- Preloader -------------------------------------- */
     window.addEventListener('load', () => {
         const el = $('#loading');
-        if (el) setTimeout(() => el.classList.add('done'), 250);
+        if (el) setTimeout(() => el.classList.add('done'), 90);
     });
 
     /* ---------- Year ------------------------------------------- */
@@ -64,6 +64,7 @@
         const progress = $('#scrollProgress');
         const toTop = $('#scrollToTop');
         const hint = $('.scroll-hint');
+        const heroField = $('.hero-field');
         let docH = 0, ticking = false;
         const measure = () => { docH = document.documentElement.scrollHeight - window.innerHeight; };
         measure();
@@ -75,6 +76,9 @@
             if (toTop) toTop.classList.toggle('visible', y > 600);
             if (progress) progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%';
             if (hint) hint.style.opacity = y > 80 ? '0' : '';
+            if (heroField && !prefersReduced && y < innerHeight) {
+                heroField.style.transform = `translate3d(0, ${(y * 0.08).toFixed(1)}px, 0)`;
+            }
             ticking = false;
         }
         window.addEventListener('scroll', () => {
@@ -111,7 +115,18 @@
         if (prefersReduced) { items.forEach(i => i.classList.add('is-visible')); return; }
         const io = new IntersectionObserver((entries) => {
             entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                // Stagger by index among reveal-siblings (capped) so grids cascade in.
+                const sibs = el.parentElement
+                    ? Array.from(el.parentElement.children).filter(c => c.hasAttribute('data-reveal'))
+                    : [el];
+                const i = sibs.indexOf(el);
+                el.style.setProperty('--reveal-d', (Math.min(i < 0 ? 0 : i, 5) * 70) + 'ms');
+                el.style.willChange = 'opacity, transform';
+                el.addEventListener('transitionend', () => { el.style.willChange = ''; }, { once: true });
+                el.classList.add('is-visible');
+                io.unobserve(el);
             });
         }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
         items.forEach(i => io.observe(i));
@@ -379,21 +394,34 @@
         const canvas = $('#heroCanvas');
         const hero = $('#home');
         if (!canvas || !hero || prefersReduced) return;
-        if (!window.matchMedia('(min-width: 768px)').matches) return;
 
+        // Runs on mobile too now (reduced density), so the field feels alive everywhere.
+        const isMobile = !window.matchMedia('(min-width: 768px)').matches;
         document.body.classList.add('hero-canvas-on'); // hides static SVG (CSS)
         const ctx = canvas.getContext('2d');
-        // Fractional node layout (0..1) — mirrors the static SVG topology
         const nodes = [
             [0.10, 0.23], [0.30, 0.43], [0.25, 0.73], [0.53, 0.30],
             [0.75, 0.50], [0.63, 0.70], [0.90, 0.33], [0.50, 0.87], [0.87, 0.77]
         ];
         const edges = [[0, 1], [1, 2], [1, 3], [3, 4], [3, 5], [4, 6], [4, 8], [2, 7], [5, 7], [7, 8]];
         const accent = new Set([3, 4]);
-        let W = 0, H = 0, dpr = Math.min(devicePixelRatio || 1, 2), running = false, raf = 0;
-        const pulses = edges.map((e, i) => ({ e, p: Math.random(), speed: 0.0016 + Math.random() * 0.0018, on: i % 2 === 0 }));
+        const dpr = Math.min(devicePixelRatio || 1, isMobile ? 1.5 : 2);
+        const minFrame = isMobile ? 33 : 0;          // ~30fps cap on mobile
+        const glow = isMobile ? 0 : 10;              // shadowBlur is desktop-only (the costly op)
+        let W = 0, H = 0, running = false, raf = 0, lastT = 0;
+        const pulses = edges.map((e, i) => ({ e, p: Math.random(), speed: 0.0016 + Math.random() * 0.0018, on: isMobile ? i % 3 === 0 : i % 2 === 0 }));
 
-        const css = (v) => getComputedStyle(document.body).getPropertyValue(v).trim();
+        // Colours read ONCE (and only re-read on theme change) — not per frame.
+        let colLine, colAcc, colDim;
+        function readColors() {
+            const cs = getComputedStyle(document.body);
+            colLine = cs.getPropertyValue('--line-strong').trim() || 'rgba(255,255,255,.16)';
+            colAcc = cs.getPropertyValue('--accent').trim() || '#7C8CF8';
+            colDim = cs.getPropertyValue('--text-mute').trim() || '#7B8698';
+        }
+        readColors();
+        $('#themeToggle')?.addEventListener('click', () => setTimeout(readColors, 0));
+
         function resize() {
             const r = hero.getBoundingClientRect();
             W = r.width; H = r.height;
@@ -401,39 +429,39 @@
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
         const pt = (i) => [nodes[i][0] * W, nodes[i][1] * H];
-        function draw() {
+        function render() {
             ctx.clearRect(0, 0, W, H);
-            const line = css('--line-strong') || 'rgba(255,255,255,.16)';
-            const acc = css('--accent') || '#7C8CF8';
-            const dim = css('--text-mute') || '#7B8698';
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 1; ctx.strokeStyle = colLine;
             edges.forEach(([a, b]) => {
                 const [ax, ay] = pt(a), [bx, by] = pt(b);
-                ctx.strokeStyle = line; ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
             });
+            ctx.shadowColor = colAcc; ctx.shadowBlur = glow; ctx.fillStyle = colAcc;
             pulses.forEach(pl => {
                 if (!pl.on) return;
                 pl.p += pl.speed; if (pl.p > 1) { pl.p = 0; pl.on = Math.random() > 0.3; }
                 const [a, b] = pl.e, [ax, ay] = pt(a), [bx, by] = pt(b);
                 const px = ax + (bx - ax) * pl.p, py = ay + (by - ay) * pl.p;
-                ctx.fillStyle = acc; ctx.globalAlpha = Math.sin(pl.p * Math.PI);
-                ctx.shadowColor = acc; ctx.shadowBlur = 12;
+                ctx.globalAlpha = Math.sin(pl.p * Math.PI);
                 ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
-                ctx.shadowBlur = 0; ctx.globalAlpha = 1;
             });
+            ctx.globalAlpha = 1;
             nodes.forEach((n, i) => {
                 const isA = accent.has(i);
-                ctx.fillStyle = isA ? acc : dim;
+                ctx.fillStyle = isA ? colAcc : colDim;
                 ctx.globalAlpha = isA ? 0.95 : 0.5;
-                if (isA) { ctx.shadowColor = acc; ctx.shadowBlur = 10; }
+                ctx.shadowBlur = isA ? glow : 0;
                 ctx.beginPath(); ctx.arc(n[0] * W, n[1] * H, isA ? 3.6 : 2.2, 0, Math.PI * 2); ctx.fill();
-                ctx.shadowBlur = 0; ctx.globalAlpha = 1;
             });
-            // occasionally re-arm pulses so the field keeps breathing
+            ctx.shadowBlur = 0; ctx.globalAlpha = 1;
             if (Math.random() < 0.01) { const k = (Math.random() * pulses.length) | 0; pulses[k].on = true; }
-            raf = requestAnimationFrame(draw);
         }
-        function start() { if (!running) { running = true; resize(); raf = requestAnimationFrame(draw); } }
+        function loop(now) {
+            if (!running) return;
+            if (!minFrame || now - lastT >= minFrame) { lastT = now; render(); }
+            raf = requestAnimationFrame(loop);
+        }
+        function start() { if (!running) { running = true; resize(); raf = requestAnimationFrame(loop); } }
         function stop() { running = false; cancelAnimationFrame(raf); }
 
         let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(resize, 150); }, { passive: true });
@@ -466,15 +494,32 @@
     /* ---------- Magnetic buttons (desktop, fine pointer) ------ */
     (function magnetic() {
         if (prefersReduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        const clamp = (v) => Math.max(-10, Math.min(10, v));
         $$('.btn').forEach(btn => {
+            let mx = 0, my = 0, raf = 0;
+            const apply = () => { btn.style.transform = `translate(${mx}px, ${my}px)`; raf = 0; };
             btn.addEventListener('pointermove', (e) => {
                 const r = btn.getBoundingClientRect();
-                const mx = e.clientX - (r.left + r.width / 2);
-                const my = e.clientY - (r.top + r.height / 2);
-                btn.style.transform = `translate(${mx * 0.18}px, ${my * 0.32}px)`;
+                mx = clamp((e.clientX - (r.left + r.width / 2)) * 0.18);
+                my = clamp((e.clientY - (r.top + r.height / 2)) * 0.32);
+                if (!raf) raf = requestAnimationFrame(apply);
             });
-            btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+            btn.addEventListener('pointerleave', () => {
+                if (raf) { cancelAnimationFrame(raf); raf = 0; }
+                btn.style.transform = '';
+            });
         });
+    })();
+
+    /* ---------- Pause paint-bound infinite animations off-screen */
+    (function pauseOffscreen() {
+        if (prefersReduced) return;
+        const targets = [$('.hero-name em'), $('.inline-link')].filter(Boolean);
+        if (!targets.length) return;
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { e.target.style.animationPlayState = e.isIntersecting ? 'running' : 'paused'; });
+        }, { threshold: 0 });
+        targets.forEach(el => io.observe(el));
     })();
 
     /* ---------- Console banner -------------------------------- */
