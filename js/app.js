@@ -12,10 +12,20 @@
     const SCRIPT_URL = 'https://yashadake-form.yashadake91.workers.dev/';
 
     /* ---------- Preloader -------------------------------------- */
-    window.addEventListener('load', () => {
+    // Clear the loader as soon as the page is usable. Do NOT gate solely on
+    // window.load — on slow/stalled mobile networks a single trickling resource
+    // can delay (or prevent) `load`, trapping the loader on screen. This script
+    // is deferred, so by the time it runs the DOM is parsed and CSS is applied;
+    // a hard timeout fallback then guarantees the loader can never stick.
+    (function preloader() {
         const el = $('#loading');
-        if (el) setTimeout(() => el.classList.add('done'), 90);
-    });
+        if (!el) return;
+        let cleared = false;
+        const hide = () => { if (cleared) return; cleared = true; el.classList.add('done'); };
+        if (document.readyState === 'complete') hide();
+        else window.addEventListener('load', hide);
+        setTimeout(hide, 1500); // safety net: never trap the page behind the loader
+    })();
 
     /* ---------- Year ------------------------------------------- */
     const yearEl = $('#currentYear');
