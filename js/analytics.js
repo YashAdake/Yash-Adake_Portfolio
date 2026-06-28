@@ -124,7 +124,7 @@ const CONSENT_KEY = 'analytics_consent'; // 'granted' | 'denied'
       bar.classList.add('visible');
       // Move focus to the primary action so keyboard / screen-reader users
       // land on the dialog instead of having to hunt for it.
-      bar.querySelector('.consent-accept').focus();
+      bar.querySelector('.consent-accept').focus({ preventScroll: true });
     });
 
     bar.querySelector('.consent-accept').addEventListener('click', () => {
