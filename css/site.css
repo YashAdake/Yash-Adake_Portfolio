@@ -3113,3 +3113,118 @@ body.light-mode .hero-name em {
 .work-visual:has(.work-shot) .work-status {
     z-index: 2;
 }
+
+/* ---------- 28. CASE-STUDY MICRO-DEMO (MyJSON) -------------- */
+.demo-box {
+    margin-top: var(--space-6);
+    padding: var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+}
+
+.demo-panes {
+    display: grid;
+    gap: var(--space-4);
+}
+
+@media (min-width: 900px) {
+    .demo-panes {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.demo-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+}
+
+.demo-label-inline {
+    display: inline;
+    margin: 0 0.4rem 0 0;
+}
+
+.demo-input,
+.demo-output {
+    width: 100%;
+    min-height: 16rem;
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--elevated);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text);
+    tab-size: 2;
+}
+
+.demo-input {
+    resize: vertical;
+}
+
+.demo-input:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+}
+
+.demo-output {
+    margin: 0;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--text-dim);
+}
+
+.demo-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+.demo-btn {
+    padding: 0.5rem 1.1rem;
+    font-size: var(--step--1);
+}
+
+.demo-querywrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.demo-path {
+    width: 11rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    background: var(--elevated);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text);
+}
+
+.demo-path:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+}
+
+.demo-status {
+    margin: var(--space-4) 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--text-mute);
+}
+
+.demo-status.demo-status-err {
+    color: var(--danger);
+}

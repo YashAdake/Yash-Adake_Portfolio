@@ -227,6 +227,39 @@
             </div>
         </section>
 
+        <!-- LIVE DEMO -->
+        <section class="cs-section" id="demo">
+            <div class="container">
+                <h2 class="cs-h2">Don't take my word — <em>test it</em></h2>
+                <div class="cs-prose">
+                    <p>This little widget follows the same rule as the product: open DevTools, watch the Network tab, and use it. Nothing fires. It's a deliberately tiny stand-in — the real workstation adds Monaco, jq 1.8 in WebAssembly, seven formats and much more — but the principle it demonstrates is the whole product's principle, verifiable right here.</p>
+                </div>
+
+                <div class="demo-box" data-reveal>
+                    <div class="demo-panes">
+                        <div class="demo-pane">
+                            <label class="demo-label" for="demoInput">Input — edit freely</label>
+                            <textarea id="demoInput" class="demo-input" rows="12" spellcheck="false" aria-describedby="demoStatus"></textarea>
+                        </div>
+                        <div class="demo-pane">
+                            <span class="demo-label" id="demoOutLabel">Output</span>
+                            <pre id="demoOutput" class="demo-output" aria-labelledby="demoOutLabel" aria-live="polite">— run something —</pre>
+                        </div>
+                    </div>
+                    <div class="demo-controls">
+                        <button type="button" id="demoFormat" class="btn demo-btn">Format</button>
+                        <button type="button" id="demoMinify" class="btn btn-ghost demo-btn">Minify</button>
+                        <span class="demo-querywrap">
+                            <label class="demo-label demo-label-inline" for="demoPath">Path</label>
+                            <input type="text" id="demoPath" class="demo-path" value="$.jq.runtime" spellcheck="false">
+                            <button type="button" id="demoQuery" class="btn btn-ghost demo-btn">Query</button>
+                        </span>
+                    </div>
+                    <p class="demo-status" id="demoStatus" role="status">Tip: Ctrl+Enter formats. The path box speaks a tiny $.key[0] dialect — the product speaks JSONPath, jq and JSON Pointer.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- SHIPPED -->
         <section class="cs-section" id="shipped">
             <div class="container">
@@ -307,6 +340,7 @@
     </div>
 
     <script src="../js/app.js?v=3.1.0" defer></script>
+    <script src="../js/demo-json.js?v=1.0.0" defer></script>
     <script src="../js/analytics.js?v=2.0.1" defer></script>
 </body>
 
