@@ -3084,3 +3084,10 @@ body.light-mode .hero-name em {
         animation: none;
     }
 }
+
+/* Note titles are full sentences — one display step down from product titles */
+.cs-title-note {
+    font-size: var(--step-3);
+    line-height: 1.12;
+    max-width: 24ch;
+}

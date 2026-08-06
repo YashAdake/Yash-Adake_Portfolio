@@ -34,6 +34,28 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Engineering notes -->
+    <url>
+        <loc>https://yashadake.com/notes/floating-dependencies.html</loc>
+        <lastmod>2026-08-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://yashadake.com/notes/latest-aliases.html</loc>
+        <lastmod>2026-08-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://yashadake.com/notes/falsifiable-privacy.html</loc>
+        <lastmod>2026-08-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
     <!-- Resume/CV PDF -->
     <url>
         <loc>https://yashadake.com/photos/Yash-Adake_Resume.pdf</loc>
