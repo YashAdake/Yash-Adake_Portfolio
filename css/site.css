@@ -3057,3 +3057,30 @@ body.light-mode .hero-name em {
         padding-top: 0.2rem;
     }
 }
+
+/* ---------- 26. LIVE REACHABILITY (status chips) ------------ */
+/* Added by js/app.js when a no-cors ping to the product resolves. */
+.status-verified .status-dot {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent);
+    animation: statusPing 1.8s var(--ease) 2;
+}
+
+@keyframes statusPing {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent);
+    }
+
+    70% {
+        box-shadow: 0 0 0 7px transparent;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .status-verified .status-dot {
+        animation: none;
+    }
+}

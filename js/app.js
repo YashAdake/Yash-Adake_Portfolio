@@ -365,6 +365,33 @@
         return { open, close };
     })();
 
+    /* ---------- Live reachability check (product cards) ------- */
+    // The "Live" chips carry data-live-url. After the page is idle we ping
+    // each product with a no-cors fetch: an opaque response proves the host
+    // is reachable from THIS visitor's browser right now (not full health —
+    // that distinction is in the tooltip). On failure we change nothing:
+    // the visitor may be offline or behind a blocker, so no false negatives.
+    (function liveCheck() {
+        const chips = $$('[data-live-url]');
+        if (!chips.length || !('fetch' in window)) return;
+        const ping = (chip) => {
+            const ctrl = new AbortController();
+            const t = setTimeout(() => ctrl.abort(), 6000);
+            fetch(chip.dataset.liveUrl, { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal })
+                .then(() => {
+                    chip.classList.add('status-verified');
+                    const label = chip.querySelector('.status-text');
+                    if (label) label.textContent = 'Live · now';
+                    chip.title = 'Reachability confirmed from your browser just now';
+                })
+                .catch(() => { /* keep the static label */ })
+                .finally(() => clearTimeout(t));
+        };
+        const start = () => chips.forEach(ping);
+        if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 4000 });
+        else setTimeout(start, 2500);
+    })();
+
     /* ---------- Custom cursor (desktop, fine pointer) -------- */
     (function cursor() {
         if (prefersReduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
