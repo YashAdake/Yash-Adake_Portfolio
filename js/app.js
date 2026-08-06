@@ -445,12 +445,25 @@
         const isMobile = !window.matchMedia('(min-width: 768px)').matches;
         document.body.classList.add('hero-canvas-on'); // hides static SVG (CSS)
         const ctx = canvas.getContext('2d');
+        // Not decoration: this is the real architecture of the three live
+        // products. Each node is [x, y, label, labelDx, labelDy, align];
+        // labels render on desktop only (too cramped behind mobile text).
         const nodes = [
-            [0.10, 0.23], [0.30, 0.43], [0.25, 0.73], [0.53, 0.30],
-            [0.75, 0.50], [0.63, 0.70], [0.90, 0.33], [0.50, 0.87], [0.87, 0.77]
+            /* 0 */[0.53, 0.26, 'yashadake.com', 0, -14, 'center'],
+            /* 1 */[0.19, 0.10, 'myjson', 0, -12, 'center'],
+            /* 2 */[0.07, 0.24, 'jq 1.8 · wasm', 0, 16, 'center'],
+            /* 3 */[0.47, 0.70, 'airdraw', 12, 4, 'left'],
+            /* 4 */[0.58, 0.88, 'mediapipe · wasm', 0, 16, 'center'],
+            /* 5 */[0.90, 0.20, 'optiresume.in', 0, -12, 'center'],
+            /* 6 */[0.94, 0.50, 'fastapi', 12, 4, 'left'],
+            /* 7 */[0.80, 0.70, 'ai gateway', 0, 18, 'center'],
+            /* 8 */[0.94, 0.88, 'gemma · groq', 0, 16, 'center'],
+            /* 9 */[0.62, 0.90, 'neon postgres', 0, 16, 'center'],
+            /*10 */[0.36, 0.55, 'one-euro · canvas', -10, 4, 'right']
         ];
-        const edges = [[0, 1], [1, 2], [1, 3], [3, 4], [3, 5], [4, 6], [4, 8], [2, 7], [5, 7], [7, 8]];
-        const accent = new Set([3, 4]);
+        // Real dataflow: hub -> products; each product -> what it runs on.
+        const edges = [[0, 1], [1, 2], [0, 3], [3, 4], [3, 10], [0, 5], [5, 6], [6, 7], [7, 8], [6, 9]];
+        const accent = new Set([0, 1, 3, 5]);
         const dpr = Math.min(devicePixelRatio || 1, isMobile ? 1.5 : 2);
         const minFrame = isMobile ? 33 : 0;          // ~30fps cap on mobile
         const glow = isMobile ? 0 : 10;              // shadowBlur is desktop-only (the costly op)
@@ -499,7 +512,19 @@
                 ctx.shadowBlur = isA ? glow : 0;
                 ctx.beginPath(); ctx.arc(n[0] * W, n[1] * H, isA ? 3.6 : 2.2, 0, Math.PI * 2); ctx.fill();
             });
-            ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+            // System-map labels (desktop only)
+            if (!isMobile) {
+                ctx.font = '10px "JetBrains Mono", monospace';
+                nodes.forEach((n, i) => {
+                    const isA = accent.has(i);
+                    ctx.fillStyle = isA ? colAcc : colDim;
+                    ctx.globalAlpha = isA ? 0.72 : 0.42;
+                    ctx.textAlign = n[5];
+                    ctx.fillText(n[2], n[0] * W + n[3], n[1] * H + n[4]);
+                });
+            }
+            ctx.globalAlpha = 1;
             if (Math.random() < 0.01) { const k = (Math.random() * pulses.length) | 0; pulses[k].on = true; }
         }
         function loop(now) {

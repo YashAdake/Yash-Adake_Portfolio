@@ -261,21 +261,38 @@
     <main id="main">
         <!-- HERO -->
         <section id="home" class="hero">
+            <!-- The field is the real architecture of the three live products,
+                 not decoration: hub -> product -> what it actually runs on. -->
             <div class="hero-field" aria-hidden="true">
-                <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+                <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
                     <g class="topo-lines">
-                        <path class="topo-line" d="M120,140 L360,260 L300,440 M360,260 L640,180 L900,300 M640,180 L760,420 M900,300 L1080,200 M900,300 L1040,460 M300,440 L600,520 L760,420 M600,520 L1040,460"/>
+                        <path class="topo-line" d="M628,156 L315,60 L204,144 M628,156 L572,420 L674,528 M572,420 L471,330 M628,156 L968,120 L1005,300 L876,420 L1005,528 M1005,300 L710,540"/>
                     </g>
                     <g class="topo-dots">
-                        <circle class="topo-node is-accent" cx="640" cy="180" r="4"/>
-                        <circle class="topo-node" cx="120" cy="140" r="3"/>
-                        <circle class="topo-node" cx="360" cy="260" r="3"/>
-                        <circle class="topo-node" cx="300" cy="440" r="3"/>
-                        <circle class="topo-node is-accent" cx="900" cy="300" r="4"/>
-                        <circle class="topo-node" cx="760" cy="420" r="3"/>
-                        <circle class="topo-node" cx="1080" cy="200" r="3"/>
-                        <circle class="topo-node" cx="600" cy="520" r="3"/>
-                        <circle class="topo-node" cx="1040" cy="460" r="3"/>
+                        <circle class="topo-node is-accent" cx="628" cy="156" r="4"/>
+                        <circle class="topo-node is-accent" cx="315" cy="60" r="4"/>
+                        <circle class="topo-node" cx="204" cy="144" r="3"/>
+                        <circle class="topo-node is-accent" cx="572" cy="420" r="4"/>
+                        <circle class="topo-node" cx="674" cy="528" r="3"/>
+                        <circle class="topo-node is-accent" cx="968" cy="120" r="4"/>
+                        <circle class="topo-node" cx="1005" cy="300" r="3"/>
+                        <circle class="topo-node" cx="876" cy="420" r="3"/>
+                        <circle class="topo-node" cx="1005" cy="528" r="3"/>
+                        <circle class="topo-node" cx="710" cy="540" r="3"/>
+                        <circle class="topo-node" cx="471" cy="330" r="3"/>
+                    </g>
+                    <g class="topo-labels">
+                        <text class="topo-label is-accent" x="628" y="142" text-anchor="middle">yashadake.com</text>
+                        <text class="topo-label is-accent" x="315" y="46" text-anchor="middle">myjson</text>
+                        <text class="topo-label" x="204" y="162" text-anchor="middle">jq 1.8 · wasm</text>
+                        <text class="topo-label is-accent" x="586" y="424" text-anchor="start">airdraw</text>
+                        <text class="topo-label" x="674" y="546" text-anchor="middle">mediapipe · wasm</text>
+                        <text class="topo-label is-accent" x="968" y="106" text-anchor="middle">optiresume.in</text>
+                        <text class="topo-label" x="1019" y="304" text-anchor="start">fastapi</text>
+                        <text class="topo-label" x="876" y="438" text-anchor="middle">ai gateway</text>
+                        <text class="topo-label" x="1005" y="546" text-anchor="middle">gemma · groq</text>
+                        <text class="topo-label" x="710" y="558" text-anchor="middle">neon postgres</text>
+                        <text class="topo-label" x="461" y="336" text-anchor="end">one-euro · canvas</text>
                     </g>
                 </svg>
                 <canvas id="heroCanvas"></canvas>

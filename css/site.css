@@ -3228,3 +3228,26 @@ body.light-mode .hero-name em {
 .demo-status.demo-status-err {
     color: var(--danger);
 }
+
+/* ---------- 29. HERO SYSTEM-MAP LABELS ---------------------- */
+/* Labels for the static (no-JS / reduced-motion) topology SVG.
+   The canvas version draws its own labels in app.js. */
+.topo-label {
+    font-family: var(--font-mono);
+    /* viewBox units — the slice scaling enlarges these ~1.5x on screen */
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    fill: var(--text-mute);
+    opacity: 0.45;
+}
+
+.topo-label.is-accent {
+    fill: var(--accent);
+    opacity: 0.7;
+}
+
+@media (max-width: 767px) {
+    .topo-labels {
+        display: none;
+    }
+}
