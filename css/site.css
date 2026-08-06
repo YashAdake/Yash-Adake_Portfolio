@@ -305,7 +305,6 @@ ul {
 #work,
 #about,
 #writing,
-#log,
 #contact,
 .site-footer {
     content-visibility: auto;
@@ -2963,99 +2962,6 @@ body.light-mode .hero-name em {
     font-size: var(--step--1);
     line-height: 1.55;
     color: var(--text-dim);
-}
-
-/* ---------- 25. SHIPPING LOG -------------------------------- */
-.log-list {
-    position: relative;
-    display: grid;
-    gap: var(--space-6);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    max-width: 74ch;
-}
-
-/* The rail — drawn behind the date dots */
-.log-list::before {
-    content: '';
-    position: absolute;
-    top: 0.4rem;
-    bottom: 0.4rem;
-    left: 0.34rem;
-    width: 1px;
-    background: var(--line-strong);
-}
-
-.log-item {
-    position: relative;
-    display: grid;
-    gap: 0.35rem var(--space-5);
-    padding-left: var(--space-6);
-}
-
-/* Node on the rail */
-.log-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.42rem;
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
-    border: 1px solid var(--accent);
-    background: var(--bg);
-}
-
-.log-item:first-child::before {
-    background: var(--accent);
-    box-shadow: 0 0 0 4px var(--accent-tint);
-}
-
-.log-date {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--text-mute);
-}
-
-.log-title {
-    margin: 0;
-    font-size: var(--step-0);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--text);
-}
-
-.log-desc {
-    margin: 0.15rem 0 0;
-    font-size: var(--step--1);
-    line-height: 1.65;
-    color: var(--text-dim);
-}
-
-.log-link {
-    color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
-    transition: color var(--dur-1) var(--ease);
-}
-
-.log-link:hover {
-    color: var(--accent-strong);
-}
-
-@media (min-width: 768px) {
-    .log-item {
-        grid-template-columns: 7.5rem 1fr;
-        align-items: start;
-        padding-left: var(--space-7);
-    }
-
-    .log-date {
-        padding-top: 0.2rem;
-    }
 }
 
 /* ---------- 26. LIVE REACHABILITY (status chips) ------------ */

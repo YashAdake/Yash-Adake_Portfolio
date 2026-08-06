@@ -281,7 +281,6 @@
             { g: 'Navigate', t: 'Selected work', run: () => scrollTo('#work') },
             { g: 'Navigate', t: 'About', run: () => scrollTo('#about') },
             { g: 'Navigate', t: 'Writing', run: () => scrollTo('#writing') },
-            { g: 'Navigate', t: 'Shipping log', run: () => scrollTo('#log') },
             { g: 'Navigate', t: 'Contact', run: () => scrollTo('#contact') },
             { g: 'Products', t: 'Open MyJSON', s: 'live', run: () => go('https://myjson.yashadake.com') },
             { g: 'Products', t: 'Open AirDraw', s: 'live', run: () => go('https://airdraw.yashadake.com') },
