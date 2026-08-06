@@ -1204,6 +1204,53 @@ body.light-mode .metric-value {
     border-color: var(--line-strong);
 }
 
+/* Product cards are containers (not one big link) so they can offer both the
+   live product and its case study. The actions row anchors to the card bottom. */
+.work-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-5);
+}
+
+.work-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-pill);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
+}
+
+.work-action .icon {
+    width: 0.95em;
+    height: 0.95em;
+}
+
+.work-action:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: var(--accent-tint);
+}
+
+.work-action-primary {
+    border-color: transparent;
+    background: var(--accent-solid);
+    color: #fff;
+}
+
+.work-action-primary:hover {
+    background: var(--accent-solid-hover);
+    border-color: transparent;
+    color: #fff;
+}
+
 @media (min-width: 768px) {
     .work-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2545,3 +2592,374 @@ body.light-mode .hero-name em {
     }
 }
 
+
+/* ---------- 24. CASE STUDIES (work/*.html) ------------------
+   Long-form product pages. Reuses the site's tokens, nav, footer
+   and reveal system; adds only the prose + decision furniture. */
+.cs-hero {
+    position: relative;
+    padding: calc(var(--section-y) + 3rem) 0 var(--section-y);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+}
+
+.cs-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-bg);
+    background: radial-gradient(90% 120% at 15% 0%, var(--accent-tint), transparent 60%);
+    pointer-events: none;
+}
+
+.cs-back {
+    /* Block-level (not inline-flex): .eyebrow below it is itself inline-flex,
+       so an inline back-link would share its line. */
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-mute);
+    text-decoration: none;
+    transition: color var(--dur-1) var(--ease);
+}
+
+.cs-back:hover {
+    color: var(--accent);
+}
+
+.cs-back .icon {
+    width: 0.9em;
+    height: 0.9em;
+}
+
+.cs-title {
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+}
+
+.cs-title em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.cs-lede {
+    max-width: 46ch;
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--text-dim);
+}
+
+.cs-lede strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.cs-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+/* Fact strip — role, timeline, status, stack */
+.cs-facts {
+    display: grid;
+    gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--line);
+}
+
+@media (min-width: 640px) {
+    .cs-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .cs-facts {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.cs-fact dt {
+    margin-bottom: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+}
+
+.cs-fact dd {
+    margin: 0;
+    font-size: var(--step--1);
+    line-height: 1.5;
+    color: var(--text);
+}
+
+/* Body sections */
+.cs-section {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.cs-section:last-of-type {
+    border-bottom: 0;
+}
+
+.cs-h2 {
+    margin: 0 0 var(--space-5);
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.cs-h2 em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.cs-prose > p {
+    max-width: 68ch;
+    margin: 0 0 var(--space-4);
+    font-size: var(--step-0);
+    line-height: 1.72;
+    color: var(--text-dim);
+}
+
+.cs-prose > p:last-child {
+    margin-bottom: 0;
+}
+
+.cs-prose strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.cs-prose code {
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--elevated);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    color: var(--text);
+}
+
+.cs-prose a:not(.btn):not(.work-action) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+/* Decision blocks — the "why", not the "what" */
+.cs-decisions {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    /* Cap the measure — full 1120px container gives ~140-char lines. */
+    max-width: 90ch;
+}
+
+.cs-decision {
+    padding: var(--space-5);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    background: var(--surface);
+    transition: border-color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+}
+
+.cs-decision:hover {
+    border-color: var(--line-strong);
+    border-left-color: var(--accent-strong);
+    transform: translateX(2px);
+}
+
+.cs-decision-label {
+    display: block;
+    margin-bottom: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.cs-decision h3 {
+    margin: 0 0 0.6rem;
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.cs-decision p {
+    margin: 0 0 var(--space-3);
+    font-size: var(--step--1);
+    line-height: 1.7;
+    color: var(--text-dim);
+}
+
+.cs-decision p:last-child {
+    margin-bottom: 0;
+}
+
+/* Numbers strip */
+.cs-numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+}
+
+.cs-number {
+    display: grid;
+    gap: 0.25rem;
+}
+
+.cs-number-value {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1;
+    color: var(--text);
+}
+
+.cs-number-label {
+    font-size: var(--step--1);
+    line-height: 1.45;
+    color: var(--text-mute);
+}
+
+/* Feature / shipped lists */
+.cs-list {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 72ch;
+}
+
+.cs-list li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-size: var(--step-0);
+    line-height: 1.65;
+    color: var(--text-dim);
+}
+
+.cs-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--accent);
+}
+
+.cs-list strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* Honest-limitations callout */
+.cs-note {
+    margin-top: var(--space-6);
+    padding: var(--space-5);
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--r-md);
+    background: transparent;
+}
+
+.cs-note-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--warn);
+}
+
+.cs-note p {
+    margin: 0;
+    font-size: var(--step--1);
+    line-height: 1.7;
+    color: var(--text-dim);
+}
+
+/* Foot navigation between case studies */
+.cs-next {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+}
+
+.cs-next-grid {
+    display: grid;
+    gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+    .cs-next-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.cs-next-card {
+    display: grid;
+    gap: 0.4rem;
+    padding: var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    text-decoration: none;
+    transition: border-color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+
+.cs-next-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line-strong));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2);
+}
+
+.cs-next-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+}
+
+.cs-next-title {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
+.cs-next-desc {
+    margin: 0;
+    font-size: var(--step--1);
+    line-height: 1.55;
+    color: var(--text-dim);
+}

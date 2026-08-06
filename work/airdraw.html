@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AirDraw — case study · Yash Adake</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="description" content="AirDraw turns noisy 30 fps hand-landmark data into something that feels like a pen — joint-angle gesture detection, One-Euro smoothing, presence smoothing across dropped frames, and an authoritative toolbar. All in the browser, with no backend.">
+    <meta name="author" content="Yash Adake">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+    <link rel="canonical" href="https://yashadake.com/work/airdraw.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yash Adake — Software Engineer">
+    <meta property="og:title" content="AirDraw — case study">
+    <meta property="og:description" content="Joint-angle gesture detection, One-Euro smoothing and presence smoothing — how noisy hand-landmark data was made to feel like a pen, entirely in the browser.">
+    <meta property="og:url" content="https://yashadake.com/work/airdraw.html">
+    <meta property="og:image" content="https://yashadake.com/photos/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yash_adake">
+    <meta name="twitter:title" content="AirDraw — case study">
+    <meta name="twitter:description" content="Making noisy 30 fps hand tracking feel like a pen — in a browser tab, with no backend.">
+    <meta name="twitter:image" content="https://yashadake.com/photos/og-image.png">
+
+    <meta name="theme-color" content="#0B0E14">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AirDraw — case study",
+        "description": "How noisy 30 fps hand-landmark data was turned into a usable drawing instrument: joint-angle gesture detection, One-Euro pointer smoothing, presence smoothing across dropped frames, and an authoritative toolbar.",
+        "url": "https://yashadake.com/work/airdraw.html",
+        "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
+        "publisher": { "@type": "Person", "name": "Yash Adake" },
+        "about": { "@type": "SoftwareApplication", "name": "AirDraw", "url": "https://airdraw.yashadake.com" },
+        "mainEntityOfPage": "https://yashadake.com/work/airdraw.html"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://yashadake.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://yashadake.com/#products" },
+            { "@type": "ListItem", "position": 3, "name": "AirDraw", "item": "https://yashadake.com/work/airdraw.html" }
+        ]
+    }
+    </script>
+
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/instrumentserif-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/instrumentserif-italic-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/jetbrainsmono-latin.woff2" crossorigin>
+
+    <link rel="stylesheet" href="../css/site.css?v=3.1.0">
+
+    <link rel="icon" type="image/x-icon" href="../photos/YA-Favicon.ico">
+    <link rel="apple-touch-icon" href="../photos/nav-brand.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></symbol>
+            <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+            <symbol id="i-twitter" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+            <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+            <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 19V5"/></symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+            <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+            <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></symbol>
+        </defs>
+    </svg>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="site-nav" id="siteNav">
+        <nav class="container nav-inner" aria-label="Primary">
+            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+                <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
+            </a>
+
+            <div class="nav-links">
+                <a class="nav-link" href="../index.html">Home</a>
+                <a class="nav-link active" href="../index.html#products">Products</a>
+                <a class="nav-link" href="../index.html#work">Work</a>
+                <a class="nav-link" href="../index.html#about">About</a>
+                <a class="nav-link" href="../index.html#writing">Writing</a>
+                <a class="nav-link" href="../index.html#contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark / light mode">
+                    <svg class="icon" id="themeIcon" aria-hidden="true"><use href="#i-sun"/></svg>
+                </button>
+                <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+                    <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="nav-panel" id="navPanel">
+        <a href="../index.html">Home <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#products">Products <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#work">Work <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#about">About <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#writing">Writing <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <main id="main">
+        <!-- HERO -->
+        <section class="cs-hero">
+            <div class="container">
+                <a class="cs-back" href="../index.html#products"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All products</a>
+                <p class="eyebrow">Case study · Browser CV · Real-time</p>
+                <h1 class="cs-title">Air<em>Draw</em></h1>
+                <p class="cs-lede">Paint with your hand in mid-air, in a browser tab. The demo is easy. The engineering was making <strong>noisy 30 fps landmark data feel like a pen</strong> — steady when you're careful, responsive when you're fast, and unbroken when a frame goes missing.</p>
+
+                <div class="cs-actions">
+                    <a class="btn" href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer">Open AirDraw <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+                    <a class="btn btn-ghost" href="../index.html#contact">Talk about this work</a>
+                </div>
+
+                <dl class="cs-facts">
+                    <div class="cs-fact">
+                        <dt>Role</dt>
+                        <dd>Sole engineer — CV pipeline, interaction design, rendering, UI</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Status</dt>
+                        <dd>Live in production · no install, no signup</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Stack</dt>
+                        <dd>Next.js 15 · React 19 · TypeScript strict · MediaPipe Tasks (Wasm + WebGL) · Zustand · Framer Motion</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Backend</dt>
+                        <dd>None. Frames never leave the device — there is no server to send them to</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section class="cs-section" id="problem">
+            <div class="container">
+                <h2 class="cs-h2">The <em>problem</em></h2>
+                <div class="cs-prose">
+                    <p>Hand-tracking demos are everywhere and almost all of them fall apart the moment a real person uses them. Gestures stop registering as soon as the hand rotates. Strokes shatter into fragments when the tracker misses a frame. Lines wobble because raw landmark coordinates jitter by a few pixels every frame even when your hand is perfectly still. And smoothing that away introduces lag, which feels worse than the jitter did.</p>
+                    <p>None of that is a machine-learning problem — the model is good. It's a <strong>signal-processing and interaction-design problem</strong> sitting on top of a good model, and that's where all the work went.</p>
+                </div>
+
+                <div class="cs-numbers">
+                    <div class="cs-number"><span class="cs-number-value">5</span><span class="cs-number-label">Gestures in the vocabulary</span></div>
+                    <div class="cs-number"><span class="cs-number-value">4</span><span class="cs-number-label">Explicit tool modes, toolbar-authoritative</span></div>
+                    <div class="cs-number"><span class="cs-number-value">180 ms</span><span class="cs-number-label">Presence smoothing window</span></div>
+                    <div class="cs-number"><span class="cs-number-value">0</span><span class="cs-number-label">Frames that leave the device</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DECISIONS -->
+        <section class="cs-section" id="decisions">
+            <div class="container">
+                <h2 class="cs-h2">Making it feel like a <em>pen</em></h2>
+
+                <div class="cs-decisions">
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 01</span>
+                        <h3>Joint angles, not fingertip heights</h3>
+                        <p>The naive way to detect "index finger up" is to compare the fingertip's y-coordinate to the knuckle's. It works beautifully in testing, because in testing your hand is upright and at a fixed distance. Rotate your wrist and it collapses. Lean toward the camera and the thresholds drift.</p>
+                        <p>AirDraw instead computes the <strong>angle at each finger joint</strong> and normalises against palm size. That makes detection rotation-invariant and distance-adaptive: the same gesture reads correctly whether the hand is upright, tilted, near or far. It's more maths for the same feature — and it's the difference between a demo and something usable.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 02</span>
+                        <h3>One-Euro smoothing, because a fixed filter has to pick a side</h3>
+                        <p>Landmark coordinates jitter constantly. A fixed low-pass filter forces an unwinnable choice: smooth enough to kill the jitter and every fast stroke lags behind your hand, or responsive enough to keep up and slow careful lines shimmer.</p>
+                        <p>The One-Euro filter adapts its cutoff to pointer speed — heavy smoothing when you're moving slowly and precision matters, light smoothing when you're moving fast and latency matters. Stroke width is modulated by velocity on top of that, which is what gives quick strokes their taper and makes the output read as ink rather than a mouse trail.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 03</span>
+                        <h3>Presence smoothing — survive the dropped frame</h3>
+                        <p>The tracker occasionally returns nothing for a frame or two: a blur, a bad angle, a moment of poor light. Treated literally, that ends the stroke and starts a new one — so a single continuous gesture comes out as three broken pieces.</p>
+                        <p>AirDraw holds the last known landmark for <strong>180 ms</strong> before accepting that the hand is really gone. That window is long enough to bridge one or two dropped frames and short enough that lifting your hand still feels immediate.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 04</span>
+                        <h3>The toolbar always wins</h3>
+                        <p>An interface that silently reinterprets your intent is infuriating. So gesture recognition never overrides an explicit choice: there are four modes — <strong>Auto</strong> (index draws, V erases, gesture decides per stroke), <strong>Draw</strong>, <strong>Erase</strong> and <strong>Pause</strong> — and in the three locked modes the toolbar is authoritative no matter what the hand does.</p>
+                        <p>Pause exists for a specific human reason: you want to show someone the canvas, or move your hands while you talk, without smearing what you just made.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 05</span>
+                        <h3>Destructive gestures need a different trigger shape</h3>
+                        <p>Cycling the palette fires on the <em>rising edge</em> of a thumbs-up, once per pose — otherwise holding the gesture for half a second would strobe through every colour. Clearing the canvas, which cannot be casually undone, requires an open palm held for roughly 600 ms. The trigger mechanism is chosen by consequence, not for consistency's sake.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 06</span>
+                        <h3>Never re-render React on a video frame</h3>
+                        <p>Drawing runs on a bitmap canvas with <code>destination-out</code> compositing for erase, so rendering cost stays O(1) no matter how long the drawing gets — no growing vector list to redraw each frame. Just as important, per-frame state was moved out of React entirely: routing 30 landmark updates a second through component state was the single biggest source of stutter, and eliminating it did more for perceived smoothness than any filter tuning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UX -->
+        <section class="cs-section" id="ux">
+            <div class="container">
+                <h2 class="cs-h2">The unglamorous <em>half</em></h2>
+                <div class="cs-prose">
+                    <p>A camera-based app has more ways to fail before it starts than after. Permission denied, permission dismissed, no camera present, the model failing to download, an unsupported browser — each of those is a distinct state that needs its own honest message, not a spinner that never resolves.</p>
+                </div>
+                <ul class="cs-list">
+                    <li><strong>Every failure mode says what happened and what to do</strong> — permission denial, model-load failure and unsupported browsers are handled as first-class states rather than as an error boundary.</li>
+                    <li><strong>A five-gesture vocabulary, deliberately.</strong> An earlier pinch-to-resize gesture was cut rather than kept: it conflicted with the draw pose often enough to be worse than the feature was worth. Removing it made the remaining four more reliable.</li>
+                    <li><strong>Brush size and colour are also reachable from the toolbar</strong>, so nothing is <em>only</em> available through a gesture — the interface never traps you behind a pose your hand won't hold.</li>
+                    <li><strong>Mobile is supported as best-effort and labelled as such</strong> — viewport handling, reachable controls, canvas sizing and touch were done properly, while acknowledging that a laptop webcam at desk distance is the setup the gesture tuning targets.</li>
+                    <li><strong>The privacy property is structural.</strong> There is no backend, so the webcam feed cannot be uploaded — not as a policy, but as an absence of capability.</li>
+                </ul>
+
+                <div class="cs-note">
+                    <span class="cs-note-label">Honest note</span>
+                    <p>This is genuinely camera-dependent software. It wants reasonable lighting and a hand inside the frame at roughly desk distance; in a dim room, tracking quality drops and no amount of filtering fixes that. The app tells you when it has lost your hand rather than pretending otherwise.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT CASE STUDIES -->
+        <section class="cs-next">
+            <div class="container">
+                <div class="cs-next-grid">
+                    <a class="cs-next-card" href="optiresume.html">
+                        <span class="cs-next-label">Next case study</span>
+                        <h2 class="cs-next-title">OptiResume</h2>
+                        <p class="cs-next-desc">A campus-placement platform where the LLM is deliberately never allowed to compute the score.</p>
+                    </a>
+                    <a class="cs-next-card" href="myjson.html">
+                        <span class="cs-next-label">Next case study</span>
+                        <h2 class="cs-next-title">MyJSON</h2>
+                        <p class="cs-next-desc">A JSON workstation that runs entirely in the browser — including real jq compiled to WebAssembly.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-brand">
+                    <p class="footer-name">Yash Adake</p>
+                    <p class="footer-tagline">Software Engineer · Remote-friendly worldwide · GMT+5:30</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#products">Products</a>
+                    <a href="../index.html#work">Work</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#writing">Writing</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                    <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-github"/></svg></a>
+                    <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+                    <a href="mailto:hello@yashadake.com" aria-label="Email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© <span id="currentYear">2026</span> Yash Adake</span>
+                <span>Typeset in Inter, Instrument Serif &amp; JetBrains Mono</span>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTop" class="scroll-to-top" type="button" aria-label="Scroll to top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></button>
+
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-label" id="cursorLabel"></div>
+    </div>
+
+    <script src="../js/app.js?v=3.1.0" defer></script>
+    <script src="../js/analytics.js?v=2.0.1" defer></script>
+</body>
+
+</html>

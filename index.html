@@ -12,8 +12,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta name="description" content="Yash Adake — Software Engineer · Remote-friendly, based in India (GMT+5:30). Backend systems, cloud infrastructure, and applied AI. Open to remote roles and consulting worldwide.">
-    <meta name="keywords" content="Yash Adake, remote software engineer, remote backend developer, remote DevOps engineer, Python developer, Docker, PostgreSQL, API development, cloud engineer, agentic AI, India, ArthaVedh">
+    <meta name="description" content="Yash Adake — Software Engineer · Backend systems, cloud infrastructure, and applied AI. Three products live in production, built end-to-end: OptiResume (placement platform), MyJSON (browser-only devtools), AirDraw (in-browser computer vision). Remote-friendly, based in India (GMT+5:30). Open to roles and consulting worldwide.">
+    <meta name="keywords" content="Yash Adake, remote software engineer, remote backend developer, FastAPI developer, Next.js developer, Python developer, Docker, Kubernetes, PostgreSQL, API development, cloud engineer, applied AI, agentic AI, LLM engineer, OptiResume, MyJSON, AirDraw, India, ArthaVedh">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -27,7 +27,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Yash Adake — Software Engineer">
     <meta property="og:title" content="Yash Adake — Software Engineer">
-    <meta property="og:description" content="Backend systems, cloud infrastructure, and applied AI. Remote-friendly · Based in India (GMT+5:30) · Open to roles worldwide.">
+    <meta property="og:description" content="Backend systems, cloud infrastructure, and applied AI — with three products live in production, each built end-to-end. Remote-friendly · Based in India (GMT+5:30) · Open to roles worldwide.">
     <meta property="og:url" content="https://yashadake.com/">
     <meta property="og:image" content="https://yashadake.com/photos/og-image.png">
     <meta property="og:image:type" content="image/png">
@@ -42,7 +42,7 @@
     <meta name="twitter:site" content="@yash_adake">
     <meta name="twitter:creator" content="@yash_adake">
     <meta name="twitter:title" content="Yash Adake — Software Engineer">
-    <meta name="twitter:description" content="Backend systems, cloud infrastructure, and applied AI. Remote-friendly · Open to roles worldwide.">
+    <meta name="twitter:description" content="Backend systems, cloud infrastructure, and applied AI — three products live in production, each built end-to-end. Remote-friendly · Open to roles worldwide.">
     <meta name="twitter:image" content="https://yashadake.com/photos/og-image.png">
     <meta name="twitter:image:alt" content="Yash Adake — Software Engineer · Backend, cloud, and applied AI">
 
@@ -66,12 +66,55 @@
         ],
         "availableLanguage": ["English", "Hindi", "Marathi"],
         "alumniOf": { "@type": "EducationalOrganization", "name": "DKTE Society's Textile and Engineering Institute" },
-        "knowsAbout": ["Python", "Docker", "Kubernetes", "DevOps", "Cloud Computing", "PostgreSQL", "API Development", "Go", "Java", "Spring Boot", "Apache NiFi", "Azure", "Git", "CI/CD", "Generative AI"],
+        "knowsAbout": ["Python", "FastAPI", "Docker", "Kubernetes", "DevOps", "Cloud Computing", "PostgreSQL", "API Development", "Go", "Java", "Spring Boot", "Apache NiFi", "Azure", "Git", "CI/CD", "TypeScript", "Next.js", "React", "Generative AI", "Applied AI", "Agentic AI", "Large Language Models", "Prompt Engineering", "Computer Vision", "WebAssembly"],
         "sameAs": [
             "https://www.linkedin.com/in/yash-adake/",
             "https://github.com/YashAdake",
             "https://twitter.com/yash_adake",
             "https://www.instagram.com/yash_adake/"
+        ],
+        "owns": [
+            { "@type": "SoftwareApplication", "name": "OptiResume", "url": "https://optiresume.in" },
+            { "@type": "SoftwareApplication", "name": "MyJSON", "url": "https://myjson.yashadake.com" },
+            { "@type": "SoftwareApplication", "name": "AirDraw", "url": "https://airdraw.yashadake.com" }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "OptiResume",
+                "url": "https://optiresume.in",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Web browser",
+                "description": "A campus-placement platform: a 27-rule deterministic ATS score, semantic JD matching, per-job resume tailoring, LinkedIn auditing and an application tracker, plus a full preparation hub with a 100-problem coding track, timed test series, mock papers, revision cards, an MBA track and a verified campus-drives directory.",
+                "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "MyJSON",
+                "url": "https://myjson.yashadake.com",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "Web browser",
+                "description": "A browser-only JSON and YAML workstation. Monaco editing, three query languages (JSONPath, real jq 1.8 via WebAssembly, and RFC 6901 JSON Pointer), Ajv schema validation and inference, three-mode diff including RFC 6902 JSON Patch, code generation to seven targets, and bidirectional conversion across seven formats. All processing is local; nothing is uploaded.",
+                "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "AirDraw",
+                "url": "https://airdraw.yashadake.com",
+                "applicationCategory": "MultimediaApplication",
+                "operatingSystem": "Web browser",
+                "description": "Real-time gesture-controlled drawing in the browser. Hand tracking runs locally on MediaPipe HandLandmarker in WebAssembly, with joint-angle finger detection and One-Euro pointer smoothing. The webcam feed never leaves the device — there is no backend.",
+                "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+            }
         ]
     }
     </script>
@@ -92,7 +135,7 @@
     <link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="fonts/jetbrainsmono-latin.woff2" crossorigin>
 
-    <link rel="stylesheet" href="css/site.css?v=3.0.0">
+    <link rel="stylesheet" href="css/site.css?v=3.1.0">
 
     <link rel="icon" type="image/x-icon" href="photos/YA-Favicon.ico">
     <link rel="apple-touch-icon" href="photos/nav-brand.png">
@@ -240,7 +283,7 @@
                 <div class="hero-content">
                     <p class="eyebrow hero-status"><span class="status status-live"><span class="status-dot"></span></span> Open to remote roles &amp; consulting</p>
                     <h1 class="hero-name">Yash <em>Adake</em></h1>
-                    <p class="hero-tagline">I design backend systems and cloud infrastructure, then build the AI that runs on top of them — from service boundaries and API gateways to <strong>applied AI that holds up against messy, real-world scale.</strong></p>
+                    <p class="hero-tagline">I design backend systems and cloud infrastructure, then build the AI that runs on top of them — and I ship the whole thing myself. Three products live in production today: a placement platform with a 27-rule ATS engine, a JSON workstation running <strong>real jq compiled to WebAssembly</strong>, and computer vision that <strong>never sends a single frame to a server.</strong></p>
                     <p class="hero-meta">
                         Based in India (GMT+5:30) · Currently at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a>
                         · Exploring <a href="#writing">agentic AI</a>. Open to remote roles &amp; consulting worldwide.
@@ -261,8 +304,8 @@
                     </div>
 
                     <div class="hero-metrics">
-                        <div class="metric"><span class="metric-value">3</span><span class="metric-label">Products shipped</span></div>
-                        <div class="metric"><span class="metric-value">2</span><span class="metric-label">Live in production</span></div>
+                        <div class="metric"><span class="metric-value">3</span><span class="metric-label">Live in production</span></div>
+                        <div class="metric"><span class="metric-value">1,000+</span><span class="metric-label">Automated tests behind them</span></div>
                         <div class="metric"><span class="metric-value">Remote</span><span class="metric-label">Worldwide · GMT+5:30</span></div>
                     </div>
                 </div>
@@ -281,11 +324,11 @@
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">Live products</p>
                     <h2 class="section-title"><em>Built</em> &amp; shipped</h2>
-                    <p class="section-kicker">Products I designed, built, and shipped end-to-end on <strong>yashadake.com</strong> — privacy-first, in-browser, engineered to the details.</p>
+                    <p class="section-kicker">Three products I designed, built, and shipped end-to-end — architecture, backend, frontend, infrastructure, copy and launch. Each one is <strong>live, in production, and used by real people today.</strong></p>
                 </header>
 
                 <div class="work-grid">
-                    <a href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                    <article class="work-card" data-reveal>
                         <div class="work-visual">
                             <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
                             <span class="work-logotype">My<em>JSON</em></span>
@@ -293,37 +336,45 @@
                         <div class="work-meta">
                             <span class="work-tag">Devtools · Privacy-first</span>
                             <h3 class="work-title">MyJSON</h3>
-                            <p class="work-stats">14 themes · 7 codegen targets · 100% in-browser</p>
-                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs entirely in your browser — open DevTools and watch the Network tab stay silent while it works. Monaco editor with 14 themes, live JSONPath, Ajv schema validate/infer, a 3-mode diff, codegen to seven targets, and a decoders suite.</p>
+                            <p class="work-stats">Real jq 1.8 in WASM · 7 formats · 100% in-browser</p>
+                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs <em>entirely</em> in your browser — open DevTools and watch the Network tab stay silent while it works. Privacy here isn't a policy page; it's an architectural constraint, and every feature had to be built to respect it.</p>
                             <ul class="work-outcomes">
-                                <li>Tree &amp; table views (CSV export), JSONPath playground, and diff in Monaco, structured, and RFC 6902 JSON Patch modes</li>
-                                <li>Decoders for JWT / Base64 / URL / hex / Unicode, an NDJSON viewer, secret-on-paste detection, and a Ctrl+P palette</li>
-                                <li>Codegen to TS, Zod, Go, Rust, dataclass, Pydantic &amp; JSON Schema — shareable links LZ-compressed into the URL hash, nothing uploaded</li>
+                                <li>Three query languages side by side — JSONPath, <strong>real jq 1.8 compiled to WebAssembly</strong>, and RFC 6901 JSON Pointer — all evaluating live as you type</li>
+                                <li>Bidirectional conversion across JSON, YAML, XML, CSV, TOML, NDJSON and TOON with a live token-savings estimate; Ajv validation with one-click schema inference; diff in Monaco, structured and RFC 6902 JSON Patch modes; codegen to seven targets</li>
+                                <li>One-click Redact masks JWTs, emails, UUIDs, IPs and cards before you share; links LZ-compress into the URL hash; installs as a true offline PWA — all of it WCAG 2.2 AA</li>
                             </ul>
-                            <div class="work-stack"><span>Next.js 14</span><span>Monaco</span><span>Zustand</span><span>Ajv</span><span>Tailwind</span></div>
+                            <div class="work-stack"><span>Next.js 14</span><span>Monaco</span><span>jq-wasm</span><span>Zustand</span><span>Ajv</span><span>Tailwind</span></div>
+                            <div class="work-actions">
+                                <a class="work-action work-action-primary" href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer">Open MyJSON <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+                                <a class="work-action" href="work/myjson.html">Read the case study <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                            </div>
                         </div>
-                    </a>
+                    </article>
 
-                    <a href="https://optiresume.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                    <article class="work-card" data-reveal>
                         <div class="work-visual">
                             <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
                             <span class="work-logotype">Opti<em>Resume</em></span>
                         </div>
                         <div class="work-meta">
-                            <span class="work-tag">SaaS · Applied AI</span>
+                            <span class="work-tag">SaaS · Applied AI · Own domain</span>
                             <h3 class="work-title">OptiResume</h3>
-                            <p class="work-stats">27 ATS rules · hybrid local + AI · parse-and-discard</p>
-                            <p class="work-desc">An AI career toolkit, not just a resume checker: it scores resumes, LinkedIn profiles and live applications, then tailors them per job. Deterministic Python rules handle parseability, keyword fit and skill matching for free; an LLM does only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a single cost-aware gateway.</p>
+                            <p class="work-stats">27-rule ATS engine · 100-problem prep track · 1,000+ tests</p>
+                            <p class="work-desc">A campus-placement platform on its own domain, <strong>optiresume.in</strong>. It began as an honest ATS scorer and grew into the entire journey a candidate actually walks: score and tailor the resume, audit the LinkedIn profile, track every application — then genuinely prepare for the test and the interview.</p>
                             <ul class="work-outcomes">
-                                <li>One AI chokepoint — caching by prompt hash, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction &amp; per-call token-cost logging</li>
-                                <li>LinkedIn-profile scoring &amp; resume cross-check, multi-resume tailoring, skill proofs, an applications tracker and a share-to-earn credit ledger</li>
-                                <li>Parse-and-discard files (only extracted text + a hash persists) and an 8-hour absolute auth ceiling with reuse-detection refresh rotation</li>
+                                <li><strong>Hybrid by design.</strong> 27 deterministic Python rules do parseability, keyword fit and skill matching for free and offline; the LLM is reserved for semantic work — STAR rewrites, cover letters, per-JD tailoring — behind a single cost-aware gateway with prompt-hash caching, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction and per-call token-cost logging</li>
+                                <li><strong>The prep half.</strong> The Code Century (100 problems and a verifiable certificate), timed test series and mock papers with persisted scores, rapid-revision cards, a dedicated MBA track, a campus-drives directory with confidence tiers that auto-archives stale listings, and programmatic OA-pattern guides for 14 companies</li>
+                                <li><strong>Built to be trusted.</strong> Parse-and-discard file handling — only extracted text and a hash ever persist — an 8-hour absolute session ceiling with reuse-detecting refresh rotation, QR-verified ATS certificates, and an operator console covering the activation funnel, live LLM spend and support queries</li>
                             </ul>
-                            <div class="work-stack"><span>FastAPI</span><span>Neon Postgres</span><span>Next.js 14</span><span>Gemma</span><span>Render</span></div>
+                            <div class="work-stack"><span>FastAPI</span><span>Neon Postgres</span><span>Next.js 14</span><span>Gemma</span><span>Groq</span><span>Render</span></div>
+                            <div class="work-actions">
+                                <a class="work-action work-action-primary" href="https://optiresume.in" target="_blank" rel="noopener noreferrer">Open OptiResume <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+                                <a class="work-action" href="work/optiresume.html">Read the case study <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                            </div>
                         </div>
-                    </a>
+                    </article>
 
-                    <a href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer" class="work-card" data-reveal>
+                    <article class="work-card" data-reveal>
                         <div class="work-visual">
                             <span class="work-status"><span class="status status-live"><span class="status-dot"></span>Live</span></span>
                             <span class="work-logotype">Air<em>Draw</em></span>
@@ -331,16 +382,20 @@
                         <div class="work-meta">
                             <span class="work-tag">Browser CV · Real-time</span>
                             <h3 class="work-title">AirDraw</h3>
-                            <p class="work-stats">5 gestures · ~28 fps · 0 servers</p>
-                            <p class="work-desc">Gesture-controlled drawing in the browser — no install, no server, no GPU; the camera feed never leaves your tab. A five-gesture vocabulary (draw, erase, lift, cycle palette, clear) runs on MediaPipe HandLandmarker entirely in WebAssembly.</p>
+                            <p class="work-stats">5 gestures · 4 tool modes · 0 servers</p>
+                            <p class="work-desc">Paint with your hand in mid-air, in a browser tab. No install, no backend, no GPU — and the camera feed never leaves your device, because there is nowhere for it to go. MediaPipe HandLandmarker runs entirely in WebAssembly; the hard part was making noisy 30 fps landmark data feel like a pen.</p>
                             <ul class="work-outcomes">
-                                <li>Joint-angle finger detection — rotation-invariant and palm-size adaptive, so gestures hold as the hand turns</li>
-                                <li>One-Euro pointer smoothing + velocity-modulated width; bitmap canvas with destination-out erase keeps render O(1)</li>
-                                <li>Presence smoothing reuses the last frame for 180 ms, so strokes survive 1–2 dropped frames instead of breaking</li>
+                                <li><strong>Joint-angle finger detection</strong> instead of naive fingertip heights — rotation-invariant and palm-size adaptive, so gestures still read correctly as the hand turns or moves toward the camera</li>
+                                <li>One-Euro pointer smoothing with velocity-modulated stroke width, and a bitmap canvas using <code>destination-out</code> erase — so rendering stays O(1) no matter how long you draw</li>
+                                <li>Presence smoothing reuses the last landmark for 180 ms, so a stroke survives 1–2 dropped frames instead of shattering; the toolbar stays authoritative over gestures across four explicit modes (Auto, Draw, Erase, Pause)</li>
                             </ul>
                             <div class="work-stack"><span>Next.js 15</span><span>React 19</span><span>MediaPipe</span><span>Zustand</span><span>TypeScript</span></div>
+                            <div class="work-actions">
+                                <a class="work-action work-action-primary" href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer">Open AirDraw <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+                                <a class="work-action" href="work/airdraw.html">Read the case study <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                            </div>
                         </div>
-                    </a>
+                    </article>
                 </div>
             </div>
         </section>
@@ -403,7 +458,7 @@
 
                 <div class="about-grid">
                 <div class="about-prose" data-reveal>
-                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>, building platforms in Python, Docker, Kubernetes, and PostgreSQL where backend engineering meets DevOps — defining service boundaries, running API gateways, and keeping infrastructure dependable enough that the developers who rely on it never have to think about it. On my own time I've built three products end-to-end on yashadake.com — two live in production today — and I work in applied and agentic AI in depth.</p>
+                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>, building platforms in Python, Docker, Kubernetes, and PostgreSQL where backend engineering meets DevOps — defining service boundaries, running API gateways, and keeping infrastructure dependable enough that the developers who rely on it never have to think about it. On my own time I've built and shipped three products end-to-end — all three live in production today, one of them on its own domain — and I work in applied and agentic AI in depth.</p>
                     <p>I started there as an intern (Mar–Sep 2024), got my first production exposure to cloud infrastructure, and learned how to write Go that doesn't embarrass me a week later. Earlier experience came from <strong>LiNS</strong> (Spring Boot, JDBC), <strong>ONE IT Solutions</strong> (client-facing web work), and <strong>IEEE Bombay Section</strong> (volunteer full-stack).</p>
                     <p>Right now, I'm going deep on <strong>generative and agentic AI</strong> — not just using the APIs, but understanding how agents plan, use tools, and recover from failure. The next generation of software will be AI-native, and I intend to build parts of it.</p>
 
@@ -425,6 +480,7 @@
                     <div class="about-stack">
                         <div class="stack-row"><span class="stack-label">Daily</span><span>Python · Docker · Kubernetes · PostgreSQL · Git</span></div>
                         <div class="stack-row"><span class="stack-label">Also</span><span>Go · Java · Spring Boot · Apache NiFi · Flask</span></div>
+                        <div class="stack-row"><span class="stack-label">Products</span><span>FastAPI · Next.js · TypeScript · Tailwind · Vercel</span></div>
                         <div class="stack-row"><span class="stack-label">Cloud</span><span>CloudJiffy · Azure API Management · KrakenD Gateway</span></div>
                         <div class="stack-row"><span class="stack-label">Exploring</span><span>Generative AI · Agentic AI · LLM tooling</span></div>
                     </div>
@@ -668,7 +724,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/app.js?v=3.0.1" defer></script>
+    <script src="js/app.js?v=3.1.0" defer></script>
     <script src="js/analytics.js?v=2.0.1" defer></script>
 </body>
 

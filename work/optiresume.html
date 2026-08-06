@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>OptiResume — case study · Yash Adake</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="description" content="How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform on its own domain — the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents worth remembering.">
+    <meta name="author" content="Yash Adake">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+    <link rel="canonical" href="https://yashadake.com/work/optiresume.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yash Adake — Software Engineer">
+    <meta property="og:title" content="OptiResume — case study">
+    <meta property="og:description" content="From a 27-rule ATS scorer to a campus-placement platform: the hybrid-AI decision, a single cost-aware AI gateway, parse-and-discard handling, and what production actually broke.">
+    <meta property="og:url" content="https://yashadake.com/work/optiresume.html">
+    <meta property="og:image" content="https://yashadake.com/photos/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yash_adake">
+    <meta name="twitter:title" content="OptiResume — case study">
+    <meta name="twitter:description" content="From a 27-rule ATS scorer to a campus-placement platform — the decisions, the guardrails, and the production incidents.">
+    <meta name="twitter:image" content="https://yashadake.com/photos/og-image.png">
+
+    <meta name="theme-color" content="#0B0E14">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "OptiResume — case study",
+        "description": "How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents.",
+        "url": "https://yashadake.com/work/optiresume.html",
+        "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
+        "publisher": { "@type": "Person", "name": "Yash Adake" },
+        "about": { "@type": "SoftwareApplication", "name": "OptiResume", "url": "https://optiresume.in" },
+        "mainEntityOfPage": "https://yashadake.com/work/optiresume.html"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://yashadake.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://yashadake.com/#products" },
+            { "@type": "ListItem", "position": 3, "name": "OptiResume", "item": "https://yashadake.com/work/optiresume.html" }
+        ]
+    }
+    </script>
+
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/instrumentserif-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/instrumentserif-italic-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/jetbrainsmono-latin.woff2" crossorigin>
+
+    <link rel="stylesheet" href="../css/site.css?v=3.1.0">
+
+    <link rel="icon" type="image/x-icon" href="../photos/YA-Favicon.ico">
+    <link rel="apple-touch-icon" href="../photos/nav-brand.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></symbol>
+            <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+            <symbol id="i-twitter" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+            <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+            <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 19V5"/></symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+            <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+            <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></symbol>
+        </defs>
+    </svg>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="site-nav" id="siteNav">
+        <nav class="container nav-inner" aria-label="Primary">
+            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+                <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
+            </a>
+
+            <div class="nav-links">
+                <a class="nav-link" href="../index.html">Home</a>
+                <a class="nav-link active" href="../index.html#products">Products</a>
+                <a class="nav-link" href="../index.html#work">Work</a>
+                <a class="nav-link" href="../index.html#about">About</a>
+                <a class="nav-link" href="../index.html#writing">Writing</a>
+                <a class="nav-link" href="../index.html#contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark / light mode">
+                    <svg class="icon" id="themeIcon" aria-hidden="true"><use href="#i-sun"/></svg>
+                </button>
+                <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+                    <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="nav-panel" id="navPanel">
+        <a href="../index.html">Home <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#products">Products <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#work">Work <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#about">About <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#writing">Writing <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <main id="main">
+        <!-- HERO -->
+        <section class="cs-hero">
+            <div class="container">
+                <a class="cs-back" href="../index.html#products"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All products</a>
+                <p class="eyebrow">Case study · SaaS · Applied AI</p>
+                <h1 class="cs-title">Opti<em>Resume</em></h1>
+                <p class="cs-lede">A campus-placement platform on its own domain. It started as an honest ATS scorer that used <strong>no AI at all</strong> — and that constraint is still the most important decision in the product.</p>
+
+                <div class="cs-actions">
+                    <a class="btn" href="https://optiresume.in" target="_blank" rel="noopener noreferrer">Open optiresume.in <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+                    <a class="btn btn-ghost" href="../index.html#contact">Talk about this work</a>
+                </div>
+
+                <dl class="cs-facts">
+                    <div class="cs-fact">
+                        <dt>Role</dt>
+                        <dd>Sole engineer — product, backend, frontend, infrastructure, launch</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Status</dt>
+                        <dd>Live in production · own domain since July 2026</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Stack</dt>
+                        <dd>FastAPI · Python 3.12 async · Postgres (Neon) · Next.js 14 · TypeScript · Gemma · Groq · Render · Vercel</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Shape</dt>
+                        <dd>Hybrid: deterministic local engine + a single cost-aware LLM gateway</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section class="cs-section" id="problem">
+            <div class="container">
+                <h2 class="cs-h2">The <em>problem</em></h2>
+                <div class="cs-prose">
+                    <p>The resume-checker category is full of tools that quietly do one thing: pipe your CV into a language model and return a confident number. The number moves between runs. The advice invents experience you never had. And the moment you actually need it — the week before a campus drive — you discover the free tier ran out.</p>
+                    <p>Two problems sat underneath that. First, <strong>an AI-generated score is not a score</strong>; it's a plausible sentence with a digit in it. Second, and bigger: a resume score is not what a candidate actually needs. Getting past the ATS is one gate out of four. They still have an online assessment to sit, an aptitude section to survive, an interview to walk into, and — in India, where most of this happens through campus drives — a fog of unreliable information about which companies are even hiring.</p>
+                    <p>So OptiResume had to be honest about the score <em>and</em> keep going past it.</p>
+                </div>
+
+                <div class="cs-numbers">
+                    <div class="cs-number"><span class="cs-number-value">27</span><span class="cs-number-label">Deterministic ATS rules — no AI in the score</span></div>
+                    <div class="cs-number"><span class="cs-number-value">100</span><span class="cs-number-label">Problems in The Code Century track</span></div>
+                    <div class="cs-number"><span class="cs-number-value">14</span><span class="cs-number-label">Company OA-pattern guides</span></div>
+                    <div class="cs-number"><span class="cs-number-value">1,000+</span><span class="cs-number-label">Automated tests gating every deploy</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HYBRID AI -->
+        <section class="cs-section" id="hybrid">
+            <div class="container">
+                <h2 class="cs-h2">The decision that shaped <em>everything</em> else</h2>
+                <div class="cs-prose">
+                    <p>The founding architecture decision — written down as an ADR before a line of scoring code existed — was that <strong>the LLM never computes the score.</strong> It draws a hard line through the product: anything that must be reproducible, auditable and free is deterministic Python; the model is only invited in for work that is genuinely semantic.</p>
+                    <p>That single boundary is why the rest of the system is affordable, testable, and defensible when a user asks <em>"why did I get 68?"</em> — a question no wrapper around a chat completion can answer.</p>
+                </div>
+
+                <div class="cs-decisions">
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 01</span>
+                        <h3>Rules score. The model writes.</h3>
+                        <p>Parseability, section detection, keyword coverage, skill matching, formatting hazards and contact hygiene are 27 explicit rules with explicit weights. They run offline, cost nothing, and produce the same number twice — so the score can be explained line by line and regression-tested like any other pure function.</p>
+                        <p>The LLM handles only what rules genuinely cannot: rewriting a bullet into STAR form using the candidate's own facts, drafting a cover letter, and tailoring a resume to a specific job description.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 02</span>
+                        <h3>Never invent experience</h3>
+                        <p>Every generative prompt is grounded: the model may only re-say what the candidate already claims. It may sharpen a weak bullet, quantify a vague one, or map it to the recruiter's vocabulary — it may not add a technology, a title, or a result that isn't in the source.</p>
+                        <p>This is the difference between a tool a candidate can walk into an interview behind, and one that gets them caught.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 03</span>
+                        <h3>The whole product works signed out — up to a point</h3>
+                        <p>An anonymous visitor can run the free rule-based check and see a real score, because the rules are local and cost nothing to run. Using the AI features requires an account, because they cost money per call. Taste before signup; account before spend.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GATEWAY -->
+        <section class="cs-section" id="gateway">
+            <div class="container">
+                <h2 class="cs-h2">One <em>chokepoint</em> for every AI call</h2>
+                <div class="cs-prose">
+                    <p>Every LLM call in the product goes through a single gateway module. Not "most" calls — every one. That was a deliberate architectural constraint, because the moment a second code path can reach the provider directly, all of the following stop being guarantees and start being hopes.</p>
+                </div>
+
+                <ul class="cs-list">
+                    <li><strong>Prompt-hash caching.</strong> Identical work is never paid for twice. The cache key binds to the <em>effective</em> model and sampling parameters, so switching models is a cache miss rather than seven days of stale output from the old one — a subtlety that only showed up during an audit.</li>
+                    <li><strong>In-flight deduplication.</strong> If two requests for the same work arrive together, the second waits on the first instead of doubling the bill.</li>
+                    <li><strong>Layered quotas.</strong> A shared daily cap protects the platform; per-user credit quotas protect it from any single user; both are enforced in the same place they're measured.</li>
+                    <li><strong>PII redaction before the wire.</strong> Personal identifiers are stripped on the way out, and untrusted resume text is wrapped in delimiter tags so the model treats it as data rather than instructions.</li>
+                    <li><strong>Per-call cost logging.</strong> Every call records its token counts and micro-USD cost, which is what makes the operator console able to answer "what did today cost?" without an invoice.</li>
+                    <li><strong>Provider flexibility.</strong> A Groq fast-path serves the latency-critical slot while the primary provider handles the rest — swappable because there is exactly one place to swap it.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TRUST -->
+        <section class="cs-section" id="trust">
+            <div class="container">
+                <h2 class="cs-h2">Built to be <em>trusted</em> with a resume</h2>
+                <div class="cs-prose">
+                    <p>People upload the single most sensitive document in their professional life. The design answer was to hold as little of it as possible, for as short a time as possible.</p>
+                </div>
+
+                <div class="cs-decisions">
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 04</span>
+                        <h3>Parse and discard</h3>
+                        <p>Uploaded files are never stored. The PDF or DOCX is parsed in memory, the extracted text and a content hash are persisted, and the original bytes are dropped. The hash gives deduplication and change detection without keeping the document — so a breach cannot leak a resume that was never written down.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 05</span>
+                        <h3>An eight-hour ceiling, not a rolling one</h3>
+                        <p>Sessions have an <strong>absolute</strong> eight-hour lifetime — refreshing extends nothing past that wall. Refresh tokens rotate on every use, and a reused token is treated as theft: the whole family is revoked. The second ADR in the repo exists to explain why the inconvenience is the point.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 06</span>
+                        <h3>Verifiable claims, not screenshots</h3>
+                        <p>Scores can be turned into a shareable ATS certificate with a QR-verifiable code, so a claim on a profile resolves back to a real record instead of an image anyone could edit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLATFORM -->
+        <section class="cs-section" id="platform">
+            <div class="container">
+                <h2 class="cs-h2">From resume tool to <em>placement platform</em></h2>
+                <div class="cs-prose">
+                    <p>The resume half was the entry point, not the product. What users actually came back for was everything that happens after the resume is good enough — and that half is now the larger one.</p>
+                </div>
+
+                <ul class="cs-list">
+                    <li><strong>The Code Century.</strong> A curated 100-problem coding track with progress tracking and a verifiable Code Centurion certificate at the end — a finishable goal instead of an infinite problem list.</li>
+                    <li><strong>Test series and mock papers.</strong> Timed, sectioned tests with scores persisted per attempt, so improvement is measurable rather than remembered.</li>
+                    <li><strong>Rapid revision.</strong> Compact revision cards for the night before, when nobody is going to read a textbook.</li>
+                    <li><strong>A dedicated MBA track.</strong> Built separately rather than bolted onto the engineering content, because the syllabus, the scoring conventions and the interview format genuinely differ.</li>
+                    <li><strong>A campus-drives directory with a freshness model.</strong> Listings carry confidence tiers; stale ones are downgraded automatically and archived after a 90-day grace period, with an admin re-verification queue. Nothing rots quietly into a lie.</li>
+                    <li><strong>Programmatic OA-pattern pages for 14 companies</strong>, plus an eligibility checker, an application tracker, LinkedIn-profile auditing and cross-checking against the resume, and a share-to-earn credit ledger.</li>
+                    <li><strong>An operator console.</strong> Activation funnel (signup → verify → analyze → use AI), live LLM spend, audit log, credit requests and a support-query channel — because a solo-run product needs to be observable by the person running it.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PRODUCTION -->
+        <section class="cs-section" id="production">
+            <div class="container">
+                <h2 class="cs-h2">What production actually <em>broke</em></h2>
+                <div class="cs-prose">
+                    <p>The interesting part of shipping is rarely the launch. Three incidents from this product's first weeks live are worth writing down, because each one changed a rule I now apply everywhere.</p>
+                </div>
+
+                <div class="cs-decisions">
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Incident · dependencies</span>
+                        <h3>A floating dependency took every AI call down</h3>
+                        <p>The provider SDK was unpinned. A minor release changed behaviour and every Gemini call in production started failing — with no deploy of mine anywhere near it. Fixed by pinning the exact version and, later, by committing a full constraints lock for the backend image.</p>
+                        <p><strong>Rule learned:</strong> a floating dependency is an unscheduled deploy performed by a stranger.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Incident · model aliases</span>
+                        <h3>Never gate a model on a <code>-latest</code> alias</h3>
+                        <p>The provider repointed a <code>-latest</code> alias to a different model. That model rejected a parameter the previous one accepted, and the calls started returning 400s. The alias had looked like a convenience; it was actually an uncontrolled dependency on someone else's roadmap.</p>
+                        <p>The same batch caught a second edge: the fast provider's token-per-minute window needed <code>max_tokens</code> clamped to it, or bursts were rejected rather than throttled.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Incident · configuration</span>
+                        <h3>The API base URL must carry its version prefix</h3>
+                        <p>A frontend environment variable set without the <code>/api/v1</code> suffix produces a build that looks completely healthy and can't reach a single endpoint. It now has a documented invariant and a deploy checklist entry, because the failure mode gives you no useful signal at all — just 404s from a server that is running perfectly.</p>
+                    </div>
+                </div>
+
+                <div class="cs-prose" style="margin-top: var(--space-6)">
+                    <p>The product also moved to its own domain mid-life. That meant a full cutover — DNS, mail in both directions, sign-in credentials, CAPTCHA origins, sitemap and search-console re-verification — with permanent redirects left behind on every old URL so nothing that was ever shared goes dead. Deployment runs a <code>dev → pre-prod → prod</code> branch pipeline across both the API host and the frontend host, so nothing reaches production without having been run somewhere else first.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT -->
+        <section class="cs-section" id="next">
+            <div class="container">
+                <h2 class="cs-h2">What's <em>next</em></h2>
+                <div class="cs-prose">
+                    <p>The work in flight is a large expansion of the preparation half — a substantially bigger question bank, per-topic mastery analytics that recommend one explainable next test rather than a wall of options, a spaced-repetition queue built from the user's own wrong answers, and guided role roadmaps that skip the phases a user can already pass.</p>
+                    <p>All of it is deliberately zero-AI: the founding decision still holds, and none of those features need a language model to work.</p>
+                </div>
+
+                <div class="cs-note">
+                    <span class="cs-note-label">Honest note</span>
+                    <p>Everything described on this page is live in production today. The expansion above is built and tested but not yet shipped — it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing genuinely good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT CASE STUDIES -->
+        <section class="cs-next">
+            <div class="container">
+                <div class="cs-next-grid">
+                    <a class="cs-next-card" href="myjson.html">
+                        <span class="cs-next-label">Next case study</span>
+                        <h2 class="cs-next-title">MyJSON</h2>
+                        <p class="cs-next-desc">A JSON workstation that runs entirely in the browser — including real jq compiled to WebAssembly.</p>
+                    </a>
+                    <a class="cs-next-card" href="airdraw.html">
+                        <span class="cs-next-label">Next case study</span>
+                        <h2 class="cs-next-title">AirDraw</h2>
+                        <p class="cs-next-desc">Turning noisy 30 fps hand-landmark data into something that feels like a pen.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-brand">
+                    <p class="footer-name">Yash Adake</p>
+                    <p class="footer-tagline">Software Engineer · Remote-friendly worldwide · GMT+5:30</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#products">Products</a>
+                    <a href="../index.html#work">Work</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#writing">Writing</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                    <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-github"/></svg></a>
+                    <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+                    <a href="mailto:hello@yashadake.com" aria-label="Email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© <span id="currentYear">2026</span> Yash Adake</span>
+                <span>Typeset in Inter, Instrument Serif &amp; JetBrains Mono</span>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTop" class="scroll-to-top" type="button" aria-label="Scroll to top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></button>
+
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-label" id="cursorLabel"></div>
+    </div>
+
+    <script src="../js/app.js?v=3.1.0" defer></script>
+    <script src="../js/analytics.js?v=2.0.1" defer></script>
+</body>
+
+</html>

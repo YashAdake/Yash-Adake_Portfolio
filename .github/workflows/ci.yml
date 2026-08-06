@@ -2,9 +2,9 @@ name: Quality Checks
 
 on:
   push:
-    branches: ["V2.0.0.0", "main"]
+    branches: ["V3.0.0.0", "V2.0.0.0", "main"]
   pull_request:
-    branches: ["V2.0.0.0", "main"]
+    branches: ["V3.0.0.0", "V2.0.0.0", "main"]
 
 jobs:
   validate:

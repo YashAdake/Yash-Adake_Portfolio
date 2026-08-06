@@ -284,7 +284,10 @@
             { g: 'Navigate', t: 'Contact', run: () => scrollTo('#contact') },
             { g: 'Products', t: 'Open MyJSON', s: 'live', run: () => go('https://myjson.yashadake.com') },
             { g: 'Products', t: 'Open AirDraw', s: 'live', run: () => go('https://airdraw.yashadake.com') },
-            { g: 'Products', t: 'Open OptiResume', s: 'live', run: () => go('https://optiresume.yashadake.com') },
+            { g: 'Products', t: 'Open OptiResume', s: 'live · optiresume.in', run: () => go('https://optiresume.in') },
+            { g: 'Case studies', t: 'OptiResume — case study', s: 'placement platform', run: () => go('work/optiresume.html', false) },
+            { g: 'Case studies', t: 'MyJSON — case study', s: 'browser-only devtools', run: () => go('work/myjson.html', false) },
+            { g: 'Case studies', t: 'AirDraw — case study', s: 'in-browser computer vision', run: () => go('work/airdraw.html', false) },
             { g: 'Actions', t: 'Toggle theme', run: () => { close(); $('#themeToggle')?.click(); } },
             { g: 'Actions', t: 'Copy email', s: 'hello@yashadake.com', run: () => copy('hello@yashadake.com') },
             { g: 'Actions', t: 'Download resume', run: () => go('photos/Yash-Adake_Resume.pdf', false) },
@@ -370,7 +373,9 @@
         // Resolve a contextual label for the hovered target. Socials/icon links
         // use their own aria-label, so every icon shows its name (not just email).
         function resolveLabel(t) {
-            if (t.closest('.work-card')) return 'View';
+            // Product cards are containers with their own action links, so only
+            // label them when the pointer is actually over something clickable.
+            if (t.closest('.work-card')) return t.closest('a') ? 'View' : null;
             if (t.closest('.certi-card')) return 'View cert';
             if (t.closest('.writing-item')) return 'Read';
             if (t.closest('a[download]')) return 'Resume';

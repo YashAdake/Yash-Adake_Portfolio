@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MyJSON — case study · Yash Adake</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="description" content="MyJSON is a JSON and YAML workstation with no backend at all — including real jq 1.8 compiled to WebAssembly. How a hard privacy constraint shaped every feature decision in the product.">
+    <meta name="author" content="Yash Adake">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+    <link rel="canonical" href="https://yashadake.com/work/myjson.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Yash Adake — Software Engineer">
+    <meta property="og:title" content="MyJSON — case study">
+    <meta property="og:description" content="A JSON workstation with no backend at all — real jq 1.8 in WebAssembly, three query languages, seven formats, and a privacy promise you can verify in the Network tab.">
+    <meta property="og:url" content="https://yashadake.com/work/myjson.html">
+    <meta property="og:image" content="https://yashadake.com/photos/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yash_adake">
+    <meta name="twitter:title" content="MyJSON — case study">
+    <meta name="twitter:description" content="No backend, real jq in WebAssembly, and a privacy promise you can verify yourself.">
+    <meta name="twitter:image" content="https://yashadake.com/photos/og-image.png">
+
+    <meta name="theme-color" content="#0B0E14">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "MyJSON — case study",
+        "description": "How a hard no-backend privacy constraint shaped every feature decision in a JSON and YAML workstation — including compiling real jq 1.8 to WebAssembly.",
+        "url": "https://yashadake.com/work/myjson.html",
+        "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
+        "publisher": { "@type": "Person", "name": "Yash Adake" },
+        "about": { "@type": "SoftwareApplication", "name": "MyJSON", "url": "https://myjson.yashadake.com" },
+        "mainEntityOfPage": "https://yashadake.com/work/myjson.html"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://yashadake.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://yashadake.com/#products" },
+            { "@type": "ListItem", "position": 3, "name": "MyJSON", "item": "https://yashadake.com/work/myjson.html" }
+        ]
+    }
+    </script>
+
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/instrumentserif-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/instrumentserif-italic-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/inter-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/jetbrainsmono-latin.woff2" crossorigin>
+
+    <link rel="stylesheet" href="../css/site.css?v=3.1.0">
+
+    <link rel="icon" type="image/x-icon" href="../photos/YA-Favicon.ico">
+    <link rel="apple-touch-icon" href="../photos/nav-brand.png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></symbol>
+            <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+            <symbol id="i-twitter" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+            <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+            <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+            <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 19V5"/></symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+            <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+            <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></symbol>
+        </defs>
+    </svg>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="site-nav" id="siteNav">
+        <nav class="container nav-inner" aria-label="Primary">
+            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+                <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
+            </a>
+
+            <div class="nav-links">
+                <a class="nav-link" href="../index.html">Home</a>
+                <a class="nav-link active" href="../index.html#products">Products</a>
+                <a class="nav-link" href="../index.html#work">Work</a>
+                <a class="nav-link" href="../index.html#about">About</a>
+                <a class="nav-link" href="../index.html#writing">Writing</a>
+                <a class="nav-link" href="../index.html#contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark / light mode">
+                    <svg class="icon" id="themeIcon" aria-hidden="true"><use href="#i-sun"/></svg>
+                </button>
+                <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+                    <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="nav-panel" id="navPanel">
+        <a href="../index.html">Home <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#products">Products <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#work">Work <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#about">About <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#writing">Writing <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="../index.html#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <main id="main">
+        <!-- HERO -->
+        <section class="cs-hero">
+            <div class="container">
+                <a class="cs-back" href="../index.html#products"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All products</a>
+                <p class="eyebrow">Case study · Devtools · Privacy-first</p>
+                <h1 class="cs-title">My<em>JSON</em></h1>
+                <p class="cs-lede">A JSON and YAML workstation with <strong>no backend at all.</strong> Not "we don't log your data" — there is nowhere for the data to go. Every feature had to be built to survive that constraint, including real jq.</p>
+
+                <div class="cs-actions">
+                    <a class="btn" href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer">Open MyJSON <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+                    <a class="btn btn-ghost" href="../index.html#contact">Talk about this work</a>
+                </div>
+
+                <dl class="cs-facts">
+                    <div class="cs-fact">
+                        <dt>Role</dt>
+                        <dd>Sole engineer — architecture, UI, performance, accessibility, SEO</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Status</dt>
+                        <dd>Live in production · installable offline PWA</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Stack</dt>
+                        <dd>Next.js 14 · React · TypeScript strict · Monaco · jq-wasm · Zustand · Ajv · Tailwind</dd>
+                    </div>
+                    <div class="cs-fact">
+                        <dt>Servers</dt>
+                        <dd>Zero. Static hosting only — no API, no database, no telemetry</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section class="cs-section" id="problem">
+            <div class="container">
+                <h2 class="cs-h2">The <em>problem</em></h2>
+                <div class="cs-prose">
+                    <p>Every developer has done it: paste a production payload into the first JSON formatter a search returns, then feel a small cold moment about what was in it. Auth tokens. Customer emails. An internal URL that shouldn't be in a stranger's request log.</p>
+                    <p>Most online JSON tools POST your document to a server. The ones that don't are usually one narrow page — a formatter <em>or</em> a validator <em>or</em> a converter — so a real task means pasting the same sensitive blob into four different sites.</p>
+                    <p>MyJSON took the opposite constraint as its starting point: <strong>the app is not allowed to make a network request while you work.</strong> Everything else followed from having to honour that.</p>
+                </div>
+
+                <div class="cs-numbers">
+                    <div class="cs-number"><span class="cs-number-value">0</span><span class="cs-number-label">Network requests during processing</span></div>
+                    <div class="cs-number"><span class="cs-number-value">3</span><span class="cs-number-label">Query languages, live-evaluating</span></div>
+                    <div class="cs-number"><span class="cs-number-value">7</span><span class="cs-number-label">Formats, converting both directions</span></div>
+                    <div class="cs-number"><span class="cs-number-value">11</span><span class="cs-number-label">Focused tool pages</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DECISIONS -->
+        <section class="cs-section" id="decisions">
+            <div class="container">
+                <h2 class="cs-h2">The decisions that <em>cost</em> something</h2>
+                <div class="cs-prose">
+                    <p>A privacy claim is cheap to write and expensive to keep. These are the places where keeping it actually made the engineering harder — which is the only real evidence that the constraint was honoured.</p>
+                </div>
+
+                <div class="cs-decisions">
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 01</span>
+                        <h3>Make the promise verifiable, not trustworthy</h3>
+                        <p>"Trust us" is the weakest possible privacy claim. So the promise is stated as something a skeptical developer can check in ten seconds: open DevTools, watch the Network tab, and use the app. Nothing fires. A status-bar badge says so, and there is a dedicated page explaining exactly what that does and doesn't cover.</p>
+                        <p>This forced a real cost — no server-side anything, ever, for any feature — but it turned the product's main claim into something falsifiable.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 02</span>
+                        <h3>Ship <em>real</em> jq, not a jq-flavoured subset</h3>
+                        <p>The obvious path was to reimplement a useful subset of jq in TypeScript. Every such subset lies the moment a user pastes a filter from Stack Overflow that touches the part you didn't implement — and they can't tell whether the bug is theirs or yours.</p>
+                        <p>Instead, MyJSON ships <strong>jq 1.8 itself, compiled to WebAssembly</strong>, running in the browser with a <code>--raw-output</code> toggle. Filters behave exactly as they do in a terminal, because it is the same jq. The cost is bundle weight and a lazy-loading strategy; the benefit is that the tool never quietly lies.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 03</span>
+                        <h3>Three query languages, because people know different ones</h3>
+                        <p>JSONPath, jq, and RFC 6901 JSON Pointer sit side by side, all evaluating live as you type, with matched paths revealed back in the editor. They are not redundant: JSONPath is what most API docs use, jq is what pipelines use, and JSON Pointer is what JSON Patch and OpenAPI use. Forcing one on everyone would just be a preference dressed as a design.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 04</span>
+                        <h3>Sharing, without a server to share through</h3>
+                        <p>Share links normally mean an upload and a database row. Here the document is LZ-compressed and embedded in the URL hash — the fragment never leaves the browser, so a shared link carries its own payload and still touches no server. It also means shared links can't be revoked or mined, which is the honest trade and is documented as such.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 05</span>
+                        <h3>Degrade, don't die, on large documents</h3>
+                        <p>Monaco is a full IDE engine; on a multi-megabyte document its niceties become the reason the tab freezes. Above roughly 1 MB the editor deliberately scales its features down instead of trying to do everything and stalling. Heavy views are code-split, one parse result is shared across every view rather than re-parsed per panel, and editor re-renders are trimmed to what actually changed.</p>
+                    </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Decision 06</span>
+                        <h3>Redact before you share, not after you regret</h3>
+                        <p>One toolbar action masks JWTs, emails, UUIDs, IP addresses, credit-card numbers and credential-keyed values to <code>&lt;redacted:…&gt;</code>. Originals survive only in the in-memory undo stack — never written to disk, never persisted — so the safe version is the one that leaves the tab.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHIPPED -->
+        <section class="cs-section" id="shipped">
+            <div class="container">
+                <h2 class="cs-h2">What's <em>in</em> it</h2>
+                <ul class="cs-list">
+                    <li><strong>Editing.</strong> Monaco with 14 themes, JSON/YAML mode toggle with lossless conversion, JSON5 fallback so comments and trailing commas just work, format/minify, and drag-drop or paste up to 25 MB.</li>
+                    <li><strong>Inspection.</strong> Tree view with search highlighting and copy-subtree, a sticky cursor-path breadcrumb, table view with sorting, filtering and CSV export, and a search overlay across keys and values that auto-expands the tree.</li>
+                    <li><strong>Schema.</strong> Ajv-powered live validation, plus one-click schema inference from the current document with format detection for email, URI, UUID and date-time.</li>
+                    <li><strong>Diff.</strong> Three modes — Monaco side-by-side, structured (click a change to jump to it in the editor), and RFC 6902 JSON Patch.</li>
+                    <li><strong>Codegen.</strong> TypeScript, Zod, Go with json tags, Rust with serde, Python dataclass, Pydantic and JSON Schema.</li>
+                    <li><strong>Conversion.</strong> Bidirectional across JSON, YAML, XML, CSV, TOML, NDJSON and TOON, with a live token-savings estimate for the TOON target.</li>
+                    <li><strong>Decoders.</strong> JWT, Base64, URL, hex and Unicode, an NDJSON viewer, and secret-on-paste detection.</li>
+                    <li><strong>Keyboard-first.</strong> A fuzzy command palette on <code>Ctrl+P</code> plus direct shortcuts for format, minify, download, clear and search — the whole tool is usable without reaching for the mouse.</li>
+                    <li><strong>Accessibility and delivery.</strong> A full WCAG 2.2 AA pass — live regions, focus traps, keyboard navigation, contrast — and a hand-rolled service worker that makes it a genuinely offline-capable PWA, with eleven focused landing pages for the tasks people actually search for.</li>
+                </ul>
+
+                <div class="cs-note">
+                    <span class="cs-note-label">Honest note</span>
+                    <p>A handful of visual refinements are deliberately parked rather than shipped half-done — chiefly consolidating some repeated UI into shared primitives, and revisiting the dynamic root font-size, which interacts badly enough with rem-based utilities to deserve a considered fix rather than a patch. The correctness, accessibility, performance and SEO work is landed and verified.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT CASE STUDIES -->
+        <section class="cs-next">
+            <div class="container">
+                <div class="cs-next-grid">
+                    <a class="cs-next-card" href="optiresume.html">
+                        <span class="cs-next-label">Next case study</span>
+                        <h2 class="cs-next-title">OptiResume</h2>
+                        <p class="cs-next-desc">A campus-placement platform where the LLM is deliberately never allowed to compute the score.</p>
+                    </a>
+                    <a class="cs-next-card" href="airdraw.html">
+                        <span class="cs-next-label">Next case study</span>
+                        <h2 class="cs-next-title">AirDraw</h2>
+                        <p class="cs-next-desc">Turning noisy 30 fps hand-landmark data into something that feels like a pen.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-brand">
+                    <p class="footer-name">Yash Adake</p>
+                    <p class="footer-tagline">Software Engineer · Remote-friendly worldwide · GMT+5:30</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#products">Products</a>
+                    <a href="../index.html#work">Work</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#writing">Writing</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/yash-adake/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                    <a href="https://github.com/YashAdake" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-github"/></svg></a>
+                    <a href="https://twitter.com/yash_adake" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><svg class="icon icon-brand" aria-hidden="true"><use href="#i-twitter"/></svg></a>
+                    <a href="mailto:hello@yashadake.com" aria-label="Email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© <span id="currentYear">2026</span> Yash Adake</span>
+                <span>Typeset in Inter, Instrument Serif &amp; JetBrains Mono</span>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTop" class="scroll-to-top" type="button" aria-label="Scroll to top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></button>
+
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-label" id="cursorLabel"></div>
+    </div>
+
+    <script src="../js/app.js?v=3.1.0" defer></script>
+    <script src="../js/analytics.js?v=2.0.1" defer></script>
+</body>
+
+</html>

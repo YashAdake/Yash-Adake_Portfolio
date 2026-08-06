@@ -77,9 +77,13 @@ project images resolve there, so the score is accurate).
 
 ```
 index.html              single-page site (hero, products, work, about, writing, contact)
+work/optiresume.html    case study — OptiResume (linked from the product card + ⌘K palette)
+work/myjson.html        case study — MyJSON
+work/airdraw.html       case study — AirDraw
 404.html                not-found page
 coming-soon.html        per-product coming-soon (?product=optiresume|airdraw)
 css/site.css            entire design system + all section styles (design tokens at top)
+                        §24 holds the .cs-* case-study classes used by work/*.html
 js/app.js               theme · nav · scroll · scroll-reveal · hero topology canvas ·
                         command palette (Ctrl/⌘+K) · custom cursor · form · carousel · counter
 js/analytics.js         GA4 + Microsoft Clarity (consent-gated)
@@ -87,6 +91,12 @@ photos/                 images, certificates, resume PDF (+ photos/projects/ for
 CNAME / .nojekyll       GitHub Pages config
 cloudflare-worker-api.js  reference copy of the deployed Worker
 ```
+
+> **No build step means the chrome is duplicated.** `work/*.html` each carry their own
+> copy of the SVG icon sprite, nav, mobile nav panel and footer. If you change any of
+> those in `index.html`, change them in all three case studies too — nothing will warn
+> you. Their asset paths are `../`-relative and their nav links point at
+> `../index.html#section`, so they work both locally and on GitHub Pages.
 
 ---
 
