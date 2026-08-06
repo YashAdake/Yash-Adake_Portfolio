@@ -3091,3 +3091,25 @@ body.light-mode .hero-name em {
     line-height: 1.12;
     max-width: 24ch;
 }
+
+/* ---------- 27. PRODUCT CARD SCREENSHOTS -------------------- */
+/* When a card carries a real screenshot, keep the logotype legible
+   with a soft scrim and let the shot breathe on hover. */
+.work-visual:has(.work-shot)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(60% 55% at 50% 52%, rgba(6, 8, 14, 0.62), transparent 72%),
+        linear-gradient(to top, rgba(6, 8, 14, 0.35), transparent 45%);
+    pointer-events: none;
+}
+
+.work-visual:has(.work-shot) .work-logotype {
+    z-index: 2;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85), 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+.work-visual:has(.work-shot) .work-status {
+    z-index: 2;
+}
