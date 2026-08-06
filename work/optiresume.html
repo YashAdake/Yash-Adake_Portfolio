@@ -2,21 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>OptiResume — case study · Yash Adake</title>
+    <title>OptiResume case study · Yash Adake</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
 
-    <meta name="description" content="How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform on its own domain — the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents worth remembering.">
+    <meta name="description" content="How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform on its own domain: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents worth remembering.">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
     <link rel="canonical" href="https://yashadake.com/work/optiresume.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yash Adake — Software Engineer">
-    <meta property="og:title" content="OptiResume — case study">
+    <meta property="og:site_name" content="Yash Adake · Software Engineer">
+    <meta property="og:title" content="OptiResume case study">
     <meta property="og:description" content="From a 27-rule ATS scorer to a campus-placement platform: the hybrid-AI decision, a single cost-aware AI gateway, parse-and-discard handling, and what production actually broke.">
     <meta property="og:url" content="https://yashadake.com/work/optiresume.html">
     <meta property="og:image" content="https://yashadake.com/photos/og/og-optiresume.png">
@@ -25,8 +25,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yash_adake">
-    <meta name="twitter:title" content="OptiResume — case study">
-    <meta name="twitter:description" content="From a 27-rule ATS scorer to a campus-placement platform — the decisions, the guardrails, and the production incidents.">
+    <meta name="twitter:title" content="OptiResume case study">
+    <meta name="twitter:description" content="From a 27-rule ATS scorer to a campus-placement platform: the decisions, the guardrails, and the production incidents.">
     <meta name="twitter:image" content="https://yashadake.com/photos/og/og-optiresume.png">
 
     <meta name="theme-color" content="#0B0E14">
@@ -35,7 +35,7 @@
     {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "OptiResume — case study",
+        "headline": "OptiResume case study",
         "description": "How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents.",
         "url": "https://yashadake.com/work/optiresume.html",
         "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
@@ -93,7 +93,7 @@
 
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
-            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+            <a class="brand" href="../index.html" aria-label="Yash Adake, home">
                 <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
@@ -133,7 +133,7 @@
                 <a class="cs-back" href="../index.html#products"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All products</a>
                 <p class="eyebrow">Case study · SaaS · Applied AI</p>
                 <h1 class="cs-title">Opti<em>Resume</em></h1>
-                <p class="cs-lede">A campus-placement platform on its own domain. It started as an honest ATS scorer that used <strong>no AI at all</strong> — and that constraint is still the most important decision in the product.</p>
+                <p class="cs-lede">A campus-placement platform on its own domain. It started as an honest ATS scorer that used <strong>no AI at all</strong>, and that constraint is still the most important decision in the product.</p>
 
                 <div class="cs-actions">
                     <a class="btn" href="https://optiresume.in" target="_blank" rel="noopener noreferrer">Open optiresume.in <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
@@ -143,7 +143,7 @@
                 <dl class="cs-facts">
                     <div class="cs-fact">
                         <dt>Role</dt>
-                        <dd>Sole engineer — product, backend, frontend, infrastructure, launch</dd>
+                        <dd>Sole engineer: product, backend, frontend, infrastructure, launch</dd>
                     </div>
                     <div class="cs-fact">
                         <dt>Status</dt>
@@ -166,13 +166,13 @@
             <div class="container">
                 <h2 class="cs-h2">The <em>problem</em></h2>
                 <div class="cs-prose">
-                    <p>The resume-checker category is full of tools that quietly do one thing: pipe your CV into a language model and return a confident number. The number moves between runs. The advice invents experience you never had. And the moment you actually need it — the week before a campus drive — you discover the free tier ran out.</p>
-                    <p>Two problems sat underneath that. First, <strong>an AI-generated score is not a score</strong>; it's a plausible sentence with a digit in it. Second, and bigger: a resume score is not what a candidate actually needs. Getting past the ATS is one gate out of four. They still have an online assessment to sit, an aptitude section to survive, an interview to walk into, and — in India, where most of this happens through campus drives — a fog of unreliable information about which companies are even hiring.</p>
+                    <p>The resume-checker category is full of tools that quietly do one thing: pipe your CV into a language model and return a confident number. The number moves between runs. The advice invents experience you never had. And the moment you actually need it, the week before a campus drive, you discover the free tier ran out.</p>
+                    <p>Two problems sat underneath that. First, <strong>an AI-generated score is not a score</strong>; it's a plausible sentence with a digit in it. Second, and bigger: a resume score is not what a candidate actually needs. Getting past the ATS is one gate out of four. They still have an online assessment to sit, an aptitude section to survive, an interview to walk into, and, in India where most of this happens through campus drives, a fog of unreliable information about which companies are even hiring.</p>
                     <p>So OptiResume had to be honest about the score <em>and</em> keep going past it.</p>
                 </div>
 
                 <div class="cs-numbers">
-                    <div class="cs-number"><span class="cs-number-value">27</span><span class="cs-number-label">Deterministic ATS rules — no AI in the score</span></div>
+                    <div class="cs-number"><span class="cs-number-value">27</span><span class="cs-number-label">Deterministic ATS rules, no AI in the score</span></div>
                     <div class="cs-number"><span class="cs-number-value">100</span><span class="cs-number-label">Problems in The Code Century track</span></div>
                     <div class="cs-number"><span class="cs-number-value">14</span><span class="cs-number-label">Company OA-pattern guides</span></div>
                     <div class="cs-number"><span class="cs-number-value">1,000+</span><span class="cs-number-label">Automated tests gating every deploy</span></div>
@@ -185,26 +185,26 @@
             <div class="container">
                 <h2 class="cs-h2">The decision that shaped <em>everything</em> else</h2>
                 <div class="cs-prose">
-                    <p>The founding architecture decision — written down as an ADR before a line of scoring code existed — was that <strong>the LLM never computes the score.</strong> It draws a hard line through the product: anything that must be reproducible, auditable and free is deterministic Python; the model is only invited in for the semantic work.</p>
-                    <p>That single boundary is why the rest of the system is affordable, testable, and defensible when a user asks <em>"why did I get 68?"</em> — a question no wrapper around a chat completion can answer.</p>
+                    <p>The founding architecture decision, written down as an ADR before a line of scoring code existed, was that <strong>the LLM never computes the score.</strong> It draws a hard line through the product: anything that must be reproducible, auditable and free is deterministic Python; the model is only invited in for the semantic work.</p>
+                    <p>That single boundary is why the rest of the system is affordable, testable, and defensible when a user asks <em>"why did I get 68?"</em>, a question no wrapper around a chat completion can answer.</p>
                 </div>
 
                 <div class="cs-decisions">
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 01</span>
                         <h3>Rules score. The model writes.</h3>
-                        <p>Parseability, section detection, keyword coverage, skill matching, formatting hazards and contact hygiene are 27 explicit rules with explicit weights. They run offline, cost nothing, and produce the same number twice — so the score can be explained line by line and regression-tested like any other pure function.</p>
+                        <p>Parseability, section detection, keyword coverage, skill matching, formatting hazards and contact hygiene are 27 explicit rules with explicit weights. They run offline, cost nothing, and produce the same number twice, so the score can be explained line by line and regression-tested like any other pure function.</p>
                         <p>The LLM handles only what rules cannot do: rewriting a bullet into STAR form using the candidate's own facts, drafting a cover letter, and tailoring a resume to a specific job description.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 02</span>
                         <h3>Never invent experience</h3>
-                        <p>Every generative prompt is grounded: the model may only re-say what the candidate already claims. It may sharpen a weak bullet, quantify a vague one, or map it to the recruiter's vocabulary — it may not add a technology, a title, or a result that isn't in the source.</p>
+                        <p>Every generative prompt is grounded: the model may only re-say what the candidate already claims. It may sharpen a weak bullet, quantify a vague one, or map it to the recruiter's vocabulary. It may not add a technology, a title, or a result that isn't in the source.</p>
                         <p>This is the difference between a tool a candidate can walk into an interview behind, and one that gets them caught.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 03</span>
-                        <h3>The whole product works signed out — up to a point</h3>
+                        <h3>The whole product works signed out, up to a point</h3>
                         <p>An anonymous visitor can run the free rule-based check and see a real score, because the rules are local and cost nothing to run. Using the AI features requires an account, because they cost money per call. Taste before signup; account before spend.</p>
                     </div>
                 </div>
@@ -216,16 +216,16 @@
             <div class="container">
                 <h2 class="cs-h2">One <em>chokepoint</em> for every AI call</h2>
                 <div class="cs-prose">
-                    <p>Every LLM call in the product goes through a single gateway module. Not "most" calls — every one. That was a deliberate architectural constraint, because the moment a second code path can reach the provider directly, all of the following stop being guarantees and start being hopes.</p>
+                    <p>Every LLM call in the product goes through a single gateway module. Not "most" calls: every one. That was a deliberate architectural constraint, because the moment a second code path can reach the provider directly, all of the following stop being guarantees and start being hopes.</p>
                 </div>
 
                 <ul class="cs-list">
-                    <li><strong>Prompt-hash caching.</strong> Identical work is never paid for twice. The cache key binds to the <em>effective</em> model and sampling parameters, so switching models is a cache miss rather than seven days of stale output from the old one — a subtlety that only showed up during an audit.</li>
+                    <li><strong>Prompt-hash caching.</strong> Identical work is never paid for twice. The cache key binds to the <em>effective</em> model and sampling parameters, so switching models is a cache miss rather than seven days of stale output from the old one. That subtlety only showed up during an audit.</li>
                     <li><strong>In-flight deduplication.</strong> If two requests for the same work arrive together, the second waits on the first instead of doubling the bill.</li>
                     <li><strong>Layered quotas.</strong> A shared daily cap protects the platform; per-user credit quotas protect it from any single user; both are enforced in the same place they're measured.</li>
                     <li><strong>PII redaction before the wire.</strong> Personal identifiers are stripped on the way out, and untrusted resume text is wrapped in delimiter tags so the model treats it as data rather than instructions.</li>
                     <li><strong>Per-call cost logging.</strong> Every call records its token counts and micro-USD cost, which is what makes the operator console able to answer "what did today cost?" without an invoice.</li>
-                    <li><strong>Provider flexibility.</strong> A Groq fast-path serves the latency-critical slot while the primary provider handles the rest — swappable because there is exactly one place to swap it.</li>
+                    <li><strong>Provider flexibility.</strong> A Groq fast-path serves the latency-critical slot while the primary provider handles the rest, swappable because there is exactly one place to swap it.</li>
                 </ul>
             </div>
         </section>
@@ -242,12 +242,12 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 04</span>
                         <h3>Parse and discard</h3>
-                        <p>Uploaded files are never stored. The PDF or DOCX is parsed in memory, the extracted text and a content hash are persisted, and the original bytes are dropped. The hash gives deduplication and change detection without keeping the document — so a breach cannot leak a resume that was never written down.</p>
+                        <p>Uploaded files are never stored. The PDF or DOCX is parsed in memory, the extracted text and a content hash are persisted, and the original bytes are dropped. The hash gives deduplication and change detection without keeping the document, so a breach cannot leak a resume that was never written down.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 05</span>
                         <h3>An eight-hour ceiling, not a rolling one</h3>
-                        <p>Sessions have an <strong>absolute</strong> eight-hour lifetime — refreshing extends nothing past that wall. Refresh tokens rotate on every use, and a reused token is treated as theft: the whole family is revoked. The second ADR in the repo exists to explain why the inconvenience is the point.</p>
+                        <p>Sessions have an <strong>absolute</strong> eight-hour lifetime; refreshing extends nothing past that wall. Refresh tokens rotate on every use, and a reused token is treated as theft: the whole family is revoked. The second ADR in the repo exists to explain why the inconvenience is the point.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 06</span>
@@ -263,17 +263,17 @@
             <div class="container">
                 <h2 class="cs-h2">From resume tool to <em>placement platform</em></h2>
                 <div class="cs-prose">
-                    <p>The resume half was the entry point, not the product. What users actually came back for was everything that happens after the resume is good enough — and that half is now the larger one.</p>
+                    <p>The resume half was the entry point, not the product. What users actually came back for was everything that happens after the resume is good enough, and that half is now the larger one.</p>
                 </div>
 
                 <ul class="cs-list">
-                    <li><strong>The Code Century.</strong> A curated 100-problem coding track with progress tracking and a verifiable Code Centurion certificate at the end — a finishable goal instead of an infinite problem list.</li>
+                    <li><strong>The Code Century.</strong> A curated 100-problem coding track with progress tracking and a verifiable Code Centurion certificate at the end: a finishable goal instead of an infinite problem list.</li>
                     <li><strong>Test series and mock papers.</strong> Timed, sectioned tests with scores persisted per attempt, so improvement is measurable rather than remembered.</li>
                     <li><strong>Rapid revision.</strong> Compact revision cards for the night before, when nobody is going to read a textbook.</li>
                     <li><strong>A dedicated MBA track.</strong> Built separately rather than bolted onto the engineering content, because the syllabus, the scoring conventions and the interview format are all different.</li>
                     <li><strong>A campus-drives directory with a freshness model.</strong> Listings carry confidence tiers; stale ones are downgraded automatically and archived after a 90-day grace period, with an admin re-verification queue. Nothing rots quietly into a lie.</li>
                     <li><strong>Programmatic OA-pattern pages for 14 companies</strong>, plus an eligibility checker, an application tracker, LinkedIn-profile auditing and cross-checking against the resume, and a share-to-earn credit ledger.</li>
-                    <li><strong>An operator console.</strong> Activation funnel (signup → verify → analyze → use AI), live LLM spend, audit log, credit requests and a support-query channel — because a solo-run product needs to be observable by the person running it.</li>
+                    <li><strong>An operator console.</strong> Activation funnel (signup → verify → analyze → use AI), live LLM spend, audit log, credit requests and a support-query channel, because a solo-run product needs to be observable by the person running it.</li>
                 </ul>
             </div>
         </section>
@@ -290,7 +290,7 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">Incident · dependencies</span>
                         <h3>A floating dependency took every AI call down</h3>
-                        <p>The provider SDK was unpinned. A minor release changed behaviour and every Gemini call in production started failing — with no deploy of mine anywhere near it. Fixed by pinning the exact version and, later, by committing a full constraints lock for the backend image.</p>
+                        <p>The provider SDK was unpinned. A minor release changed behaviour and every Gemini call in production started failing, with no deploy of mine anywhere near it. Fixed by pinning the exact version and, later, by committing a full constraints lock for the backend image.</p>
                         <p><strong>Rule learned:</strong> a floating dependency is an unscheduled deploy performed by a stranger.</p>
                     </div>
                     <div class="cs-decision">
@@ -302,12 +302,12 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">Incident · configuration</span>
                         <h3>The API base URL must carry its version prefix</h3>
-                        <p>A frontend environment variable set without the <code>/api/v1</code> suffix produces a build that looks completely healthy and can't reach a single endpoint. It now has a documented invariant and a deploy checklist entry, because the failure mode gives you no useful signal at all — just 404s from a server that is running perfectly.</p>
+                        <p>A frontend environment variable set without the <code>/api/v1</code> suffix produces a build that looks completely healthy and can't reach a single endpoint. It now has a documented invariant and a deploy checklist entry, because the failure mode gives you no useful signal at all: just 404s from a server that is running perfectly.</p>
                     </div>
                 </div>
 
                 <div class="cs-prose" style="margin-top: var(--space-6)">
-                    <p>The product also moved to its own domain mid-life. That meant a full cutover — DNS, mail in both directions, sign-in credentials, CAPTCHA origins, sitemap and search-console re-verification — with permanent redirects left behind on every old URL so nothing that was ever shared goes dead. Deployment runs a <code>dev → pre-prod → prod</code> branch pipeline across both the API host and the frontend host, so nothing reaches production without having been run somewhere else first.</p>
+                    <p>The product also moved to its own domain mid-life. That meant a full cutover (DNS, mail in both directions, sign-in credentials, CAPTCHA origins, sitemap and search-console re-verification) with permanent redirects left behind on every old URL so nothing that was ever shared goes dead. Deployment runs a <code>dev → pre-prod → prod</code> branch pipeline across both the API host and the frontend host, so nothing reaches production without having been run somewhere else first.</p>
                 </div>
             </div>
         </section>
@@ -317,13 +317,13 @@
             <div class="container">
                 <h2 class="cs-h2">What's <em>next</em></h2>
                 <div class="cs-prose">
-                    <p>The work in flight is a large expansion of the preparation half — a substantially bigger question bank, per-topic mastery analytics that recommend one explainable next test rather than a wall of options, a spaced-repetition queue built from the user's own wrong answers, and guided role roadmaps that skip the phases a user can already pass.</p>
+                    <p>The work in flight is a large expansion of the preparation half: a substantially bigger question bank, per-topic mastery analytics that recommend one explainable next test rather than a wall of options, a spaced-repetition queue built from the user's own wrong answers, and guided role roadmaps that skip the phases a user can already pass.</p>
                     <p>All of it is deliberately zero-AI: the founding decision still holds, and none of those features need a language model to work.</p>
                 </div>
 
                 <div class="cs-note">
                     <span class="cs-note-label">Honest note</span>
-                    <p>Everything described on this page is live in production today. The expansion above is built and tested but not yet shipped — it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
+                    <p>Everything described on this page is live in production today. The expansion above is built and tested but not yet shipped, and it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
                 </div>
             </div>
         </section>
@@ -335,7 +335,7 @@
                     <a class="cs-next-card" href="myjson.html">
                         <span class="cs-next-label">Next case study</span>
                         <h2 class="cs-next-title">MyJSON</h2>
-                        <p class="cs-next-desc">A JSON workstation that runs entirely in the browser — including real jq compiled to WebAssembly.</p>
+                        <p class="cs-next-desc">A JSON workstation that runs entirely in the browser, including real jq compiled to WebAssembly.</p>
                     </a>
                     <a class="cs-next-card" href="airdraw.html">
                         <span class="cs-next-label">Next case study</span>

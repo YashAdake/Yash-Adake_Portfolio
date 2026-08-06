@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
 
-    <meta name="description" content="Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency — and the fix is a habit, not a tool.">
+    <meta name="description" content="Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency, and the fix is a habit, not a tool.">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
     <link rel="canonical" href="https://yashadake.com/notes/floating-dependencies.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yash Adake — Software Engineer">
+    <meta property="og:site_name" content="Yash Adake · Software Engineer">
     <meta property="og:title" content="A floating dependency is an unscheduled deploy performed by a stranger">
-    <meta property="og:description" content="Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency — and the fix is a habit, not a tool.">
+    <meta property="og:description" content="Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency, and the fix is a habit, not a tool.">
     <meta property="og:url" content="https://yashadake.com/notes/floating-dependencies.html">
     <meta property="og:image" content="https://yashadake.com/photos/og/og-home.png">
     <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yash_adake">
     <meta name="twitter:title" content="A floating dependency is an unscheduled deploy performed by a stranger">
-    <meta name="twitter:description" content="Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency — and the fix is a habit, not a tool.">
+    <meta name="twitter:description" content="Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency, and the fix is a habit, not a tool.">
     <meta name="twitter:image" content="https://yashadake.com/photos/og/og-home.png">
 
     <meta name="theme-color" content="#0B0E14">
@@ -36,7 +36,7 @@
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "A floating dependency is an unscheduled deploy performed by a stranger",
-        "description": "Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency — and the fix is a habit, not a tool.",
+        "description": "Every AI call in a production SaaS died with no deploy anywhere near it. The root cause was one unpinned dependency, and the fix is a habit, not a tool.",
         "url": "https://yashadake.com/notes/floating-dependencies.html",
         "datePublished": "2026-08-07",
         "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
@@ -93,7 +93,7 @@
 
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
-            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+            <a class="brand" href="../index.html" aria-label="Yash Adake, home">
                 <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
@@ -132,7 +132,7 @@
                 <a class="cs-back" href="../index.html#writing"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All writing</a>
                 <p class="eyebrow">Engineering note · Reliability</p>
                 <h1 class="cs-title cs-title-note">A floating dependency is an <em>unscheduled deploy</em> performed by a stranger</h1>
-                <p class="cs-lede">Every AI call in OptiResume died in production one morning. Nobody had deployed anything — which is exactly why the outage took so long to find.</p>
+                <p class="cs-lede">Every AI call in OptiResume died in production one morning. Nobody had deployed anything, which is exactly why the outage took so long to find.</p>
             </div>
         </section>
 
@@ -140,7 +140,7 @@
             <div class="container">
                 <h2 class="cs-h2">What <em>happened</em></h2>
                 <div class="cs-prose">
-                    <p>OptiResume’s backend depended on the provider SDK for its LLM calls with an open version range — the default posture of almost every requirements file on the internet. The provider shipped a minor release. Its behaviour changed just enough that every Gemini call in production began failing, and the error surface said nothing about versions. From the outside it looked exactly like an outage I had caused; the investigation kept circling deploys that didn’t exist.</p>
+                    <p>OptiResume’s backend depended on the provider SDK for its LLM calls with an open version range, the default posture of almost every requirements file on the internet. The provider shipped a minor release. Its behaviour changed just enough that every Gemini call in production began failing, and the error surface said nothing about versions. From the outside it looked exactly like an outage I had caused; the investigation kept circling deploys that didn’t exist.</p>
                     <p>The fix took minutes once the cause was found: pin the exact version. The find took much longer, because the mental model was wrong. I was looking for <strong>a change I had made</strong>, and there wasn’t one. Someone else had changed my production system, invisibly, by publishing a package.</p>
                 </div>
 
@@ -153,14 +153,14 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">What changed</span>
                         <h3>Pin the SDK, then lock the world</h3>
-                        <p>The immediate fix pinned the one SDK. The durable fix committed a full constraints lock for the backend image, so the Docker build resolves every transitive dependency to a known version. Upgrades still happen — but as <strong>deliberate, reviewed diffs</strong>, on my schedule, with the changelog open.</p>
+                        <p>The immediate fix pinned the one SDK. The durable fix committed a full constraints lock for the backend image, so the Docker build resolves every transitive dependency to a known version. Upgrades still happen, but as <strong>deliberate, reviewed diffs</strong>, on my schedule, with the changelog open.</p>
                         <p>The subtle part: a lockfile you don’t build from is theatre. The image build had to actually consume the lock, or the pin protects the laptop and not production.</p>
                     </div>
                 </div>
 
                 <div class="cs-note">
                     <span class="cs-note-label">The rule</span>
-                    <p>If you cannot name the exact versions running in production, then you don’t know what’s running in production — you know what was running the last time you looked. Pin what you ship. Treat every upgrade as a deploy, because that is what it is.</p>
+                    <p>If you cannot name the exact versions running in production, then you don’t know what’s running in production. You know what was running the last time you looked. Pin what you ship. Treat every upgrade as a deploy, because that is what it is.</p>
                 </div>
             </div>
         </section>

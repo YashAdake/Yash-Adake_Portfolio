@@ -1,5 +1,5 @@
 /* ============================================================
-   YASH ADAKE — PORTFOLIO
+   YASH ADAKE PORTFOLIO
    "Systems-grade editorial" design system
    Single stylesheet · mobile-first · token-driven · no framework
    Replaces premium.css + elite.css (legacy retired)
@@ -40,7 +40,7 @@
 
 /* ---------- 1. TOKENS ---------------------------------------- */
 :root {
-    /* Surfaces (deep blue-black, layered — not flat black) */
+    /* Surfaces (deep blue-black, layered: not flat black) */
     --bg: #0B0E14;
     --surface: #11151E;
     --elevated: #181D28;
@@ -93,7 +93,7 @@
     --container: 1120px;
     --container-narrow: 720px;
 
-    /* Radius (restrained — tool-like) */
+    /* Radius (restrained: tool-like) */
     --r-sm: 8px;
     --r-md: 12px;
     --r-lg: 18px;
@@ -120,7 +120,7 @@
     color-scheme: dark;
 }
 
-/* Light theme — paper, darkened brand + status for AA contrast */
+/* Light theme: paper, darkened brand + status for AA contrast */
 body.light-mode {
     --bg: #F6F7F9;
     --surface: #FFFFFF;
@@ -339,7 +339,7 @@ h3 {
     color: var(--text);
 }
 
-/* Mono eyebrow / status label — the "instrumented" voice */
+/* Mono eyebrow / status label: the "instrumented" voice */
 .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -600,7 +600,7 @@ body.light-mode .section-title em {
     box-shadow: 0 0 0 3px var(--accent-tint), 0 0 22px var(--accent-tint);
 }
 
-/* Desktop link cluster — hidden on mobile (panel used instead) */
+/* Desktop link cluster: hidden on mobile (panel used instead) */
 .nav-links {
     display: none;
 }
@@ -779,7 +779,7 @@ body.hero-canvas-on .hero-field svg {
     display: none;
 }
 
-/* Static SVG topology — the always-on fallback (no JS / mobile / reduced-motion) */
+/* Static SVG topology: the always-on fallback (no JS / mobile / reduced-motion) */
 .hero-field .topo-line {
     stroke: var(--line-strong);
     fill: none;
@@ -887,7 +887,7 @@ body.hero-canvas-on .hero-field svg {
     box-shadow: 0 0 0 1px var(--accent-tint);
 }
 
-/* Mono metrics row — tabular figures, the "instrumented" proof */
+/* Mono metrics row: tabular figures, the "instrumented" proof */
 .hero-metrics {
     display: flex;
     flex-wrap: wrap;
@@ -1000,7 +1000,7 @@ body.light-mode .metric-value {
         align-items: center;
     }
 
-    /* Two-column editorial hero — the client-facing desktop composition */
+    /* Two-column editorial hero: the client-facing desktop composition */
     .hero-inner {
         grid-template-columns: 1.1fr 0.9fr;
         align-items: center;
@@ -1660,7 +1660,7 @@ body.light-mode .metric-value {
     margin-top: var(--space-5);
 }
 
-/* Newsletter CTA — a prominent, attention-drawing pill */
+/* Newsletter CTA: a prominent, attention-drawing pill */
 .inline-link {
     display: inline-flex;
     align-items: center;
@@ -2421,7 +2421,7 @@ body.light-mode .loading-ya {
 }
 
 /* ---------- 24. MOTION / EYE-CATCH ------------------------- */
-/* Hero entrance — staggered rise on load */
+/* Hero entrance: staggered rise on load */
 @keyframes heroIn {
     from {
         opacity: 0;
@@ -2466,7 +2466,7 @@ body.light-mode .loading-ya {
     animation-delay: 0.47s;
 }
 
-/* Translate-only (opacity stays 1) so the portrait — the LCP element —
+/* Translate-only (opacity stays 1) so the portrait (the LCP element)
    paints immediately instead of fading in late. */
 .hero-portrait {
     animation: heroRise 0.7s var(--ease) 0.1s both;
@@ -2492,7 +2492,7 @@ body.light-mode .loading-ya {
     pointer-events: none;
 }
 
-/* Slow drifting aurora — compositor-only (transform), adds living depth */
+/* Slow drifting aurora: compositor-only (transform), adds living depth */
 .hero::after {
     content: "";
     position: absolute;
@@ -2669,7 +2669,7 @@ body.light-mode .hero-name em {
     margin-top: var(--space-6);
 }
 
-/* Fact strip — role, timeline, status, stack */
+/* Fact strip: role, timeline, status, stack */
 .cs-facts {
     display: grid;
     gap: var(--space-4) var(--space-6);
@@ -2764,12 +2764,12 @@ body.light-mode .hero-name em {
     text-decoration-thickness: 1px;
 }
 
-/* Decision blocks — the "why", not the "what" */
+/* Decision blocks: the "why", not the "what" */
 .cs-decisions {
     display: grid;
     gap: var(--space-4);
     margin-top: var(--space-6);
-    /* Cap the measure — full 1120px container gives ~140-char lines. */
+    /* Cap the measure: full 1120px container gives ~140-char lines. */
     max-width: 90ch;
 }
 
@@ -2991,7 +2991,7 @@ body.light-mode .hero-name em {
     }
 }
 
-/* Note titles are full sentences — one display step down from product titles */
+/* Note titles are full sentences: one display step down from product titles */
 .cs-title-note {
     font-size: var(--step-3);
     line-height: 1.12;
@@ -3140,7 +3140,7 @@ body.light-mode .hero-name em {
    The canvas version draws its own labels in app.js. */
 .topo-label {
     font-family: var(--font-mono);
-    /* viewBox units — the slice scaling enlarges these ~1.5x on screen */
+    /* viewBox units: the slice scaling enlarges these ~1.5x on screen */
     font-size: 9px;
     letter-spacing: 0.04em;
     fill: var(--text-mute);

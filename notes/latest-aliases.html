@@ -15,7 +15,7 @@
     <link rel="canonical" href="https://yashadake.com/notes/latest-aliases.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yash Adake — Software Engineer">
+    <meta property="og:site_name" content="Yash Adake · Software Engineer">
     <meta property="og:title" content="Never gate production on a -latest alias">
     <meta property="og:description" content="A model alias quietly repointed to a different model, and valid requests started returning 400s. An alias is a dependency on someone else’s roadmap.">
     <meta property="og:url" content="https://yashadake.com/notes/latest-aliases.html">
@@ -93,7 +93,7 @@
 
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
-            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+            <a class="brand" href="../index.html" aria-label="Yash Adake, home">
                 <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
@@ -132,7 +132,7 @@
                 <a class="cs-back" href="../index.html#writing"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All writing</a>
                 <p class="eyebrow">Engineering note · Applied AI</p>
                 <h1 class="cs-title cs-title-note">Never gate production on a <em>-latest</em> alias</h1>
-                <p class="cs-lede">The request didn’t change. The code didn’t change. The <strong>meaning of a string</strong> changed — on someone else’s server, on someone else’s schedule — and production started returning 400s.</p>
+                <p class="cs-lede">The request didn’t change. The code didn’t change. The <strong>meaning of a string</strong> changed, on someone else’s server and on someone else’s schedule, and production started returning 400s.</p>
             </div>
         </section>
 
@@ -140,7 +140,7 @@
             <div class="container">
                 <h2 class="cs-h2">What <em>happened</em></h2>
                 <div class="cs-prose">
-                    <p>OptiResume used a provider alias of the form <code>-latest</code> — the documented, encouraged way to “always get the newest model.” The provider repointed the alias to a newer model. The newer model rejected a request parameter the older one accepted, so a payload that had been valid for weeks began failing with 400s. Nothing in my system changed; the alias resolved differently on a Tuesday.</p>
+                    <p>OptiResume used a provider alias of the form <code>-latest</code>, the documented, encouraged way to “always get the newest model.” The provider repointed the alias to a newer model. The newer model rejected a request parameter the older one accepted, so a payload that had been valid for weeks began failing with 400s. Nothing in my system changed; the alias resolved differently on a Tuesday.</p>
                     <p>This is the same failure class as <a href="floating-dependencies.html">a floating dependency</a>, wearing an API costume. An alias is a pointer you don’t control into a set of behaviours you haven’t tested. Using one in production means shipping code whose semantics are decided later, by someone else.</p>
                 </div>
 
@@ -148,7 +148,7 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">What changed</span>
                         <h3>Pin the model ID; drop the incompatible parameter</h3>
-                        <p>The fix was two lines: name the exact model version, and remove the request field the repointed model rejected. The policy behind the fix is the real change: <strong>model identifiers in production are exact</strong>, upgrades are deliberate, and a new model is treated as a new dependency — evaluated, then adopted.</p>
+                        <p>The fix was two lines: name the exact model version, and remove the request field the repointed model rejected. The policy behind the fix is the real change: <strong>model identifiers in production are exact</strong>, upgrades are deliberate, and a new model is treated as a new dependency: evaluated, then adopted.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">The corollary</span>
@@ -164,7 +164,7 @@
 
                 <div class="cs-note">
                     <span class="cs-note-label">The rule</span>
-                    <p>In production, resolve every “convenience pointer” — <code>-latest</code>, <code>stable</code>, an unpinned tag — to the exact thing it names today, and ship that. Conveniences are for experiments; production runs on nouns, not pronouns.</p>
+                    <p>In production, resolve every “convenience pointer” (<code>-latest</code>, <code>stable</code>, an unpinned tag) to the exact thing it names today, and ship that. Conveniences are for experiments; production runs on nouns, not pronouns.</p>
                 </div>
             </div>
         </section>

@@ -15,7 +15,7 @@
     <link rel="canonical" href="https://yashadake.com/notes/falsifiable-privacy.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yash Adake — Software Engineer">
+    <meta property="og:site_name" content="Yash Adake · Software Engineer">
     <meta property="og:title" content="Make the privacy claim falsifiable">
     <meta property="og:description" content="“We don’t store your data” is marketing. An architecture where the data cannot leave is engineering. How three products turned privacy from a promise into a property.">
     <meta property="og:url" content="https://yashadake.com/notes/falsifiable-privacy.html">
@@ -93,7 +93,7 @@
 
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
-            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+            <a class="brand" href="../index.html" aria-label="Yash Adake, home">
                 <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
@@ -140,30 +140,30 @@
             <div class="container">
                 <h2 class="cs-h2">Three products, one <em>principle</em></h2>
                 <div class="cs-prose">
-                    <p>Every privacy policy on the internet says roughly the same thing, and users have learned to price those words at zero — rationally, because a policy describes intent, and intent is invisible. The only privacy claim worth making is one a skeptical stranger can test and, in principle, refute. So each of my products states its claim in a form that can fail in public.</p>
+                    <p>Every privacy policy on the internet says roughly the same thing, and users have learned to price those words at zero. Rationally so, because a policy describes intent, and intent is invisible. The only privacy claim worth making is one a skeptical stranger can test and, in principle, refute. So each of my products states its claim in a form that can fail in public.</p>
                 </div>
 
                 <div class="cs-decisions">
                     <div class="cs-decision">
                         <span class="cs-decision-label">MyJSON</span>
                         <h3>“Open DevTools. Watch the Network tab stay silent.”</h3>
-                        <p>The JSON workstation makes no network requests while you work — not “we don’t log,” but <em>there is no request to log</em>. That constraint cost real features their easy implementation: sharing embeds the document in the URL hash instead of a database row; jq runs as WebAssembly in the tab instead of on a server. The claim survives because the app was built to make it checkable in ten seconds.</p>
+                        <p>The JSON workstation makes no network requests while you work. Not “we don’t log,” but <em>there is no request to log</em>. That constraint cost real features their easy implementation: sharing embeds the document in the URL hash instead of a database row; jq runs as WebAssembly in the tab instead of on a server. The claim survives because the app was built to make it checkable in ten seconds.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">AirDraw</span>
-                        <h3>The webcam feed cannot be uploaded — there is nowhere to send it</h3>
+                        <h3>The webcam feed cannot be uploaded; there is nowhere to send it</h3>
                         <p>Hand tracking runs on-device in WebAssembly. The app has no backend at all, so the strongest possible statement about the camera feed is structural: the capability to exfiltrate it does not exist in the system. Absence of capability beats presence of policy.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">OptiResume</span>
                         <h3>Parse and discard: what isn’t stored can’t be breached</h3>
-                        <p>A resume platform can’t be serverless — so its claim is about retention, made falsifiable by design. Uploaded files are parsed in memory; only the extracted text and a content hash persist; the original bytes are dropped. Sessions die at an absolute 8-hour wall. The threat model isn’t “we promise not to look” — it’s “a breach of our database cannot leak a document we never wrote down.”</p>
+                        <p>A resume platform can’t be serverless, so its claim is about retention, made falsifiable by design. Uploaded files are parsed in memory; only the extracted text and a content hash persist; the original bytes are dropped. Sessions die at an absolute 8-hour wall. The threat model isn’t “we promise not to look.” It’s “a breach of our database cannot leak a document we never wrote down.”</p>
                     </div>
                 </div>
 
                 <div class="cs-note">
                     <span class="cs-note-label">The rule</span>
-                    <p>State every privacy property as a test someone else could run: what request would they see, what row would they find, what file would they recover? If no such test exists, you don’t have a privacy property — you have a paragraph.</p>
+                    <p>State every privacy property as a test someone else could run: what request would they see, what row would they find, what file would they recover? If no such test exists, you don’t have a privacy property. You have a paragraph.</p>
                 </div>
             </div>
         </section>

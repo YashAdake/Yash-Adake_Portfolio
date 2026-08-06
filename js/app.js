@@ -1,5 +1,5 @@
 /* ============================================================
-   YASH ADAKE — PORTFOLIO · app.js
+   YASH ADAKE PORTFOLIO · app.js
    Consolidated, framework-free. Replaces core/effects/motion/
    delights/palette/hero3d/elite-improvements + Bootstrap + AOS.
    ============================================================ */
@@ -13,7 +13,7 @@
 
     /* ---------- Preloader -------------------------------------- */
     // Clear the loader as soon as the page is usable. Do NOT gate solely on
-    // window.load — on slow/stalled mobile networks a single trickling resource
+    // window.load: on slow/stalled mobile networks a single trickling resource
     // can delay (or prevent) `load`, trapping the loader on screen. This script
     // is deferred, so by the time it runs the DOM is parsed and CSS is applied;
     // a hard timeout fallback then guarantees the loader can never stick.
@@ -198,7 +198,7 @@
                 .then(r => r.json().catch(() => ({ success: r.ok })))
                 .then(data => {
                     if (!data || data.success === false) throw new Error('fail');
-                    msg.textContent = 'Thanks for reaching out — I\'ll reply within 1–2 business days.';
+                    msg.textContent = 'Thanks for reaching out! I\'ll reply within 1-2 business days.';
                     msg.className = 'message success';
                     txt.textContent = 'Message sent';
                     form.reset();
@@ -285,9 +285,9 @@
             { g: 'Products', t: 'Open MyJSON', s: 'live', run: () => go('https://myjson.yashadake.com') },
             { g: 'Products', t: 'Open AirDraw', s: 'live', run: () => go('https://airdraw.yashadake.com') },
             { g: 'Products', t: 'Open OptiResume', s: 'live · optiresume.in', run: () => go('https://optiresume.in') },
-            { g: 'Case studies', t: 'OptiResume — case study', s: 'placement platform', run: () => go('work/optiresume.html', false) },
-            { g: 'Case studies', t: 'MyJSON — case study', s: 'browser-only devtools', run: () => go('work/myjson.html', false) },
-            { g: 'Case studies', t: 'AirDraw — case study', s: 'in-browser computer vision', run: () => go('work/airdraw.html', false) },
+            { g: 'Case studies', t: 'OptiResume case study', s: 'placement platform', run: () => go('work/optiresume.html', false) },
+            { g: 'Case studies', t: 'MyJSON case study', s: 'browser-only devtools', run: () => go('work/myjson.html', false) },
+            { g: 'Case studies', t: 'AirDraw case study', s: 'in-browser computer vision', run: () => go('work/airdraw.html', false) },
             { g: 'Notes', t: 'Floating dependencies', s: 'an unscheduled deploy by a stranger', run: () => go('notes/floating-dependencies.html', false) },
             { g: 'Notes', t: 'Never gate prod on -latest', s: 'aliases are someone else\'s roadmap', run: () => go('notes/latest-aliases.html', false) },
             { g: 'Notes', t: 'Falsifiable privacy', s: 'privacy as a testable property', run: () => go('notes/falsifiable-privacy.html', false) },
@@ -370,7 +370,7 @@
     /* ---------- Live reachability check (product cards) ------- */
     // The "Live" chips carry data-live-url. After the page is idle we ping
     // each product with a no-cors fetch: an opaque response proves the host
-    // is reachable from THIS visitor's browser right now (not full health —
+    // is reachable from THIS visitor's browser right now (not full health;
     // that distinction is in the tooltip). On failure we change nothing:
     // the visitor may be offline or behind a blocker, so no false negatives.
     (function liveCheck() {
@@ -469,7 +469,7 @@
         let W = 0, H = 0, running = false, raf = 0, lastT = 0;
         const pulses = edges.map((e, i) => ({ e, p: Math.random(), speed: 0.0016 + Math.random() * 0.0018, on: isMobile ? i % 3 === 0 : i % 2 === 0 }));
 
-        // Colours read ONCE (and only re-read on theme change) — not per frame.
+        // Colours read ONCE (and only re-read on theme change), not per frame.
         let colLine, colAcc, colDim;
         function readColors() {
             const cs = getComputedStyle(document.body);
@@ -593,6 +593,6 @@
     })();
 
     /* ---------- Console banner -------------------------------- */
-    console.log('%cYash Adake — Software Engineer', 'color:#7C8CF8;font:600 14px monospace');
+    console.log('%cYash Adake · Software Engineer', 'color:#7C8CF8;font:600 14px monospace');
     console.log('linkedin.com/in/yash-adake · github.com/YashAdake · ⌘K to explore');
 })();

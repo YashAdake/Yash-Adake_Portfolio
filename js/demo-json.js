@@ -1,8 +1,8 @@
 /* ============================================================
-   MyJSON case study — "try a slice of it" widget.
+   MyJSON case study: "try a slice of it" widget.
    A deliberately tiny, standalone demo of the product's rule:
    everything happens in this tab. This file makes no network
-   requests and shares no code with the product — it exists so a
+   requests and shares no code with the product; it exists so a
    visitor can verify the principle in ten seconds.
    ============================================================ */
 (function () {
@@ -52,7 +52,7 @@
             : JSON.stringify(value, null, 2);
     }
 
-    // A small dotted-path evaluator: $.a.b[0].c — nothing more.
+    // A small dotted-path evaluator: $.a.b[0].c, nothing more.
     // The real product ships JSONPath, jq 1.8 (WASM) and JSON Pointer.
     function queryPath(doc, path) {
         var p = path.trim();
@@ -60,7 +60,7 @@
         if (p[0] === '$') p = p.slice(1);
         var tokens = p.match(/\.[A-Za-z_][\w-]*|\[\d+\]/g);
         var consumed = tokens ? tokens.join('') : '';
-        if (consumed !== p) return { ok: false, err: 'Unsupported path — this mini-demo only does $.key.key[0] chains.' };
+        if (consumed !== p) return { ok: false, err: 'Unsupported path. This mini-demo only does $.key.key[0] chains.' };
         var cur = doc;
         for (var i = 0; i < tokens.length; i++) {
             var t = tokens[i];
@@ -78,7 +78,7 @@
         if (!r.ok) return;
         input.value = JSON.stringify(r.value, null, 2);
         show(r.value);
-        say('Formatted. Check the Network tab — still silent.');
+        say('Formatted. Check the Network tab: still silent.');
     });
 
     document.getElementById('demoMinify').addEventListener('click', function () {
@@ -95,7 +95,7 @@
         var q = queryPath(r.value, pathEl.value || '$');
         if (!q.ok) { say(q.err, true); return; }
         show(q.value);
-        say('Queried ' + (pathEl.value || '$') + ' — locally, like everything else here.');
+        say('Queried ' + (pathEl.value || '$') + ' locally, like everything else here.');
     });
 
     input.addEventListener('keydown', function (e) {

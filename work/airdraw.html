@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-    <title>AirDraw — case study · Yash Adake</title>
+    <title>AirDraw case study · Yash Adake</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
 
-    <meta name="description" content="AirDraw turns noisy 30 fps hand-landmark data into something that feels like a pen — joint-angle gesture detection, One-Euro smoothing, presence smoothing across dropped frames, and an authoritative toolbar. All in the browser, with no backend.">
+    <meta name="description" content="AirDraw turns noisy 30 fps hand-landmark data into something that feels like a pen: joint-angle gesture detection, One-Euro smoothing, presence smoothing across dropped frames, and an authoritative toolbar. All in the browser, with no backend.">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
     <link rel="canonical" href="https://yashadake.com/work/airdraw.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yash Adake — Software Engineer">
-    <meta property="og:title" content="AirDraw — case study">
-    <meta property="og:description" content="Joint-angle gesture detection, One-Euro smoothing and presence smoothing — how noisy hand-landmark data was made to feel like a pen, entirely in the browser.">
+    <meta property="og:site_name" content="Yash Adake · Software Engineer">
+    <meta property="og:title" content="AirDraw case study">
+    <meta property="og:description" content="Joint-angle gesture detection, One-Euro smoothing and presence smoothing: how noisy hand-landmark data was made to feel like a pen, entirely in the browser.">
     <meta property="og:url" content="https://yashadake.com/work/airdraw.html">
     <meta property="og:image" content="https://yashadake.com/photos/og/og-airdraw.png">
     <meta property="og:image:width" content="1200">
@@ -25,8 +25,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yash_adake">
-    <meta name="twitter:title" content="AirDraw — case study">
-    <meta name="twitter:description" content="Making noisy 30 fps hand tracking feel like a pen — in a browser tab, with no backend.">
+    <meta name="twitter:title" content="AirDraw case study">
+    <meta name="twitter:description" content="Making noisy 30 fps hand tracking feel like a pen, in a browser tab, with no backend.">
     <meta name="twitter:image" content="https://yashadake.com/photos/og/og-airdraw.png">
 
     <meta name="theme-color" content="#0B0E14">
@@ -35,7 +35,7 @@
     {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "AirDraw — case study",
+        "headline": "AirDraw case study",
         "description": "How noisy 30 fps hand-landmark data was turned into a usable drawing instrument: joint-angle gesture detection, One-Euro pointer smoothing, presence smoothing across dropped frames, and an authoritative toolbar.",
         "url": "https://yashadake.com/work/airdraw.html",
         "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
@@ -93,7 +93,7 @@
 
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
-            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+            <a class="brand" href="../index.html" aria-label="Yash Adake, home">
                 <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
@@ -133,7 +133,7 @@
                 <a class="cs-back" href="../index.html#products"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All products</a>
                 <p class="eyebrow">Case study · Browser CV · Real-time</p>
                 <h1 class="cs-title">Air<em>Draw</em></h1>
-                <p class="cs-lede">Paint with your hand in mid-air, in a browser tab. The demo is easy. The engineering was making <strong>noisy 30 fps landmark data feel like a pen</strong> — steady when you're careful, responsive when you're fast, and unbroken when a frame goes missing.</p>
+                <p class="cs-lede">Paint with your hand in mid-air, in a browser tab. The demo is easy. The engineering was making <strong>noisy 30 fps landmark data feel like a pen</strong>: steady when you're careful, responsive when you're fast, and unbroken when a frame goes missing.</p>
 
                 <div class="cs-actions">
                     <a class="btn" href="https://airdraw.yashadake.com" target="_blank" rel="noopener noreferrer">Open AirDraw <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
@@ -143,7 +143,7 @@
                 <dl class="cs-facts">
                     <div class="cs-fact">
                         <dt>Role</dt>
-                        <dd>Sole engineer — CV pipeline, interaction design, rendering, UI</dd>
+                        <dd>Sole engineer: CV pipeline, interaction design, rendering, UI</dd>
                     </div>
                     <div class="cs-fact">
                         <dt>Status</dt>
@@ -155,7 +155,7 @@
                     </div>
                     <div class="cs-fact">
                         <dt>Backend</dt>
-                        <dd>None. Frames never leave the device — there is no server to send them to</dd>
+                        <dd>None. Frames never leave the device; there is no server to send them to</dd>
                     </div>
                 </dl>
             </div>
@@ -167,7 +167,7 @@
                 <h2 class="cs-h2">The <em>problem</em></h2>
                 <div class="cs-prose">
                     <p>Hand-tracking demos are everywhere and almost all of them fall apart the moment a real person uses them. Gestures stop registering as soon as the hand rotates. Strokes shatter into fragments when the tracker misses a frame. Lines wobble because raw landmark coordinates jitter by a few pixels every frame even when your hand is perfectly still. And smoothing that away introduces lag, which feels worse than the jitter did.</p>
-                    <p>None of that is a machine-learning problem — the model is good. It's a <strong>signal-processing and interaction-design problem</strong> sitting on top of a good model, and that's where all the work went.</p>
+                    <p>None of that is a machine-learning problem; the model is good. It's a <strong>signal-processing and interaction-design problem</strong> sitting on top of a good model, and that's where all the work went.</p>
                 </div>
 
                 <div class="cs-numbers">
@@ -189,35 +189,35 @@
                         <span class="cs-decision-label">Decision 01</span>
                         <h3>Joint angles, not fingertip heights</h3>
                         <p>The naive way to detect "index finger up" is to compare the fingertip's y-coordinate to the knuckle's. It works beautifully in testing, because in testing your hand is upright and at a fixed distance. Rotate your wrist and it collapses. Lean toward the camera and the thresholds drift.</p>
-                        <p>AirDraw instead computes the <strong>angle at each finger joint</strong> and normalises against palm size. That makes detection rotation-invariant and distance-adaptive: the same gesture reads correctly whether the hand is upright, tilted, near or far. It's more maths for the same feature — and it's the difference between a demo and something usable.</p>
+                        <p>AirDraw instead computes the <strong>angle at each finger joint</strong> and normalises against palm size. That makes detection rotation-invariant and distance-adaptive: the same gesture reads correctly whether the hand is upright, tilted, near or far. It's more maths for the same feature, and it's the difference between a demo and something usable.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 02</span>
                         <h3>One-Euro smoothing, because a fixed filter has to pick a side</h3>
                         <p>Landmark coordinates jitter constantly. A fixed low-pass filter forces an unwinnable choice: smooth enough to kill the jitter and every fast stroke lags behind your hand, or responsive enough to keep up and slow careful lines shimmer.</p>
-                        <p>The One-Euro filter adapts its cutoff to pointer speed — heavy smoothing when you're moving slowly and precision matters, light smoothing when you're moving fast and latency matters. Stroke width is modulated by velocity on top of that, which is what gives quick strokes their taper and makes the output read as ink rather than a mouse trail.</p>
+                        <p>The One-Euro filter adapts its cutoff to pointer speed: heavy smoothing when you're moving slowly and precision matters, light smoothing when you're moving fast and latency matters. Stroke width is modulated by velocity on top of that, which is what gives quick strokes their taper and makes the output read as ink rather than a mouse trail.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 03</span>
-                        <h3>Presence smoothing — survive the dropped frame</h3>
-                        <p>The tracker occasionally returns nothing for a frame or two: a blur, a bad angle, a moment of poor light. Treated literally, that ends the stroke and starts a new one — so a single continuous gesture comes out as three broken pieces.</p>
+                        <h3>Presence smoothing: survive the dropped frame</h3>
+                        <p>The tracker occasionally returns nothing for a frame or two: a blur, a bad angle, a moment of poor light. Treated literally, that ends the stroke and starts a new one, so a single continuous gesture comes out as three broken pieces.</p>
                         <p>AirDraw holds the last known landmark for <strong>180 ms</strong> before accepting that the hand is really gone. That window is long enough to bridge one or two dropped frames and short enough that lifting your hand still feels immediate.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 04</span>
                         <h3>The toolbar always wins</h3>
-                        <p>An interface that silently reinterprets your intent is infuriating. So gesture recognition never overrides an explicit choice: there are four modes — <strong>Auto</strong> (index draws, V erases, gesture decides per stroke), <strong>Draw</strong>, <strong>Erase</strong> and <strong>Pause</strong> — and in the three locked modes the toolbar is authoritative no matter what the hand does.</p>
+                        <p>An interface that silently reinterprets your intent is infuriating. So gesture recognition never overrides an explicit choice: there are four modes: <strong>Auto</strong> (index draws, V erases, gesture decides per stroke), <strong>Draw</strong>, <strong>Erase</strong> and <strong>Pause</strong>, and in the three locked modes the toolbar is authoritative no matter what the hand does.</p>
                         <p>Pause exists for a specific human reason: you want to show someone the canvas, or move your hands while you talk, without smearing what you just made.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 05</span>
                         <h3>Destructive gestures need a different trigger shape</h3>
-                        <p>Cycling the palette fires on the <em>rising edge</em> of a thumbs-up, once per pose — otherwise holding the gesture for half a second would strobe through every colour. Clearing the canvas, which cannot be casually undone, requires an open palm held for roughly 600 ms. The trigger mechanism is chosen by consequence, not for consistency's sake.</p>
+                        <p>Cycling the palette fires on the <em>rising edge</em> of a thumbs-up, once per pose, because holding the gesture for half a second would otherwise strobe through every colour. Clearing the canvas, which cannot be casually undone, requires an open palm held for roughly 600 ms. The trigger mechanism is chosen by consequence, not for consistency's sake.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 06</span>
                         <h3>Never re-render React on a video frame</h3>
-                        <p>Drawing runs on a bitmap canvas with <code>destination-out</code> compositing for erase, so rendering cost stays O(1) no matter how long the drawing gets — no growing vector list to redraw each frame. Just as important, per-frame state was moved out of React entirely: routing 30 landmark updates a second through component state was the single biggest source of stutter, and eliminating it did more for perceived smoothness than any filter tuning.</p>
+                        <p>Drawing runs on a bitmap canvas with <code>destination-out</code> compositing for erase, so rendering cost stays O(1) no matter how long the drawing gets. There is no growing vector list to redraw each frame. Just as important, per-frame state was moved out of React entirely: routing 30 landmark updates a second through component state was the single biggest source of stutter, and eliminating it did more for perceived smoothness than any filter tuning.</p>
                     </div>
                 </div>
             </div>
@@ -228,14 +228,14 @@
             <div class="container">
                 <h2 class="cs-h2">The unglamorous <em>half</em></h2>
                 <div class="cs-prose">
-                    <p>A camera-based app has more ways to fail before it starts than after. Permission denied, permission dismissed, no camera present, the model failing to download, an unsupported browser — each of those is a distinct state that needs its own honest message, not a spinner that never resolves.</p>
+                    <p>A camera-based app has more ways to fail before it starts than after. Permission denied, permission dismissed, no camera present, the model failing to download, an unsupported browser: each of those is a distinct state that needs its own honest message, not a spinner that never resolves.</p>
                 </div>
                 <ul class="cs-list">
-                    <li><strong>Every failure mode says what happened and what to do</strong> — permission denial, model-load failure and unsupported browsers are handled as first-class states rather than as an error boundary.</li>
+                    <li><strong>Every failure mode says what happened and what to do.</strong> Permission denial, model-load failure and unsupported browsers are handled as first-class states rather than as an error boundary.</li>
                     <li><strong>A five-gesture vocabulary, deliberately.</strong> An earlier pinch-to-resize gesture was cut rather than kept: it conflicted with the draw pose often enough to be worse than the feature was worth. Removing it made the remaining four more reliable.</li>
-                    <li><strong>Brush size and colour are also reachable from the toolbar</strong>, so nothing is <em>only</em> available through a gesture — the interface never traps you behind a pose your hand won't hold.</li>
-                    <li><strong>Mobile is supported as best-effort and labelled as such</strong> — viewport handling, reachable controls, canvas sizing and touch were done properly, while acknowledging that a laptop webcam at desk distance is the setup the gesture tuning targets.</li>
-                    <li><strong>The privacy property is structural.</strong> There is no backend, so the webcam feed cannot be uploaded — not as a policy, but as an absence of capability.</li>
+                    <li><strong>Brush size and colour are also reachable from the toolbar</strong>, so nothing is <em>only</em> available through a gesture. The interface never traps you behind a pose your hand won't hold.</li>
+                    <li><strong>Mobile is supported as best-effort and labelled as such.</strong> Viewport handling, reachable controls, canvas sizing and touch were done properly, while acknowledging that a laptop webcam at desk distance is the setup the gesture tuning targets.</li>
+                    <li><strong>The privacy property is structural.</strong> There is no backend, so the webcam feed cannot be uploaded. Not a policy, an absence of capability.</li>
                 </ul>
 
                 <div class="cs-note">
@@ -257,7 +257,7 @@
                     <a class="cs-next-card" href="myjson.html">
                         <span class="cs-next-label">Next case study</span>
                         <h2 class="cs-next-title">MyJSON</h2>
-                        <p class="cs-next-desc">A JSON workstation that runs entirely in the browser — including real jq compiled to WebAssembly.</p>
+                        <p class="cs-next-desc">A JSON workstation that runs entirely in the browser, including real jq compiled to WebAssembly.</p>
                     </a>
                 </div>
             </div>

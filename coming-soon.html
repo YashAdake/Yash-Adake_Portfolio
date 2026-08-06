@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#0B0E14">
-    <title>Coming Soon — Yash Adake</title>
+    <title>Coming Soon · Yash Adake</title>
     <meta name="description" content="A product I'm building. Launching on yashadake.com soon.">
 
     <link rel="icon" type="image/x-icon" href="photos/nav-brand.png">
@@ -64,7 +64,7 @@
             overflow-x: hidden;
         }
 
-        /* Ambient background — radial tint takes the product color */
+        /* Ambient background; radial tint takes the product color */
         body::before {
             content: '';
             position: fixed;
@@ -385,33 +385,33 @@
             const PRODUCTS = {
                 optiresume: {
                     title: 'Opti<br><em>Resume</em>',
-                    tagline: 'An AI career toolkit — score and tailor resumes, LinkedIn profiles and applications, with the cost of intelligence kept low.',
-                    description: 'Hybrid design: deterministic local rules score parseability, keyword fit and skill matching instantly, while an LLM (Google Gemma 4 31B) handles only the semantic work — rewrites, suggestions, cover letters, tailoring — behind a strict cost-aware gateway.',
+                    tagline: 'An AI career toolkit: score and tailor resumes, LinkedIn profiles and applications, with the cost of intelligence kept low.',
+                    description: 'Hybrid design: deterministic local rules score parseability, keyword fit and skill matching instantly, while an LLM (Google Gemma 4 31B) handles only the semantic work: rewrites, suggestions, cover letters, tailoring, all behind a strict cost-aware gateway.',
                     features: [
                         'Single AI gateway: caching by prompt hash, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction and per-call token-cost logging.',
                         'LinkedIn-profile scoring and resume cross-check, multi-resume tailoring, skill proofs, an applications tracker and a share-to-earn credit ledger.',
                         'Parse-and-discard resume handling (only extracted text + a hash persists) and an 8-hour absolute auth ceiling with reuse-detection refresh rotation.'
                     ],
-                    eta: 'In active development — final polish before public launch.',
+                    eta: 'In active development, final polish before public launch.',
                     tintA: '#22D3EE',
                     tintB: '#A78BFA',
-                    docTitle: 'OptiResume — Coming Soon · Yash Adake',
+                    docTitle: 'OptiResume · Coming Soon · Yash Adake',
                     notifySubject: 'Notify me when OptiResume launches',
                     notifyBody: 'Hi Yash,\n\nI saw OptiResume on yashadake.com and would like a note when it ships.\n\nMy name: \nMy use case: \n\nThanks!'
                 },
                 airdraw: {
                     title: 'Air<br><em>Draw</em>',
-                    tagline: 'Gesture-controlled drawing in the browser — your camera feed never leaves the tab.',
+                    tagline: 'Gesture-controlled drawing in the browser. Your camera feed never leaves the tab.',
                     description: 'A five-gesture vocabulary (draw, erase, lift, cycle palette, clear) runs on MediaPipe HandLandmarker entirely in WebAssembly, with joint-angle finger detection, One-Euro pointer smoothing and a persistent bitmap canvas. No install, no server, no GPU required.',
                     features: [
-                        'Joint-angle finger detection — rotation-invariant and palm-size adaptive, so gestures stay reliable as your hand moves.',
+                        'Joint-angle finger detection: rotation-invariant and palm-size adaptive, so gestures stay reliable as your hand moves.',
                         'One-Euro pointer smoothing and velocity-modulated stroke width give air-drawn lines a hand-drawn feel.',
-                        'Presence smoothing reuses the last frame for 180 ms — strokes survive 1–2 dropped frames; the bitmap canvas keeps render cost O(1).'
+                        'Presence smoothing reuses the last frame for 180 ms, so strokes survive 1-2 dropped frames; the bitmap canvas keeps render cost O(1).'
                     ],
-                    eta: 'In active development — final polish before public launch.',
+                    eta: 'In active development, final polish before public launch.',
                     tintA: '#F472B6',
                     tintB: '#8B5CF6',
-                    docTitle: 'AirDraw — Coming Soon · Yash Adake',
+                    docTitle: 'AirDraw · Coming Soon · Yash Adake',
                     notifySubject: 'Notify me when AirDraw launches',
                     notifyBody: 'Hi Yash,\n\nI saw AirDraw on yashadake.com and would like a note when it ships.\n\nMy name: \n\nThanks!'
                 }
@@ -425,7 +425,7 @@
             document.getElementById('year').textContent = new Date().getFullYear();
 
             if (!p) {
-                // Generic fallback — leave default copy in place, just wire the notify CTA.
+                // Generic fallback: leave default copy in place, just wire the notify CTA.
                 document.getElementById('notifyBtn').href =
                     'mailto:hello@yashadake.com?subject=' +
                     encodeURIComponent('Notify me when your next product launches');

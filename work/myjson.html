@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-    <title>MyJSON — case study · Yash Adake</title>
+    <title>MyJSON case study · Yash Adake</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
 
-    <meta name="description" content="MyJSON is a JSON and YAML workstation with no backend at all — including real jq 1.8 compiled to WebAssembly. How a hard privacy constraint shaped every feature decision in the product.">
+    <meta name="description" content="MyJSON is a JSON and YAML workstation with no backend at all, including real jq 1.8 compiled to WebAssembly. How a hard privacy constraint shaped every feature decision in the product.">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
     <link rel="canonical" href="https://yashadake.com/work/myjson.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Yash Adake — Software Engineer">
-    <meta property="og:title" content="MyJSON — case study">
-    <meta property="og:description" content="A JSON workstation with no backend at all — real jq 1.8 in WebAssembly, three query languages, seven formats, and a privacy promise you can verify in the Network tab.">
+    <meta property="og:site_name" content="Yash Adake · Software Engineer">
+    <meta property="og:title" content="MyJSON case study">
+    <meta property="og:description" content="A JSON workstation with no backend at all: real jq 1.8 in WebAssembly, three query languages, seven formats, and a privacy promise you can verify in the Network tab.">
     <meta property="og:url" content="https://yashadake.com/work/myjson.html">
     <meta property="og:image" content="https://yashadake.com/photos/og/og-myjson.png">
     <meta property="og:image:width" content="1200">
@@ -25,7 +25,7 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yash_adake">
-    <meta name="twitter:title" content="MyJSON — case study">
+    <meta name="twitter:title" content="MyJSON case study">
     <meta name="twitter:description" content="No backend, real jq in WebAssembly, and a privacy promise you can verify yourself.">
     <meta name="twitter:image" content="https://yashadake.com/photos/og/og-myjson.png">
 
@@ -35,8 +35,8 @@
     {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "MyJSON — case study",
-        "description": "How a hard no-backend privacy constraint shaped every feature decision in a JSON and YAML workstation — including compiling real jq 1.8 to WebAssembly.",
+        "headline": "MyJSON case study",
+        "description": "How a hard no-backend privacy constraint shaped every feature decision in a JSON and YAML workstation, including compiling real jq 1.8 to WebAssembly.",
         "url": "https://yashadake.com/work/myjson.html",
         "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
         "publisher": { "@type": "Person", "name": "Yash Adake" },
@@ -93,7 +93,7 @@
 
     <header class="site-nav" id="siteNav">
         <nav class="container nav-inner" aria-label="Primary">
-            <a class="brand" href="../index.html" aria-label="Yash Adake — home">
+            <a class="brand" href="../index.html" aria-label="Yash Adake, home">
                 <img class="brand-mark" src="../photos/nav-brand2.webp" alt="Yash Adake" width="40" height="40">
             </a>
 
@@ -133,7 +133,7 @@
                 <a class="cs-back" href="../index.html#products"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg> All products</a>
                 <p class="eyebrow">Case study · Devtools · Privacy-first</p>
                 <h1 class="cs-title">My<em>JSON</em></h1>
-                <p class="cs-lede">A JSON and YAML workstation with <strong>no backend at all</strong> — there is simply nowhere for your data to go. Every feature had to be engineered to survive that constraint, including real jq.</p>
+                <p class="cs-lede">A JSON and YAML workstation with <strong>no backend at all</strong>. There is simply nowhere for your data to go. Every feature had to be engineered to survive that constraint, including real jq.</p>
 
                 <div class="cs-actions">
                     <a class="btn" href="https://myjson.yashadake.com" target="_blank" rel="noopener noreferrer">Open MyJSON <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
@@ -143,7 +143,7 @@
                 <dl class="cs-facts">
                     <div class="cs-fact">
                         <dt>Role</dt>
-                        <dd>Sole engineer — architecture, UI, performance, accessibility, SEO</dd>
+                        <dd>Sole engineer: architecture, UI, performance, accessibility, SEO</dd>
                     </div>
                     <div class="cs-fact">
                         <dt>Status</dt>
@@ -155,7 +155,7 @@
                     </div>
                     <div class="cs-fact">
                         <dt>Servers</dt>
-                        <dd>Zero. Static hosting only — no API, no database, no telemetry</dd>
+                        <dd>Zero. Static hosting only: no API, no database, no telemetry</dd>
                     </div>
                 </dl>
             </div>
@@ -167,7 +167,7 @@
                 <h2 class="cs-h2">The <em>problem</em></h2>
                 <div class="cs-prose">
                     <p>Every developer has done it: paste a production payload into the first JSON formatter a search returns, then feel a small cold moment about what was in it. Auth tokens. Customer emails. An internal URL that shouldn't be in a stranger's request log.</p>
-                    <p>Most online JSON tools POST your document to a server. The ones that don't are usually one narrow page — a formatter <em>or</em> a validator <em>or</em> a converter — so a real task means pasting the same sensitive blob into four different sites.</p>
+                    <p>Most online JSON tools POST your document to a server. The ones that don't are usually one narrow page (a formatter <em>or</em> a validator <em>or</em> a converter), so a real task means pasting the same sensitive blob into four different sites.</p>
                     <p>MyJSON took the opposite constraint as its starting point: <strong>the app is not allowed to make a network request while you work.</strong> Everything else followed from having to honour that.</p>
                 </div>
 
@@ -185,7 +185,7 @@
             <div class="container">
                 <h2 class="cs-h2">The decisions that <em>cost</em> something</h2>
                 <div class="cs-prose">
-                    <p>A privacy claim is cheap to write and expensive to keep. These are the places where keeping it actually made the engineering harder — which is the only real evidence that the constraint was honoured.</p>
+                    <p>A privacy claim is cheap to write and expensive to keep. These are the places where keeping it actually made the engineering harder, which is the only real evidence that the constraint was honoured.</p>
                 </div>
 
                 <div class="cs-decisions">
@@ -193,12 +193,12 @@
                         <span class="cs-decision-label">Decision 01</span>
                         <h3>Make the promise verifiable, not trustworthy</h3>
                         <p>"Trust us" is the weakest possible privacy claim. So the promise is stated as something a skeptical developer can check in ten seconds: open DevTools, watch the Network tab, and use the app. Nothing fires. A status-bar badge says so, and there is a dedicated page explaining exactly what that does and doesn't cover.</p>
-                        <p>This forced a real cost — no server-side anything, ever, for any feature — but it turned the product's main claim into something falsifiable.</p>
+                        <p>This forced a real cost, no server-side anything, ever, for any feature. In return it turned the product's main claim into something falsifiable.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 02</span>
                         <h3>Ship <em>real</em> jq, not a jq-flavoured subset</h3>
-                        <p>The obvious path was to reimplement a useful subset of jq in TypeScript. Every such subset lies the moment a user pastes a filter from Stack Overflow that touches the part you didn't implement — and they can't tell whether the bug is theirs or yours.</p>
+                        <p>The obvious path was to reimplement a useful subset of jq in TypeScript. Every such subset lies the moment a user pastes a filter from Stack Overflow that touches the part you didn't implement, and they can't tell whether the bug is theirs or yours.</p>
                         <p>Instead, MyJSON ships <strong>jq 1.8 itself, compiled to WebAssembly</strong>, running in the browser with a <code>--raw-output</code> toggle. Filters behave exactly as they do in a terminal, because it is the same jq. The cost is bundle weight and a lazy-loading strategy; the benefit is that the tool never quietly lies.</p>
                     </div>
                     <div class="cs-decision">
@@ -209,7 +209,7 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 04</span>
                         <h3>Sharing, without a server to share through</h3>
-                        <p>Share links normally mean an upload and a database row. Here the document is LZ-compressed and embedded in the URL hash — the fragment never leaves the browser, so a shared link carries its own payload and still touches no server. It also means shared links can't be revoked or mined, which is the honest trade and is documented as such.</p>
+                        <p>Share links normally mean an upload and a database row. Here the document is LZ-compressed and embedded in the URL hash. The fragment never leaves the browser, so a shared link carries its own payload and still touches no server. It also means shared links can't be revoked or mined, which is the honest trade and is documented as such.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 05</span>
@@ -219,7 +219,7 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 06</span>
                         <h3>Redact before you share, not after you regret</h3>
-                        <p>One toolbar action masks JWTs, emails, UUIDs, IP addresses, credit-card numbers and credential-keyed values to <code>&lt;redacted:…&gt;</code>. Originals survive only in the in-memory undo stack — never written to disk, never persisted — so the safe version is the one that leaves the tab.</p>
+                        <p>One toolbar action masks JWTs, emails, UUIDs, IP addresses, credit-card numbers and credential-keyed values to <code>&lt;redacted:…&gt;</code>. Originals survive only in the in-memory undo stack (never written to disk, never persisted), so the safe version is the one that leaves the tab.</p>
                     </div>
                 </div>
             </div>
@@ -228,20 +228,20 @@
         <!-- LIVE DEMO -->
         <section class="cs-section" id="demo">
             <div class="container">
-                <h2 class="cs-h2">Don't take my word — <em>test it</em></h2>
+                <h2 class="cs-h2">Don't take my word, <em>test it</em></h2>
                 <div class="cs-prose">
-                    <p>This little widget obeys the same rule as the product: open DevTools, watch the Network tab, and use it. Nothing fires. I kept it deliberately tiny — the real workstation adds Monaco, jq 1.8 in WebAssembly, seven formats and plenty more — but the rule it demonstrates is the one the whole product is built on, and you can check it right here.</p>
+                    <p>This little widget obeys the same rule as the product: open DevTools, watch the Network tab, and use it. Nothing fires. I kept it deliberately tiny (the real workstation adds Monaco, jq 1.8 in WebAssembly, seven formats and plenty more), but the rule it demonstrates is the one the whole product is built on, and you can check it right here.</p>
                 </div>
 
                 <div class="demo-box" data-reveal>
                     <div class="demo-panes">
                         <div class="demo-pane">
-                            <label class="demo-label" for="demoInput">Input — edit freely</label>
+                            <label class="demo-label" for="demoInput">Input, edit freely</label>
                             <textarea id="demoInput" class="demo-input" rows="12" spellcheck="false" aria-describedby="demoStatus"></textarea>
                         </div>
                         <div class="demo-pane">
                             <span class="demo-label" id="demoOutLabel">Output</span>
-                            <pre id="demoOutput" class="demo-output" aria-labelledby="demoOutLabel" aria-live="polite">— run something —</pre>
+                            <pre id="demoOutput" class="demo-output" aria-labelledby="demoOutLabel" aria-live="polite">run something to see the result</pre>
                         </div>
                     </div>
                     <div class="demo-controls">
@@ -253,7 +253,7 @@
                             <button type="button" id="demoQuery" class="btn btn-ghost demo-btn">Query</button>
                         </span>
                     </div>
-                    <p class="demo-status" id="demoStatus" role="status">Tip: Ctrl+Enter formats. The path box speaks a tiny $.key[0] dialect — the product speaks JSONPath, jq and JSON Pointer.</p>
+                    <p class="demo-status" id="demoStatus" role="status">Tip: Ctrl+Enter formats. The path box speaks a tiny $.key[0] dialect; the product speaks JSONPath, jq and JSON Pointer.</p>
                 </div>
             </div>
         </section>
@@ -266,17 +266,17 @@
                     <li><strong>Editing.</strong> Monaco with 14 themes, JSON/YAML mode toggle with lossless conversion, JSON5 fallback so comments and trailing commas just work, format/minify, and drag-drop or paste up to 25 MB.</li>
                     <li><strong>Inspection.</strong> Tree view with search highlighting and copy-subtree, a sticky cursor-path breadcrumb, table view with sorting, filtering and CSV export, and a search overlay across keys and values that auto-expands the tree.</li>
                     <li><strong>Schema.</strong> Ajv-powered live validation, plus one-click schema inference from the current document with format detection for email, URI, UUID and date-time.</li>
-                    <li><strong>Diff.</strong> Three modes — Monaco side-by-side, structured (click a change to jump to it in the editor), and RFC 6902 JSON Patch.</li>
+                    <li><strong>Diff.</strong> Three modes: Monaco side-by-side, structured (click a change to jump to it in the editor), and RFC 6902 JSON Patch.</li>
                     <li><strong>Codegen.</strong> TypeScript, Zod, Go with json tags, Rust with serde, Python dataclass, Pydantic and JSON Schema.</li>
                     <li><strong>Conversion.</strong> Bidirectional across JSON, YAML, XML, CSV, TOML, NDJSON and TOON, with a live token-savings estimate for the TOON target.</li>
                     <li><strong>Decoders.</strong> JWT, Base64, URL, hex and Unicode, an NDJSON viewer, and secret-on-paste detection.</li>
-                    <li><strong>Keyboard-first.</strong> A fuzzy command palette on <code>Ctrl+P</code> plus direct shortcuts for format, minify, download, clear and search — the whole tool is usable without reaching for the mouse.</li>
-                    <li><strong>Accessibility and delivery.</strong> A full WCAG 2.2 AA pass — live regions, focus traps, keyboard navigation, contrast — and a hand-rolled service worker that keeps it fully usable offline as a PWA, with eleven focused landing pages for the tasks people actually search for.</li>
+                    <li><strong>Keyboard-first.</strong> A fuzzy command palette on <code>Ctrl+P</code> plus direct shortcuts for format, minify, download, clear and search. The whole tool is usable without reaching for the mouse.</li>
+                    <li><strong>Accessibility and delivery.</strong> A full WCAG 2.2 AA pass (live regions, focus traps, keyboard navigation, contrast) and a hand-rolled service worker that keeps it fully usable offline as a PWA, with eleven focused landing pages for the tasks people actually search for.</li>
                 </ul>
 
                 <div class="cs-note">
                     <span class="cs-note-label">Honest note</span>
-                    <p>A handful of visual refinements are deliberately parked rather than shipped half-done — chiefly consolidating some repeated UI into shared primitives, and revisiting the dynamic root font-size, which interacts badly enough with rem-based utilities to deserve a considered fix rather than a patch. The correctness, accessibility, performance and SEO work is landed and verified.</p>
+                    <p>A handful of visual refinements are deliberately parked rather than shipped half-done: chiefly consolidating some repeated UI into shared primitives, and revisiting the dynamic root font-size, which interacts badly enough with rem-based utilities to deserve a considered fix rather than a patch. The correctness, accessibility, performance and SEO work is landed and verified.</p>
                 </div>
             </div>
         </section>

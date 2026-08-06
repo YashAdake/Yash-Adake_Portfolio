@@ -1,5 +1,5 @@
 // ============================================
-// ANALYTICS — GA4 + Microsoft Clarity
+// ANALYTICS · GA4 + Microsoft Clarity
 // ============================================
 // Detailed visitor analytics for the portfolio:
 //   - GA4   → traffic sources, geo, device, engagement + custom events
@@ -77,7 +77,7 @@ const CONSENT_KEY = 'analytics_consent'; // 'granted' | 'denied'
       el.addEventListener('click', () => track('resume_download', { location: 'portfolio' }));
     });
 
-    // Project / work card clicks — capture which product and whether live
+    // Project / work card clicks: capture which product and whether live
     document.querySelectorAll('.work-card').forEach((el) => {
       el.addEventListener('click', () => {
         const title = el.querySelector('.work-title')?.textContent?.trim() || 'unknown';
@@ -99,7 +99,7 @@ const CONSENT_KEY = 'analytics_consent'; // 'granted' | 'denied'
       });
     });
 
-    // Command palette opened — app.js owns the ⌘K shortcut and dispatches
+    // Command palette opened: app.js owns the ⌘K shortcut and dispatches
     // this event, so we track once here without a duplicate key listener.
     document.addEventListener('palette:open', () => track('command_palette_open'));
   }
