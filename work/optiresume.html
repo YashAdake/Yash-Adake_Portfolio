@@ -187,7 +187,7 @@
             <div class="container">
                 <h2 class="cs-h2">The decision that shaped <em>everything</em> else</h2>
                 <div class="cs-prose">
-                    <p>The founding architecture decision — written down as an ADR before a line of scoring code existed — was that <strong>the LLM never computes the score.</strong> It draws a hard line through the product: anything that must be reproducible, auditable and free is deterministic Python; the model is only invited in for work that is genuinely semantic.</p>
+                    <p>The founding architecture decision — written down as an ADR before a line of scoring code existed — was that <strong>the LLM never computes the score.</strong> It draws a hard line through the product: anything that must be reproducible, auditable and free is deterministic Python; the model is only invited in for the semantic work.</p>
                     <p>That single boundary is why the rest of the system is affordable, testable, and defensible when a user asks <em>"why did I get 68?"</em> — a question no wrapper around a chat completion can answer.</p>
                 </div>
 
@@ -196,7 +196,7 @@
                         <span class="cs-decision-label">Decision 01</span>
                         <h3>Rules score. The model writes.</h3>
                         <p>Parseability, section detection, keyword coverage, skill matching, formatting hazards and contact hygiene are 27 explicit rules with explicit weights. They run offline, cost nothing, and produce the same number twice — so the score can be explained line by line and regression-tested like any other pure function.</p>
-                        <p>The LLM handles only what rules genuinely cannot: rewriting a bullet into STAR form using the candidate's own facts, drafting a cover letter, and tailoring a resume to a specific job description.</p>
+                        <p>The LLM handles only what rules cannot do: rewriting a bullet into STAR form using the candidate's own facts, drafting a cover letter, and tailoring a resume to a specific job description.</p>
                     </div>
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 02</span>
@@ -272,7 +272,7 @@
                     <li><strong>The Code Century.</strong> A curated 100-problem coding track with progress tracking and a verifiable Code Centurion certificate at the end — a finishable goal instead of an infinite problem list.</li>
                     <li><strong>Test series and mock papers.</strong> Timed, sectioned tests with scores persisted per attempt, so improvement is measurable rather than remembered.</li>
                     <li><strong>Rapid revision.</strong> Compact revision cards for the night before, when nobody is going to read a textbook.</li>
-                    <li><strong>A dedicated MBA track.</strong> Built separately rather than bolted onto the engineering content, because the syllabus, the scoring conventions and the interview format genuinely differ.</li>
+                    <li><strong>A dedicated MBA track.</strong> Built separately rather than bolted onto the engineering content, because the syllabus, the scoring conventions and the interview format are all different.</li>
                     <li><strong>A campus-drives directory with a freshness model.</strong> Listings carry confidence tiers; stale ones are downgraded automatically and archived after a 90-day grace period, with an admin re-verification queue. Nothing rots quietly into a lie.</li>
                     <li><strong>Programmatic OA-pattern pages for 14 companies</strong>, plus an eligibility checker, an application tracker, LinkedIn-profile auditing and cross-checking against the resume, and a share-to-earn credit ledger.</li>
                     <li><strong>An operator console.</strong> Activation funnel (signup → verify → analyze → use AI), live LLM spend, audit log, credit requests and a support-query channel — because a solo-run product needs to be observable by the person running it.</li>
@@ -325,7 +325,7 @@
 
                 <div class="cs-note">
                     <span class="cs-note-label">Honest note</span>
-                    <p>Everything described on this page is live in production today. The expansion above is built and tested but not yet shipped — it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing genuinely good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
+                    <p>Everything described on this page is live in production today. The expansion above is built and tested but not yet shipped — it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
                 </div>
             </div>
         </section>
