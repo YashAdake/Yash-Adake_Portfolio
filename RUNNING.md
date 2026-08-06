@@ -78,8 +78,11 @@ project images resolve there, so the score is accurate).
 ```
 index.html              single-page site (hero, products, work, about, writing, contact)
 work/optiresume.html    case study — OptiResume (linked from the product card + ⌘K palette)
-work/myjson.html        case study — MyJSON
+work/myjson.html        case study — MyJSON (carries the live demo widget, js/demo-json.js)
 work/airdraw.html       case study — AirDraw
+notes/*.html            engineering notes (3) — linked from Writing + ⌘K palette; same
+                        page system as work/, generated once by a scratchpad script but
+                        edited by hand since — treat the HTML as the source of truth
 404.html                not-found page
 coming-soon.html        per-product coming-soon (?product=optiresume|airdraw)
 css/site.css            entire design system + all section styles (design tokens at top)
@@ -92,11 +95,11 @@ CNAME / .nojekyll       GitHub Pages config
 cloudflare-worker-api.js  reference copy of the deployed Worker
 ```
 
-> **No build step means the chrome is duplicated.** `work/*.html` each carry their own
-> copy of the SVG icon sprite, nav, mobile nav panel and footer. If you change any of
-> those in `index.html`, change them in all three case studies too — nothing will warn
-> you. Their asset paths are `../`-relative and their nav links point at
-> `../index.html#section`, so they work both locally and on GitHub Pages.
+> **No build step means the chrome is duplicated.** `work/*.html` and `notes/*.html`
+> each carry their own copy of the SVG icon sprite, nav, mobile nav panel and footer.
+> If you change any of those in `index.html`, change them in all six subpages too —
+> nothing will warn you. Their asset paths are `../`-relative and their nav links point
+> at `../index.html#section`, so they work both locally and on GitHub Pages.
 
 ---
 
