@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
 
-    <meta name="description" content="How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform on its own domain: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents worth remembering.">
+    <meta name="description" content="How OptiResume grew from an honest 28-rule ATS scorer into a campus-placement platform on its own domain: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents worth remembering.">
     <meta name="author" content="Yash Adake">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
@@ -17,7 +17,7 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Yash Adake · Software Engineer">
     <meta property="og:title" content="OptiResume case study">
-    <meta property="og:description" content="From a 27-rule ATS scorer to a campus-placement platform: the hybrid-AI decision, a single cost-aware AI gateway, parse-and-discard handling, and what production actually broke.">
+    <meta property="og:description" content="From a 28-rule ATS scorer to a campus-placement platform: the hybrid-AI decision, a single cost-aware AI gateway, parse-and-discard handling, and what production actually broke.">
     <meta property="og:url" content="https://yashadake.com/work/optiresume.html">
     <meta property="og:image" content="https://yashadake.com/photos/og/og-optiresume.png">
     <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yash_adake">
     <meta name="twitter:title" content="OptiResume case study">
-    <meta name="twitter:description" content="From a 27-rule ATS scorer to a campus-placement platform: the decisions, the guardrails, and the production incidents.">
+    <meta name="twitter:description" content="From a 28-rule ATS scorer to a campus-placement platform: the decisions, the guardrails, and the production incidents.">
     <meta name="twitter:image" content="https://yashadake.com/photos/og/og-optiresume.png">
 
     <meta name="theme-color" content="#0B0E14">
@@ -36,7 +36,7 @@
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "OptiResume case study",
-        "description": "How OptiResume grew from an honest 27-rule ATS scorer into a campus-placement platform: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents.",
+        "description": "How OptiResume grew from an honest 28-rule ATS scorer into a campus-placement platform: the hybrid-AI decision, the single AI gateway, parse-and-discard file handling, and three production incidents.",
         "url": "https://yashadake.com/work/optiresume.html",
         "author": { "@type": "Person", "name": "Yash Adake", "url": "https://yashadake.com" },
         "publisher": { "@type": "Person", "name": "Yash Adake" },
@@ -172,10 +172,10 @@
                 </div>
 
                 <div class="cs-numbers">
-                    <div class="cs-number"><span class="cs-number-value">27</span><span class="cs-number-label">Deterministic ATS rules, no AI in the score</span></div>
+                    <div class="cs-number"><span class="cs-number-value">28</span><span class="cs-number-label">Deterministic ATS rules, no AI in the score</span></div>
                     <div class="cs-number"><span class="cs-number-value">100</span><span class="cs-number-label">Problems in The Code Century track</span></div>
                     <div class="cs-number"><span class="cs-number-value">14</span><span class="cs-number-label">Company OA-pattern guides</span></div>
-                    <div class="cs-number"><span class="cs-number-value">1,000+</span><span class="cs-number-label">Automated tests gating every deploy</span></div>
+                    <div class="cs-number"><span class="cs-number-value">3,000+</span><span class="cs-number-label">Automated tests gating every deploy</span></div>
                 </div>
             </div>
         </section>
@@ -193,7 +193,7 @@
                     <div class="cs-decision">
                         <span class="cs-decision-label">Decision 01</span>
                         <h3>Rules score. The model writes.</h3>
-                        <p>Parseability, section detection, keyword coverage, skill matching, formatting hazards and contact hygiene are 27 explicit rules with explicit weights. They run offline, cost nothing, and produce the same number twice, so the score can be explained line by line and regression-tested like any other pure function.</p>
+                        <p>Parseability, section detection, keyword coverage, skill matching, formatting hazards and contact hygiene are 28 explicit rules with explicit weights. They run offline, cost nothing, and produce the same number twice, so the score can be explained line by line and regression-tested like any other pure function.</p>
                         <p>The LLM handles only what rules cannot do: rewriting a bullet into STAR form using the candidate's own facts, drafting a cover letter, and tailoring a resume to a specific job description.</p>
                     </div>
                     <div class="cs-decision">
@@ -273,6 +273,8 @@
                     <li><strong>A dedicated MBA track.</strong> Built separately rather than bolted onto the engineering content, because the syllabus, the scoring conventions and the interview format are all different.</li>
                     <li><strong>A campus-drives directory with a freshness model.</strong> Listings carry confidence tiers; stale ones are downgraded automatically and archived after a 90-day grace period, with an admin re-verification queue. Nothing rots quietly into a lie.</li>
                     <li><strong>Programmatic OA-pattern pages for 14 companies</strong>, plus an eligibility checker, an application tracker, LinkedIn-profile auditing and cross-checking against the resume, and a share-to-earn credit ledger.</li>
+                    <li><strong>Tailored resumes that stay honest.</strong> Tailoring a resume to a job description returns a real document, not a text blob. The page shows it beside the original with every changed bullet marked, lets you edit in place with a free re-score, and exports a PDF that scores what the text scores. Skills the candidate never claimed are removed from the draft rather than merely flagged, and the job description is read as requirement groups, so "Python or Java" counts as one requirement.</li>
+                    <li><strong>Scam Check and a written promise.</strong> Paste a recruiter message or offer and get a plain verdict (a fee paid to a UPI ID is a stop), run by local rules rather than a model. A public promise page states what the product will and will not do with a resume.</li>
                     <li><strong>An operator console.</strong> Activation funnel (signup → verify → analyze → use AI), live LLM spend, audit log, credit requests and a support-query channel, because a solo-run product needs to be observable by the person running it.</li>
                 </ul>
             </div>
@@ -304,6 +306,12 @@
                         <h3>The API base URL must carry its version prefix</h3>
                         <p>A frontend environment variable set without the <code>/api/v1</code> suffix produces a build that looks completely healthy and can't reach a single endpoint. It now has a documented invariant and a deploy checklist entry, because the failure mode gives you no useful signal at all: just 404s from a server that is running perfectly.</p>
                     </div>
+                    <div class="cs-decision">
+                        <span class="cs-decision-label">Incident · accounting</span>
+                        <h3>Credits that would have silently reset</h3>
+                        <p>A user's lifetime AI credit usage was computed by counting rows in the call log, and a boot-time sweep deleted those rows after 90 days. The first cohort of users was due to be quietly re-credited on 13 October. A full audit caught it 25 days out, and the fix needed no migration.</p>
+                        <p>Rule learned: a durable fact inferred from a table with its own retention policy will eventually be wrong. The same audit found two sibling bugs of the same shape, and a mobile admin menu that sat off-screen, which no amount of reading class names had revealed. Only rendering the page at 320px did.</p>
+                    </div>
                 </div>
 
                 <div class="cs-prose" style="margin-top: var(--space-6)">
@@ -317,13 +325,13 @@
             <div class="container">
                 <h2 class="cs-h2">What's <em>next</em></h2>
                 <div class="cs-prose">
-                    <p>The work in flight is a large expansion of the preparation half: a substantially bigger question bank, per-topic mastery analytics that recommend one explainable next test rather than a wall of options, a spaced-repetition queue built from the user's own wrong answers, and guided role roadmaps that skip the phases a user can already pass.</p>
+                    <p>The work in flight is a deeper preparation half: company-pattern mock papers for TCS, Infosys, Wipro and Cognizant that generate a new paper per attempt and state plainly what they cannot simulate, freshly generated aptitude practice whose answers are computed by code, a trust pass over the campus-drives directory (only drives confirmed on the company's own page are labelled official), and a structured Study Notes library, starting with a 34-chapter AI Engineering course in which every chapter was independently reviewed and every Python block checked against pinned versions.</p>
                     <p>All of it is deliberately zero-AI: the founding decision still holds, and none of those features need a language model to work.</p>
                 </div>
 
                 <div class="cs-note">
                     <span class="cs-note-label">Honest note</span>
-                    <p>Everything described on this page is live in production today. The expansion above is built and tested but not yet shipped, and it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
+                    <p>Everything described above "What's next" is live in production today. The expansion in this section is built and tested but not yet shipped, and it is not counted anywhere on this site until it is. The same rule applies to the resource catalogue behind the roadmaps: where nothing good and free exists for a step yet, that step ships with an honest blank rather than a padded link.</p>
                 </div>
             </div>
         </section>
