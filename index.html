@@ -28,7 +28,7 @@
     <meta property="og:title" content="Yash Adake · Backend &amp; Platform Engineer, Applied AI">
     <meta property="og:description" content="Backend systems, cloud infrastructure, and applied AI, with three products live in production, each built end-to-end. Remote-friendly · Based in India (GMT+5:30) · Open to roles worldwide.">
     <meta property="og:url" content="https://yashadake.com/">
-    <meta property="og:image" content="https://yashadake.com/photos/og/og-home.png">
+    <meta property="og:image" content="https://yashadake.com/photos/og/og-home.png?v=2">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -42,7 +42,7 @@
     <meta name="twitter:creator" content="@yash_adake">
     <meta name="twitter:title" content="Yash Adake · Backend &amp; Platform Engineer, Applied AI">
     <meta name="twitter:description" content="Backend systems, cloud infrastructure, and applied AI. Three products live in production, each built end-to-end. Remote-friendly · Open to roles worldwide.">
-    <meta name="twitter:image" content="https://yashadake.com/photos/og/og-home.png">
+    <meta name="twitter:image" content="https://yashadake.com/photos/og/og-home.png?v=2">
     <meta name="twitter:image:alt" content="Yash Adake · Software Engineer · Backend, cloud, and applied AI">
 
     <meta name="theme-color" content="#0B0E14">
@@ -134,7 +134,7 @@
     <link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="fonts/jetbrainsmono-latin.woff2" crossorigin>
 
-    <link rel="stylesheet" href="css/site.css?v=3.2.0">
+    <link rel="stylesheet" href="css/site.css?v=3.3.0">
 
     <link rel="icon" type="image/x-icon" href="photos/YA-Favicon.ico">
     <link rel="apple-touch-icon" href="photos/nav-brand.png">
@@ -316,25 +316,25 @@
                 <header class="section-header" data-reveal>
                     <p class="eyebrow">Live products</p>
                     <h2 class="section-title"><em>Built</em> &amp; shipped</h2>
-                    <p class="section-kicker">Each of these is mine in full: the architecture, the backend, the interface, the infrastructure, the launch. All three are <strong>in production and in daily use.</strong></p>
+                    <p class="section-kicker">Each of these is mine in full: the architecture, the backend, the interface, the infrastructure, the launch. All three are <strong>live in production.</strong></p>
                 </header>
 
                 <div class="work-grid">
                     <article class="work-card" data-reveal>
                         <div class="work-visual">
                             <span class="work-status"><span class="status status-live" data-live-url="https://optiresume.in"><span class="status-dot"></span><span class="status-text">Live</span></span></span>
-                            <img class="work-shot" src="photos/projects/optiresume.webp" alt="The OptiResume landing page: an honest ATS score, JD-tailored resumes, drive checks and a 100-problem coding challenge" loading="lazy" decoding="async" width="1120" height="630">
+                            <img class="work-shot" src="photos/projects/optiresume.webp?v=2" alt="The OptiResume landing page: a free 28-rule ATS score with no AI in the number, JD-tailored resumes and 6,314 practice questions" loading="lazy" decoding="async" width="1120" height="630">
                             <span class="work-logotype">Opti<em>Resume</em></span>
                         </div>
                         <div class="work-meta">
                             <span class="work-tag">SaaS · Applied AI · Own domain</span>
                             <h3 class="work-title">OptiResume</h3>
-                            <p class="work-stats">28-rule ATS engine · 100-problem prep track · 3,000+ tests</p>
-                            <p class="work-desc">A campus-placement platform on its own domain, <strong>optiresume.in</strong>. It began as an honest ATS scorer and grew into the entire journey a candidate actually walks: score and tailor the resume, audit the LinkedIn profile, track every application, then sit down and properly prepare for the test and the interview.</p>
+                            <p class="work-stats">28-rule ATS engine · 6,314 practice questions · 100+ sign-ups</p>
+                            <p class="work-desc">A placement platform for students, live at <strong>optiresume.in</strong>. Score the resume honestly, tailor it to a job, audit LinkedIn, then prepare for the test and the interview.</p>
                             <ul class="work-outcomes">
-                                <li><strong>Hybrid by design.</strong> 28 deterministic Python rules do parseability, keyword fit and skill matching for free and offline; the LLM is reserved for semantic work (STAR rewrites, cover letters, per-JD tailoring) behind a single cost-aware gateway with prompt-hash caching, in-flight dedup, shared daily caps, per-user credit quotas, PII redaction and per-call token-cost logging</li>
-                                <li><strong>The prep half.</strong> The Code Century (100 problems and a verifiable certificate), timed test series and mock papers with persisted scores, rapid-revision cards, a dedicated MBA track, a campus-drives directory with confidence tiers that auto-archives stale listings, and programmatic OA-pattern guides for 14 companies</li>
-                                <li><strong>Built to be trusted.</strong> Parse-and-discard file handling where only extracted text and a hash ever persist, an 8-hour absolute session ceiling with reuse-detecting refresh rotation, QR-verified ATS certificates, and an operator console covering the activation funnel, live LLM spend and support queries</li>
+                                <li><strong>Hybrid by design.</strong> 28 deterministic rules compute the score. The AI only writes: STAR rewrites, cover letters and per-job tailoring, behind one cost-aware gateway.</li>
+                                <li><strong>A full prep half.</strong> The 100-problem Code Century, timed mocks, revision cards, a campus-drives directory and OA guides for top recruiters.</li>
+                                <li><strong>Built to be trusted.</strong> Resumes are parsed and discarded, sessions end after 8 hours, and scores can be verified through a QR certificate.</li>
                             </ul>
                             <div class="work-stack"><span>FastAPI</span><span>Neon Postgres</span><span>Next.js 14</span><span>Gemma</span><span>Groq</span><span>Render</span></div>
                             <div class="work-actions">
@@ -354,11 +354,11 @@
                             <span class="work-tag">Devtools · Privacy-first</span>
                             <h3 class="work-title">MyJSON</h3>
                             <p class="work-stats">Real jq 1.8 in WASM · 7 formats · 100% in-browser</p>
-                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs <em>entirely</em> in your browser. Open DevTools and watch the Network tab stay silent while it works. There is no server to send your data to, so every feature, sharing included, had to be engineered around that restriction.</p>
+                            <p class="work-desc">A keyboard-first JSON/YAML workstation that runs <em>entirely</em> in your browser. Open DevTools and watch the Network tab stay silent.</p>
                             <ul class="work-outcomes">
-                                <li>Three query languages side by side (JSONPath, <strong>real jq 1.8 compiled to WebAssembly</strong>, and RFC 6901 JSON Pointer), all evaluating live as you type</li>
-                                <li>Bidirectional conversion across JSON, YAML, XML, CSV, TOML, NDJSON and TOON with a live token-savings estimate; Ajv validation with one-click schema inference; diff in Monaco, structured and RFC 6902 JSON Patch modes; codegen to seven targets</li>
-                                <li>One-click Redact masks JWTs, emails, UUIDs, IPs and cards before you share; links LZ-compress into the URL hash; installs as a true offline PWA, all of it WCAG 2.2 AA</li>
+                                <li><strong>Real jq 1.8</strong> compiled to WebAssembly, plus JSONPath and JSON Pointer, all evaluating live as you type.</li>
+                                <li>Converts across 7 formats, validates with Ajv, diffs three ways and generates code for 7 targets.</li>
+                                <li>One-click Redact masks tokens, emails and IPs before you share. Installs as an offline PWA, WCAG 2.2 AA.</li>
                             </ul>
                             <div class="work-stack"><span>Next.js 14</span><span>Monaco</span><span>jq-wasm</span><span>Zustand</span><span>Ajv</span><span>Tailwind</span></div>
                             <div class="work-actions">
@@ -378,11 +378,11 @@
                             <span class="work-tag">Browser CV · Real-time</span>
                             <h3 class="work-title">AirDraw</h3>
                             <p class="work-stats">5 gestures · 4 tool modes · 0 servers</p>
-                            <p class="work-desc">Paint with your hand in mid-air, in a browser tab. No install, no backend, no GPU, and the camera feed never leaves your device, because there is nowhere for it to go. MediaPipe HandLandmarker runs entirely in WebAssembly; the hard part was making noisy 30 fps landmark data feel like a pen.</p>
+                            <p class="work-desc">Paint with your hand in mid-air, in a browser tab. No install, no backend, and the camera feed never leaves your device.</p>
                             <ul class="work-outcomes">
-                                <li><strong>Joint-angle finger detection</strong> instead of naive fingertip heights: rotation-invariant and palm-size adaptive, so gestures still read correctly as the hand turns or moves toward the camera</li>
-                                <li>One-Euro pointer smoothing with velocity-modulated stroke width, and a bitmap canvas using <code>destination-out</code> erase, so rendering stays O(1) no matter how long you draw</li>
-                                <li>Presence smoothing reuses the last landmark for 180 ms, so a stroke survives a dropped frame or two instead of shattering; the toolbar stays authoritative over gestures across four explicit modes (Auto, Draw, Erase, Pause)</li>
+                                <li><strong>Joint-angle finger detection</strong> stays accurate as your hand rotates or moves toward the camera.</li>
+                                <li>One-Euro smoothing and velocity-based stroke width make air-drawn lines feel like a pen.</li>
+                                <li>Survives dropped frames with 180 ms presence smoothing. Four modes: Auto, Draw, Erase, Pause.</li>
                             </ul>
                             <div class="work-stack"><span>Next.js 15</span><span>React 19</span><span>MediaPipe</span><span>Zustand</span><span>TypeScript</span></div>
                             <div class="work-actions">
@@ -453,9 +453,10 @@
 
                 <div class="about-grid">
                 <div class="about-prose" data-reveal>
-                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>, where I build platforms in Python, Docker, Kubernetes, and PostgreSQL at the seam where backend engineering meets DevOps: drawing service boundaries, running API gateways, and keeping infrastructure dependable enough that the developers above it never have to think about it. Beyond that work, I've carried three products of my own from first sketch to production; all three are live today, one on its own domain, and applied AI runs deep through my practice.</p>
-                    <p>I arrived there as an intern (Mar to Sep 2024), earned my first production exposure to cloud infrastructure, and learned to write Go I could still stand behind a week later. Before that came <strong>LiNS</strong> (Spring Boot, JDBC), <strong>ONE IT Solutions</strong> (client-facing web work), and a volunteer full-stack season with the <strong>IEEE Bombay Section</strong>.</p>
-                    <p>At present I'm studying <strong>generative and agentic AI</strong> in earnest: not merely calling the APIs, but understanding how agents plan, choose their tools, and recover when things go wrong. The next generation of software will be AI-native, and I intend to build my share of it.</p>
+                    <p class="about-lead">I'm a <strong>Software Engineer at <a href="https://arthavedh.com/" target="_blank" rel="noopener noreferrer">ArthaVedh Consulting</a></strong>. I build platforms in Python, Docker, Kubernetes and PostgreSQL where backend meets DevOps: service boundaries, API gateways, and infrastructure dependable enough that nobody above it has to think about it.</p>
+                    <p>Outside work I have shipped three products of my own, all live today. One has its own domain and 100+ sign-ups; two run with zero servers.</p>
+                    <p>I started at ArthaVedh as an intern (Mar to Sep 2024) and got my first production exposure to cloud infrastructure there. Before that: Spring Boot at <strong>LiNS</strong>, client web work at <strong>ONE IT Solutions</strong>, and a volunteer full-stack season with the <strong>IEEE Bombay Section</strong>.</p>
+                    <p>Right now I'm studying <strong>generative and agentic AI</strong> in earnest: how agents plan, choose their tools and recover when things go wrong. I intend to build my share of AI-native software.</p>
 
                     <blockquote class="about-quote">Great systems aren't loud. They disappear into reliability.</blockquote>
                 </div>
@@ -481,8 +482,9 @@
                     </div>
 
                     <div class="about-panel-group">
-                    <h3 class="about-subtitle">Education</h3>
+                    <h3 class="about-subtitle">Path</h3>
                     <ul class="about-list">
+                        <li><span class="list-label">Mar-Sep 2024</span><span>Intern · ArthaVedh Consulting, then full-time engineer</span></li>
                         <li><span class="list-label">2020-2024</span><span>B.Tech Computer Science · DKTE Institute · CGPA 8.5/10</span></li>
                     </ul>
                     </div>
@@ -493,7 +495,32 @@
                     <h3 class="about-subtitle">Certifications</h3>
                     <div class="certi-carousel-wrap">
                         <button class="certi-arrow certi-arrow-left" type="button" aria-label="Scroll certificates left"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"/></svg></button>
-                        <div class="certi-carousel" id="certiCarousel">
+                        <div class="certi-carousel" id="certiCarousel">                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Career Essentials in Software Development, Microsoft and LinkedIn" data-img="photos/certi-4.webp" data-title="Career Essentials in Software Development" data-issuer="Microsoft &amp; LinkedIn">
+                                <img src="photos/certi-4.webp" alt="Career Essentials in Software Development Certificate" loading="lazy" decoding="async" width="200" height="150">
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Career Essentials in Software Development</span><span class="certi-issuer">Microsoft &amp; LinkedIn</span></div>
+                            </div>
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Full Stack Internship, IEEE Bombay Section" data-img="photos/certi-1.webp" data-title="Full Stack Internship" data-issuer="IEEE Bombay Section">
+                                <img src="photos/certi-1.webp" alt="IEEE Full Stack Internship Certificate" loading="lazy" decoding="async" width="200" height="150">
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Full Stack Internship</span><span class="certi-issuer">IEEE Bombay Section</span></div>
+                            </div>
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Networking Essentials, Cisco" data-img="photos/certi-5.webp" data-title="Networking Essentials" data-issuer="Cisco">
+                                <img src="photos/certi-5.webp" alt="Cisco Networking Essentials Certificate" loading="lazy" decoding="async" width="200" height="150">
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Networking Essentials</span><span class="certi-issuer">Cisco</span></div>
+                            </div>
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Android Development Bootcamp, IITB TechFeast" data-img="photos/certi-3.webp" data-title="Android Development Bootcamp" data-issuer="IITB TechFeast">
+                                <img src="photos/certi-3.webp" alt="IITB TechFeast Android Development Bootcamp Certificate" loading="lazy" decoding="async" width="200" height="150">
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Android Development Bootcamp</span><span class="certi-issuer">IITB TechFeast</span></div>
+                            </div>
+                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Industry Certificate, OneIT Solutions Pvt Ltd" data-img="photos/certi-2.webp" data-title="Industry Certificate" data-issuer="OneIT Solutions Pvt Ltd">
+                                <img src="photos/certi-2.webp" alt="OneIT Solutions Certificate" loading="lazy" decoding="async" width="200" height="150">
+                                <div class="certi-hover-overlay"><span>View</span></div>
+                                <div class="certi-info"><span class="certi-title">Industry Certificate</span><span class="certi-issuer">OneIT Solutions Pvt Ltd</span></div>
+                            </div>
+
                             <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Claude AI Fundamentals, Anthropic" data-img="photos/Claude101.webp" data-title="Claude AI Fundamentals" data-issuer="Anthropic">
                                 <img src="photos/Claude101.webp" alt="Claude AI Fundamentals Certificate" loading="lazy" decoding="async" width="200" height="150">
                                 <div class="certi-hover-overlay"><span>View</span></div>
@@ -509,31 +536,7 @@
                                 <div class="certi-hover-overlay"><span>View</span></div>
                                 <div class="certi-info"><span class="certi-title">Claude Code in Action</span><span class="certi-issuer">Anthropic</span></div>
                             </div>
-                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Career Essentials in Software Development, Microsoft and LinkedIn" data-img="photos/certi-4.webp" data-title="Career Essentials in Software Development" data-issuer="Microsoft &amp; LinkedIn">
-                                <img src="photos/certi-4.webp" alt="Career Essentials in Software Development Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>View</span></div>
-                                <div class="certi-info"><span class="certi-title">Career Essentials in Software Development</span><span class="certi-issuer">Microsoft &amp; LinkedIn</span></div>
-                            </div>
-                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Full Stack Internship, IEEE Bombay Section" data-img="photos/certi-1.webp" data-title="Full Stack Internship" data-issuer="IEEE Bombay Section">
-                                <img src="photos/certi-1.webp" alt="IEEE Full Stack Internship Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>View</span></div>
-                                <div class="certi-info"><span class="certi-title">Full Stack Internship</span><span class="certi-issuer">IEEE Bombay Section</span></div>
-                            </div>
-                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Android Development Bootcamp, IITB TechFeast" data-img="photos/certi-3.webp" data-title="Android Development Bootcamp" data-issuer="IITB TechFeast">
-                                <img src="photos/certi-3.webp" alt="IITB TechFeast Android Development Bootcamp Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>View</span></div>
-                                <div class="certi-info"><span class="certi-title">Android Development Bootcamp</span><span class="certi-issuer">IITB TechFeast</span></div>
-                            </div>
-                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Networking Essentials, Cisco" data-img="photos/certi-5.webp" data-title="Networking Essentials" data-issuer="Cisco">
-                                <img src="photos/certi-5.webp" alt="Cisco Networking Essentials Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>View</span></div>
-                                <div class="certi-info"><span class="certi-title">Networking Essentials</span><span class="certi-issuer">Cisco</span></div>
-                            </div>
-                            <div class="certi-card" role="button" tabindex="0" aria-label="View certificate: Industry Certificate, OneIT Solutions Pvt Ltd" data-img="photos/certi-2.webp" data-title="Industry Certificate" data-issuer="OneIT Solutions Pvt Ltd">
-                                <img src="photos/certi-2.webp" alt="OneIT Solutions Certificate" loading="lazy" decoding="async" width="200" height="150">
-                                <div class="certi-hover-overlay"><span>View</span></div>
-                                <div class="certi-info"><span class="certi-title">Industry Certificate</span><span class="certi-issuer">OneIT Solutions Pvt Ltd</span></div>
-                            </div>
+
                         </div>
                         <button class="certi-arrow certi-arrow-right" type="button" aria-label="Scroll certificates right"><svg class="icon" aria-hidden="true"><use href="#i-chev-right"/></svg></button>
                     </div>
@@ -744,7 +747,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/app.js?v=3.2.1" defer></script>
+    <script src="js/app.js?v=3.3.0" defer></script>
     <script src="js/analytics.js?v=2.0.1" defer></script>
 </body>
 
