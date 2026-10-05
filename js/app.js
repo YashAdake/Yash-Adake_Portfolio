@@ -593,6 +593,31 @@
         targets.forEach(el => io.observe(el));
     })();
 
+    /* ---------- LinkedIn links open the LinkedIn app on phones -- */
+    // Android Chrome/Samsung: an intent:// URL targeting the LinkedIn package
+    // launches the app and falls back to the original https URL if it is not
+    // installed. iOS: a plain same-tab https link lets Safari hand the URL to
+    // the app through LinkedIn's universal links; target=_blank blocks that.
+    // In-app browsers (Instagram, WhatsApp, etc.) cannot be fixed from here.
+    (function linkedinApp() {
+        const ua = navigator.userAgent || '';
+        const inApp = /FBAN|FBAV|Instagram|LinkedInApp|Line\/|Snapchat|; wv\)|WhatsApp|Twitter/i.test(ua);
+        if (inApp) return;
+        const isAndroid = /Android/i.test(ua) && /Chrome\/|SamsungBrowser\//.test(ua);
+        const isIOS = /iPhone|iPad|iPod/i.test(ua);
+        if (!isAndroid && !isIOS) return;
+        const LI = /^https:\/\/(www\.)?linkedin\.com\//i;
+        $$('a[href]').forEach(a => {
+            const href = a.getAttribute('href');
+            if (!LI.test(href)) return;
+            if (isAndroid) {
+                const path = href.replace(/^https:\/\//i, '');
+                a.setAttribute('href', 'intent://' + path + '#Intent;scheme=https;package=com.linkedin.android;S.browser_fallback_url=' + encodeURIComponent(href) + ';end');
+            }
+            a.removeAttribute('target');
+        });
+    })();
+
     /* ---------- Console banner -------------------------------- */
     console.log('%cYash Adake · Software Engineer', 'color:#7C8CF8;font:600 14px monospace');
     console.log('linkedin.com/in/yash-adake · github.com/YashAdake · ⌘K to explore');
