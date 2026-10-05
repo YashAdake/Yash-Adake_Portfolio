@@ -3,8 +3,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /backup/
-Disallow: /old/
 Disallow: /google-apps-script/
 
 Sitemap: https://yashadake.com/sitemap.xml

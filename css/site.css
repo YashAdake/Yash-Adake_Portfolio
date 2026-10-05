@@ -3206,3 +3206,22 @@ body.light-mode .hero-name em {
     font-size: var(--step--1);
     color: var(--text-dim);
 }
+
+/* Phase 1: keep the hero topology out of the text column; slimmer consent bar */
+.hero-field canvas,
+.hero-field svg {
+    -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.12) 42%, #000 68%);
+    mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.12) 42%, #000 68%);
+}
+.consent-banner {
+    width: min(520px, calc(100vw - 2rem));
+}
+.hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: var(--space-4) var(--space-5);
+}
+@media (max-width: 420px) {
+    .hero-metrics { grid-template-columns: 1fr 1fr; }
+}

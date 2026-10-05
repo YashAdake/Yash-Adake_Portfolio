@@ -20,7 +20,7 @@ Google Apps Script — the script URL is never exposed to the browser.
 
 ```
 index.html              Single-page portfolio (hero, products, work, about, writing, contact)
-coming-soon.html        Per-product "coming soon" page (?product=optiresume|airdraw)
+coming-soon.html        Redirect for old "coming soon" links (?product=optiresume|airdraw|myjson)
 404.html                Custom not-found page
 css/
   premium.css           Design system + all section styles (design tokens at top)
