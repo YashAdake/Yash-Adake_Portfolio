@@ -47,7 +47,7 @@ python -m http.server 8080
 
 These only work on the live domain because the Cloudflare Worker restricts CORS
 to `https://yashadake.com`:
-- **Visitor counter** shows a fallback number (~850).
+- **Visitor counter** hides itself when the count service is unreachable.
 - **Contact form** won't actually send.
 
 Also: **project card screenshots** show a gradient + logotype fallback unless the

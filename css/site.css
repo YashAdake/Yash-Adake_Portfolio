@@ -1994,6 +1994,7 @@ a.contact-value:hover {
     color: var(--accent);
 }
 
+.visitor-counter[hidden] { display: none; }
 .visitor-counter {
     position: fixed;
     left: var(--space-5);
@@ -3179,4 +3180,29 @@ body.light-mode .hero-name em {
     .hero-portrait {
         width: min(100%, 360px);
     }
+}
+
+/* ---------- Newsletter strip (Writing) ---------------------- */
+.newsletter-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 16px;
+}
+.newsletter-name {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.1;
+}
+.newsletter-meta {
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-dim);
 }

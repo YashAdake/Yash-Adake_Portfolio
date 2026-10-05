@@ -217,7 +217,8 @@
     (function visitors() {
         const el = $('#visitorCount');
         if (!el) return;
-        const FALLBACK = 850;
+        const box = $('#visitorCounter');
+        const hide = () => { if (box) box.hidden = true; };
         const cached = parseInt(localStorage.getItem('vc_last'), 10);
         if (cached) el.textContent = cached.toLocaleString();
         const ctrl = new AbortController();
@@ -228,9 +229,9 @@
                 if (d && d.success && typeof d.count === 'number') {
                     el.textContent = d.count.toLocaleString();
                     localStorage.setItem('vc_last', d.count);
-                } else if (!cached) { el.textContent = FALLBACK.toLocaleString(); }
+                } else if (!cached) { hide(); }
             })
-            .catch(() => { if (!cached) el.textContent = FALLBACK.toLocaleString(); })
+            .catch(() => { if (!cached) hide(); })
             .finally(() => clearTimeout(t));
     })();
 
