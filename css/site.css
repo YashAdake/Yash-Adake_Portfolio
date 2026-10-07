@@ -3225,3 +3225,23 @@ body.light-mode .hero-name em {
 @media (max-width: 420px) {
     .hero-metrics { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---------- Audit fixes (2026-10) --------------------------- */
+/* Real screenshots carry their own content: no logotype overlay or scrim on top of them,
+   and the "Live" pill gets an opaque surface so it reads on any image in either theme. */
+.work-visual:has(.work-shot) .work-logotype { display: none; }
+.work-visual:has(.work-shot)::after { display: none; }
+.work-visual:has(.work-shot) .work-status {
+    background: var(--surface);
+    border-color: var(--line-strong);
+    backdrop-filter: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+/* Light theme: status and note colours below 4.5:1 on pale backgrounds */
+body.light-mode .status-live { color: #0B6B3A; }
+body.light-mode .status-soon { color: #8A5A00; }
+body.light-mode .cs-note-label { color: #8A5A00; }
+body.light-mode .err-status { color: #4B5563; }
+@media (max-width: 1023px) {
+    .scroll-hint { display: none; }
+}
